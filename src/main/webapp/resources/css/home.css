@@ -1,0 +1,487 @@
+@charset "utf-8";
+
+
+/* 공통사항 */
+.container {
+    width: 1136px;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.plr10 {
+    padding: 0 10px;
+}
+
+.mlr-10 {
+    margin: 0 -10px;
+}
+
+.section_mt60 {
+    margin-top: 60px;
+}
+
+.section_title {
+    margin-bottom: 20px;
+}
+
+.section_title > h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+}
+
+.photo_rank {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    font-weight: 700;
+    color: #fff;
+}
+.photo_rank > span {
+    display: block;
+    width: 30px;
+    height: 36px;
+    padding-top: 8px;
+    font-size: 15px;
+    text-align: center;
+    background-position: left 0 top -40px;
+    background-image: url(/img/main_icons.png);
+    background-size: 600px auto;
+}
+
+/* 레이아웃 */
+#layout {
+    position: relative;
+}
+
+
+/* main */
+main {
+    position: relative;
+    margin-bottom: 60px;
+}
+
+/* 비주얼 */
+.visual {
+    padding-top: 30px;
+}
+
+.visual_wrap {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+}
+
+.visual_left {
+    flex: 0 0 75%;
+    max-width: 75%;
+    padding-right: 0px;
+}
+
+.visual_left_link {
+    display: block;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.visual_left_link::before {
+    content: "";
+    position: absolute;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 230px;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.5));
+    z-index: 1;
+}
+
+.visual_left_img_wrap {
+    position: relative;
+}
+
+.visual_left_img_wrap::before {
+    content: "";
+    display: block;
+    padding-bottom: 66.66667%;
+}
+
+.visual_left_img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 105%;
+    transition: width 0.2s;
+}
+
+.visual_left_link:hover .visual_left_img {
+    width: 110%;
+}
+
+.visual_left_content_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    color: #fff;
+    z-index: 2;
+}
+
+.visual_left_title {
+    width: 80%;
+    max-height: 88px;
+    margin: 8px 0 10px;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.38;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.visual_left_profile {
+    width: 80%;
+}
+
+.visual_left_profile_img_wrap {
+}
+
+.visual_left_profile_img {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    vertical-align: -6px;
+    border-radius: 100%;
+}
+
+.visual_left_profile_name {
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 80%;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.visual_left_more {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    width: 140px;
+    font-size: 15px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    font-weight: 700;
+    padding: 18px 0 17px;
+    margin: 0 0 0 20px;
+    text-align: center;
+    transition: background-color 0.1s, border 0.1s;
+}
+
+.visual_left_link:hover .visual_left_more {
+    background-color: #35c5f0;
+    border: 1px solid #35c5f0;
+}
+
+.visual_right {
+    flex: 0 0 25%;
+    max-width: 25%;
+    margin-left: 20px;
+    padding-left: 0px;
+}
+
+.visual_right_link {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.visual_right_img_wrap {
+    position: relative;
+    height: 100%;
+}
+
+.visual_right_img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    transition: height 0.2s;
+}
+
+.visual_right_link:hover .visual_right_img {
+    height: 105%;
+}
+
+/* 오늘의 스토리 */
+.story {
+    position: relative;
+}
+
+.story_box {
+    display: flex;
+}
+
+.story_box_list {
+    flex: 0 0 25%;
+    max-width: 25%;
+    position: relative;
+    width: 100%;
+}
+
+.story_box_link {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.story_box_img_wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.story_box_img_wrap::before {
+    content: "";
+    display: block;
+    padding-bottom: 66.66667%;
+}
+
+.story_box_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    min-height: 100%;
+    transition: width 0.2s;
+}
+
+.story_box_link:hover .story_box_img {
+    width: 105%;
+}
+
+.story_video {
+    display: inline-block;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 0 5px;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+}
+
+.story_box_content_wrap {
+    height: 122px;
+    padding: 15px 10px;
+}
+
+.story_box_content_title {
+    max-height: 38.5px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.story_box_content_profile {
+    margin-top: 10px;
+}
+
+.story_box_profile_img {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    vertical-align: -6px;
+    border-radius: 100%;
+}
+
+.story_box_profile_name {
+    display: inline-block;
+    width: 80%;
+    font-size: 13px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.story_menu_wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.story_menu_link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 0 auto;
+    margin: 0.5px 0;
+    padding: 12.5px 10%;
+    background-color: #f5f5f5;
+    transition: background-color 0.1s;
+}
+
+.story_menu_link:hover {
+    background-color: #ededed;
+}
+
+.story_menu_link > .description {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #757575;
+}
+
+.story_menu_link > .title {
+    display: flex;
+    font-size: 15px;
+    font-weight: 700;
+    color: #424242;
+}
+
+.story_menu_link > .title > .text {
+    flex: 1 1 0;
+}
+
+.story_menu_link > .title > .arrow {
+    width: 5px;
+    height: 5px;
+    border: 1px solid #757575;
+    border-width: 1px 1px 0 0;
+    transform: rotate(45deg);
+}
+
+/* 오늘의 인기 사진 */
+.photo {
+    position: relative;
+}
+
+.photo_more {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #35c5f0;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 3px;
+}
+
+.photo_box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photo_box_list {
+    flex: 0 0 25%;
+    max-width: 25%;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.photo_box_link {
+    position: relative;
+}
+
+.photo_box_img_wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.photo_box_img_wrap::before {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.photo_box_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    min-height: 100%;
+    transition: width 0.2s;
+}
+
+.photo_box_link:hover .photo_box_img {
+    width: 105%;
+}
+
+.photo_box_content_wrap {
+    position: relative;
+}
+
+.photo_box_content_wrap::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 128px;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.5));
+    border-radius: 0 0 6px 6px;
+}
+
+.photo_box_content_profile {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+}
+
+.photo_box_profile_img {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    vertical-align: -6px;
+    border-radius: 100%;
+    border: 1px solid hsla(0, 0%, 100%, 0.5);
+    background-color: #f5f5f5;
+}
+
+.photo_box_profile_name {
+    display: inline-block;
+    width: 80%;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* footer */
+footer {
+    position: relative;
+    height: 281px;
+    background-color: #fafafa;
+}

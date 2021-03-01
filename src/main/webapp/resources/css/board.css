@@ -1,0 +1,369 @@
+@charset "UTF-8";
+
+.store-detail-container { /* 스토어카테고리 컨테이너 */
+    display: grid;
+    grid-template-columns: 654px 482px;
+    grid-template-areas: 'store-detail-photo store-detail-info'
+                         'store-detail-content store-detail-content';
+    position: absolute;
+    top: 175px;
+    left: 50%;
+    margin-left: -568px;
+}
+
+/* 상품 이미지 시작 */
+
+.store-detail-photo {  /* 스토어 디테일 사진 */
+    grid-area: store-detail-photo;
+    height: 620px;
+}
+
+.product_img {
+    display : flex;
+}
+.pro_big_img_box{
+    display : flex;
+}
+
+.pro_big_img{
+    width : 558px;
+    height: 558px;
+    border-radius: 10px;
+}
+
+.pro_min_img_box{
+    display: flex;
+    flex-direction: column;
+}
+
+.pro_min_img{
+    width: 56px;
+    height: 56px;
+    margin : 0 10px 10px 0;
+    border-radius: 5px;
+
+}
+
+/* 상품 이미지 끝 */
+
+/* 상품 가격 시작 */
+
+.store-detail-info {  
+    grid-area: store-detail-info;
+    height: 620px;
+    padding: 0 10px;
+}
+
+.brand {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #35c5f0;
+    margin-bottom: 3px;
+}
+
+.product_nm {
+    display: block;
+    font-size: 25px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.review_content {
+
+}
+
+.review_content a {
+	font-size: 13px;
+	font-weight: 700;
+    color: #35c5f0;
+}
+
+.review_content:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.price_box {
+    display: flex;
+    align-items: baseline;
+}
+
+.sale_count {
+    color: #35c5f0;
+    font-size: 44px;
+    font-weight: 700;
+    padding-top : 20px;
+    padding-bottom: 20px;
+  
+}
+
+.sale_persent {
+    color: #35c5f0;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.sale_price{
+    font-size: 35px;
+    font-weight: 900;
+    padding-left :10px;
+    color: #000; 
+}
+
+.action_button_box {
+    position: absolute;
+    top: 64px;
+    right: 10px;
+}
+
+.share_button{
+    color: #000; 
+    padding: 5px;
+}
+
+.share_button .far {
+    font-size: 27px;
+    font-weight: 100;
+}
+ 
+.scrap_button {
+    color: #000; 
+    padding: 5px;
+}
+
+.scrap_button .fas {
+    font-size: 27px;
+    font-weight: 100;
+}
+
+
+.delivery_content {
+    display: block;
+    font-weight: 500;
+    margin-top: 9px;
+    padding: 15px 0;
+    color: #757575;
+    font-size: 12px;
+    line-height: 18px;
+    border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+}
+
+.delivery_content ul li{
+    list-style: inside;
+}
+.delivery_content_header {
+    margin: 5px 0 10px;
+}
+
+.delivery_info {
+    color: #757575;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.delivery_info::after {
+    content: "";
+    height: 15px;
+    display: inline-block;
+    margin: 0 6px;
+    border-left: 1px solid #dbdbdb;
+    vertical-align: -2px;
+}
+
+.delivery_info:last-child:after {
+    content: "";
+    border: 0;
+}
+
+.select_product {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #555;
+    margin: 30px 0 20px;
+    padding: 0 10px;
+    border: 1px solid #D0D0D0;
+    border-radius: 4px;
+    outline: 0;
+    box-sizing: border-box; 
+}
+
+
+.order_box {
+    width: 100%;    
+}
+
+.order_price_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order_price {
+    font-size: 13px;
+}
+
+.order_product_price {
+    font-size: 25px;
+    font-weight: 700;
+}
+  
+.order_or_basket {
+    display: flex;
+    height: 80px;
+    margin-top: 21px;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.basket_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 55px;
+    color: #35c5f0;
+    background-color:#fff;
+    border: 1px solid #35c5f0;
+    border-radius: 10px;
+    margin-right: 3px;
+}
+
+.basket_box:hover {
+    background-color: #35c4f00c;
+}
+
+.order_direct {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 55px;
+    color: #fff;
+    background-color: #35c5f0;
+    border-radius: 10px;
+    margin-left: 3px;
+}
+
+.order_direct:hover {
+    background-color: #09addb;
+}
+
+/* 상품 가격 끝 */
+
+/* 스토어 디테일 콘텐츠 시작 */
+.store-detail-content { 
+    grid-area: store-detail-content;
+}
+
+.tab_nav {
+    display : flex;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    background-color: #fafafa;
+    border-top: #dadada solid 1px;
+    border-bottom: #dadada solid 1px;
+}
+.tab_nav a {
+    color: #424242;
+}
+
+.tab_nav_item {
+    display : flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 47px;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 15px;
+}
+
+.tab_nav_item:hover {
+    color: #35c5f0;
+}
+
+.tab_nav_item:focus {
+    color: #35c5f0;
+    border-bottom: 4px solid #35c5f0;
+}
+  
+.item_info {
+    display: flex;
+    justify-content: center;
+}
+
+.nav_item_text {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.selling_section {
+    margin: 40px 0;
+}
+
+.selling_table {
+    font-size: 14px;
+    font-weight: 500;
+    width: 800px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 28px;
+}
+
+.selling_table tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.selling_table tbody tr {
+    border: none;
+    border-bottom: 1px solid #ededed;
+}
+
+.selling_table tbody tr th {
+    width: 200px;
+    font-size: 13px;
+    padding: 12px 6px;
+    text-align: left;
+
+}
+
+.selling_table tbody tr td {
+    padding: 12px 6px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.refund_title {
+    margin: 30px 0 5px;
+    color: #424242;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 21px;
+}
+
+.refund_note {
+    font-size: 13px;
+    line-height: 17px;
+    margin-bottom: 10px;
+    color: #757575;
+}
+
+.refund_text {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17px;
+    color: #424242;
+}
+/* 스토어 디테일 콘텐츠 끝 */
