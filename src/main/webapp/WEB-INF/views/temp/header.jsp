@@ -7,7 +7,7 @@
         <div class="menu-layout">
             <div class="main-menubar">
                 <div class="logo">
-                    <a href="/community/home"><img src="../resources/img/ohouser_logo.jpg"></a>
+                    <a href="/"><img src="../resources/img/ohouser_logo.jpg"></a>
                 </div>
                 <nav class="nav-menu">
                     <a href="/community/home">커뮤니티</a>
