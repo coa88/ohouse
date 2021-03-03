@@ -13,21 +13,20 @@ import com.koreait.ohouse.model.UserEntity;
 public class UserController {
 	@Autowired
 	private UserService service;
-	
 
 	@GetMapping("/login")
-	public void login() {}
-	
+	public void login() {
+	}
+
 	@GetMapping("/join")
-	public void join() {}
-	
+	public void join() {
+	}
+
 	@PostMapping("/join")
-	public String join(UserEntity param) {	 
-		service.insUser(param);
+	public String join(UserEntity p) {
+		System.out.println("email : "+ p.getEmail_id()+"@"+"naver.com");
+		service.insUser(p);
 		return "redirect:/user/login";
 	}
-	
-	
-	
 
 }
