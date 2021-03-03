@@ -9,6 +9,8 @@
 		WHERE typ = #{typ} AND typ_seq = #{typ_seq};
 	</insert>
 	
+	<select id=""></select>
+	
 	<update id="updBoard">
 		UPDATE cm_board
 		SET title = #{title}
