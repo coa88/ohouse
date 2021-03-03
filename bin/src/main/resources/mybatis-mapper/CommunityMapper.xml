@@ -7,7 +7,7 @@
 		SELECT #{i_user}, #{typ}, #{typ_seq}, IFNULL(MAX(#{board_num}), 0) + 1, #{title}, #{ctnt}, #{board_img}
 		FROM cm_board
 		WHERE typ = #{typ} AND typ_seq = #{typ_seq};
-	</insert>
+	</insert>	
 	
 	<update id="updBoard">
 		UPDATE cm_board
