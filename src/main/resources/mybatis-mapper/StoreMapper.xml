@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.koreait.ohouse.StoreMapper">
+	
+	<insert id="insPdBoard" useGeneratedKeys="true" keyProperty="pd_board">
+		INSERT INTO pd_board
+		(i_user, product_typ, product_sectyp, product_seq, product_title, product_ctnt, product_nm, price, sales, final_price)
+		SELECT #{iUser}, #{productTyp}, #{productSectyp}, IFNULL(MAX(productSeq), 0) + 1
+		, #{productTitle}, #{productCtnt}, #{productNm}, #{price}, #{sales}, #{price}-(#{price} * (#{sales}/100))
+		FROM pd_board
+		WHERE product_typ = #{productTyp} AND product_sectyp = #{productSectyp}
+	</insert>
+	
+	<select id="selPdBoard" resultType="StoreEntity">
+		SELECT A.i_product, A.product_typ, A.product_sectyp, A.product_seq, A.product_title, A.product_ctnt
+		,A.product_nm, A.price, FORMAT(A.sales/100,2) , final_price, A.product_dt, B.i_user, B.nm
+		
+		FROM pd_board A
+		LEFT JOIN t_user B
+		ON A.i_user = B.i_user
+		
+		WHERE A.i_product = #{iProduct}
+	</select>
+	
+	<select id="selPdBoardList" resultType="StoreEntity">
+		SELECT A.i_product, A.product_typ, A.product_sectyp, A.product_seq, A.product_title, A.product_ctnt
+		,A.product_nm, A.price, FORMAT(A.sales/100,2) , final_price, A.product_dt, B.i_user, B.nm
+		
+		FROM pd_board A
+		LEFT JOIN t_user B
+		ON A.i_user = B.i_user
+				
+		WHERE A.product_typ = #{productTyp} AND product_sectyp = #{productSectyp}
+		ORDER BY product_seq DESC
+	</select>
+	
+	
+	<update id="updPdBoard">
+		UPDATE pd_board
+		SET product_title = #{productTitle}, product_ctnt = #{productCtnt}, price = #{price}
+		, sales = #{sales}, final_price = #{price}-(#{price} * ((#{sales}/100))
+		WHERE i_product = #{iProduct}
+		AND i_user = #{iUser}
+	</update>
+	
+	<delete id="delPdBoard">
+		DELETE FROM pd_board
+		WHERE i_product = #{iProduct}
+		AND i_user = #{iUser}
+	</delete>
+	
+</mapper>
