@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>${title}</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<link rel="stylesheet" href="/resources/css/common.css?ver=2">
+<link rel="stylesheet" href="/resources/css/common.css?ver=3">
 <link rel="stylesheet" href="/resources/css/home.css?ver=2">
 <link rel="stylesheet" href="/resources/css/photo.css?ver=2">
 <link rel="stylesheet" href="/resources/css/houseparty.css?ver=2">
