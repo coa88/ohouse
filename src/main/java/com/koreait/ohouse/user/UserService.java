@@ -21,6 +21,9 @@ public class UserService {
 	public int delUser(UserEntity param) {
 		return mapper.delUser(param);
 	}
+	public UserEntity updUser(UserEntity param) {
+		return mapper.updUser(param);
+	}
 	
 	
 }

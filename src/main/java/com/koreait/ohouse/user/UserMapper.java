@@ -8,7 +8,7 @@ public interface UserMapper {
  
 	int insUser(UserEntity p);
 	UserEntity selUser(UserEntity p);
-	int updUser(UserEntity p);
+	UserEntity updUser(UserEntity p);
 	int delUser(UserEntity p);
 
 
