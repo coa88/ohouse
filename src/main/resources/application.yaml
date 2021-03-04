@@ -8,12 +8,14 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/ohouse?autoReconnect=true
     username: root
-    password: ohouse
+    password: koreait2020
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
   mapper-locations: mybatis-mapper/**/*.xml
   type-aliases-package: com.koreait.ohouse.model 
+  configuration:
+    map-underscore-to-camel-case: true
 
 # Tomcat port change
 server:
