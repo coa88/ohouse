@@ -2,9 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
+<div class="regmod-container">
+	<div class="input-form-title" >
+		<input type="text" placeholder="제목을 입력해주세요.">
+	</div>
+	<div class="editor">
 
-<div class="editor"></div>
-		
+
+	</div>
+</div>
+
 <script src="/resources/js/ckeditor5/build/ckeditor.js?ver=2"></script>
 <script>ClassicEditor
 		.create( document.querySelector( '.editor' ), {
