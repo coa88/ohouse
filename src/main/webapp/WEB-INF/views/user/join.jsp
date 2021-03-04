@@ -7,15 +7,15 @@
     <div class="join-form">
         <h1 class="join-form-title">회원가입</h1>
 
-        <form action="/join" method="post">
+        <form action="/user/join" method="post">
             <h2 class="join-form-label">이메일</h2>
             <div class="join-form-email">
                 <span><input type="text" class="join-form-email-input" name="email_id" placeholder="이메일"></span>
                 <span class="join-form-email-separator">@</span>
                 <span class="join-form-email-select">
                     <select id="join-form-email-emailType">
-                        <option selected value disabled>선택해주세요</option>
-                        <option value="naver.com">naver.com</option>
+                        <option value disabled>선택해주세요</option>
+                        <option selected value="naver.com">naver.com</option>
                         <option value="hanmail.net">hanmail.net</option>
                         <option value="daum.net">daum.net</option>
                         <option value="gmail.com">gmail.com</option>
@@ -24,6 +24,7 @@
                         <option value="outlook.com">outlook.com</option>
                         <option value="icloud.com">icloud.com</option>
                         <option value="direct">직접입력</option>
+                        <input type="text" class="dd" name="email">
                     </select>
                 </span>
             </div>
@@ -70,7 +71,7 @@
             </div>
 
             <button type="submit" class="input-join-form-btn">회원가입 완료</button>
-            <input type="hidden" name="provider" value="mango">
+            <input type="hidden" name="provider" value="ohouse">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
         </form>
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mapper namespace="com.koreait.ohouse.StoreMapper">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.ohouse.store.StoreMapper">
 	
 	<insert id="insPdBoard" useGeneratedKeys="true" keyProperty="pd_board">
 		INSERT INTO pd_board
@@ -12,7 +13,7 @@
 	
 	<select id="selPdBoard" resultType="StoreEntity">
 		SELECT A.i_product, A.product_typ, A.product_sectyp, A.product_seq, A.product_title, A.product_ctnt
-		,A.product_nm, A.price, FORMAT(A.sales/100,2) , final_price, A.product_dt, B.i_user, B.nm
+		,A.product_nm, A.price, A.sales, final_price, A.product_dt, B.i_user, B.nm
 		
 		FROM pd_board A
 		LEFT JOIN t_user B
