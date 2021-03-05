@@ -28,7 +28,7 @@
                     </select>
                 </span>
             </div>
-
+ 
             <h2 class="join-form-label">비밀번호</h2>
             <h3 class="join-form-label-contents">8자 이상 입력해주세요.</h2>
             <div><input type="password" class="join-form-input" name="user_pw" placeholder="비밀번호"></div>

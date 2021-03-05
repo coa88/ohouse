@@ -34,8 +34,13 @@ public class UserService {
 		return mapper.updUser(param);
 	}
 
+<<<<<<< HEAD
 	public int delUser(UserEntity p) {
 		return mapper.delUser(p);
+=======
+	public int updUser(UserEntity param) {
+		return mapper.updUser(param);
+>>>>>>> branch 'master' of https://github.com/coa88/ohouse.git
 	}
 
 }

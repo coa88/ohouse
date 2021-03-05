@@ -1,0 +1,35 @@
+
+.regmod-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input-form-title {
+    display: flex;
+    width: 900px;
+    height: 40px;
+    border-bottom: 1px solid #c4c4c4;
+    margin-bottom: 5px;
+}
+.input-form-title>input {
+    width: 100%;
+    padding: 0px 10px;
+    border: none; 
+    outline: none;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.input-form-title>input::placeholder {
+    color: #ccc;
+}
+
+.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners {
+    width: 900px;
+    
+}
+.ck.ck-editor__main>.ck-editor__editable {
+    height: 800px;
+    
+}
