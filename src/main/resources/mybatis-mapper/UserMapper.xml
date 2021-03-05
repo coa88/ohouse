@@ -15,7 +15,7 @@
 		
 	</select>
 	
-	<update id="updUser" resultType="UserEntity">
+	<update id="updUser">
 		UPDATE t_user 
 		<set>
 			user_pw =#{userPw},

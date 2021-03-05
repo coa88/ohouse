@@ -30,7 +30,7 @@ public class UserService {
 		return mapper.delUser(p);
 	}
 
-	public UserEntity updUser(UserEntity param) {
+	public int updUser(UserEntity param) {
 		return mapper.updUser(param);
 	}
 
