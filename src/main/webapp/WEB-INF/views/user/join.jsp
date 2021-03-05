@@ -10,12 +10,12 @@
         <form action="/user/join" method="post">
             <h2 class="join-form-label">이메일</h2>
             <div class="join-form-email">
-                <span><input type="text" class="join-form-email-input" name="email_id" placeholder="이메일"></span>
+                <span><input type="text" class="join-form-email-input" name="frontEmail" placeholder="이메일"></span>
                 <span class="join-form-email-separator">@</span>
                 <span class="join-form-email-select">
-                    <select id="join-form-email-emailType">
-                        <option value disabled>선택해주세요</option>
-                        <option selected value="naver.com">naver.com</option>
+                    <select id="join-form-email-emailType" onchange="emailClick()">
+                        <option selected value disabled>선택해주세요</option>
+                        <option value="naver.com">naver.com</option>
                         <option value="hanmail.net">hanmail.net</option>
                         <option value="daum.net">daum.net</option>
                         <option value="gmail.com">gmail.com</option>
@@ -24,7 +24,7 @@
                         <option value="outlook.com">outlook.com</option>
                         <option value="icloud.com">icloud.com</option>
                         <option value="direct">직접입력</option>
-                        <input type="text" class="dd" name="email">
+                        <input type="text" class="backEmail_send_input" name="backEmail">
                     </select>
                 </span>
             </div>

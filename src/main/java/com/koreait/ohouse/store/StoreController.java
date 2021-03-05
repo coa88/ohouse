@@ -15,28 +15,30 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/store")
 public class StoreController {
-	
+
 	final StoreService service;
-	
+
 	@GetMapping("/store_home")
-	public void storeHome() {}
+	public void storeHome() {
+	}
 
 	@GetMapping("/category")
-	public void category() {}
-	
+	public void category() {
+	}
+
 	@PostMapping("/category")
 	public String category(CommunityEntity p) {
 		return "";
 	}
-	
+
 	@GetMapping("/store_detail")
-	public void store_detail() {}
+	public void store_detail() {
+	}
 
 	@GetMapping("/best")
 	public void best(Model model, StoreEntity p) {
 		p.setiProduct(2);
 		model.addAttribute("data", service.selPdBoard(p));
 	}
-
 
 }

@@ -11,7 +11,7 @@ public interface UserMapper {
 
 	UserEntity selUser(UserEntity p);
 
-	int updUser(UserEntity p);
+	UserEntity updUser(UserEntity p);
 
 	int delUser(UserEntity p);
 

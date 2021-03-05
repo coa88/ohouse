@@ -1,5 +1,14 @@
 'use strict'
 
-let emailID = document.getElementById("join-form-email-emailType")
-let sendEmail = emailID.options[emailID.selectedIndex].value
-document.querySelector('.dd').value = '@'+sendEmail
+// 이메일아이디 서버로 보내기
+let frontID = document.querySelector(".join-form-email-input")
+let backID = document.querySelector("#join-form-email-emailType")
+
+function emailClick() {
+	emailSend()
+}
+
+function emailSend() {
+	let resultID = backID.options[backID.selectedIndex].value
+	document.querySelector('.backEmail_send_input').value = '@' + resultID
+}

@@ -24,7 +24,6 @@ public class UserController {
 
 	@PostMapping("/join")
 	public String join(UserEntity p) {
-		System.out.println("email : "+ p.getEmailId()+"@"+"naver.com");
 		service.insUser(p);
 		return "redirect:/user/login";
 	}
