@@ -1,5 +1,6 @@
 package com.koreait.ohouse.user;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +15,27 @@ public class UserService {
 
 	@Autowired
 	private HttpSession hs;
+	
+	@Autowired
+	private HttpServletRequest request;
 
 	public int insUser(UserEntity p) {
-		System.out.println("backEmail : " + hs.getAttribute(""));
-//		String emailId = (hs.getAttribute("email_id") + hs.getAttribute("email"));
-//		p.setEmailId(emailId);
+		String emailAdr = request.getParameter("emailAdr");
+		System.out.println(p.getEmailId()+emailAdr);
 		return mapper.insUser(p);
+
 	}
 
 	public UserEntity selUser(UserEntity p) {
 		return mapper.selUser(p);
 	}
 
-	public int delUser(UserEntity p) {
-		return mapper.delUser(p);
+	public int updUser(UserEntity param) {
+		return mapper.updUser(param);
 	}
 
-	public UserEntity updUser(UserEntity param) {
-		return mapper.updUser(param);
+	public int delUser(UserEntity p) {
+		return mapper.delUser(p);
 	}
 
 }

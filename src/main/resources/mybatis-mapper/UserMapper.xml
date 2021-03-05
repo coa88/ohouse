@@ -11,14 +11,13 @@
 	
 	<select id="selUser" resultType="UserEntity">
 		SELECT * FROM t_user
-		where email_id = #{emailId}
-		
+		where email_id = #{emailId}		
 	</select>
 	
-	<update id="updUser" resultType="UserEntity">
+	<update id="updUser">
 		UPDATE t_user 
 		<set>
-			user_pw =#{userPw},
+			user_pw = #{userPw},
 			nm = #{nm},
 			gender=#{gender},
 			ph = #{ph}
