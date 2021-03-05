@@ -22,7 +22,9 @@ public class UserService {
 	public int insUser(UserEntity p) {
 		String emailAdr = request.getParameter("emailAdr");
 		String email_id = p.getEmailId() + emailAdr;
+		String userPw = request.getParameter("user_pw");
 		p.setEmailId(email_id);
+		p.setUserPw(userPw);
 		return mapper.insUser(p);
 
 	}
