@@ -21,7 +21,8 @@ public class UserService {
 
 	public int insUser(UserEntity p) {
 		String emailAdr = request.getParameter("emailAdr");
-		System.out.println(p.getEmailId() + emailAdr);
+		String email_id = p.getEmailId() + emailAdr;
+		p.setEmailId(email_id);
 		return mapper.insUser(p);
 
 	}

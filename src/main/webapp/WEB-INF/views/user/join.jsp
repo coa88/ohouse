@@ -33,7 +33,7 @@
             <h3 class="join-form-label-contents">8자 이상 입력해주세요.</h2>
             <div><input type="password" class="join-form-input" name="user_pw" placeholder="비밀번호"></div>
             <h2 class="join-form-label">비밀번호 확인</h2>
-            <div><input type="text" class="join-form-input" name="user_pw_chk" placeholder="비밀번호 확인"></div>
+            <div><input type="password" class="join-form-input" name="user_pw_chk" placeholder="비밀번호 확인"></div>
             <h2 class="join-form-label">별명</h2>
             <h3 class="join-form-label-contents">다른 유저와 겹치지 않는 별명을 입력해주세요. (2~15자)</h2>
             <div><input type="text" class="join-form-input" name="nm" placeholder="별명 (2~15자)"></div>
