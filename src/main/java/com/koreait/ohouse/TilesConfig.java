@@ -2,6 +2,7 @@ package com.koreait.ohouse;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.view.tiles3.SimpleSpringPreparerFactory;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
@@ -15,6 +16,7 @@ public class TilesConfig {
         //해당 경로에 tiles.xml 파일을 넣음
         configurer.setDefinitions(new String[]{"/WEB-INF/tiles/tiles.xml"});
         configurer.setCheckRefresh(true);
+        configurer.setPreparerFactoryClass(SimpleSpringPreparerFactory.class);
         return configurer;
     }
 
@@ -24,4 +26,6 @@ public class TilesConfig {
         tilesViewResolver.setViewClass(TilesView.class);
         return tilesViewResolver;
     }
+    
+    
 }

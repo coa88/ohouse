@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>      
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> 
+<tiles:importAttribute name="menuList"/>
 
 <div id="header-container">
     <header>
@@ -14,24 +16,13 @@
                     <div class="sub-menu-layout">
                         <div class="sub-menubar">
                             <ul class="sub-menu-item">
-                                <li class="sub-menu-item_li"><a href="/community/home">홈</a></li>
-                                <li class="sub-menu-item_li"><a href="/community/photo">사진</a></li>
-                                <li class="sub-menu-item_li"><a href="/community/houseparty">집들이</a></li>
-                                <li class="sub-menu-item_li"><a href="/community/tip">노하우</a></li>
-                                <li class="sub-menu-item_li"><a href="/community/event">이벤트</a></li>
+	                            <c:forEach items="${pageScope.menuList}" var="item">
+	                                <li class="sub-menu-item_li"><a href="/community/${item.menuAddress}">${item.menuNm}</a></li>
+	                            </c:forEach>
                             </ul>
                         </div>
                     </div>
-                    <a href="/store/store_home">스토어</a>
-                    <div class="sub-menu-layout">
-                        <div class="sub-menubar">
-                            <ul class="sub-menu-item">
-                                <li class="sub-menu-item_li"><a href="/store/store_home">스토어홈</a></li>
-                                <li class="sub-menu-item_li"><a href="/store/category">카테고리</a></li>
-                                <li class="sub-menu-item_li"><a href="/store/best">베스트</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                   
                 </nav>
                 <div class="nav-right">
                     <div class="has-search">

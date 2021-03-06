@@ -2,7 +2,7 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-    <definition name="basic-template" template="/WEB-INF/views/temp/tiles_temp.jsp">    	
+    <definition name="basic-template" template="/WEB-INF/views/temp/tiles_temp.jsp" preparer="com.koreait.ohouse.MenuPreparer">    	
         <put-attribute name="header" value="/WEB-INF/views/temp/header.jsp" />   
         <put-attribute name="content" value="/WEB-INF/views/temp/content.jsp" />  
         <put-attribute name="footer" value="/WEB-INF/views/temp/footer.jsp" />        

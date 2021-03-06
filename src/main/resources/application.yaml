@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/ohouse?autoReconnect=true
     username: root
-    password: koreait2020
+    password: db0808
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
