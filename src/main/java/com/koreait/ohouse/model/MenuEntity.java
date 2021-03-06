@@ -4,18 +4,15 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("MenuEntity")
 public class MenuEntity {
-	private int topTyp;
 	private int menuTyp;
 	private String menuAddress;
 	private String menuNm;
 	private int menuOrderby;
+	private int submenuTyp;
+	private String submenuAddress;
+	private String submenuNm;
+	private int submenuOrderby;
 	
-	public int getTopTyp() {
-		return topTyp;
-	}
-	public void setTopTyp(int topTyp) {
-		this.topTyp = topTyp;
-	}
 	public int getMenuTyp() {
 		return menuTyp;
 	}
@@ -40,6 +37,31 @@ public class MenuEntity {
 	public void setMenuOrderby(int menuOrderby) {
 		this.menuOrderby = menuOrderby;
 	}
+	public int getSubmenuTyp() {
+		return submenuTyp;
+	}
+	public void setSubmenuTyp(int submenuTyp) {
+		this.submenuTyp = submenuTyp;
+	}
+	public String getSubmenuAddress() {
+		return submenuAddress;
+	}
+	public void setSubmenuAddress(String submenuAddress) {
+		this.submenuAddress = submenuAddress;
+	}
+	public String getSubmenuNm() {
+		return submenuNm;
+	}
+	public void setSubmenuNm(String submenuNm) {
+		this.submenuNm = submenuNm;
+	}
+	public int getSubmenuOrderby() {
+		return submenuOrderby;
+	}
+	public void setSubmenuOrderby(int submenuOrderby) {
+		this.submenuOrderby = submenuOrderby;
+	}
+	
 	
 
 	

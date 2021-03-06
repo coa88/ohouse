@@ -9,6 +9,7 @@ import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.koreait.ohouse.common.CommonMapper;
 import com.koreait.ohouse.model.MenuEntity;
 
 
@@ -20,10 +21,12 @@ public class MenuPreparer implements ViewPreparer  {
 	@Override
 	public void execute(Request tilesContext, AttributeContext attributeContext) {		
 		List<MenuEntity> menuList = null;
-		if(menuList == null) {
+		List<MenuEntity> submenuList = null;
 			System.out.println(" ----- get menus from DB -----");	
 			menuList = mapper.selMenuList();
-		}
-        attributeContext.putAttribute("menuList", new Attribute(menuList), true);		
+			submenuList = mapper.selSubmenuList();
+
+		attributeContext.putAttribute("menuList", new Attribute(menuList), true);		
+        attributeContext.putAttribute("submenuList", new Attribute(submenuList), true);		
 	}
 }

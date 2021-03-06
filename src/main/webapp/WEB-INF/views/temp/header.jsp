@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>      
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> 
 <tiles:importAttribute name="menuList"/>
+<tiles:importAttribute name="submenuList"/>
 
 <div id="header-container">
     <header>
@@ -12,16 +13,29 @@
                     <a href="/"><img src="../resources/img/ohouser_logo.jpg"></a>
                 </div>
                 <nav class="nav-menu">
-                    <a href="/community/home">커뮤니티</a>
-                    <div class="sub-menu-layout">
-                        <div class="sub-menubar">
-                            <ul class="sub-menu-item">
-	                            <c:forEach items="${pageScope.menuList}" var="item">
-	                                <li class="sub-menu-item_li"><a href="/community/${item.menuAddress}">${item.menuNm}</a></li>
-	                            </c:forEach>
-                            </ul>
-                        </div>
-                    </div>
+	                <c:forEach items="${menuList}" var="item">
+                    <a href="/${item.menuAddress}">${item.menuNm}</a>
+	                    <div class="sub-menu-layout">
+	                        <div class="sub-menubar">
+	                            <ul class="sub-menu-item">
+				                    <c:forEach items="${submenuList}" var="data">
+				                 		<c:if test="${item.menuTyp eq data.menuTyp}">
+				                 			<c:choose>
+				                 				<c:when test="${item.menuAddress eq data.submenuAddress}">
+				                 					<li class="sub-menu-item_li"><a href="/${item.menuAddress}">${data.submenuNm}</a></li>
+				                 				</c:when>
+				                 				<c:otherwise>
+				                 					<li class="sub-menu-item_li"><a href="/${item.menuAddress}/${data.submenuAddress}">${data.submenuNm}</a></li>
+				                 				</c:otherwise>
+				                 			</c:choose>
+				                            
+					       				</c:if>
+							        </c:forEach>
+	                            </ul>
+	                        </div>
+	                    </div>
+             	   </c:forEach>
+                    
                    
                 </nav>
                 <div class="nav-right">

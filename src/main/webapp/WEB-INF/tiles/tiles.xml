@@ -8,10 +8,16 @@
         <put-attribute name="footer" value="/WEB-INF/views/temp/footer.jsp" />        
     </definition>
      
+    <definition name="community" extends="basic-template">
+        <put-attribute name="content" value="/WEB-INF/views/community/home.jsp" />
+    </definition>
+     
+     <definition name="store" extends="basic-template">
+        <put-attribute name="content" value="/WEB-INF/views/store/store_home.jsp" />
+    </definition>
+     
     <definition name="*/*" extends="basic-template">
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
-        <put-attribute name="categoryJS" value="{1}" />
-        <put-attribute name="categoryCSS" value="{1}" />
     </definition>
      
 </tiles-definitions>

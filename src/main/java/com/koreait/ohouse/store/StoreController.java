@@ -18,10 +18,6 @@ public class StoreController {
 
 	final StoreService service;
 
-	@GetMapping("/store_home")
-	public void storeHome() {
-	}
-
 	@GetMapping("/category")
 	public void category() {
 	}

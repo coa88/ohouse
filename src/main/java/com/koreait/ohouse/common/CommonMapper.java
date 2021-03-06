@@ -1,4 +1,4 @@
-package com.koreait.ohouse;
+package com.koreait.ohouse.common;
 
 import java.util.List;
 
@@ -9,4 +9,5 @@ import com.koreait.ohouse.model.MenuEntity;
 @Mapper
 public interface CommonMapper {
 	List<MenuEntity> selMenuList();
+	List<MenuEntity> selSubmenuList();
 }

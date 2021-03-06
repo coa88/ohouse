@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/community")
 public class CommunityController {
 	
-	@GetMapping("/home")
-	public void home() {}
-
 	@GetMapping("/photo")
 	public void photo() {}
 	

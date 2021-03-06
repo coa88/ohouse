@@ -8,8 +8,16 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-	@GetMapping("/")
-	public String home() {
-		return "index";
+
+	
+	@GetMapping({"/","/community"})
+	public String community() {
+		return "community";
 	}
+	
+	@GetMapping("/store")
+	public String store() {
+		return "store";
+	}
+	
 }
