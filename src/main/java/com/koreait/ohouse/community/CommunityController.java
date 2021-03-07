@@ -21,6 +21,6 @@ public class CommunityController {
 	@GetMapping("/event")
 	public void event() {}
 	
-	@GetMapping("/regmod")
-	public void regmod() {}
+	@GetMapping("/write")
+	public void write() {}
 }

@@ -93,7 +93,7 @@ img {
     width: 100%;
     height: 50px;
     border-bottom: 1px solid #ededed;
-    z-index: 10;
+    z-index: 9;
     top: 80px;
     left: 0%;
     justify-content: center;
@@ -240,31 +240,89 @@ img {
  /* 로그인, 회원가입 끝 */
 
 /* 글쓰기 시작 */
-.nav-write-btn {    
+.nav-write-box {
     width: 100px;
     height: 40px;
-    display: inline-block;
     margin-left:13px;
-    border: none;
-    background: none;
+
+}
+
+.nav-write-btn {  
+    height: 40px; 
+    align-items: center;
+    justify-content: center; 
+    display: flex;
     color: #fff;
     font-size: 17px;
     font-weight: 700;
-    text-align: center;
+    box-sizing: border-box;
+    padding-bottom: 2px;
     background-color: #35c5f0;
     border-radius: 5px;
     cursor: pointer;
-    outline: 0;
+}
+
+.nav-write-btn:hover {  
+    background-color: #09addb;
 }
 
 .nav-write-btn-arrow {
     font-size: 11px;
     padding-left: 7px;
-    
 }
 
-.nav-write-btn:hover {  
-    background-color: #09addb;
+.nav-write-list {
+    display: none;
+    width: 340px;
+    height: 300px;
+    margin-top: 15px;
+    padding: 8px;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px 0 rgb(63 71 77 / 20%);
+    float: right;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.nav-write-list.active {
+    display: block;
+}
+
+
+.nav-write-item {
+    width: 322px;
+    height: 71px;
+    display: flex;
+    align-items: center;
+    padding: 15px 0 15px 15px;
+    background-color: #fff;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.nav-write-item:hover {
+    background-color: #f8f8ff;
+}
+
+.nav-write-item-icon {
+    margin-right: 10px;
+}
+
+.nav-write-item-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 21px;
+    color: #424242;
+}
+
+.nav-write-item-subtitle {
+    margin: 4px 0 0;
+    font-size: 12px;
+    line-height: 16px;
+    color: #9e9e9e;
 }
 /* 글쓰기 끝 */
 

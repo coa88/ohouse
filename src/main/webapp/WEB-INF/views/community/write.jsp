@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<div class="regmod-container">
+<div class="write-container">
 	<div class="input-form-title" >
 		<input type="text" placeholder="제목을 입력해주세요.">
 	</div>
