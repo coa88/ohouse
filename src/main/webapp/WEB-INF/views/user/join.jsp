@@ -31,40 +31,40 @@
  
             <h2 class="join-form-label">비밀번호</h2>
             <h3 class="join-form-label-contents">8자 이상 입력해주세요.</h2>
-            <div><input type="password" class="join-form-input" name="user_pw" placeholder="비밀번호"></div>
+            <div><input type="password" class="join-form-input" name="userPw" placeholder="비밀번호"></div>
             <h2 class="join-form-label">비밀번호 확인</h2>
-            <div><input type="password" class="join-form-input" name="user_pw_chk" placeholder="비밀번호 확인"></div>
+            <div><input type="password" class="join-form-input" name="userPwChk" placeholder="비밀번호 확인"></div>
             <h2 class="join-form-label">별명</h2>
             <h3 class="join-form-label-contents">다른 유저와 겹치지 않는 별명을 입력해주세요. (2~15자)</h2>
             <div><input type="text" class="join-form-input" name="nm" placeholder="별명 (2~15자)"></div>
             
             <h2 class="join-form-label">약관동의</h2>
-            <div class="join-form-agree">
+            <div class="checkbox_group join-form-agree">
                 <label class="form-all-check-label">
-                    <input type="checkbox" class="form-check-label-box">
+                    <input type="checkbox" class="check_all form-check-label-box">
                     <span class="join-form-all-check-contents">전체동의</span>
                 </label>
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-label-box">
+                    <input type="checkbox" class="normal form-check-label-box">
                     <span class="join-form-check-contents">만 14세 이상입니다.</span>
                     <span class="join-form-check-contents-required">(필수)</span>
                 </label>
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-label-box">
+                    <input type="checkbox" class="normal form-check-label-box">
                     <span class="join-form-check-contents">
                         <a href="#" class="join-form-check-contents-a">이용약관</a>
                     </span>
                     <span class="join-form-check-contents-required">(필수)</span>
                 </label>
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-label-box">
+                    <input type="checkbox" class="normal form-check-label-box">
                     <span class="join-form-check-contents">
                         <a href="#" class="join-form-check-contents-a">개인정보수집 및 이용동의</a>
                     </span>
                     <span class="join-form-check-contents-required">(필수)</span>
                 </label>
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-label-box">
+                    <input type="checkbox" class="normal form-check-label-box">
                     <span class="join-form-check-contents">이벤트,프로모션 알림 메일 및 SMS 수신</span>
                     <span class="join-form-check-contents-select">(선택)</span>
                 </label>

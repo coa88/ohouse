@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css?ver=2"> <!-- splide css -->
 <script defer src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script> <!-- splide js-->
 <script defer src="/resources/js/store.js?ver=2"></script>
+<script defer src="/resources/js/user/join.js?ver=2"></script>
 
 </head>
 <body>

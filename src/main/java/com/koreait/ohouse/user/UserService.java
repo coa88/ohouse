@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.koreait.ohouse.common.SecurityUtils;
 import com.koreait.ohouse.model.UserEntity;
 
 @Service
@@ -21,10 +22,11 @@ public class UserService {
 
 	public int insUser(UserEntity p) {
 		String emailAdr = request.getParameter("emailAdr");
-		String email_id = p.getEmailId() + emailAdr;
-		String userPw = request.getParameter("user_pw");
-		p.setEmailId(email_id);
-		p.setUserPw(userPw);
+		String emailId = p.getEmailId() + emailAdr;
+		String salt = SecurityUtils.genSalt();
+		String encryptUserPw = SecurityUtils.hashPassword(p.getUserPw(), salt);
+		p.setEmailId(emailId);
+		p.setUserPw(encryptUserPw);
 		return mapper.insUser(p);
 
 	}
