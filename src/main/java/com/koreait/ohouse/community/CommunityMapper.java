@@ -8,11 +8,11 @@ import com.koreait.ohouse.model.CommunityEntity;
 
 @Mapper
 public interface CommunityMapper {
-	int insBoard(CommunityEntity p);
+	int insBoard(CommunityEntity param);
 
-	List<CommunityEntity> selBoardList(CommunityEntity p);
+	List<CommunityEntity> selBoardList(CommunityEntity param);
 
-	int updBoard(CommunityEntity p);
+	int updBoard(CommunityEntity param);
 
-	int delBoard(CommunityEntity p);
+	int delBoard(CommunityEntity param);
 }

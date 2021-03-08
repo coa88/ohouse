@@ -52,28 +52,28 @@
                     <div class="nav-write-box">
                         <div class="nav-write-btn">글쓰기<span class="fas fa-chevron-down nav-write-btn-arrow"></span></div>
                         <div class="nav-write-list">
-                            <a href="/community/write?submenu_nm=photo" class="nav-write-item">
+                            <a href="/community/write?typ=1&secTyp=2" class="nav-write-item">
                                 <div class="nav-write-item-icon"><img src="../resources/img/icon/photo_icon.png" alt="사진올리기"></div>
                                 <div class="nav-write-item-text">
                                     <div class="nav-write-item-title">사진 올리기</div>
                                     <div class="nav-write-item-subtitle">우리집 사진을 공유해보세요.</div>
                                 </div>
                             </a>
-                            <a href="/community/write?submenu_nm=houseparty" class="nav-write-item">
+                            <a href="/community/write?typ=1&secTyp=3" class="nav-write-item">
                                 <div class="nav-write-item-icon"><img src="../resources/img/icon/houseparty_icon.png" alt="집들이 글쓰기"></div>
                                 <div class="nav-write-item-text">
                                     <div class="nav-write-item-title">집들이 글쓰기</div>
                                     <div class="nav-write-item-subtitle">집에 관한 이야기를 글로 작성해보세요.</div>
                                 </div>
                             </a>
-                            <a href="/community/write?submenu_nm=tip" class="nav-write-item">
+                            <a href="/community/write?typ=1&secTyp=4" class="nav-write-item">
                                 <div class="nav-write-item-icon"><img src="../resources/img/icon/tip_icon.png" alt="노하우 글쓰기"></div>
                                 <div class="nav-write-item-text">
                                     <div class="nav-write-item-title">노하우 글쓰기</div>
                                     <div class="nav-write-item-subtitle">다양한 인테리어 노하우를 공유해주세요.</div>
                                 </div>
                             </a>
-                            <a href="/store/write?submenu_nm=photo" class="nav-write-item">
+                            <a href="#" class="nav-write-item">
                                 <div class="nav-write-item-icon"><img src="../resources/img/icon/review_icon.png" alt="상품 리뷰 쓰기"></div>
                                 <div class="nav-write-item-text">
                                     <div class="nav-write-item-title">상품 리뷰 쓰기</div>

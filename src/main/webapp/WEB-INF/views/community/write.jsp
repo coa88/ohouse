@@ -2,15 +2,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<div class="write-container">
-	<div class="input-form-title" >
-		<input type="text" placeholder="제목을 입력해주세요.">
-	</div>
-	<div class="editor">
 
+<form action="/community/write" method="post" id="frm">
+	<input type="hidden" name="typ" value="${param.typ}">
+	<input type="hidden" name="secTyp" value="${param.secTyp}">
+	<div class="write-container">
+		<div class="input-form-title" >
+			<input type="text"  name="title" placeholder="제목을 입력해주세요." required>
+		</div>
+		<textarea  class="editor" name="ctnt" placeholder="내용을 입력해주세요." required>
 
+		</textarea >
 	</div>
-</div>
+	<div>
+		<input type="submit" value="글등록">
+	</div>
+</form>
 
 <script src="/resources/js/ckeditor5/build/ckeditor.js?ver=2"></script>
 <script>ClassicEditor
