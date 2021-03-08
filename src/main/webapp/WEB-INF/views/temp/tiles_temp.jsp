@@ -22,6 +22,8 @@
 <script defer src="/resources/js/common.js?ver=2"></script>
 <script defer src="/resources/js/store.js?ver=2"></script>
 <script defer src="/resources/js/user/join.js?ver=2"></script>
+<script defer src="/resources/js/store_detail.js?ver=2"></script>
+
 
 </head>
 <body>

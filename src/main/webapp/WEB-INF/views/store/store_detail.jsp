@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <div class="store-detail-container">
@@ -130,4 +130,102 @@
             <li>7. 복제가 가능한 상품 등의 포장을 훼손한 경우 (CD/DVD/GAME/도서의 경우 포장 개봉 시)</li>
         </ol>
     </div>
+    
+    <button type='button' id="modal_btn">모달창아 나와랏</button>
+        <div class="black_bg"></div>
+        <div class="modal_wrap">
+         	<div class="modal_close"><a href="#">close</a></div>
+        <div>
+             
+<div class ="review_modal">
+    <div class="review_modal_title"> 리뷰 쓰기
+        <button type="button" class="review_modal_close">close</button>
+    </div>
+    <div class= "review_point"> 포토리뷰 500p, 일반리뷰 100p</div>
+
+    <form class="review_modal_form">    
+        <div class="review_modal_form_product">
+            <img class="review_modal_form_product_img" src ="img/detail1.jpg">
+            <div class ="review_modal_form_product_content"> 
+                <div class="review_modal_form_product_content_brand">브랜드 이름</div>
+                <div class="review_modal_form_product_content_name"> 제품 이름</div>
+            </div>
+
+        </div>
+        <div class="review_modal_star_section">
+            <div class="review_modal_star_title">별점평가</div>
+            <div class="review_modal_star_wrap">
+                <div class = "review_modal_star">
+                    <div class ="review_modal_star_label" >내구성</div>
+                    <div class="review_modal_star_value">  
+                        <div class = star-rating_wrap>
+                            <p class="star_rating">
+                                <a href="#" class="on">★</a>
+                                <a href="#" class="on">★</a>
+                                <a href="#" class="on">★</a>
+                                <a href="#">★</a>
+                                <a href="#">★</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class = "review_modal_star">
+                    <div class ="review_modal_star_label" >가격</div>
+                    <div class="review_modal_star_value">  
+                        <div class = star-rating_wrap>
+                            <p class="star_rating">
+                                <a href="#" class="on">★</a>
+                                <a href="#" class="on">★</a>
+                                <a href="#" class="on">★</a>
+                                <a href="#">★</a>
+                                <a href="#">★</a>
+                            </p>
+                    </div></div>
+                </div>
+                <div class = "review_modal_star">
+                    <div class ="review_modal_star_label" >디자인</div>
+                    <div class="review_modal_star_value">  
+                        <div class = star-rating_wrap>
+                            <p class="star_rating">
+                                <a href="#" class="on">★</a>
+                                <a href="#" class="on">★</a>
+                                <a href="#" class="on">★</a>
+                                <a href="#">★</a>
+                                <a href="#">★</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class = "review_modal_star">
+                    <div class ="review_modal_star_label" >배송</div>
+                    <div class="review_modal_star_value">  
+                        <div class = star-rating_wrap>
+                            <p class="star_rating">
+                                <a href="#" class="on">★</a>
+                                <a href="#" class="on">★</a>
+                                <a href="#" class="on">★</a>
+                                <a href="#">★</a>
+                                <a href="#">★</a>
+                            </p>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+
+           
+           
+            <!-- 테스트 코드 끝 -->
+
+        <div class="review_modal_section">
+            <div class="review_modal_section_title">사진 첨부 (선택)</div>
+            <button class="upload_button" type="button">  사진 첨부하기 </buttons>
+        </div>
+        <div class="review_modal_section">
+            <div class="review_modal_star_title">리뷰 작성</div>
+            <textarea class ="review_modal_text"placeholder="자세하고 솔직한 리뷰는 다른 고객들에게 큰 도움이 됩니다. (최소 20자 이상)"></textarea>
+
+        </div>
+        <button class="review_modal_form_submit" type="submit">완료</button>
+        
+    </form>
 </div>
