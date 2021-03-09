@@ -11,6 +11,13 @@ spring:
     username: root
     password: koreait2020
     driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  #파일업로드 설정
+  servlet:
+    multipart:      file-size-threshold: 1MB
+      location: C:/Temp
+      max-file-size: 20MB
+      max-request-size: 20MB        
 
 mybatis:
   mapper-locations: mybatis-mapper/**/*.xml

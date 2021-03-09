@@ -1,12 +1,18 @@
 package com.koreait.ohouse.community;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.koreait.ohouse.model.CommunityEntity;
 
@@ -35,15 +41,17 @@ public class CommunityController {
 	@GetMapping("/write")
 	public void write() {}
 	
+	@ResponseBody
 	@PostMapping("/write")
-	public String write(CommunityEntity param, HttpSession hs) {
-		System.out.println(param.getTyp());
-		System.out.println(param.getSecTyp());
-		System.out.println(param.getSeq());
-		System.out.println(param.getTitle());
-		System.out.println(param.getCtnt());
-		param.setiUser(1);
-		service.insBoard(param);
-		return "redirect:/board/detail?i_board=" + param.getiBoard();
+	public Map<String, Object> write(@RequestBody CommunityEntity param) {
+		Map<String, Object> resultValue = new HashMap<>();
+		System.out.println("title : " + param.getTitle());
+		System.out.println("ctnt : " + param.getCtnt());
+		System.out.println("typ : " + param.getTyp());
+		System.out.println("secTyp : " + param.getSecTyp());
+		//resultValue.put("result", service.insBoard(param));
+		resultValue.put("result", "성공");
+		
+		return resultValue;
 	}
 }
