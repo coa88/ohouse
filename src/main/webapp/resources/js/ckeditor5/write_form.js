@@ -65,11 +65,28 @@ function writePost () {
 
 }
 
+let boardImgElem = document.querySelector('#boardImgInput')
+function boardImgUpload () {
+	if(boardImgElem.files.length === 0) {
+		alert('이미지를 선택해 주세요')
+		return
+	}
+	
+	ajax()
+	closeModal () 
+	
+	function ajax () {
+		var formData = new FormData()
+			formData.append('boardImg', boardImgElem.files[0])		
+			
+		fetch('/community/imgUpload',{
+			method: 'post',
+			body: formData
+		})
+	}
+}
 
 let modalContainerElem = document.querySelector('.modalContainer')
-function boardImgModal() {
-	
-}
 
 function openModal () {	
 	modalContainerElem.classList.remove('hide')
