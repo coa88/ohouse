@@ -16,7 +16,7 @@
                 <input type="password" class="input-login-form input-login-form-password" name="userPw" placeholder="비밀번호">
             </div>
             <button type="submit" class="input-login-form input-login-form-btn">로그인</button>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+   
         </form>
 
         <div class="sign-in-form">

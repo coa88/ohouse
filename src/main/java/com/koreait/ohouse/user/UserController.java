@@ -16,12 +16,16 @@ import com.koreait.ohouse.model.UserEntity;
 public class UserController {
 	@Autowired
 	private UserService service;
-
+	@Autowired
+	private HttpSession hs;
+	
+	
+	
 	@GetMapping("/login")
 	public void login() {
 	}
 	@PostMapping("/login")
-	public String loginProc(UserEntity param, HttpSession hs) {
+	public String loginProc(UserEntity param) {
 		int result = service.login(param, hs);
 		if(result == 1) { //로그인 성공
 			System.out.println("로그인 성공 ");
@@ -42,10 +46,10 @@ public class UserController {
 	}
 	
 	@GetMapping("/logout")
-	public String logout(UserEntity param, HttpSession hs) {
+	public String logout(UserEntity param) {
 		//로그아웃시키기 
 		hs.invalidate();
-		return "redirect:/store";
+		return "redirect:/";
 	}
 
 }
