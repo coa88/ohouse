@@ -8,12 +8,12 @@
         <div class="login-form-header">
             <img src="../resources/img/ohouser_logo.jpg">
         </div>
-        <form action="/login" method="post">
+        <form action="/user/login" method="post">
             <div>
-                <input type="text" class="input-login-form input-login-form-email" name="username" placeholder="이메일">
+                <input type="text" class="input-login-form input-login-form-email" name="emailId" placeholder="이메일">
             </div>
             <div>
-                <input type="password" class="input-login-form input-login-form-password" name="password" placeholder="비밀번호">
+                <input type="password" class="input-login-form input-login-form-password" name="userPw" placeholder="비밀번호">
             </div>
             <button type="submit" class="input-login-form input-login-form-btn">로그인</button>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

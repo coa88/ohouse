@@ -53,7 +53,8 @@
                    		 </div>
                     	</c:when>
                     	<c:otherwise>
-                    		<a href="/user/mypage" class="nav-login-item">마이페이지 </a>
+                    		<a href="/user/mypage" class="nav-login-item">마이페이지</a>
+                    		<a href="/user/logout" class="nav-login-item">로그아웃</a>
                     	</c:otherwise>
                     </c:choose>
                    
