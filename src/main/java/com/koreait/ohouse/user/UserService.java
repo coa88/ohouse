@@ -23,8 +23,7 @@ public class UserService {
 	public int insUser(UserEntity p) {
 		String emailAdr = request.getParameter("emailAdr");
 		String emailId = p.getEmailId() + emailAdr;
-		String salt = SecurityUtils.genSalt();
-		String encryptUserPw = SecurityUtils.hashPassword(p.getUserPw(), salt);
+		String encryptUserPw = SecurityUtils.hashPassword(p.getUserPw());
 		p.setEmailId(emailId);
 		p.setUserPw(encryptUserPw);
 		return mapper.insUser(p);

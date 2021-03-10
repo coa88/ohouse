@@ -20,4 +20,9 @@ public class HomeController {
 		return "store";
 	}
 	
+	@GetMapping("/error")
+	public String error() {
+		return "error";
+	}
+	
 }

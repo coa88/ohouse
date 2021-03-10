@@ -1,7 +1,9 @@
 //글쓰기에디터 생성	
 let textAreaData;
 ClassicEditor.create( document.querySelector( '.editor' ), {
+	
 	toolbar: {
+		extraPlugins: [MyCustomUploadAdapterPlugin],
 		items: [
 			'imageUpload',
 			'|',
@@ -96,3 +98,53 @@ function closeModal () {
 	modalContainerElem.classList.add('hide')
 }
 
+
+class UploadAdapter {
+    constructor(loader) {
+        this.loader = loader;
+    }
+	upload() {
+        return this.loader.file.then( file => new Promise(((resolve, reject) => {
+            this._initRequest();
+            this._initListeners( resolve, reject, file );
+            this._sendRequest( file );
+        })))
+    }
+
+    _initRequest() {
+        const xhr = this.xhr = new XMLHttpRequest();
+        xhr.open('POST', '/community/writeImgUpload', true);
+        xhr.responseType = 'json';
+    }
+
+    _initListeners(resolve, reject, file) {
+        const xhr = this.xhr;
+        const loader = this.loader;
+        const genericErrorText = '파일을 업로드 할 수 없습니다.'
+
+        xhr.addEventListener('error', () => {reject(genericErrorText)})
+        xhr.addEventListener('abort', () => reject())
+        xhr.addEventListener('load', () => {
+            const response = xhr.response
+            if(!response || response.error) {
+                return reject( response && response.error ? response.error.message : genericErrorText );
+            }
+
+            resolve({
+                default: response.url //업로드된 파일 주소
+            })
+        })
+    }
+
+    _sendRequest(file) {
+        const data = new FormData()
+        data.append('upload',file)
+        this.xhr.send(data)
+    }
+}
+
+function MyCustomUploadAdapterPlugin(editor) { // 이미지업로드 어댑터
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+        return new UploadAdapter(loader)
+    }
+}

@@ -3,8 +3,8 @@
 <mapper namespace="com.koreait.ohouse.community.CommunityMapper">
 	<insert id="insBoard" useGeneratedKeys="true" keyProperty="iBoard">
 		INSERT INTO cm_board
-		(i_user, typ, sec_typ, seq, title, ctnt)
-		SELECT #{iUser}, #{typ}, #{secTyp}, IFNULL(MAX(seq), 0) + 1, #{title}, #{ctnt}
+		(i_user, typ, sec_typ, seq, title, ctnt, board_img)
+		SELECT #{iUser}, #{typ}, #{secTyp}, IFNULL(MAX(seq), 0) + 1, #{title}, #{ctnt}, #{boardImg}
 		FROM cm_board
 		WHERE typ = #{typ} AND sec_typ = #{secTyp};
 	</insert>
