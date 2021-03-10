@@ -23,7 +23,10 @@ public class UserService {
 	public int insUser(UserEntity p) {
 		String emailAdr = request.getParameter("emailAdr");
 		String emailId = p.getEmailId() + emailAdr;
+<<<<<<< HEAD
 		String salt = SecurityUtils.genSalt();
+=======
+>>>>>>> branch 'master' of https://github.com/coa88/ohouse.git
 		String encryptUserPw = SecurityUtils.hashPassword(p.getUserPw());
 		p.setEmailId(emailId);
 		p.setUserPw(encryptUserPw);

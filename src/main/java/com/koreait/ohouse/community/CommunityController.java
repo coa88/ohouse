@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityEntity;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class CommunityController {
 
 	final private CommunityService service;
+	private MultipartFile img;
 	
 	@GetMapping("/photo")
 	public void photo() {}
@@ -41,17 +44,25 @@ public class CommunityController {
 	@GetMapping("/write")
 	public void write() {}
 	
+	
 	@ResponseBody
-	@PostMapping("/write")
-	public Map<String, Object> write(@RequestBody CommunityEntity param) {
-		Map<String, Object> resultValue = new HashMap<>();
-		System.out.println("title : " + param.getTitle());
-		System.out.println("ctnt : " + param.getCtnt());
-		System.out.println("typ : " + param.getTyp());
-		System.out.println("secTyp : " + param.getSecTyp());
-		//resultValue.put("result", service.insBoard(param));
-		resultValue.put("result", "성공");
-		
+	@PostMapping("/write") // 커뮤니티 게시판 글쓰기
+	public Map<String, Object> write(@RequestBody  CommunityEntity param) {
+		Map<String, Object> resultValue = new HashMap<>();		
+		resultValue.put("result", service.insBoard(param, img));
 		return resultValue;
+	}
+	
+	
+	@ResponseBody //커뮤니티 게시물 대표이미지 업로드
+	@PostMapping("/imgUpload")
+	public void imgUpload(@RequestBody MultipartFile boardImg) {
+		img = boardImg;
+	}
+	
+	@ResponseBody //커뮤니티 게시물 대표이미지 업로드
+	@PostMapping("/writeImgUpload")
+	public void writeImgUpload(@RequestBody CommunityDTO param) {
+		
 	}
 }

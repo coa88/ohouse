@@ -7,7 +7,7 @@
         <put-attribute name="content" value="/WEB-INF/views/temp/content.jsp" />  
         <put-attribute name="footer" value="/WEB-INF/views/temp/footer.jsp" />        
     </definition>
-     
+    
     <definition name="community" extends="basic-template">
         <put-attribute name="content" value="/WEB-INF/views/community/home.jsp" />
     </definition>
@@ -19,5 +19,10 @@
     <definition name="*/*" extends="basic-template">
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
     </definition>
+    
+	<!-- 에러페이지 -->    	
+	<definition name="error-template" template="/WEB-INF/views/temp/error.jsp"> 
+    </definition>
+
      
 </tiles-definitions>

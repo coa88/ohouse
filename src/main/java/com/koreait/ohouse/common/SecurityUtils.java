@@ -16,7 +16,6 @@ public class SecurityUtils {
 	}
 	
 	public static boolean chkPassword(String pw, String salt) {
-		
 		return BCrypt.checkpw(pw, salt);
 	}
 	public static UserEntity getLoginUser(HttpSession hs) {
