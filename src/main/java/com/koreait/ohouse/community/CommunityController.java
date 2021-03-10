@@ -47,7 +47,7 @@ public class CommunityController {
 	
 	@ResponseBody
 	@PostMapping("/write") // 커뮤니티 게시판 글쓰기
-	public Map<String, Object> write(@RequestBody  CommunityEntity param) {
+	public Map<String, Object> write(@RequestBody  CommunityDTO param) {
 		Map<String, Object> resultValue = new HashMap<>();		
 		resultValue.put("result", service.insBoard(param, img));
 		return resultValue;

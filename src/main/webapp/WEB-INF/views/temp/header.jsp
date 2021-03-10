@@ -20,7 +20,7 @@
 	                            <ul class="sub-menu-item">
 				                    <c:forEach items="${submenuList}" var="data">
 				                 		<c:if test="${item.menuTyp eq data.menuTyp}">
-				                 			<c:choose>
+				                 			<c:choose> 
 				                 				<c:when test="${item.menuAddress eq data.submenuAddress}">
 				                 					<li class="sub-menu-item_li"><a href="/${item.menuAddress}">${data.submenuNm}</a></li>
 				                 				</c:when>
@@ -45,15 +45,19 @@
                     <div class="cart-menu">
                         <a href="/" class="fas fa-shopping-cart fa-lg cart-icon"></a>
                     </div>
+          
                     <c:choose>
-                    	<c:when test="${sessionScope.loginUser = null}">
+                    	<c:when test="${sessionScope.loginUser eq null}">
                     	 <div>
                       		  <a href="/user/login" class="nav-login-item">로그인</a>
                        		  <a href="/user/join" class="nav-login-item">회원가입</a>
                    		 </div>
                     	</c:when>
                     	<c:otherwise>
-                    		<a href="/user/mypage" class="nav-login-item">마이페이지 </a>
+                    		<div>
+	                    		<a href="/user/mypage" class="nav-login-item">마이페이지</a>
+	                    		<a href="/user/logout" class="nav-login-item">로그아웃</a>
+							</div>                    		
                     	</c:otherwise>
                     </c:choose>
                    
