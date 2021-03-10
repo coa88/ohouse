@@ -1,5 +1,32 @@
 'use strict'
 
+// 회원가입 - 이메일
+const joinSelect = document.querySelector('#join-form-email-emailType')
+const joinInputBox = document.querySelector('.emailAdr_send_input')
+const buttonExpandIcon = document.querySelector('.email_input_expand')
+
+function selectEmail() {
+	if (joinSelect.options[joinSelect.selectedIndex].value == 'direct') {
+		joinInputBox.type = 'text'
+		joinInputBox.value = ''
+		joinInputBox.focus()
+		joinSelect.style.display = 'none'
+		buttonExpandIcon.style.display = 'block'
+	} else {
+		joinInputBox.value = '@' + joinSelect.options[joinSelect.selectedIndex].value
+		joinSelect.style.display = 'inline-block'
+	}
+}
+
+buttonExpandIcon.addEventListener('click', () => { // 이메일주소 x아이콘 클릭시
+	buttonExpandIcon.style.display = 'none'
+	joinInputBox.type = 'hidden'
+	joinSelect.style.display = 'inline-block'
+	joinSelect.options[0].selected = 'selected'
+})
+
+
+
 // 약관동의 체크박스 이벤트
 const chkAll = document.querySelector('.check_all')
 const chkNormal = document.querySelectorAll('.normal')
@@ -46,16 +73,3 @@ chkAll.addEventListener('click', (e) => { // 전체동의이벤트
 		})
 	}
 })
-
-// 이메일주소 서버로 보내기 (ex @naver.com)
-const emailAdr = document.querySelector("#join-form-email-emailType")
-
-function emailClick() {
-	emailSend()
-}
-
-function emailSend() {
-	const emailAdrVal = emailAdr.options[emailAdr.selectedIndex].value
-	document.querySelector('.emailAdr_send_input').value = '@' + emailAdrVal
-}
-

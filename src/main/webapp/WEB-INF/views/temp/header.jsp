@@ -45,10 +45,18 @@
                     <div class="cart-menu">
                         <a href="/" class="fas fa-shopping-cart fa-lg cart-icon"></a>
                     </div>
-                    <div>
-                        <a href="/user/login" class="nav-login-item">로그인</a>
-                        <a href="/user/join" class="nav-login-item">회원가입</a>
-                    </div>
+                    <c:choose>
+                    	<c:when test="${sessionScope.loginUser = null}">
+                    	 <div>
+                      		  <a href="/user/login" class="nav-login-item">로그인</a>
+                       		  <a href="/user/join" class="nav-login-item">회원가입</a>
+                   		 </div>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<a href="/user/mypage" class="nav-login-item">마이페이지 </a>
+                    	</c:otherwise>
+                    </c:choose>
+                   
                     <div class="nav-write-box">
                         <div class="nav-write-btn">글쓰기<span class="fas fa-chevron-down nav-write-btn-arrow"></span></div>
                         <div class="nav-write-list">

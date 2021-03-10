@@ -131,6 +131,19 @@
         </ol>
     </div>
     
+    
+    <div>리뷰쓰기 테스트 로그인 되어있으면 리뷰쓰기 버튼이 보이고 안되어있으면 로그인으로 </div>
+    <c:choose>
+    	<c:when test="${sessionScope.loginUser = null}">
+    		 <form action="/user/login" method="post"></form>
+    	</c:when>
+    	<c:otherwise>
+    		<div>리뷰쓰기 </div>
+    	</c:otherwise>
+    </c:choose>
+    
+    
+    
     <button type='button' id="modal_btn">모달창아 나와랏</button>
         <div class="black_bg"></div>
         <div class="modal_wrap">

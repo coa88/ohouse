@@ -42,5 +42,22 @@ public class UserService {
 	public int delUser(UserEntity p) {
 		return mapper.delUser(p);
 	}
-
+	//1: 로그인 성공 2: 아이디 없음 3: 비밀번호 틀림 
+	public int login(UserEntity param , HttpSession hs) {
+		
+		UserEntity data = selUser(param);
+		if(data == null) {
+			return 2;
+		}
+		
+		boolean cryptLoginPw = SecurityUtils.chkPassword(param.getUserPw(), data.getUserPw());
+		
+		if(!cryptLoginPw) {
+			return 3;
+		}
+		data.setUserPw(null);
+		hs.setAttribute("loginUser", data);
+			return 1;
+	}
+	
 }
