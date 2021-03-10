@@ -1,9 +1,11 @@
 'use strict'
 
 // 회원가입 - 이메일
-const joinSelect = document.querySelector('#join-form-email-emailType')
+const joinEmailId = document.querySelector('.join-form-email-input')
 const joinInputBox = document.querySelector('.emailAdr_send_input')
+const joinSelect = document.querySelector('#join-form-email-emailType')
 const buttonExpandIcon = document.querySelector('.email_input_expand')
+const joinCompleteBtn = document.querySelector('.input-join-form-btn')
 
 function selectEmail() {
 	if (joinSelect.options[joinSelect.selectedIndex].value == 'direct') {
@@ -13,7 +15,7 @@ function selectEmail() {
 		joinSelect.style.display = 'none'
 		buttonExpandIcon.style.display = 'block'
 	} else {
-		joinInputBox.value = '@' + joinSelect.options[joinSelect.selectedIndex].value
+		joinInputBox.value = joinSelect.options[joinSelect.selectedIndex].value
 		joinSelect.style.display = 'inline-block'
 	}
 }
@@ -24,6 +26,28 @@ buttonExpandIcon.addEventListener('click', () => { // 이메일주소 x아이콘
 	joinSelect.style.display = 'inline-block'
 	joinSelect.options[0].selected = 'selected'
 })
+
+// 회원가입 완료 클릭시
+function checkfield() {
+	/*
+	if (joinSelect.options[0]) {
+		
+	}
+	*/
+
+	if (!joinEmailId.value == '' && joinSelect.options[0]) {
+		document.querySelector('.emailAdr_error').style.display = 'block'
+		/*
+		joinInputBox.type = 'text'
+		joinInputBox.value = ''
+		joinInputBox.focus()
+		joinSelect.style.display = 'none'
+		buttonExpandIcon.style.display = 'block'
+		*/
+	} else {
+		document.querySelector('.emailAdr_error').style.display = 'none'
+	}
+}
 
 
 

@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 public class CommunityService {
 
 	final ImgUploadUtils imgUtils;
-	final CommunityMapper mapper;
+	final CommunityMapper mapper; 
 	
 	public int insBoard(CommunityEntity param, MultipartFile img) {
 		// 0:유저pk없음 1:성공 2:파일없음 

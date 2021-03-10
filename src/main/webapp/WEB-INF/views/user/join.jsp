@@ -25,18 +25,20 @@
                         <option value="icloud.com">icloud.com</option>
                         <option value="direct">직접입력</option>
                     </select>
-                    <input type="hidden" class="join-form-input emailAdr_send_input" name="emailAdr" placeholder="입력해주세요">          		        
+                    <input type="hidden" class="join-form-input emailAdr_send_input" name="emailAdr" placeholder="입력해주세요" required>          		        
                 	<button class="email_input_expand">
                 		<svg class="icon" width="10" height="10" preserveAspectRatio="xMidYMid meet" style="fill: currentcolor;"><path fill-rule="evenodd" d="M5 4L8.5.3l1 1.1L6.2 5l3.5 3.6-1 1L5 6.1 1.4 9.6l-1-1L3.9 5 .4 1.5l1.1-1L5 3.8z"></path></svg>
                 	</button>
                 </span>
-                <div class="user-sign-up-form__form-group__error">필수 입력 항목입니다.</div>
+                <div class="email_error">필수 입력 항목입니다.</div>
+                <div class="emailAdr_error">이메일주소를 선택해주세요.</div>
             </div>
  			
             <h2 class="join-form-label">비밀번호</h2>
             <h3 class="join-form-label-contents">8자 이상 입력해주세요.</h2>
             <div><input type="password" class="join-form-input" name="userPw" placeholder="비밀번호" required></div>
             <h2 class="join-form-label">비밀번호 확인</h2>
+            <div class="pw_error">비밀번호가 일치하지 않습니다.</div>
             <div><input type="password" class="join-form-input" name="userPwChk" placeholder="비밀번호 확인" required></div>
             <h2 class="join-form-label">별명</h2>
             <h3 class="join-form-label-contents">다른 유저와 겹치지 않는 별명을 입력해주세요. (2~15자)</h2>
@@ -74,7 +76,7 @@
                 </label>
             </div>
 
-            <button type="submit" class="input-join-form-btn">회원가입 완료</button>
+            <button type="submit" class="input-join-form-btn" onclick="checkfield()">회원가입 완료</button>
             <input type="hidden" name="provider" value="ohouse">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
         </form>
