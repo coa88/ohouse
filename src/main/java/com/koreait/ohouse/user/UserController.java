@@ -23,7 +23,8 @@ public class UserController {
 	@PostMapping("/login")
 	public String loginProc(UserEntity param, HttpSession hs) {
 		int result = service.login(param, hs);
-		if(result == 1) {
+		if(result == 1) { //로그인 성공
+			System.out.println("로그인 성공 ");
 			return "redirect:/store";
 		}
 		return null;
@@ -38,6 +39,13 @@ public class UserController {
 	public String join(UserEntity p) {
 		service.insUser(p);
 		return "redirect:/user/login";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(UserEntity param, HttpSession hs) {
+		//로그아웃시키기 
+		hs.invalidate();
+		return "redirect:/store";
 	}
 
 }

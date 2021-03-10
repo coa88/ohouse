@@ -24,7 +24,7 @@ public class UserService {
 		String emailAdr = request.getParameter("emailAdr");
 		String emailId = p.getEmailId() + emailAdr;
 		String salt = SecurityUtils.genSalt();
-		String encryptUserPw = SecurityUtils.hashPassword(p.getUserPw(), salt);
+		String encryptUserPw = SecurityUtils.hashPassword(p.getUserPw());
 		p.setEmailId(emailId);
 		p.setUserPw(encryptUserPw);
 		return mapper.insUser(p);
@@ -46,13 +46,17 @@ public class UserService {
 	public int login(UserEntity param , HttpSession hs) {
 		
 		UserEntity data = selUser(param);
-		if(data == null) {
-			return 2;
-		}
+		System.out.println(param.getNm());
+		
+//		if(data == null) {
+//			System.out.println("아이디 없음 ");
+//			return 2;
+//		}
 		
 		boolean cryptLoginPw = SecurityUtils.chkPassword(param.getUserPw(), data.getUserPw());
 		
 		if(!cryptLoginPw) {
+			System.out.println("비밀번호 틀림 ");
 			return 3;
 		}
 		data.setUserPw(null);
