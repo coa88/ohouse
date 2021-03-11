@@ -477,6 +477,7 @@ img {
 	font-size: 20px;
 	font-weight: 700;
 	padding: 0 0 25px;
+	color: #424242;
 }
 
 .join-form-label {
@@ -494,7 +495,7 @@ img {
 }
 /* 이메일 입력 시작 */
 .join-form-email-input {
-	width: 47%;
+	width: 100%;
 	height: 40px;
 	font-size: 15px;
 	font-weight: 700;
@@ -560,49 +561,21 @@ img {
 	position: relative;
 }
 
-.join-form-email-select .emailAdr_send_input {
-	width: 47%;
-	margin: 0 0 0;
-}
-
 .join-form-email {
 	margin: 0 0 20px;
 }
 
-.email_error {
+.emailRequired, .emailChk {
 	display: none;
-	margin: 0 0 20px;
-	color: #f77;
-}
-
-.emailAdr_error {
-	display: none;
-	margin: 0 0 20px;
+	margin: 10px 0;
+	font-size: 13px;
+	line-height: 21px;
 	color: #f77;
 }
 
 .pw_error {
 	display: none;
 	color: #f77;
-}
-
-.email_input_expand {
-	display: none;
-	position: absolute;
-	top: 2px;
-	right: 0px;
-	padding: 5px;
-	background: none;
-	border: none;
-	font-size: 0;
-	cursor: default;
-	color: rgba(0, 0, 0, .3);
-	outline: none;
-	position: absolute;
-}
-
-.email_input_expand>.icon {
-	stroke: none;
 }
 
 .join-form-input {
