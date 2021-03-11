@@ -1,9 +1,9 @@
 //글쓰기에디터 생성	
 let textAreaData;
 ClassicEditor.create( document.querySelector( '.editor' ), {
-	
+	extraPlugins: [MyCustomUploadAdapterPlugin],
 	toolbar: {
-		extraPlugins: [MyCustomUploadAdapterPlugin],
+		viewportTopOffset : -100,
 		items: [
 			'imageUpload',
 			'|',
@@ -34,15 +34,12 @@ ClassicEditor.create( document.querySelector( '.editor' ), {
 
 //글쓰기
 function writePost () {
-	let boardImgElem = document.querySelector('#boardImg')
 	
 	let writePostElem = document.querySelector('#writePost')
 	let typElem = writePostElem.typ.value
 	let secTypElem = writePostElem.secTyp.value
 	let titleElem = writePostElem.title.value
 	let ctntElem = textAreaData.getData()
-
-
 
 	let data = {
 		typ: typElem,
@@ -139,7 +136,7 @@ class UploadAdapter {
     _sendRequest(file) {
         const data = new FormData()
         data.append('upload',file)
-        this.xhr.send(data)
+		//this.xhr.send(data)
     }
 }
 

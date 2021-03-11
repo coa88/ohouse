@@ -24,12 +24,9 @@
     color: #ccc;
 }
 
-.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar, .ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners {
-    width: 900px;
-    
-}
 .ck.ck-editor__main>.ck-editor__editable {
-    height: 800px;
+    width: 900px;
+    height: 600px;
 }
 
 
