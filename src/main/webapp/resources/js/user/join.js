@@ -1,72 +1,31 @@
 'use strict'
 
-// 회원가입 체크
-const email = document.querySelector('.join-form-email-input')
-const emailVal = document.querySelector('.join-form-email-input').value
-const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+function joinChk() {
+	const joinForm = document.querySelector('#joinForm')
 
-email.addEventListener('blur', () => {
-	if (emailVal.match(regExp) == null) {
-		document.querySelector('.emailChk').style.display = 'none'
-		document.querySelector('.join-form-label').style.color = '#f77'
-	} else {
-		document.querySelector('.emailChk').style.display = 'block'
-		document.querySelector('.join-form-label').style.color = '#424242'
+	const emailId = joinForm.emailId
+	const emailJ = /^[_a-zA-Z0-9]+([-+.][_a-zA-Z0-9]+)*@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/i
+	if (!emailJ.test(emailId.value)) {
+		alert('이메일 형식이 올바르지 않습니다.')
+		joinForm.emailId.focus()
+		return false
 	}
 
-	if (emailVal == null) {
-		document.querySelector('.emailRequired').style.display = 'block'
-	} else {
-		document.querySelector('.emailRequired').style.display = 'none'
+	const pw = joinForm.userPw
+	if (pw.value > 8) {
+		alert('8자 이상 입력해주세요.')
+		joinForm.pw.value = ''
+		joinForm.pw.focus()
+		return false
 	}
-})
 
-
-
-
-// 약관동의 체크박스 이벤트
-const chkAll = document.querySelector('.check_all')
-const chkNormal = document.querySelectorAll('.normal')
-
-const agreements = {
-	firstChk: false,
-	secondChk: false,
-	thirdChk: false,
-	fourChk: false,
-}
-
-chkNormal.forEach((item) => item.addEventListener('input', toggleCheckbox))
-
-function toggleCheckbox(e) {
-	const { checked, id } = e.target
-	agreements[id] = checked
-	this.parentNode.classList.toggle('active')
-	checkAllStatus()
-	toggleSubmitButton()
-}
-
-function checkAllStatus() {
-	const { firstChk, secondChk, thirdChk, fourChk } = agreements
-	if (firstChk && secondChk && thirdChk && fourChk) {
-		chkAll.checked = true
-	} else {
-		chkAll.checked = false
+	const pwChk = joinForm.userPwChk
+	if (pw.value === pwChk.value) {
+		alert('비밀번호가 일치하지 않습니다.')
+		joinForm.pw.value = ''
+		joinForm.pwChk.value = ''
+		joinForm.pwChk.focus()
+		return false
 	}
 }
 
-chkAll.addEventListener('click', (e) => { // 전체동의이벤트
-	const { checked } = e.target
-	if (checked) {
-		chkNormal.forEach((item) => {
-			item.checked = true
-			agreements[item.id] = true
-			item.parentNode.classList.add('active')
-		})
-	} else {
-		chkNormal.forEach((item) => {
-			item.checked = false
-			agreements[item.id] = false
-			item.parentNode.classList.remove('active')
-		})
-	}
-})
