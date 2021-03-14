@@ -41,19 +41,19 @@
                     <span class="join-form-all-check-contents">전체동의</span>
                 </label>
                 <label class="form-check-label">
-                    <input type="checkbox" class="normal form-check-label-box">
+                    <input type="checkbox" class="normal form-check-label-box" required>
                     <span class="join-form-check-contents">만 14세 이상입니다.</span>
                     <span class="join-form-check-contents-required">(필수)</span>
                 </label>
                 <label class="form-check-label">
-                    <input type="checkbox" class="normal form-check-label-box">
+                    <input type="checkbox" class="normal form-check-label-box" required>
                     <span class="join-form-check-contents">
                         <a href="#" class="join-form-check-contents-a">이용약관</a>
                     </span>
                     <span class="join-form-check-contents-required">(필수)</span>
                 </label>
                 <label class="form-check-label">
-                    <input type="checkbox" class="normal form-check-label-box">
+                    <input type="checkbox" class="normal form-check-label-box" required>
                     <span class="join-form-check-contents">
                         <a href="#" class="join-form-check-contents-a">개인정보수집 및 이용동의</a>
                     </span>
