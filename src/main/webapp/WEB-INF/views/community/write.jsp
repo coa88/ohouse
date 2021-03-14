@@ -26,6 +26,6 @@
 
 
 
-<script src="/resources/js/ckeditor5/build/ckeditor.js?ver=3"></script>
-<script defer src="/resources/js/ckeditor5/write_form.js?ver=3"></script>
+<script src="/resources/js/ckeditor5/build/ckeditor.js?ver=4"></script>
+<script defer src="/resources/js/ckeditor5/write_form.js?ver=4"></script>
 
