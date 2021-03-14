@@ -22,12 +22,13 @@ public class CommunityService {
 	
 	public int insBoard(CommunityDTO param, MultipartFile img) {
 		// 0:유저pk없음 1:성공 2:파일없음 
-		int i_user = SecurityUtils.getLoginUserPk(hs);
+//		int i_user = SecurityUtils.getLoginUserPk(hs);
+		int i_user = 1;
 		
 		if(i_user < 1) { // 유저없음
 			return 0;
 		}
-		
+		//대표이미지 
 		try {	
 			String folder = "/resources/img/community/user/" + i_user;
 			MultipartFile file = img;
@@ -42,6 +43,7 @@ public class CommunityService {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		
 		return mapper.insBoard(param);
 	}

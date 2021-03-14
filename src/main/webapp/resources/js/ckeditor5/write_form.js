@@ -1,7 +1,8 @@
-//글쓰기에디터 생성	
+//--------------- ckeditor 시작 -----------------//
+
 let textAreaData;
 ClassicEditor.create( document.querySelector( '.editor' ), {
-	extraPlugins: [MyCustomUploadAdapterPlugin],
+	extraPlugins: [ MyCustomUploadAdapterPlugin ],
 	toolbar: {
 		viewportTopOffset : -100,
 		items: [
@@ -20,7 +21,7 @@ ClassicEditor.create( document.querySelector( '.editor' ), {
 	licenseKey: '',
 	} )
 	.then( editor => {
-		window.editor = editor;
+		window.editor = editor
 		textAreaData = editor
 } )
 .catch( error => {
@@ -30,16 +31,96 @@ ClassicEditor.create( document.querySelector( '.editor' ), {
 	console.error( error );
 })
 
+//파일을 서버로 안전하게 보내고 서버의 응답 (예 : 저장된 파일의 URL)을 파일 로더로 다시 전달 또는 오류처리
+class MyUploadAdapter { 
+    constructor(loader) {	//디스크에서 파일을 읽고 업로드 어댑터를 사용하여 서버에 업로드
+        this.loader = loader;
+    }
+	upload() {
+        return this.loader.file
+            .then( file => new Promise( ( resolve, reject ) => {
+                this._initRequest();
+                this._initListeners( resolve, reject, file );
+                this._sendRequest( file );
+            } ) );
+    }
 
+	abort() {
+        if ( this.xhr ) {
+            this.xhr.abort();
+        }
+    }
+    _initRequest() {
+        const xhr = this.xhr = new XMLHttpRequest();
+        xhr.open( 'POST', '/imageUpload.do', true );
+        xhr.responseType = 'json'
+    } 
+
+    _initListeners( resolve, reject, file ) {
+        const xhr = this.xhr;
+        const loader = this.loader;
+        const genericErrorText = `Couldn't upload file: ${ file.name }.`
+
+        xhr.addEventListener( 'error', () => reject( genericErrorText ))
+        xhr.addEventListener( 'abort', () => reject() );
+        xhr.addEventListener( 'load', () => {
+            const response = xhr.response
+			alert(response);
+            if (!response || response.error) {
+				console.log(xhr)
+				console.log(loader)
+				console.log(genericErrorText)
+                return reject( response && response.error ? response.error.message : genericErrorText)
+            } else {
+				let writePostElem = document.querySelector('#writePost');
+				let ctntElem = textAreaData.getData();
+				alert(ctntElem);
+				var img = "<img src=\"" + response.fileUrl + "\">";
+				alert(img);
+				textAreaData.setData(ctntElem + img);
+				
+			}
+
+            resolve({				
+                default: response.url
+            })
+        })
+
+		if ( xhr.upload ) {
+            xhr.upload.addEventListener( 'progress', evt => {
+                if ( evt.lengthComputable ) {
+                    loader.uploadTotal = evt.total;
+                    loader.uploaded = evt.loaded;
+                }
+            })
+   		}
+	}
+		_sendRequest( file ) {
+        const data = new FormData();
+        data.append( 'upload', file );
+        this.xhr.send( data );
+		console.log(data)
+  	    }
+	}
+
+   
+
+function MyCustomUploadAdapterPlugin( editor ) {
+    editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+        return new MyUploadAdapter( loader );
+    }
+}
+
+//--------------- ckeditor 끝 -----------------//
 
 //글쓰기
 function writePost () {
 	
 	let writePostElem = document.querySelector('#writePost')
-	let typElem = writePostElem.typ.value
-	let secTypElem = writePostElem.secTyp.value
-	let titleElem = writePostElem.title.value
-	let ctntElem = textAreaData.getData()
+	let typElem = writePostElem.typ.value;
+	let secTypElem = writePostElem.secTyp.value;
+	let titleElem = writePostElem.title.value;
+	let ctntElem = textAreaData.getData();
 
 	let data = {
 		typ: typElem,
@@ -96,52 +177,4 @@ function closeModal () {
 }
 
 
-class UploadAdapter {
-    constructor(loader) {
-        this.loader = loader;
-    }
-	upload() {
-        return this.loader.file.then( file => new Promise(((resolve, reject) => {
-            this._initRequest();
-            this._initListeners( resolve, reject, file );
-            this._sendRequest( file );
-        })))
-    }
 
-    _initRequest() {
-        const xhr = this.xhr = new XMLHttpRequest();
-        xhr.open('POST', '/community/writeImgUpload', true);
-        xhr.responseType = 'json';
-    }
-
-    _initListeners(resolve, reject, file) {
-        const xhr = this.xhr;
-        const loader = this.loader;
-        const genericErrorText = '파일을 업로드 할 수 없습니다.'
-
-        xhr.addEventListener('error', () => {reject(genericErrorText)})
-        xhr.addEventListener('abort', () => reject())
-        xhr.addEventListener('load', () => {
-            const response = xhr.response
-            if(!response || response.error) {
-                return reject( response && response.error ? response.error.message : genericErrorText );
-            }
-
-            resolve({
-                default: response.url //업로드된 파일 주소
-            })
-        })
-    }
-
-    _sendRequest(file) {
-        const data = new FormData()
-        data.append('upload',file)
-		//this.xhr.send(data)
-    }
-}
-
-function MyCustomUploadAdapterPlugin(editor) { // 이미지업로드 어댑터
-    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-        return new UploadAdapter(loader)
-    }
-}
