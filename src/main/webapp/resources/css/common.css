@@ -526,16 +526,8 @@ img {
 }
 
 /* 이메일 입력 끝 */
-.join-form-email-select {
-	position: relative;
-}
-
-.join-form-email {
-	margin: 0 0 20px;
-}
-
-.emailChk, .emailRequired, .pwRequired, .pwChkRequired, .pw_error,
-	.nmRequired, .nmLength {
+.emailRequired, .emailChk, .pwRequired, .pwChk, .pwChkChk,
+	.pwChkRequired, .nmRequired, .nmLength {
 	display: none;
 	margin: 10px 0;
 	font-size: 13px;
@@ -548,12 +540,27 @@ img {
 	color: #f77;
 }
 
+.pw_margin, .pwChk_margin, .nm_margin {
+	margin: 0;
+}
+
+.pw_label, .pwChk_label, .nm_label, .terms_label {
+	margin-top: 30px;
+}
+
+.join-form-email-select {
+	position: relative;
+}
+
+.join-form-email {
+	margin: 0 0 20px;
+}
+
 .join-form-input {
 	width: 100%;
 	height: 40px;
 	font-size: 15px;
 	font-weight: 700;
-	margin: 0 0 20px;
 	border: 1px solid #dadada;
 	border-radius: 4px;
 	padding: 0 15px;
@@ -562,14 +569,6 @@ img {
 	background-color: #ffffff;
 	color: #424242;
 	box-sizing: border-box;
-}
-
-.pw_margin, .pwChk_margin, .nm_margin {
-	margin: 0;
-}
-
-.pwChk_label, .nm_label, .terms_label {
-	margin-top: 30px;
 }
 
 .join-form-input::placeholder {
