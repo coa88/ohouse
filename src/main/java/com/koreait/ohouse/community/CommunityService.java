@@ -3,6 +3,7 @@ package com.koreait.ohouse.community;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityEntity;
 import com.koreait.ohouse.model.UserEntity;
 import com.koreait.ohouse.utils.ImgUploadUtils;
@@ -16,7 +17,7 @@ public class CommunityService {
 	final ImgUploadUtils imgUtils;
 	final CommunityMapper mapper;
 	
-	public int insBoard(CommunityEntity param, MultipartFile img) {
+	public int insBoard(CommunityDTO param, MultipartFile img) {
 		// 0:유저pk없음 1:성공 2:파일없음 
 		int i_user = 1;
 		

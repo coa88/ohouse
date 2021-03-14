@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class StoreController {
 
 	final StoreService service;
-
+ 
 	@GetMapping("/category")
 	public void category() {
 	}

@@ -23,7 +23,6 @@ public class UserService {
 	public int insUser(UserEntity p) {
 		String emailAdr = request.getParameter("emailAdr");
 		String emailId = p.getEmailId() + emailAdr;
-
 		String encryptUserPw = SecurityUtils.hashPassword(p.getUserPw());
 		p.setEmailId(emailId);
 		p.setUserPw(encryptUserPw);
@@ -35,23 +34,25 @@ public class UserService {
 		return mapper.selUser(p);
 	}
 
-	public int updUser(UserEntity param) {
+	public int updUser(UserEntity param, HttpSession hs) {
 		return mapper.updUser(param);
 	}
 
 	public int delUser(UserEntity p) {
 		return mapper.delUser(p);
 	}
+	
+	
 	//1: 로그인 성공 2: 아이디 없음 3: 비밀번호 틀림 
 	public int login(UserEntity param , HttpSession hs) {
 		
 		UserEntity data = selUser(param);
-		System.out.println(param.getNm());
+		System.out.println(param.getiUser());
 		
-//		if(data == null) {
-//			System.out.println("아이디 없음 ");
-//			return 2;
-//		}
+		if(data == null) {
+			System.out.println("아이디 없음 ");
+			return 2;
+		}
 		
 		boolean cryptLoginPw = SecurityUtils.chkPassword(param.getUserPw(), data.getUserPw());
 		
@@ -60,8 +61,10 @@ public class UserService {
 			return 3;
 		}
 		data.setUserPw(null);
-		hs.setAttribute("loginUser", data);
+		hs.setAttribute("loginUser", data); 
 			return 1;
 	}
+	
+	
 	
 }
