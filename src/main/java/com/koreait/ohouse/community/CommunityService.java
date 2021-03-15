@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.koreait.ohouse.common.SecurityUtils;
-import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityEntity;
-import com.koreait.ohouse.model.UserEntity;
 import com.koreait.ohouse.utils.ImgUploadUtils;
 
 import lombok.RequiredArgsConstructor;
@@ -20,10 +18,9 @@ public class CommunityService {
 	final ImgUploadUtils imgUtils;
 	final CommunityMapper mapper; 
 	
-	public int insBoard(CommunityDTO param, MultipartFile img) {
+	public int insBoard(CommunityEntity param, MultipartFile img) {
 		// 0:유저pk없음 1:성공 2:파일없음 
-//		int i_user = SecurityUtils.getLoginUserPk(hs);
-		int i_user = 1;
+		int i_user = SecurityUtils.getLoginUserPk(hs);
 		
 		if(i_user < 1) { // 유저없음
 			return 0;

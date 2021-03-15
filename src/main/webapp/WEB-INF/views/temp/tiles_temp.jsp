@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/resources/css/tip.css?ver=2">
 <link rel="stylesheet" href="/resources/css/store.css?ver=2">
 <link rel="stylesheet" href="/resources/css/board.css?ver=2">
-<link rel="stylesheet" href="/resources/css/write.css?ver=4">
+<link rel="stylesheet" href="/resources/css/write.css?ver=5">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css?ver=2"> <!-- splide css -->
 <script defer src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script> <!-- splide js-->
 <script defer src="/resources/js/common.js?ver=3"></script>

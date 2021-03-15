@@ -9,14 +9,6 @@
 		WHERE typ = #{typ} AND sec_typ = #{secTyp};
 	</insert>
 	
-	<insert id="insCmPhoto" useGeneratedKeys="true" keyProperty="iBoard">
-		INSERT INTO cm_photo
-		(i_board, img_seq, community_img)
-		SELECT 42, IFNULL(MAX(img_seq), 0) + 1, #{community_img}
-		FROM cm_photo
-		WHERE i_board = 42;
-	</insert>
-	
 	<update id="updBoard">
 		UPDATE cm_board
 		SET title = #{title}

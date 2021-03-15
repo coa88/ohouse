@@ -65,20 +65,12 @@ class MyUploadAdapter {
         xhr.addEventListener( 'abort', () => reject() );
         xhr.addEventListener( 'load', () => {
             const response = xhr.response
-			alert(response);
             if (!response || response.error) {
-				console.log(xhr)
-				console.log(loader)
-				console.log(genericErrorText)
                 return reject( response && response.error ? response.error.message : genericErrorText)
             } else {
-				let writePostElem = document.querySelector('#writePost');
 				let ctntElem = textAreaData.getData();
-				alert(ctntElem);
 				var img = "<img src=\"" + response.fileUrl + "\">";
-				alert(img);
 				textAreaData.setData(ctntElem + img);
-				
 			}
 
             resolve({				
@@ -113,15 +105,43 @@ function MyCustomUploadAdapterPlugin( editor ) {
 
 //--------------- ckeditor 끝 -----------------//
 
-//글쓰기
-function writePost () {
+// 게시물 업로드
+let fileElem = document.querySelector('#file')
+function WriteUpload () {
+	if(fileElem.files.length === 0) {
+		alert('이미지를 선택해 주세요')
+		return false
+	}
 	
+	ajax()
+	writePost ()
+	
+	function ajax () {
+		var formData = new FormData()
+			formData.append('boardImg', fileElem.files[0])		
+			
+		fetch('/community/mainImgUpload',{
+			method: 'post',
+			body: formData
+		})
+	}
+}
+
+//글정보 서버로 전송
+function writePost () {
 	let writePostElem = document.querySelector('#writePost')
 	let typElem = writePostElem.typ.value;
 	let secTypElem = writePostElem.secTyp.value;
 	let titleElem = writePostElem.title.value;
 	let ctntElem = textAreaData.getData();
-
+	
+	if(titleElem == '') {
+		alert('제목을 입력해 주세요.');
+		return false;
+	} else if(ctntElem == '') {
+		alert('내용을 작성해 주세요.');
+		return false;
+	}
 	let data = {
 		typ: typElem,
 		secTyp: secTypElem,
@@ -139,42 +159,29 @@ function writePost () {
 	}).then(function (res){
 			return res.json()
 		}).then(function (data) {
-			console.log(data.result)
-		}) 
-	.catch(error => console.error('Error:', error));
-
-}
-
-let boardImgElem = document.querySelector('#boardImgInput')
-function boardImgUpload () {
-	if(boardImgElem.files.length === 0) {
-		alert('이미지를 선택해 주세요')
-		return
-	}
-	
-	ajax()
-	closeModal () 
-	
-	function ajax () {
-		var formData = new FormData()
-			formData.append('boardImg', boardImgElem.files[0])		
-			
-		fetch('/community/imgUpload',{
-			method: 'post',
-			body: formData
+			if(data.result === 0 || data.result === undefined) {
+				alert('업로드 실패하였습니다.')
+				return false;
+			} else {
+				location.href='/'
+				return data;			
+			}
 		})
-	}
+		
+	.catch(error => console.error('Error:', error))
+
 }
 
-let modalContainerElem = document.querySelector('.modalContainer')
+var file = document.querySelector("#file");
+function setThumbnail() {
+    var fileList = file.files 
 
-function openModal () {	
-	modalContainerElem.classList.remove('hide')
+    // 읽기
+    var reader = new FileReader()
+    reader.readAsDataURL(fileList [0])
+
+    //로드 한 후
+    reader.onload = function  () {
+        document.querySelector('#preview').src = reader.result
+    }
 }
-
-function closeModal () {
-	modalContainerElem.classList.add('hide')
-}
-
-
-

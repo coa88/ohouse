@@ -1,11 +1,9 @@
 package com.koreait.ohouse.community;
 
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -16,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.koreait.ohouse.model.CommunityDTO;
-import com.koreait.ohouse.utils.ImgUploadUtils;
+import com.koreait.ohouse.model.CommunityEntity;
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,7 +48,7 @@ public class CommunityController {
 	
 	@ResponseBody
 	@PostMapping("/write") // 커뮤니티 게시판 글쓰기
-	public Map<String, Object> write(@RequestBody  CommunityDTO param) {
+	public Map<String, Object> write(@RequestBody  CommunityEntity param) {
 		Map<String, Object> resultValue = new HashMap<>();		
 		resultValue.put("result", service.insBoard(param, boardImg));
 		return resultValue;
@@ -59,7 +56,7 @@ public class CommunityController {
 	
 	
 	@ResponseBody //커뮤니티 게시물 대표이미지 업로드
-	@PostMapping("/imgUpload")
+	@PostMapping("/mainImgUpload")
 	public void imgUpload(@RequestBody MultipartFile boardImg) {
 		this.boardImg = boardImg;
 	}

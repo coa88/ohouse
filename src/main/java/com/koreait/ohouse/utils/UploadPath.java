@@ -3,7 +3,7 @@ package com.koreait.ohouse.utils;
 import javax.servlet.http.HttpServletRequest;
 
 public class UploadPath {
-public static String attach_path="resources/upload/";
+public static String attach_path="resources/img/community/user/";
 	
 	public static String path( HttpServletRequest request){
 		String uploadPath ="/";

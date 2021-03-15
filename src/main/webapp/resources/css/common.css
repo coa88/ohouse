@@ -264,6 +264,7 @@ img {
 
 .nav-write-btn:hover {
 	background-color: #09addb;
+	transition: .2s ease;
 }
 
 .nav-write-btn-arrow {
