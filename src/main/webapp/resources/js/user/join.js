@@ -2,6 +2,42 @@
 
 const form = document.querySelector('#joinForm')
 
+// 별명 중복 체크
+form.nm.addEventListener('input', function() {
+	ajax()
+})
+
+function ajax() {
+	const joinNmVal = form.nm.value
+
+	var param = {
+		nm: joinNmVal
+	}
+
+	fetch('/user/nmChk', {
+		method: 'post',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(param)
+	})
+		.then(res => res.json())
+		.then(myJson => {
+			alert(myJson.result)
+			proc(myJson)
+		})
+}
+
+function proc(res) {
+	if (res.result == 0) {
+		document.querySelector('.nm_label').classList.add('focus')
+		document.querySelector('.nmOverlap').style.display = 'block'
+	} else {
+		document.querySelector('.nm_label').classList.remove('focus')
+		document.querySelector('.nmOverlap').style.display = 'none'
+	}
+}
+
 // 회원가입 체크
 function joinChk() {
 	if (!chKEmail()) {
@@ -61,6 +97,7 @@ function chkPwChk() {
 	}
 	document.querySelector('.pwChk_label').classList.remove('focus')
 	document.querySelector('.pwChkChk').style.display = 'none'
+	return true
 }
 
 function chkNm() {

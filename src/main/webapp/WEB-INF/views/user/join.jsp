@@ -33,6 +33,7 @@
             <div><input type="text" class="join-form-input nm_margin" name="nm" placeholder="별명 (2~10자)"></div>
             <div class="nmRequired">필수 입력 항목입니다.</div>
             <div class="nmLength">2자 이상 15자 이하로 입력해주세요.</div>
+            <div class="nmOverlap">사용 중인 별명입니다.</div>
             
             <h2 class="join-form-label terms_label">약관동의</h2>
             <div class="checkbox_group join-form-agree">
@@ -41,19 +42,19 @@
                     <span class="join-form-all-check-contents">전체동의</span>
                 </label>
                 <label class="form-check-label">
-                    <input type="checkbox" class="normal form-check-label-box" required>
+                    <input type="checkbox" class="normal form-check-label-box">
                     <span class="join-form-check-contents">만 14세 이상입니다.</span>
                     <span class="join-form-check-contents-required">(필수)</span>
                 </label>
                 <label class="form-check-label">
-                    <input type="checkbox" class="normal form-check-label-box" required>
+                    <input type="checkbox" class="normal form-check-label-box">
                     <span class="join-form-check-contents">
                         <a href="#" class="join-form-check-contents-a">이용약관</a>
                     </span>
                     <span class="join-form-check-contents-required">(필수)</span>
                 </label>
                 <label class="form-check-label">
-                    <input type="checkbox" class="normal form-check-label-box" required>
+                    <input type="checkbox" class="normal form-check-label-box">
                     <span class="join-form-check-contents">
                         <a href="#" class="join-form-check-contents-a">개인정보수집 및 이용동의</a>
                     </span>

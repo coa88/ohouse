@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/community")
 public class CommunityController {
 
-	final private CommunityService service;
+	final private CommunityService service;  
 	final private HttpSession hs;
 	private MultipartFile boardImg;
 	

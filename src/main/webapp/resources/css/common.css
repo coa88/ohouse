@@ -528,7 +528,7 @@ img {
 
 /* 이메일 입력 끝 */
 .emailRequired, .emailChk, .pwRequired, .pwChk, .pwChkChk,
-	.pwChkRequired, .nmRequired, .nmLength {
+	.pwChkRequired, .nmRequired, .nmLength, .nmOverlap {
 	display: none;
 	margin: 10px 0;
 	font-size: 13px;

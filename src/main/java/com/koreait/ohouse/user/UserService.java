@@ -54,4 +54,9 @@ public class UserService {
 		return 1;
 	}
 
+	// 회원가입 별명 체크
+	public int nmChk(UserEntity p) {
+		return mapper.nmChk(p);
+	}
+
 }

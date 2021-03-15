@@ -18,21 +18,19 @@ public class UserController {
 	private UserService service;
 	@Autowired
 	private HttpSession hs;
-	
-	
-	
+
 	@GetMapping("/login")
 	public void login() {
 	}
+
 	@PostMapping("/login")
 	public String loginProc(UserEntity param) {
 		int result = service.login(param, hs);
-		if(result == 1) { //로그인 성공
+		if (result == 1) { // 로그인 성공
 			System.out.println("로그인 성공 ");
 			return "redirect:/store";
 		}
 		return null;
-		
 	}
 
 	@GetMapping("/join")
@@ -44,10 +42,10 @@ public class UserController {
 		service.insUser(p);
 		return "redirect:/user/login";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout(UserEntity param) {
-		//로그아웃시키기 
+		// 로그아웃시키기
 		hs.invalidate();
 		return "redirect:/";
 	}
