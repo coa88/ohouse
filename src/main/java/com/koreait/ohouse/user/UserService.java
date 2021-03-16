@@ -28,18 +28,21 @@ public class UserService {
 		return mapper.selUser(p);
 	}
 
-	public int updUser(UserEntity param) {
+	public int updUser(UserEntity param, HttpSession hs) {
 		return mapper.updUser(param);
 	}
 
 	public int delUser(UserEntity p) {
 		return mapper.delUser(p);
 	}
+	
+	
 
 	// 1: 로그인 성공 2: 아이디 없음 3: 비밀번호 틀림
 	public int login(UserEntity param, HttpSession hs) {
 
 		UserEntity data = selUser(param);
+		System.out.println(param.getiUser());
 		if (data == null) {
 			return 2;
 		}
@@ -50,8 +53,9 @@ public class UserService {
 			return 3;
 		}
 		data.setUserPw(null);
-		hs.setAttribute("loginUser", data);
-		return 1;
+		hs.setAttribute("loginUser", data); 
+			return 1;
+		
 	}
 
 	// 회원가입 별명 체크
@@ -59,4 +63,6 @@ public class UserService {
 		return mapper.nmChk(p);
 	}
 
+	
+	
 }
