@@ -60,14 +60,13 @@ public class UserController {
 	@GetMapping("/mypage")
 	public void seluserdetail(UserEntity param, Model model, HttpSession hs) {
 		param.setiUser(SecurityUtils.getLoginUserPk(hs));
-		param.setEmailId("test@naver.com");
 		model.addAttribute("userDetail", service.selUser(param)); //유저 정보 가져오기 
 		
 	}
 	@PostMapping("/mypage")
 	public void seluserdetail(UserEntity param) {
 		
-		//service.updUser(param, hs);
+		service.updUser(param, hs);
 		
 	}
 	

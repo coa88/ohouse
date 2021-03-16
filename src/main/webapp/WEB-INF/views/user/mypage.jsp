@@ -5,10 +5,17 @@
 <meta charset="UTF-8">
 
 
-<div>아이디 : ${userDetail.emailId}</div>
-<div>닉네임 : ${userDetail.nm}</div>
+<div>emailId : ${userDetail.emailId}</div>
+<div>nm : ${userDetail.nm}</div>
 <div>gender : ${userDetail.gender}</div>
 <div>ph : ${userDetail.ph}</div>
 
-
+<form id ="updUser" action="/user/mypage" method="post">
+	<input type="hidden" name="userPk" value="">
+	<div> ---updUser----
+		<div>nm <input type="text" name=""></div>
+		<div>gender<input type="text" name=""></div>
+		<div>ph</div> <input type="text" name=""></div>
+	</div>	
+</form>
 </html>
