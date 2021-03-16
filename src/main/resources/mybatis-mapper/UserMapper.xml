@@ -43,7 +43,7 @@
 	<select id="nmChk" resultType="UserEntity">
 		SELECT nm
 		FROM t_user
-		WHERE nm = #{nm};
+		WHERE nm = #{nm}
 	</select>
 
 </mapper>

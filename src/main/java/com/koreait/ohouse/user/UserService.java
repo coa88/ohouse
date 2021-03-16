@@ -1,5 +1,8 @@
 package com.koreait.ohouse.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +59,7 @@ public class UserService {
 
 	// 회원가입 별명 체크
 	public int nmChk(UserEntity p) {
-		return mapper.nmChk(p);
+		return mapper.nmChk(p) == null ? 0 : 1;
 	}
 
 }

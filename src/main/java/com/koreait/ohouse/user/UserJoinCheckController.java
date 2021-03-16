@@ -21,9 +21,8 @@ public class UserJoinCheckController {
 	@ResponseBody
 	@PostMapping("/nmChk")
 	public Map<String, Object> nmChk(@RequestBody UserEntity p) {
-		System.out.println("nm : " + p.getNm());
 		Map<String, Object> nmVal = new HashMap<>();
-		nmVal.put("result", service.nmChk(p));
+		nmVal.put("isExist", service.nmChk(p));
 		return nmVal;
 	}
 }
