@@ -50,6 +50,7 @@ class MyUploadAdapter {
             this.xhr.abort();
         }
     }
+
     _initRequest() {
         const xhr = this.xhr = new XMLHttpRequest();
         xhr.open( 'POST', '/imageUpload.do', true );
@@ -87,15 +88,14 @@ class MyUploadAdapter {
             })
    		}
 	}
-		_sendRequest( file ) {
-        const data = new FormData();
-        data.append( 'upload', file );
-        this.xhr.send( data );
+	_sendRequest( file ) {
+	    const data = new FormData();
+	    data.append( 'upload', file );
+	    this.xhr.send( data );
 		console.log(data)
-  	    }
-	}
+    }
+}
 
-   
 
 function MyCustomUploadAdapterPlugin( editor ) {
     editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
@@ -172,6 +172,7 @@ function writePost () {
 
 }
 
+// 썸네일보여주기
 var file = document.querySelector("#file");
 function setThumbnail() {
     var fileList = file.files 

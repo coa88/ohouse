@@ -49,7 +49,6 @@ public class CkeditorUploadController {
 		String folder = "/resources/img/community/user/" + i_user + "/"; // 경로에 폴더생성
 		String basePath = ImgUtils.getBasePath(folder);
 		ImgUtils.makeDirectories(basePath);
-
 		byte[] bytes = upload.getBytes(); // 첨부파일을 바이트 배열로 저장
 		// getRealPath ="http://localhost:8090 // url만들기
 		String getRealPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();

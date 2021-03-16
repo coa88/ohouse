@@ -26,7 +26,6 @@ public class CommunityController {
 
 	final private CommunityService service;  
 	final private HttpSession hs;
-	private MultipartFile boardImg;
 	
 	
 	
@@ -50,15 +49,24 @@ public class CommunityController {
 	@PostMapping("/write") // 커뮤니티 게시판 글쓰기
 	public Map<String, Object> write(@RequestBody  CommunityEntity param) {
 		Map<String, Object> resultValue = new HashMap<>();		
+		MultipartFile boardImg = (MultipartFile)hs.getAttribute("img");
 		resultValue.put("result", service.insBoard(param, boardImg));
 		return resultValue;
 	}
 	
 	
-	@ResponseBody //커뮤니티 게시물 대표이미지 업로드
+	@ResponseBody 
 	@PostMapping("/mainImgUpload")
-	public void imgUpload(@RequestBody MultipartFile boardImg) {
-		this.boardImg = boardImg;
+	public void mainImgUpload(@RequestBody MultipartFile boardImg) {
+		hs.setAttribute("img", boardImg);
+	}
+	
+	@ResponseBody
+	@PostMapping("uploadImg")
+	public Map<String, String> uploadImg(MultipartFile ctntImg) {
+		Map<String, String> result = new HashMap();
+		result.put("default", service.saveBoardImg(ctntImg));		
+		return result; 
 	}
 	
 }
