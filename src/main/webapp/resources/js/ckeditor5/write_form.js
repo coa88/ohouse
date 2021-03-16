@@ -1,9 +1,10 @@
-//글쓰기에디터 생성	
+//--------------- ckeditor 시작 -----------------//
+
 let textAreaData;
 ClassicEditor.create( document.querySelector( '.editor' ), {
-	
+	extraPlugins: [ MyCustomUploadAdapterPlugin ],
 	toolbar: {
-		extraPlugins: [MyCustomUploadAdapterPlugin],
+		viewportTopOffset : -100,
 		items: [
 			'imageUpload',
 			'|',
@@ -20,7 +21,7 @@ ClassicEditor.create( document.querySelector( '.editor' ), {
 	licenseKey: '',
 	} )
 	.then( editor => {
-		window.editor = editor;
+		window.editor = editor
 		textAreaData = editor
 } )
 .catch( error => {
@@ -30,20 +31,117 @@ ClassicEditor.create( document.querySelector( '.editor' ), {
 	console.error( error );
 })
 
+//파일을 서버로 안전하게 보내고 서버의 응답 (예 : 저장된 파일의 URL)을 파일 로더로 다시 전달 또는 오류처리
+class MyUploadAdapter { 
+    constructor(loader) {	//디스크에서 파일을 읽고 업로드 어댑터를 사용하여 서버에 업로드
+        this.loader = loader;
+    }
+	upload() {
+        return this.loader.file
+            .then( file => new Promise( ( resolve, reject ) => {
+                this._initRequest();
+                this._initListeners( resolve, reject, file );
+                this._sendRequest( file );
+            } ) );
+    }
+
+	abort() {
+        if ( this.xhr ) {
+            this.xhr.abort();
+        }
+    }
+
+    _initRequest() {
+        const xhr = this.xhr = new XMLHttpRequest();
+        xhr.open( 'POST', '/imageUpload.do', true );
+        xhr.responseType = 'json'
+    } 
+
+    _initListeners( resolve, reject, file ) {
+        const xhr = this.xhr;
+        const loader = this.loader;
+        const genericErrorText = `Couldn't upload file: ${ file.name }.`
+
+        xhr.addEventListener( 'error', () => reject( genericErrorText ))
+        xhr.addEventListener( 'abort', () => reject() );
+        xhr.addEventListener( 'load', () => {
+            const response = xhr.response
+            if (!response || response.error) {
+                return reject( response && response.error ? response.error.message : genericErrorText)
+            } else {
+				let ctntElem = textAreaData.getData();
+				var img = "<img src=\"" + response.fileUrl + "\">";
+				textAreaData.setData(ctntElem + img);
+			}
+
+            resolve({				
+                default: response.url
+            })
+        })
+
+		if ( xhr.upload ) {
+            xhr.upload.addEventListener( 'progress', evt => {
+                if ( evt.lengthComputable ) {
+                    loader.uploadTotal = evt.total;
+                    loader.uploaded = evt.loaded;
+                }
+            })
+   		}
+	}
+	_sendRequest( file ) {
+	    const data = new FormData();
+	    data.append( 'upload', file );
+	    this.xhr.send( data );
+		console.log(data)
+    }
+}
 
 
-//글쓰기
-function writePost () {
-	let boardImgElem = document.querySelector('#boardImg')
+function MyCustomUploadAdapterPlugin( editor ) {
+    editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+        return new MyUploadAdapter( loader );
+    }
+}
+
+//--------------- ckeditor 끝 -----------------//
+
+// 게시물 업로드
+let fileElem = document.querySelector('#file')
+function WriteUpload () {
+	if(fileElem.files.length === 0) {
+		alert('이미지를 선택해 주세요')
+		return false
+	}
 	
+	ajax()
+	writePost ()
+	
+	function ajax () {
+		var formData = new FormData()
+			formData.append('boardImg', fileElem.files[0])		
+			
+		fetch('/community/mainImgUpload',{
+			method: 'post',
+			body: formData
+		})
+	}
+}
+
+//글정보 서버로 전송
+function writePost () {
 	let writePostElem = document.querySelector('#writePost')
-	let typElem = writePostElem.typ.value
-	let secTypElem = writePostElem.secTyp.value
-	let titleElem = writePostElem.title.value
-	let ctntElem = textAreaData.getData()
-
-
-
+	let typElem = writePostElem.typ.value;
+	let secTypElem = writePostElem.secTyp.value;
+	let titleElem = writePostElem.title.value;
+	let ctntElem = textAreaData.getData();
+	
+	if(titleElem == '') {
+		alert('제목을 입력해 주세요.');
+		return false;
+	} else if(ctntElem == '') {
+		alert('내용을 작성해 주세요.');
+		return false;
+	}
 	let data = {
 		typ: typElem,
 		secTyp: secTypElem,
@@ -61,90 +159,30 @@ function writePost () {
 	}).then(function (res){
 			return res.json()
 		}).then(function (data) {
-			console.log(data.result)
-		}) 
-	.catch(error => console.error('Error:', error));
-
-}
-
-let boardImgElem = document.querySelector('#boardImgInput')
-function boardImgUpload () {
-	if(boardImgElem.files.length === 0) {
-		alert('이미지를 선택해 주세요')
-		return
-	}
-	
-	ajax()
-	closeModal () 
-	
-	function ajax () {
-		var formData = new FormData()
-			formData.append('boardImg', boardImgElem.files[0])		
-			
-		fetch('/community/imgUpload',{
-			method: 'post',
-			body: formData
+			if(data.result === 0 || data.result === undefined) {
+				alert('업로드 실패하였습니다.')
+				return false;
+			} else {
+				location.href='/'
+				return data;			
+			}
 		})
-	}
+		
+	.catch(error => console.error('Error:', error))
+
 }
 
-let modalContainerElem = document.querySelector('.modalContainer')
+// 썸네일보여주기
+var file = document.querySelector("#file");
+function setThumbnail() {
+    var fileList = file.files 
 
-function openModal () {	
-	modalContainerElem.classList.remove('hide')
-}
+    // 읽기
+    var reader = new FileReader()
+    reader.readAsDataURL(fileList [0])
 
-function closeModal () {
-	modalContainerElem.classList.add('hide')
-}
-
-
-class UploadAdapter {
-    constructor(loader) {
-        this.loader = loader;
-    }
-	upload() {
-        return this.loader.file.then( file => new Promise(((resolve, reject) => {
-            this._initRequest();
-            this._initListeners( resolve, reject, file );
-            this._sendRequest( file );
-        })))
-    }
-
-    _initRequest() {
-        const xhr = this.xhr = new XMLHttpRequest();
-        xhr.open('POST', '/community/writeImgUpload', true);
-        xhr.responseType = 'json';
-    }
-
-    _initListeners(resolve, reject, file) {
-        const xhr = this.xhr;
-        const loader = this.loader;
-        const genericErrorText = '파일을 업로드 할 수 없습니다.'
-
-        xhr.addEventListener('error', () => {reject(genericErrorText)})
-        xhr.addEventListener('abort', () => reject())
-        xhr.addEventListener('load', () => {
-            const response = xhr.response
-            if(!response || response.error) {
-                return reject( response && response.error ? response.error.message : genericErrorText );
-            }
-
-            resolve({
-                default: response.url //업로드된 파일 주소
-            })
-        })
-    }
-
-    _sendRequest(file) {
-        const data = new FormData()
-        data.append('upload',file)
-        this.xhr.send(data)
-    }
-}
-
-function MyCustomUploadAdapterPlugin(editor) { // 이미지업로드 어댑터
-    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-        return new UploadAdapter(loader)
+    //로드 한 후
+    reader.onload = function  () {
+        document.querySelector('#preview').src = reader.result
     }
 }

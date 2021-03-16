@@ -1,11 +1,11 @@
 package com.koreait.ohouse.community;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityEntity;
 
 import lombok.RequiredArgsConstructor;
@@ -26,8 +24,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/community")
 public class CommunityController {
 
-	final private CommunityService service;
-	private MultipartFile img;
+	final private CommunityService service;  
+	final private HttpSession hs;
+	
+	
 	
 	@GetMapping("/photo")
 	public void photo() {}
@@ -38,7 +38,7 @@ public class CommunityController {
 	@GetMapping("/tip")
 	public void tip() {}
 	
-	@GetMapping("/event")
+	@GetMapping("/event")	
 	public void event() {}
 	
 	@GetMapping("/write")
@@ -47,22 +47,26 @@ public class CommunityController {
 	
 	@ResponseBody
 	@PostMapping("/write") // 커뮤니티 게시판 글쓰기
-	public Map<String, Object> write(@RequestBody  CommunityDTO param) {
+	public Map<String, Object> write(@RequestBody  CommunityEntity param) {
 		Map<String, Object> resultValue = new HashMap<>();		
-		resultValue.put("result", service.insBoard(param, img));
+		MultipartFile boardImg = (MultipartFile)hs.getAttribute("img");
+		resultValue.put("result", service.insBoard(param, boardImg));
 		return resultValue;
 	}
 	
 	
-	@ResponseBody //커뮤니티 게시물 대표이미지 업로드
-	@PostMapping("/imgUpload")
-	public void imgUpload(@RequestBody MultipartFile boardImg) {
-		img = boardImg;
+	@ResponseBody 
+	@PostMapping("/mainImgUpload")
+	public void mainImgUpload(@RequestBody MultipartFile boardImg) {
+		hs.setAttribute("img", boardImg);
 	}
 	
-	@ResponseBody //커뮤니티 게시물 대표이미지 업로드
-	@PostMapping("/writeImgUpload")
-	public void writeImgUpload(@RequestBody CommunityDTO param) {
-		
+	@ResponseBody
+	@PostMapping("uploadImg")
+	public Map<String, String> uploadImg(MultipartFile ctntImg) {
+		Map<String, String> result = new HashMap();
+		result.put("default", service.saveBoardImg(ctntImg));		
+		return result; 
 	}
+	
 }

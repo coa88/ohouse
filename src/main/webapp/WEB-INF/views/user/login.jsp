@@ -21,7 +21,7 @@
 
         <div class="sign-in-form">
             <a href="#" class="sign-in-form sign-in-form-resetpw">비밀번호 재설정</a>
-            <a href="/join" class="sign-in-form sign-in-form-join">회원가입</a>
+            <a href="/user/join" class="sign-in-form sign-in-form-join">회원가입</a>
         </div>
 
         <div class="sign-in-form">

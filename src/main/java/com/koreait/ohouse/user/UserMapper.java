@@ -14,5 +14,8 @@ public interface UserMapper {
 	int updUser(UserEntity p);
 
 	int delUser(UserEntity p);
+	
+	// 회원가입 별명 체크
+	int nmChk(UserEntity p);
 
 }

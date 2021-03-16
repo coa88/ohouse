@@ -12,6 +12,6 @@ public class StoreService {
 	final StoreMapper mapper;
 	 
 	public StoreEntity selPdBoard(StoreEntity p) {
-		return mapper.selPdBoard(p);
+		return mapper.selPdBoard(p); 
 	}
 }

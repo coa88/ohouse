@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityEntity;
 
 @Mapper
 public interface CommunityMapper {
-	int insBoard(CommunityDTO param);
-
+	int insBoard(CommunityEntity param);
+	
 	List<CommunityEntity> selBoardList(CommunityEntity param);
 
 	int updBoard(CommunityEntity param);

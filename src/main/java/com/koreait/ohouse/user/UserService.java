@@ -1,6 +1,5 @@
 package com.koreait.ohouse.user;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +16,9 @@ public class UserService {
 	@Autowired
 	private HttpSession hs;
 
-	@Autowired
-	private HttpServletRequest request;
-
 	public int insUser(UserEntity p) {
-		String emailAdr = request.getParameter("emailAdr");
-		String emailId = p.getEmailId() + emailAdr;
 		String encryptUserPw = SecurityUtils.hashPassword(p.getUserPw());
-		p.setEmailId(emailId);
+		p.setEmailId(p.getEmailId());
 		p.setUserPw(encryptUserPw);
 		return mapper.insUser(p);
 
@@ -43,28 +37,32 @@ public class UserService {
 	}
 	
 	
-	//1: 로그인 성공 2: 아이디 없음 3: 비밀번호 틀림 
-	public int login(UserEntity param , HttpSession hs) {
-		
+
+	// 1: 로그인 성공 2: 아이디 없음 3: 비밀번호 틀림
+	public int login(UserEntity param, HttpSession hs) {
+
 		UserEntity data = selUser(param);
 		System.out.println(param.getiUser());
-		
-		if(data == null) {
-			System.out.println("아이디 없음 ");
+		if (data == null) {
 			return 2;
 		}
-		
+
 		boolean cryptLoginPw = SecurityUtils.chkPassword(param.getUserPw(), data.getUserPw());
-		
-		if(!cryptLoginPw) {
-			System.out.println("비밀번호 틀림 ");
+
+		if (!cryptLoginPw) {
 			return 3;
 		}
 		data.setUserPw(null);
 		hs.setAttribute("loginUser", data); 
 			return 1;
+		
 	}
-	
+
+	// 회원가입 별명 체크
+	public int nmChk(UserEntity p) {
+		return mapper.nmChk(p);
+	}
+
 	
 	
 }
