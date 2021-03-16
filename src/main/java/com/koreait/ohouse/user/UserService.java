@@ -35,6 +35,8 @@ public class UserService {
 	public int delUser(UserEntity p) {
 		return mapper.delUser(p);
 	}
+	
+	
 
 	
 	
@@ -53,7 +55,7 @@ public class UserService {
 			return 3;
 		}
 		data.setUserPw(null);
-		hs.setAttribute("loginUser", data);
+		hs.setAttribute("loginUser", data); 
 			return 1;
 		
 	}
@@ -63,4 +65,6 @@ public class UserService {
 		return mapper.nmChk(p) == null ? 0 : 1;
 	}
 
+	
+	
 }

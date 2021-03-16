@@ -50,6 +50,7 @@ class MyUploadAdapter {
             this.xhr.abort();
         }
     }
+
     _initRequest() {
         const xhr = this.xhr = new XMLHttpRequest();
         xhr.open( 'POST', '/imageUpload.do', true );
@@ -87,15 +88,14 @@ class MyUploadAdapter {
             })
    		}
 	}
-		_sendRequest( file ) {
-        const data = new FormData();
-        data.append( 'upload', file );
-        this.xhr.send( data );
+	_sendRequest( file ) {
+	    const data = new FormData();
+	    data.append( 'upload', file );
+	    this.xhr.send( data );
 		console.log(data)
-  	    }
-	}
+    }
+}
 
-   
 
 function MyCustomUploadAdapterPlugin( editor ) {
     editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
@@ -113,7 +113,7 @@ function WriteUpload () {
 		return false
 	}
 	
-	ajax()
+	//ajax()
 	writePost ()
 	
 	function ajax () {
@@ -142,6 +142,7 @@ function writePost () {
 		alert('내용을 작성해 주세요.');
 		return false;
 	}
+	/*
 	let data = {
 		typ: typElem,
 		secTyp: secTypElem,
@@ -149,37 +150,44 @@ function writePost () {
 		ctnt: ctntElem,
 		
 	}
+	*/
+	
+	var formData = new FormData()
+	formData.append('file', fileElem.files[0])
+	formData.append('typ', typElem)
+	formData.append('secTyp', secTypElem)
+	formData.append('title', titleElem)
+	formData.append('ctnt', ctntElem)
+	
 	
 	fetch('/community/write', {
-		method: 'POST',
-		headers: {
-            'Content-Type': 'application/json',
-        },
-		body: JSON.stringify(data),
+		method: 'POST',		
+		body: formData
 	}).then(function (res){
+			console.log(res)
 			return res.json()
 		}).then(function (data) {
+			console.log(data)
 			if(data.result === 0 || data.result === undefined) {
 				alert('업로드 실패하였습니다.')
 				return false;
 			} else {
 				location.href='/'
 				return data;			
-			}
+			} 
 		})
 		
 	.catch(error => console.error('Error:', error))
 
 }
 
+// 썸네일보여주기
 var file = document.querySelector("#file");
 function setThumbnail() {
     var fileList = file.files 
-
     // 읽기
     var reader = new FileReader()
     reader.readAsDataURL(fileList [0])
-
     //로드 한 후
     reader.onload = function  () {
         document.querySelector('#preview').src = reader.result

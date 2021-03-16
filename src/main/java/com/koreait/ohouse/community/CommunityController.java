@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityEntity;
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,6 @@ public class CommunityController {
 
 	final private CommunityService service;  
 	final private HttpSession hs;
-	private MultipartFile boardImg;
 	
 	
 	
@@ -48,17 +48,28 @@ public class CommunityController {
 	
 	@ResponseBody
 	@PostMapping("/write") // 커뮤니티 게시판 글쓰기
-	public Map<String, Object> write(@RequestBody  CommunityEntity param) {
+	public Map<String, Object> write(CommunityDTO p) {
 		Map<String, Object> resultValue = new HashMap<>();		
-		resultValue.put("result", service.insBoard(param, boardImg));
+		//MultipartFile boardImg = (MultipartFile)hs.getAttribute("img");	
+		
+		resultValue.put("result", service.insBoard(p));
 		return resultValue;
 	}
 	
 	
-	@ResponseBody //커뮤니티 게시물 대표이미지 업로드
+	@ResponseBody 
 	@PostMapping("/mainImgUpload")
-	public void imgUpload(@RequestBody MultipartFile boardImg) {
-		this.boardImg = boardImg;
+	public void mainImgUpload(@RequestBody MultipartFile boardImg) {		
+		System.out.println("== mainImgUpload == empty : " + boardImg.isEmpty());
+		hs.setAttribute("img", boardImg);
+	}
+	
+	@ResponseBody
+	@PostMapping("uploadImg")
+	public Map<String, String> uploadImg(MultipartFile ctntImg) {
+		Map<String, String> result = new HashMap();
+		result.put("default", service.saveBoardImg(ctntImg));		
+		return result; 
 	}
 	
 }

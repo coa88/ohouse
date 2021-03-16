@@ -14,8 +14,8 @@ spring:
   
   #파일업로드 설정
   servlet:
-    multipart:      file-size-threshold: 1MB
-      location: C:/Temp
+    multipart:
+      location: C:/Temp      file-size-threshold: 1MB
       max-file-size: 20MB
       max-request-size: 20MB
 
