@@ -2,6 +2,7 @@ package com.koreait.ohouse.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -46,6 +47,7 @@ public class ImgUploadUtils {
 		String fileNm = getRandomFileNm(mf.getOriginalFilename());
 		
 		try {
+			System.out.println("mf empty : " + mf.isEmpty());
 			File file = new File(basePath, fileNm);
 			mf.transferTo(file);
 		} catch(IOException e) {
