@@ -56,17 +56,24 @@ public class UserController {
 	
 	
 	@GetMapping("/mypage")
+	public void openmypage() {
+		
+	}
+	
+	@GetMapping("/edit")
 	public void seluserdetail(UserEntity param, Model model, HttpSession hs) {
 		param.setiUser(SecurityUtils.getLoginUserPk(hs));
 		model.addAttribute("userDetail", service.selUser(param)); //유저 정보 가져오기 
 		
 	}
-	@PostMapping("/mypage")
-	public void seluserdetail(UserEntity param) {
-		
-		service.updUser(param, hs);
+	@PostMapping("/edit")
+	public void seluserdetail(UserEntity param) {	
+		service.updUser(param);
 		
 	}
+	
+	
+	
 	
 
 }
