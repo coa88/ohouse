@@ -161,8 +161,9 @@ main {
     max-width: 25%;
 }
 
-.box_padding {
+.photo_box_list>.box_padding {
     padding-bottom: 50px;
+    text-align: left;
 }
 
 .box_writer {

@@ -159,7 +159,7 @@ main {
     max-width: 25%;
 }
 
-.box_padding {
+.tip_box_list>.box_padding {
     position: relative;
     margin: 10px 0 20px;
 }
