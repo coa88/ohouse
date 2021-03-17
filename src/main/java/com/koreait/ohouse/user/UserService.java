@@ -39,6 +39,8 @@ public class UserService {
 	
 	
 
+	
+	
 	// 1: 로그인 성공 2: 아이디 없음 3: 비밀번호 틀림
 	public int login(UserEntity param, HttpSession hs) {
 		
@@ -61,7 +63,7 @@ public class UserService {
 
 	// 회원가입 별명 체크
 	public int nmChk(UserEntity p) {
-		return mapper.nmChk(p);
+		return mapper.nmChk(p) == null ? 0 : 1;
 	}
 
 	

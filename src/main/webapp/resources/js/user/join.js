@@ -3,7 +3,14 @@
 const form = document.querySelector('#joinForm')
 
 // 별명 중복 체크
-form.nm.addEventListener('input', function() {
+form.nm.addEventListener('change', function() {
+	if (form.nm.value.length < 2 || form.nm.value.length > 15) {
+		document.querySelector('.nm_label').classList.add('focus')
+		document.querySelector('.nmLength').style.display = 'block'
+	} else {
+		document.querySelector('.nm_label').classList.remove('focus')
+		document.querySelector('.nmLength').style.display = 'none'
+	}
 	ajax()
 })
 
@@ -23,19 +30,19 @@ function ajax() {
 	})
 		.then(res => res.json())
 		.then(myJson => {
-			alert(myJson.result)
-			proc(myJson)
+			proc(myJson.isExist)
 		})
 }
 
-function proc(res) {
-	if (res.result == 0) {
+function proc(val) {
+	if (val === 1) {
 		document.querySelector('.nm_label').classList.add('focus')
 		document.querySelector('.nmOverlap').style.display = 'block'
-	} else {
-		document.querySelector('.nm_label').classList.remove('focus')
-		document.querySelector('.nmOverlap').style.display = 'none'
+		return false
 	}
+	document.querySelector('.nm_label').classList.remove('focus')
+	document.querySelector('.nmOverlap').style.display = 'none'
+	return true
 }
 
 // 회원가입 체크
