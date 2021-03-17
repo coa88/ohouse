@@ -45,7 +45,13 @@
 		AND user_pw =#{userPw}
 	</delete>
 	
-	<!-- 회원가입 별명 체크 -->
+	<!-- 회원가입 중복 체크 -->	
+	<select id="emailIdChk" resultType="UserEntity">
+		SELECT email_id
+		FROM t_user
+		WHERE email_id = #{emailId}
+	</select>
+	
 	<select id="nmChk" resultType="UserEntity">
 		SELECT nm
 		FROM t_user

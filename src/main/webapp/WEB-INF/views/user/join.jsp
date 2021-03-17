@@ -13,12 +13,13 @@
                 <span><input type="text" class="email_input" name="emailId" placeholder="이메일을 입력해주세요."></span>
             	<div class="emailRequired">필수 입력 항목입니다.</div>
  				<div class="emailChk">이메일 형식이 올바르지 않습니다.</div>
+ 				<div class="emailIdOverlap">이미 사용하고있는 이메일입니다.</div>
             </div> 			
  			
             <h2 class="join-form-label pw_label">비밀번호</h2>
             <h3 class="join-form-label-contents">8자 이상 입력해주세요.</h2>
             <div>
-            	<input type="password" class="join-form-input pw_margin" name="userPw" placeholder="비밀번호">
+            	<input type="password" class="join-form-input pw_margin" name="userPw" placeholder="비밀번호" >
             	<div class="pwRequired">필수 입력 항목입니다.</div>
             	<div class="pwChk">8자 이상 입력해주세요.</div>
             </div>            

@@ -36,14 +36,10 @@ public class UserService {
 	public int delUser(UserEntity p) {
 		return mapper.delUser(p);
 	}
-	
-	
 
-	
-	
 	// 1: 로그인 성공 2: 아이디 없음 3: 비밀번호 틀림
 	public int login(UserEntity param, HttpSession hs) {
-		
+
 		UserEntity data = selUser(param);
 		System.out.println(param.getiUser());
 		if (data == null) {
@@ -56,16 +52,18 @@ public class UserService {
 			return 3;
 		}
 		data.setUserPw(null);
-		hs.setAttribute("loginUser", data); 
-			return 1;
-		
+		hs.setAttribute("loginUser", data);
+		return 1;
+
 	}
 
-	// 회원가입 별명 체크
+	// 회원가입 중복 체크
+	public int emailIdChk(UserEntity p) {
+		return mapper.emailIdChk(p) == null ? 0 : 1;
+	}
+
 	public int nmChk(UserEntity p) {
 		return mapper.nmChk(p) == null ? 0 : 1;
 	}
 
-	
-	
 }

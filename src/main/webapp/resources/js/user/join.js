@@ -2,26 +2,44 @@
 
 const form = document.querySelector('#joinForm')
 
-// 별명 중복 체크
-form.nm.addEventListener('change', function() {
-	if (form.nm.value.length < 2 || form.nm.value.length > 15) {
-		document.querySelector('.nm_label').classList.add('focus')
-		document.querySelector('.nmLength').style.display = 'block'
-	} else {
-		document.querySelector('.nm_label').classList.remove('focus')
-		document.querySelector('.nmLength').style.display = 'none'
+// 회원가입 체크
+function joinChk() {
+
+	if (!emailNullChk()) {
+		return false
+	} else if (!chkEmail()) {
+		return false
+	} else if (!pwNullChk()) {
+		return false
+	} else if (!chkPw()) {
+		return false
+	} else if (!pwChkNullChk()) {
+		return false
+	} else if (!chkPwChk()) {
+		return false
+	} else if (!nmNullChk()) {
+		return false
+	} else if (!chkNmChk()) {
+		return false
 	}
-	ajax()
+	return true
+
+}
+
+
+// 이메일 중복 체크
+form.emailId.addEventListener('change', function() {
+	emailIdAjax()
 })
 
-function ajax() {
-	const joinNmVal = form.nm.value
+function emailIdAjax() {
+	const joinEmailIdVal = form.emailId.value
 
 	var param = {
-		nm: joinNmVal
+		emailId: joinEmailIdVal
 	}
 
-	fetch('/user/nmChk', {
+	fetch('/emailIdChk', {
 		method: 'post',
 		headers: {
 			'Content-Type': 'application/json'
@@ -30,11 +48,47 @@ function ajax() {
 	})
 		.then(res => res.json())
 		.then(myJson => {
-			proc(myJson.isExist)
+			emailIdProc(myJson.emailId)
 		})
 }
 
-function proc(val) {
+function emailIdProc(val) {
+	if (val === 1) {
+		document.querySelector('.email_label').classList.add('focus')
+		document.querySelector('.emailIdOverlap').style.display = 'block'
+		return false
+	}
+	document.querySelector('.email_label').classList.remove('focus')
+	document.querySelector('.emailIdOverlap').style.display = 'none'
+	return true
+}
+
+// 별명 중복 체크
+form.nm.addEventListener('change', function() {
+	nmAjax()
+})
+
+function nmAjax() {
+	const joinNmVal = form.nm.value
+
+	var param = {
+		nm: joinNmVal
+	}
+
+	fetch('/nmChk', {
+		method: 'post',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(param)
+	})
+		.then(res => res.json())
+		.then(myJson => {
+			nmProc(myJson.nm)
+		})
+}
+
+function nmProc(val) {
 	if (val === 1) {
 		document.querySelector('.nm_label').classList.add('focus')
 		document.querySelector('.nmOverlap').style.display = 'block'
@@ -45,24 +99,25 @@ function proc(val) {
 	return true
 }
 
-// 회원가입 체크
-function joinChk() {
-	if (!chKEmail()) {
-		return false
-	} else if (!chkPw()) {
-		return false
-	} else if (!chkPwChk()) {
-		return false
-	} else if (!chkNm()) {
-		return false
-	}
-	return true
-}
 
-// 공백체크후에 조건 체크
-function chKEmail() {
-	if (!emailNullChk())
-		return false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 회원가입 조건 체크
+function chkEmail() {
 
 	const emailJ = /^[_a-zA-Z0-9]+([-+.][_a-zA-Z0-9]+)*@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/i
 
@@ -78,8 +133,6 @@ function chKEmail() {
 }
 
 function chkPw() {
-	if (!pwNullChk())
-		return false
 
 	if (form.userPw.value.length < 8) {
 		document.querySelector('.pw_label').classList.add('focus')
@@ -93,8 +146,6 @@ function chkPw() {
 }
 
 function chkPwChk() {
-	if (!pwChkNullChk())
-		return false
 
 	if (form.userPw.value !== form.userPwChk.value) {
 		document.querySelector('.pwChk_label').classList.add('focus')
@@ -108,18 +159,19 @@ function chkPwChk() {
 }
 
 function chkNm() {
-	if (!nmNullChk())
-		return false
 
 	if (form.nm.value.length < 2 || form.nm.value.length > 15) {
 		document.querySelector('.nm_label').classList.add('focus')
 		document.querySelector('.nmLength').style.display = 'block'
+		form.nm.focus()
 		return false
 	}
+
 	document.querySelector('.nm_label').classList.remove('focus')
 	document.querySelector('.nmLength').style.display = 'none'
 	return true
 }
+
 
 // 입력란 공백 체크
 function emailNullChk() {
@@ -169,7 +221,6 @@ function nmNullChk() {
 	document.querySelector('.nmRequired').style.display = 'none'
 	return true
 }
-
 
 // 약관동의
 const chkAll = document.querySelector('.check_all')

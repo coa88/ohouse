@@ -13,16 +13,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.koreait.ohouse.model.UserEntity;
 
 @Controller
-@RequestMapping("/user")
 public class UserJoinCheckController {
 	@Autowired
 	private UserService service;
 
 	@ResponseBody
+	@PostMapping("/emailIdChk")
+	public Map<String, Object> emailIdChk(@RequestBody UserEntity p) {
+		Map<String, Object> emailIdVal = new HashMap<>();
+		emailIdVal.put("emailId", service.emailIdChk(p));
+		return emailIdVal;
+	}
+
+	@ResponseBody
 	@PostMapping("/nmChk")
 	public Map<String, Object> nmChk(@RequestBody UserEntity p) {
 		Map<String, Object> nmVal = new HashMap<>();
-		nmVal.put("isExist", service.nmChk(p));
+		nmVal.put("nm", service.nmChk(p));
 		return nmVal;
 	}
 }
