@@ -15,7 +15,7 @@
 			<if test="iUser > 0">
 				i_user = #{iUser}
 			</if>
-				and email_id= #{emailId}
+				or email_id= #{emailId}
 		</where>	 
 	</select>
 	
@@ -29,11 +29,11 @@
 		</set>
 		
 		<where>
-			<if test="i_user > 0">
+			<if test="iUser > 0">
 				i_user = #{iUser}
 			</if>
-			<if test="user_id != null and user_id !=''">
-				AND user_id = #{userId}
+			<if test="emailId != null and emailId !=''">
+				or email_id= #{emailId}
 			</if>
 		</where>		
 	</update>

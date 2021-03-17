@@ -28,7 +28,8 @@ public class UserService {
 		return mapper.selUser(p);
 	}
 
-	public int updUser(UserEntity param, HttpSession hs) {
+	public int updUser(UserEntity param) {
+		param.setUserPw(SecurityUtils.hashPassword(param.getUserPw()));
 		return mapper.updUser(param);
 	}
 
@@ -40,7 +41,7 @@ public class UserService {
 
 	// 1: 로그인 성공 2: 아이디 없음 3: 비밀번호 틀림
 	public int login(UserEntity param, HttpSession hs) {
-
+		
 		UserEntity data = selUser(param);
 		System.out.println(param.getiUser());
 		if (data == null) {
