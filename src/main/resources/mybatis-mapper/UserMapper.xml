@@ -15,13 +15,9 @@
 			<if test="iUser > 0">
 				i_user = #{iUser}
 			</if>
-<<<<<<< HEAD
 				or email_id= #{emailId}
 		</where>	 
-=======
-				and email_id= #{emailId}
-		</where>	
->>>>>>> branch 'master' of https://github.com/coa88/ohouse.git
+
 	</select>
 	
 	<update id="updUser">
