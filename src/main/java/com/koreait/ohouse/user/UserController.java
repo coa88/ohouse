@@ -1,5 +1,8 @@
 package com.koreait.ohouse.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
@@ -8,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreait.ohouse.common.SecurityUtils;
 import com.koreait.ohouse.model.UserEntity;
@@ -53,27 +58,40 @@ public class UserController {
 		hs.invalidate();
 		return "redirect:/";
 	}
-	
-	
+
 	@GetMapping("/mypage")
 	public void openmypage() {
-		
+
 	}
-	
+
 	@GetMapping("/edit")
 	public void seluserdetail(UserEntity param, Model model, HttpSession hs) {
 		param.setiUser(SecurityUtils.getLoginUserPk(hs));
-		model.addAttribute("userDetail", service.selUser(param)); //유저 정보 가져오기 
-		
+		model.addAttribute("userDetail", service.selUser(param)); // 유저 정보 가져오기
+
 	}
+
 	@PostMapping("/edit")
-	public void seluserdetail(UserEntity param) {	
+	public void seluserdetail(UserEntity param) {
 		service.updUser(param);
-		
+
 	}
-	
-	
-	
-	
+
+	// 회원가입 중복 체크
+	@ResponseBody
+	@PostMapping("/emailIdChk")
+	public Map<String, Object> emailIdChk(@RequestBody UserEntity p) {
+		Map<String, Object> emailIdVal = new HashMap<>();
+		emailIdVal.put("emailId", service.emailIdChk(p));
+		return emailIdVal;
+	}
+
+	@ResponseBody
+	@PostMapping("/nmChk")
+	public Map<String, Object> nmChk(@RequestBody UserEntity p) {
+		Map<String, Object> nmVal = new HashMap<>();
+		nmVal.put("nm", service.nmChk(p));
+		return nmVal;
+	}
 
 }

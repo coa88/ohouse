@@ -4,7 +4,6 @@ const form = document.querySelector('#joinForm')
 
 // 회원가입 체크
 function joinChk() {
-
 	if (!emailNullChk()) {
 		return false
 	} else if (!chkEmail()) {
@@ -19,13 +18,12 @@ function joinChk() {
 		return false
 	} else if (!nmNullChk()) {
 		return false
-	} else if (!chkNmChk()) {
+	} else if (!chkNm()) {
 		return false
 	}
+	
 	return true
-
 }
-
 
 // 이메일 중복 체크
 form.emailId.addEventListener('change', function() {
@@ -39,7 +37,7 @@ function emailIdAjax() {
 		emailId: joinEmailIdVal
 	}
 
-	fetch('/emailIdChk', {
+	fetch('/user/emailIdChk', {
 		method: 'post',
 		headers: {
 			'Content-Type': 'application/json'
@@ -75,7 +73,7 @@ function nmAjax() {
 		nm: joinNmVal
 	}
 
-	fetch('/nmChk', {
+	fetch('/user/nmChk', {
 		method: 'post',
 		headers: {
 			'Content-Type': 'application/json'
@@ -98,16 +96,6 @@ function nmProc(val) {
 	document.querySelector('.nmOverlap').style.display = 'none'
 	return true
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -160,13 +148,12 @@ function chkPwChk() {
 
 function chkNm() {
 
-	if (form.nm.value.length < 2 || form.nm.value.length > 15) {
+	if (form.nm.value.length < 2 || form.nm.value.length > 10) {
 		document.querySelector('.nm_label').classList.add('focus')
 		document.querySelector('.nmLength').style.display = 'block'
 		form.nm.focus()
 		return false
 	}
-
 	document.querySelector('.nm_label').classList.remove('focus')
 	document.querySelector('.nmLength').style.display = 'none'
 	return true
@@ -226,44 +213,20 @@ function nmNullChk() {
 const chkAll = document.querySelector('.check_all')
 const chkNormal = document.querySelectorAll('.normal')
 
-const agreements = {
-	firstChk: false,
-	secondChk: false,
-	thirdChk: false,
-	fourChk: false,
-}
+chkAll.addEventListener('click', function() { // 전체 선택 클릭시 이벤트
+	for (let i = 0; i < chkNormal.length; i++) {
+		chkNormal[i].checked = chkAll.checked
+	}
+}, false)
 
-chkNormal.forEach((item) => item.addEventListener('input', toggleCheckbox))
-
-function toggleCheckbox(e) { // 각각의 체크박스
-	const { checked, id } = e.target
-	agreements[id] = checked
-	this.parentNode.classList.toggle('active')
-	checkAllStatus()
-}
-
-function checkAllStatus() {
-	const { firstChk, secondChk, thirdChk, fourChk } = agreements
-	if (firstChk && secondChk && thirdChk && fourChk) {
+for (let i = 0; i < chkNormal.length; i++) { // 하위 체크박스 클릭시 이벤트
+	chkNormal[i].addEventListener('click', function() {
+		for (let j = 0; j < chkNormal.length; j++) {
+			if (chkNormal[j].checked === false) {
+				chkAll.checked = false
+				return
+			}
+		}
 		chkAll.checked = true
-	} else {
-		chkAll.checked = false
-	}
-}
-
-chkAll.addEventListener('click', (e) => { // 전체동의 체크박스
-	const { checked } = e.target
-	if (checked) {
-		chkNormal.forEach((item) => {
-			item.checked = true
-			agreements[item.id] = true
-			item.parentNode.classList.add('active')
-		})
-	} else {
-		chkNormal.forEach((item) => {
-			item.checked = false
-			agreements[item.id] = false
-			item.parentNode.classList.remove('active')
-		})
-	}
-})
+	}, false)
+} 
