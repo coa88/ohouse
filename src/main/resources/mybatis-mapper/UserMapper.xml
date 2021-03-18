@@ -22,21 +22,12 @@
 	
 	<update id="updUser">
 		UPDATE t_user 
-		<set>
-			user_pw = #{userPw},
+		set
 			nm = #{nm},
 			gender=#{gender},
 			ph = #{ph}
-		</set>
 		
-		<where>
-			<if test="iUser > 0">
-				i_user = #{iUser}
-			</if>
-			<if test="emailId != null and emailId !=''">
-				or email_id= #{emailId}
-			</if>
-		</where>		
+		where i_user=#{iUser} 		
 	</update>
 	
 	<delete id="delUser">

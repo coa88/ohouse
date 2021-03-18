@@ -1,0 +1,60 @@
+
+
+
+.edit_user_info_contaner{
+    position: relative;
+    margin: 50px auto;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+    padding: 50px;
+    color: #292929;
+    width: 100%;
+}
+
+.edit_user_info_header{
+    display: flex;
+    margin-bottom: 60px;
+}
+.user_withdraw{
+    font-size: 14px;
+    color: #ccc;
+    text-decoration: underline;
+}
+
+/*입력부분*/
+
+.edit_user_info_item{
+    padding-top: 30px;
+    width: 300px;
+}
+.edit_user_info_item>td{
+    padding-left: 30;    
+}
+.edit_user_info_item_title{
+    padding-right: 20px;
+}
+
+.edit_user_info_item_field{
+
+}
+.radio_user_sex{
+    display: flex;
+}
+
+.edit_user_profile_button{
+    width: 200;
+    height: 200;
+}
+
+.edit_user_info_submit{
+    margin: 50px 0 0 100px;
+    width: 290px;
+    padding: 11px 10px;
+    font-size: 17px;
+    line-height: 26px;
+    background-color: #35c5f0;
+    border-color: #35c5f0;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+}

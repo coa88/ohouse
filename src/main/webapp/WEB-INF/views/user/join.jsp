@@ -33,7 +33,7 @@
             <h3 class="join-form-label-contents">다른 유저와 겹치지 않는 별명을 입력해주세요. (2~10자)</h2>
             <div><input type="text" class="join-form-input nm_margin" name="nm" placeholder="별명 (2~10자)"></div>
             <div class="nmRequired">필수 입력 항목입니다.</div>
-            <div class="nmLength">2자 이상 15자 이하로 입력해주세요.</div>
+            <div class="nmLength">2자 이상 10자 이하로 입력해주세요.</div>
             <div class="nmOverlap">사용 중인 별명입니다.</div>
             
             <h2 class="join-form-label terms_label">약관동의</h2>

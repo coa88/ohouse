@@ -53,12 +53,12 @@
 		<!-- jstl -->
 		<dependency>
 		    <groupId>javax.servlet</groupId>
-		    <artifactId>jstl</artifactId>		    
+		    <artifactId>jstl</artifactId>
 		</dependency>
 		<!-- tomcat -->
 		<dependency>
 		    <groupId>org.apache.tomcat.embed</groupId>
-		    <artifactId>tomcat-embed-jasper</artifactId>		    
+		    <artifactId>tomcat-embed-jasper</artifactId>	    
 		</dependency>
 		<!-- tiles -->
 		<dependency>

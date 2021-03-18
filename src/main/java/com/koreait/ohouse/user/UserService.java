@@ -29,7 +29,6 @@ public class UserService {
 	}
 
 	public int updUser(UserEntity param) {
-		param.setUserPw(SecurityUtils.hashPassword(param.getUserPw()));
 		return mapper.updUser(param);
 	}
 
