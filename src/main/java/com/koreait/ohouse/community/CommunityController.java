@@ -2,6 +2,7 @@ package com.koreait.ohouse.community;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -51,12 +52,14 @@ public class CommunityController {
 	
 	@GetMapping("/detail")
 	public void detail(CommunityDTO param, Model model) {
-		param.setiBoard(204);
-		model.addAttribute("data", service.selCmboard(param));
+		param.setiBoard(27);
+		model.addAttribute("data", service.selCmBoard(param)); 
 	}
 	
 	@GetMapping("/photo")
-	public void photo() {}
+	public void photo(CommunityDTO param, Model model) {
+		model.addAttribute("list", service.selCmBoardList(param));
+	}
 	
 	@GetMapping("/houseparty")
 	public void houseparty() {}

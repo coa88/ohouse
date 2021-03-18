@@ -1,5 +1,7 @@
 package com.koreait.ohouse.community;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
@@ -66,7 +68,6 @@ public class CommunityService {
 		for(Element ele : imgs) {
 			String originSrc = ele.attr("src");
 			String moveSrc = originSrc.replace("/temp/" + i_user, "/board/" + param.getiBoard());
-			
 			myFileUtils.moveFile(originSrc, moveSrc);					
 			
 			ctnt = ctnt.replace(originSrc, moveSrc);
@@ -82,9 +83,15 @@ public class CommunityService {
 		return mapper.updBoard(param);
 	}
 	
-	public CommunityDTO selCmboard(CommunityDTO param) {
-		return mapper.selCmboard(param);
+	public CommunityDTO selCmBoard(CommunityDTO param) {
+		return mapper.selCmBoard(param);
 	}
 	
+	public List<CommunityDTO> selCmBoardList(CommunityDTO param) {
+		param.setTyp(1);
+		param.setSecTyp(2);
+		
+		return mapper.selCmBoardList(param);
+	}
 	
 }

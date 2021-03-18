@@ -14,7 +14,9 @@ public interface CommunityMapper {
 	
 	int insBoardImg(CommunityPhotoEntity param);
 	
-	CommunityDTO selCmboard(CommunityDTO param);
+	CommunityDTO selCmBoard(CommunityDTO param);
+	
+	List<CommunityDTO> selCmBoardList(CommunityDTO param);
 
 	int updBoard(CommunityEntity param);
 

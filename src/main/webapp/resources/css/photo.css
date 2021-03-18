@@ -268,12 +268,14 @@ main {
 
 .user_text {
     display: -webkit-box;
+    height: 44px;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     opacity: 1;
     transition: opacity 0.1s;
+    font-weight: 700;
 }
 
 .box_link:hover .user_text {
