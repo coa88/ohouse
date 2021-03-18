@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.koreait.ohouse.model.CommunityDTO;
-import com.koreait.ohouse.model.CommunityDomain;
 import com.koreait.ohouse.model.CommunityEntity;
 import com.koreait.ohouse.model.CommunityPhotoEntity;
 
@@ -15,7 +14,7 @@ public interface CommunityMapper {
 	
 	int insBoardImg(CommunityPhotoEntity param);
 	
-	CommunityDomain selCmboard(CommunityDomain param);
+	CommunityDTO selCmboard(CommunityDTO param);
 
 	int updBoard(CommunityEntity param);
 
