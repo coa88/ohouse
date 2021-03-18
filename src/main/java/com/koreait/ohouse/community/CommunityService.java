@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.koreait.ohouse.common.SecurityUtils;
 import com.koreait.ohouse.model.CommunityDTO;
+import com.koreait.ohouse.model.CommunityPhotoEntity;
 import com.koreait.ohouse.utils.MyFileUtils;
 
 import lombok.RequiredArgsConstructor;
@@ -40,11 +41,13 @@ public class CommunityService {
 		if(i_user < 1) { // 유저없음
 			return 0;
 		}
+		mapper.insBoard(param); // pk값을 얻기위해 먼저 생성
 		
+	
 		//썸네일이미지 
 		MultipartFile img = param.getFile();
 		try {
-			String folder = "/resources/img/community/user/" + i_user;		
+			String folder = "/resources/img/community/board/" + param.getiBoard();		
 			String fileNm = myFileUtils.transferTo(img, folder);
 			param.setBoardImg(fileNm);
 		} catch(Exception e) {
@@ -56,13 +59,31 @@ public class CommunityService {
 		Document doc = Jsoup.parseBodyFragment(ctnt);
 		Elements imgs = doc.getElementsByTag("img");
 		
+		
+		CommunityPhotoEntity cmPhotoEntity = new CommunityPhotoEntity();
+		cmPhotoEntity.setiBoard(param.getiBoard());;
+		
 		for(Element ele : imgs) {
-			String src = ele.attr("src");
+			String originSrc = ele.attr("src");
+			String moveSrc = originSrc.replace("/temp/" + i_user, "/board/" + param.getiBoard());
+			
+			myFileUtils.moveFile(originSrc, moveSrc);					
+			
+			ctnt = ctnt.replace(originSrc, moveSrc);
+			
+			//img insert
+			String saveImg = moveSrc.substring(moveSrc.lastIndexOf("/") + 1);
+			cmPhotoEntity.setCommunityImg(saveImg);
+			mapper.insBoardImg(cmPhotoEntity);
 		}
 		
 		
-		
-		return mapper.insBoard(param);
+		param.setCtnt(ctnt);
+		return mapper.updBoard(param);
+	}
+	
+	public CommunityDTO selCmboard(CommunityDTO param) {
+		return mapper.selCmboard(param);
 	}
 	
 	

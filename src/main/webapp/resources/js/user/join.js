@@ -2,19 +2,71 @@
 
 const form = document.querySelector('#joinForm')
 
-// 별명 중복 체크
-form.nm.addEventListener('change', function() {
-	if (form.nm.value.length < 2 || form.nm.value.length > 15) {
-		document.querySelector('.nm_label').classList.add('focus')
-		document.querySelector('.nmLength').style.display = 'block'
-	} else {
-		document.querySelector('.nm_label').classList.remove('focus')
-		document.querySelector('.nmLength').style.display = 'none'
+// 회원가입 체크
+function joinChk() {
+	if (!emailNullChk()) {
+		return false
+	} else if (!chkEmail()) {
+		return false
+	} else if (!pwNullChk()) {
+		return false
+	} else if (!chkPw()) {
+		return false
+	} else if (!pwChkNullChk()) {
+		return false
+	} else if (!chkPwChk()) {
+		return false
+	} else if (!nmNullChk()) {
+		return false
+	} else if (!chkNm()) {
+		return false
 	}
-	ajax()
+	
+	return true
+}
+
+// 이메일 중복 체크
+form.emailId.addEventListener('change', function() {
+	emailIdAjax()
 })
 
-function ajax() {
+function emailIdAjax() {
+	const joinEmailIdVal = form.emailId.value
+
+	var param = {
+		emailId: joinEmailIdVal
+	}
+
+	fetch('/user/emailIdChk', {
+		method: 'post',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(param)
+	})
+		.then(res => res.json())
+		.then(myJson => {
+			emailIdProc(myJson.emailId)
+		})
+}
+
+function emailIdProc(val) {
+	if (val === 1) {
+		document.querySelector('.email_label').classList.add('focus')
+		document.querySelector('.emailIdOverlap').style.display = 'block'
+		return false
+	}
+	document.querySelector('.email_label').classList.remove('focus')
+	document.querySelector('.emailIdOverlap').style.display = 'none'
+	return true
+}
+
+// 별명 중복 체크
+form.nm.addEventListener('change', function() {
+	nmAjax()
+})
+
+function nmAjax() {
 	const joinNmVal = form.nm.value
 
 	var param = {
@@ -30,11 +82,11 @@ function ajax() {
 	})
 		.then(res => res.json())
 		.then(myJson => {
-			proc(myJson.isExist)
+			nmProc(myJson.nm)
 		})
 }
 
-function proc(val) {
+function nmProc(val) {
 	if (val === 1) {
 		document.querySelector('.nm_label').classList.add('focus')
 		document.querySelector('.nmOverlap').style.display = 'block'
@@ -45,24 +97,15 @@ function proc(val) {
 	return true
 }
 
-// 회원가입 체크
-function joinChk() {
-	if (!chKEmail()) {
-		return false
-	} else if (!chkPw()) {
-		return false
-	} else if (!chkPwChk()) {
-		return false
-	} else if (!chkNm()) {
-		return false
-	}
-	return true
-}
 
-// 공백체크후에 조건 체크
-function chKEmail() {
-	if (!emailNullChk())
-		return false
+
+
+
+
+
+
+// 회원가입 조건 체크
+function chkEmail() {
 
 	const emailJ = /^[_a-zA-Z0-9]+([-+.][_a-zA-Z0-9]+)*@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/i
 
@@ -78,8 +121,6 @@ function chKEmail() {
 }
 
 function chkPw() {
-	if (!pwNullChk())
-		return false
 
 	if (form.userPw.value.length < 8) {
 		document.querySelector('.pw_label').classList.add('focus')
@@ -93,8 +134,6 @@ function chkPw() {
 }
 
 function chkPwChk() {
-	if (!pwChkNullChk())
-		return false
 
 	if (form.userPw.value !== form.userPwChk.value) {
 		document.querySelector('.pwChk_label').classList.add('focus')
@@ -108,18 +147,18 @@ function chkPwChk() {
 }
 
 function chkNm() {
-	if (!nmNullChk())
-		return false
 
-	if (form.nm.value.length < 2 || form.nm.value.length > 15) {
+	if (form.nm.value.length < 2 || form.nm.value.length > 10) {
 		document.querySelector('.nm_label').classList.add('focus')
 		document.querySelector('.nmLength').style.display = 'block'
+		form.nm.focus()
 		return false
 	}
 	document.querySelector('.nm_label').classList.remove('focus')
 	document.querySelector('.nmLength').style.display = 'none'
 	return true
 }
+
 
 // 입력란 공백 체크
 function emailNullChk() {
@@ -170,49 +209,24 @@ function nmNullChk() {
 	return true
 }
 
-
 // 약관동의
 const chkAll = document.querySelector('.check_all')
 const chkNormal = document.querySelectorAll('.normal')
 
-const agreements = {
-	firstChk: false,
-	secondChk: false,
-	thirdChk: false,
-	fourChk: false,
-}
+chkAll.addEventListener('click', function() { // 전체 선택 클릭시 이벤트
+	for (let i = 0; i < chkNormal.length; i++) {
+		chkNormal[i].checked = chkAll.checked
+	}
+}, false)
 
-chkNormal.forEach((item) => item.addEventListener('input', toggleCheckbox))
-
-function toggleCheckbox(e) { // 각각의 체크박스
-	const { checked, id } = e.target
-	agreements[id] = checked
-	this.parentNode.classList.toggle('active')
-	checkAllStatus()
-}
-
-function checkAllStatus() {
-	const { firstChk, secondChk, thirdChk, fourChk } = agreements
-	if (firstChk && secondChk && thirdChk && fourChk) {
+for (let i = 0; i < chkNormal.length; i++) { // 하위 체크박스 클릭시 이벤트
+	chkNormal[i].addEventListener('click', function() {
+		for (let j = 0; j < chkNormal.length; j++) {
+			if (chkNormal[j].checked === false) {
+				chkAll.checked = false
+				return
+			}
+		}
 		chkAll.checked = true
-	} else {
-		chkAll.checked = false
-	}
-}
-
-chkAll.addEventListener('click', (e) => { // 전체동의 체크박스
-	const { checked } = e.target
-	if (checked) {
-		chkNormal.forEach((item) => {
-			item.checked = true
-			agreements[item.id] = true
-			item.parentNode.classList.add('active')
-		})
-	} else {
-		chkNormal.forEach((item) => {
-			item.checked = false
-			agreements[item.id] = false
-			item.parentNode.classList.remove('active')
-		})
-	}
-})
+	}, false)
+} 
