@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class CommunityController {
 
 	final private CommunityService service;  
 	final private HttpSession hs;
-	final private Model model;
+	
 	
 	@GetMapping("/write")
 	public void write() {}
@@ -53,7 +54,7 @@ public class CommunityController {
 	}
 	
 	@GetMapping("/detail")
-	public void detail(CommunityDomain param) {
+	public void detail(CommunityDomain param, Model model) {
 		model.addAttribute("data", service.selCmboard(param));
 	}
 	
