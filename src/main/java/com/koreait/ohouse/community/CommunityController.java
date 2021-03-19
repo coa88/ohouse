@@ -50,11 +50,6 @@ public class CommunityController {
 		return result;
 	}
 
-	@GetMapping("/detail")
-	public void detail(CommunityDTO param, Model model) {
-		System.out.println("ppp : " + param.getiBoard());
-		model.addAttribute("data", service.selCmBoard(param));
-	}
 
 	@GetMapping("/photo")
 	public String photo(CommunityDTO param, Model model) {
@@ -83,7 +78,8 @@ public class CommunityController {
 		model.addAttribute("data", service.selCmBoard(param));
 		return "community/detail";
 	}
-
+	
+	@GetMapping("/tip")
 	public String tip(CommunityDTO param, Model model) {
 		param.setTyp(1);
 		param.setSecTyp(4);
