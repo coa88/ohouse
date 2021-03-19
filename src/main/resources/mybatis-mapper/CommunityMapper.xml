@@ -98,5 +98,15 @@
 		DELETE FROM cm_board
 		WHERE i_board = #{iBoard}
 		AND i_user = #{iUser}
-	</delete>
+	</delete>	
+	
+	<!-- /////////////////////////// CMT /////////////////////////// -->
+	
+	<insert id="insCmt">
+		INSERT INTO cm_cmt
+		( cmt_group, i_board, i_user, ctnt )
+		VALUES
+		( IFNULL(MAX(#{cmtGroup}), 0) + 1, #{iBoard}, #{iUser}, #{ctnt} )
+	</insert>
+	
 </mapper>

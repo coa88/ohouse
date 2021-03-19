@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.koreait.ohouse.common.SecurityUtils;
+import com.koreait.ohouse.model.BoardCmtEntity;
 import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityPhotoEntity;
 import com.koreait.ohouse.utils.MyFileUtils;
@@ -92,6 +93,12 @@ public class CommunityService {
 		param.setSecTyp(2);
 		
 		return mapper.selCmBoardList(param);
+	}
+	
+	// ----------------------------CMT----------------------------//
+	
+	public int insCmt(BoardCmtEntity p) {
+		return mapper.insCmt(p);
 	}
 	
 }

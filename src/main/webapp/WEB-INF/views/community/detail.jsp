@@ -70,7 +70,16 @@
         	<!-- 스텟끝 -->
         	
         	<!-- 댓글시작 -->
-        	
+        	<div style="margin-top: 20px;">				
+				<div>
+					<form id="cmtFrm">
+						<input type="hidden" name="iBoard" value="${param.iBoard}">
+						댓글: <input type="text" name="ctnt">	
+						<input type="button" name="btn" value="등록">	
+					</form>
+				</div>				
+				<div id="cmtList"></div>		
+			</div>
         	<!-- 댓글끝 -->
         </div>
     </main>
