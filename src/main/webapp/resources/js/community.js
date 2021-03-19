@@ -1,5 +1,6 @@
 'use strict'
 function moveLocation(iBoard) {		
-	let url = `/community/detail?iBoard=${iBoard}`
-	location.href = url; //주소값 이동
+	let url = window.location.href
+	let link = url + `/detail?iBoard=${iBoard}`
+	location.href = link; //주소값 이동
 }

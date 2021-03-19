@@ -36,8 +36,9 @@ public class CommunityController {
 	@ResponseBody
 	@PostMapping("/write") // 커뮤니티 게시판 글쓰기
 	public Map<String, Object> write(CommunityDTO param) {
-		Map<String, Object> resultValue = new HashMap<>();		
-		resultValue.put("result", service.insBoard(param));
+		Map<String, Object> resultValue = new HashMap<>();
+		service.insBoard(param);
+		resultValue.put("result", param.getiBoard());
 		return resultValue;
 	}
 	
@@ -49,25 +50,53 @@ public class CommunityController {
 		return result; 
 	}
 	
-	@GetMapping("/detail")
-	public void detail(CommunityDTO param, Model model) {
-		System.out.println("ppp : " + param.getiBoard());
-		model.addAttribute("data", service.selCmBoard(param)); 
-	}
 	
 	@GetMapping("/photo")
-	public void photo(CommunityDTO param, Model model) {
+	public String photo(CommunityDTO param, Model model) {
+		param.setTyp(1);
+		param.setSecTyp(2);
 		model.addAttribute("list", service.selCmBoardList(param));
+		return "community/photo";
+	}
+	
+	@GetMapping("/photo/detail")
+	public String photoDetail(CommunityDTO param, Model model) {
+		model.addAttribute("data", service.selCmBoard(param));
+		return "community/detail";
 	}
 	
 	@GetMapping("/houseparty")
-	public void houseparty() {}
+	public String houseparty(CommunityDTO param, Model model) {
+		param.setTyp(1);
+		param.setSecTyp(3);
+		model.addAttribute("list", service.selCmBoardList(param));
+		return "community/houseparty";
+	}
+	
+	@GetMapping("/houseparty/detail")
+	public String housepartyDetail(CommunityDTO param, Model model) {
+		model.addAttribute("data", service.selCmBoard(param));
+		return "community/detail";
+	}
 
 	@GetMapping("/tip")
-	public void tip() {}
+	public String tip(CommunityDTO param, Model model) {
+		param.setTyp(1);
+		param.setSecTyp(4);
+		model.addAttribute("list", service.selCmBoardList(param));
+		return "community/tip";
+	}
+	
+	@GetMapping("/tip/detail")
+	public String tipDetail(CommunityDTO param, Model model) {
+		model.addAttribute("data", service.selCmBoard(param));
+		return "community/detail";
+	}
 	
 	@GetMapping("/event")	
-	public void event() {}
+	public String event() {
+		return "community/event";
+	}
 	
 	
 }

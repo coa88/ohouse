@@ -10,7 +10,7 @@
         <div class="menu-layout">
             <div class="main-menubar">
                 <div class="logo">
-                    <a href="/"><img src="../resources/img/ohouser_logo.jpg"></a>
+                    <a href="/"><img src="/resources/img/ohouser_logo.jpg"></a>
                 </div>
                 <nav class="nav-menu">
 	                <c:forEach items="${menuList}" var="item">
