@@ -5,11 +5,10 @@
 <div id="layout">
     <!-- main -->
     <main>
-    	<input type="hidden" name="iBoard" value="${param.iBoard}">
         <!-- 커버이미지 -->
         <div class="detail_cover_img_wrap">
             <div class="detail_cover_img_size">
-            	<img src="../resources/img/community/board/${data.iBoard}/${data.boardImg}"alt="대표이미지">
+            	<img src="/resources/img/community/board/${data.iBoard}/${data.boardImg}"alt="대표이미지">
             </div>
         </div>
         <!-- 디테일 내용 -->
@@ -20,8 +19,8 @@
                     <div class="con_header_user">
                         <a class="con_header_user_link" href="#">
                             <div class="user_img_wrap">
-                                <img class="user_img" src="../resources/img/user/${data.iUser}/${data.profileImg}" onerror="this.src='../resources/img/user/basic_profile.webp'" alt="프로필사진">
-                            </div>
+                                <img class="user_img" src="/resources/img/user/${data.iUser}/${data.profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진">
+                            </div>																							
                             <div class="user_name">${data.nm}</div>
                             <div class="user_date">${data.rDt}</div>
                         </a>

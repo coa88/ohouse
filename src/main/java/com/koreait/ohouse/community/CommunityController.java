@@ -37,6 +37,8 @@ public class CommunityController {
 	public Map<String, Object> write(CommunityDTO param) {
 		Map<String, Object> resultValue = new HashMap<>();
 		resultValue.put("result", service.insBoard(param));
+		service.insBoard(param);
+		resultValue.put("result", param.getiBoard());
 		return resultValue;
 	}
 
@@ -55,20 +57,49 @@ public class CommunityController {
 	}
 
 	@GetMapping("/photo")
-	public void photo(CommunityDTO param, Model model) {
+	public String photo(CommunityDTO param, Model model) {
+		param.setTyp(1);
+		param.setSecTyp(2);
 		model.addAttribute("list", service.selCmBoardList(param));
+		return "community/photo";
+	}
+	
+	@GetMapping("/photo/detail")
+	public String photoDetail(CommunityDTO param, Model model) {
+		model.addAttribute("data", service.selCmBoard(param));
+		return "community/detail";
 	}
 
 	@GetMapping("/houseparty")
-	public void houseparty() {
+	public String houseparty(CommunityDTO param, Model model) {
+		param.setTyp(1);
+		param.setSecTyp(3);
+		model.addAttribute("list", service.selCmBoardList(param));
+		return "community/houseparty";
+	}
+	
+	@GetMapping("/houseparty/detail")
+	public String housepartyDetail(CommunityDTO param, Model model) {
+		model.addAttribute("data", service.selCmBoard(param));
+		return "community/detail";
 	}
 
-	@GetMapping("/tip")
-	public void tip() {
+	public String tip(CommunityDTO param, Model model) {
+		param.setTyp(1);
+		param.setSecTyp(4);
+		model.addAttribute("list", service.selCmBoardList(param));
+		return "community/tip";
+	}
+	
+	@GetMapping("/tip/detail")
+	public String tipDetail(CommunityDTO param, Model model) {
+		model.addAttribute("data", service.selCmBoard(param));
+		return "community/detail";
 	}
 
-	@GetMapping("/event")
-	public void event() {
+	@GetMapping("/event")	
+	public String event() {
+		return "community/event";
 	}
 
 	// ----------------------------CMT----------------------------//

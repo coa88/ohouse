@@ -89,9 +89,6 @@ public class CommunityService {
 	}
 	
 	public List<CommunityDTO> selCmBoardList(CommunityDTO param) {
-		param.setTyp(1);
-		param.setSecTyp(2);
-		
 		return mapper.selCmBoardList(param);
 	}
 	
