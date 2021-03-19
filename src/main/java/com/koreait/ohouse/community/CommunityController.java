@@ -35,10 +35,9 @@ public class CommunityController {
 	
 	@ResponseBody
 	@PostMapping("/write") // 커뮤니티 게시판 글쓰기
-	public Map<String, Object> write(CommunityDTO p) {
+	public Map<String, Object> write(CommunityDTO param) {
 		Map<String, Object> resultValue = new HashMap<>();		
-		
-		resultValue.put("result", service.insBoard(p));
+		resultValue.put("result", service.insBoard(param));
 		return resultValue;
 	}
 	
@@ -52,7 +51,7 @@ public class CommunityController {
 	
 	@GetMapping("/detail")
 	public void detail(CommunityDTO param, Model model) {
-		param.setiBoard(27);
+		System.out.println("ppp : " + param.getiBoard());
 		model.addAttribute("data", service.selCmBoard(param)); 
 	}
 	

@@ -5,6 +5,7 @@
 <div id="layout">
     <!-- main -->
     <main>
+    	<input type="hidden" name="iBoard" value="${param.iBoard}">
         <!-- 커버이미지 -->
         <div class="detail_cover_img_wrap">
             <div class="detail_cover_img_size">

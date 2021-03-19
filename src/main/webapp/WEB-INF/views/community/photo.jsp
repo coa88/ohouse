@@ -59,6 +59,16 @@
 	                            </div>
 	                        </div>
 	                        <div class="box_content">
+	                            
+	                            <div class="box_link" onclick="moveLocation(${item.iBoard})">
+	                                <div class="photo_feed_img_wrap">
+	                                    <img class="photo_feed_img" src="../resources/img/community/board/${item.iBoard}/${item.boardImg}" alt="썸네일사진">
+	                                    <span class="img_view_count">조회수 ${item.hits}</span>
+	                                </div>
+	                                <div class="user_text_wrap">
+	                                    <span class="user_text">${item.title}</span>
+	                                </div>
+	                            </div>
 	                            <div class="util">
 	                                <button class="util_icon">
 	                                    <svg class="icon" aria-label="좋아요" width="24" height="24" fill="currentColor"
@@ -90,20 +100,12 @@
 	                                    <span class="count">${item.cmtCnt}</span>
 	                                </button>
 	                            </div>
-	                            <div class="box_link" onclick="moveLocation(${item.iBoard})">
-	                                <div class="photo_feed_img_wrap">
-	                                    <img class="photo_feed_img" src="../resources/img/community/photo/photo_feed_img_01.webp" alt="home">
-	                                    <span class="img_view_count">조회수 ${item.hits}</span>
-	                                </div>
-	                                <div class="user_text_wrap">
-	                                    <span class="user_text">${item.title}</span>
-	                                </div>
-	                            </div>
+	                            
 	                            <div class="photo_feed_comment_wrap">
 	                                <div class="photo_feed_comment">
 	                                    <a class="comment_profile" href="#">
 	                                        <img class="comment_img" src="../resources/img/community/photo/photo_feed_comment_img_01.webp"
-	                                            alt="photo">
+	                                            onerror="this.src='../resources/img/user/basic_profile.webp'" alt="댓글프로필사진">
 	                                        <span class="comment_name">댓글닉네임</span>
 	                                    </a>
 	                                    <a class="comment_link" href="#">

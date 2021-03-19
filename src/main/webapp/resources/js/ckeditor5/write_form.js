@@ -77,6 +77,7 @@ function MyCustomUploadAdapterPlugin( editor ) {
 function WriteUpload () {
 	let fileElem = document.querySelector('#file')
 	let writePostElem = document.querySelector('#writePost')
+	let iBoardVal = writePostElem.iBoard.value;
 	let typVal = writePostElem.typ.value;
 	let secTypVal = writePostElem.secTyp.value;
 	let titleVal = writePostElem.title.value;
@@ -96,6 +97,7 @@ function WriteUpload () {
 
 	var formData = new FormData()
 	formData.append('file', fileElem.files[0])
+	formData.append('iBoard', iBoardVal)
 	formData.append('typ', typVal)
 	formData.append('secTyp', secTypVal)
 	formData.append('title', titleVal)
@@ -114,7 +116,8 @@ function WriteUpload () {
 			alert('업로드 실패하였습니다.')
 			return false;
 		} else {
-			location.href='/'
+			console.log('data.items : ' + data.body )
+			location.href='/community/detail?iBoard='+data.iBoard
 			return data;			
 		} 
 	}).catch(error => console.error('Error:', error))
