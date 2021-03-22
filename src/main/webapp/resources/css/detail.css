@@ -206,6 +206,11 @@
     margin-right: 5px;
 }
 
+.content-detail-item-btn {
+    display: inline-flex;
+    float: right;
+}
+
 .detail-stats__item dd {
     color: #656e75;
 }

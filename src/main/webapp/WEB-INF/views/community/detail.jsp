@@ -65,6 +65,12 @@
         			<dt>조회수</dt>
         			<dd>${data.hits}</dd>
         		</div>
+        		<c:if test="${loginUser != null}">
+        			<div class="content-detail-item-btn">
+        				<a href="/community/modify?iBoard=${param.iBoard}">수정</a>
+        				<span onclick="DeletePost(${param.iBoard})">삭제</span>
+        			</div>
+        		</c:if>
         	</div>
         	<!-- 스텟끝 -->
         	

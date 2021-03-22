@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
+import jdk.internal.org.jline.utils.Log;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -27,7 +28,8 @@ public class MyFileUtils {
 	
 	//폴더 삭제
 	public void delFolder(String path) {
-		File folder = new File(path);
+		String basePath = getRealPath(path);
+		File folder = new File(basePath);
 		while(folder.exists()) {
 			File[] fileList = folder.listFiles();
 			if(fileList == null) {
@@ -48,11 +50,22 @@ public class MyFileUtils {
 	}
 
 	//파일 삭제
-	public void delFile(String path) {
-		File file = new File(path);
-		if(file.exists()) {
-			file.delete();
+	public void delFile(String path, String fileNm) {
+		String basePath = getRealPath(path);
+		File file = new File(basePath, fileNm);
+		if (file.exists()) {
+			// 파일 삭제 성공시
+			if (file.delete()) {
+			  System.out.println("파일을 삭제 성공");
+			//파일 삭제 실패시
+			} else {
+			    System.out.println("파일 삭제 실패");
+			}
+	    // 지정한 경로에 파일이 존재안하는 경우 
+		} else {
+		  System.out.println("파일이 없습니다.");
 		}
+		
 	}
 	
 	public void moveFile(String beforePath, String afterPath) {
@@ -84,6 +97,7 @@ public class MyFileUtils {
 	
 	//파일저장 & 랜덤파일명 구하기
 	public String transferTo(MultipartFile mf, String target) throws IllegalStateException, IOException {
+		
 		String fileNm = null;
 		String basePath = getRealPath(target);
 		makeFolders(basePath);

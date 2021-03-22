@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!-- 레이아웃 -->
 <div id="layout">
+	
     <!-- main -->
     <main>
         <div class="photo_feed container">
@@ -52,7 +53,9 @@
 	         		<c:forEach items="${list}" var="item">
 		                <div class="photo_box_list plr10">
 		                    <div class="box_padding">
-		                    	<input type="hidden" name="secTyp" value="${item.iBoard}">
+		                    	<input type="hidden" name="iBoard" value="${item.iBoard}">
+		                    	<input type="hidden" name="typ" value="1">
+   								<input type="hidden" name="secTyp" value="2">
 		                        <div class="box_writer">
 		                            <div class="writer_content">
 		                                <div class="writer_header">

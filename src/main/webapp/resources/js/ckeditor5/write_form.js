@@ -127,7 +127,7 @@ function WriteUpload () {
 		if(data.result === 0 || data.result === undefined) {
 			alert('업로드 실패하였습니다.')			
 		} else {
-			location.href='/community/'+ pathName +'/detail?iBoard='+data.result						
+			location.href='/community/'+ pathName +'/detail?iBoard='+data.iBoard						
 		} 
 	}).catch(error => console.error('Error:', error))
 }
@@ -144,3 +144,49 @@ function setThumbnail() {
         document.querySelector('#preview').src = reader.result
     }
 }
+
+// 게시물 수정
+
+function UpdatePost () {
+	let fileElem = document.querySelector('#file')
+	let writePostElem = document.querySelector('#writePost')
+	let iBoardVal = writePostElem.iBoard.value
+	let titleVal = writePostElem.title.value
+	let ctntVal = textAreaData.getData()
+	let previousUrl = document.referrer
+	console.log(fileElem)
+	if(titleVal == '') {
+		alert('제목을 입력해 주세요.');
+		return false;
+	} else if(ctntVal == '') {
+		alert('내용을 작성해 주세요.');
+		return false;
+	}
+
+	let formData = new FormData()
+	if(fileElem.files[0] !== undefined) {
+		formData.append('file', fileElem.files[0])		
+	}
+	formData.append('iBoard', iBoardVal)
+	formData.append('title', titleVal)
+	formData.append('ctnt', ctntVal)
+	
+	
+	fetch('/community/modify', {
+		method: 'POST',		
+		body: formData
+	}).then(function (res){
+		console.log(res)
+		return res.json()		
+	}).then(function (data) {
+		console.log(data.result)
+		if(data.result === 0 || data.result === undefined) {
+			alert('수정을 실패하였습니다.')			
+		} else {
+			location.href = previousUrl
+		} 
+	}).catch(error => console.error('Error:', error))
+}
+
+
+

@@ -4,6 +4,8 @@ navWriteElem.addEventListener('click',() => { //글쓰기 클릭시 메뉴 on/of
     navWriteList.classList.toggle('active')
 })
 
-
-
-
+function moveLocation(iBoard) {		
+	let url = window.location.href
+	let link = url + `/detail?iBoard=${iBoard}`
+	location.href = link; //주소값 이동
+}

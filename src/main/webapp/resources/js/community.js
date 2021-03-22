@@ -1,11 +1,22 @@
 'use strict'
 
-function moveLocation(iBoard) {		
-	let url = window.location.href
-	let link = url + `/detail?iBoard=${iBoard}`
-	location.href = link; //주소값 이동
+//게시물 삭제
+function DeletePost(iBoard) {
+	if(confirm('삭제 하시겠습니까?')) {
+		fetch(`/community/delCmBoard/${iBoard}`, {
+			method: 'DELETE'
+		}).then(function (res) {
+			return res.json()
+		}).then(function (json) {
+			console.log('result : '+json.result)
+			if(json.result === 1) {
+				location.href = '/community'
+			} else {
+				alert("삭제 실패하였습니다.")
+			}
+		})
+	}
 }
-
 
 // 커뮤니티 댓글
 var cmtObj = {

@@ -19,9 +19,9 @@ public interface CommunityMapper {
 
 	List<CommunityDTO> selCmBoardList(CommunityDTO param);
 
-	int updBoard(CommunityEntity param);
+	int updCmBoard(CommunityDTO param);
 
-	int delBoard(CommunityEntity param);
+	int delCmBoard(CommunityDTO param);
 
 	// ----------------------------CMT----------------------------//
 
