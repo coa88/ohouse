@@ -30,10 +30,17 @@
 		where i_user=#{iUser} 		
 	</update>
 	
+	<update id="changePw">
+		update t_user
+		set
+			user_pw = #{userPw}
+		where
+			i_user=#{iUser}
+		
+	</update>
 	<delete id="delUser">
 		DELETE from t_user
 		where i_user = #{iUser}
-		AND user_pw =#{userPw}
 	</delete>
 	
 	<!-- 회원가입 중복 체크 -->	
