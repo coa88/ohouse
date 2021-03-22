@@ -7,13 +7,14 @@
         <div class="nav_warp">
           <li class ="nav_item"> <a href="/user/mypage">프로필</a></li>
           <li class ="nav_item"> <a href ="/user/edit">설정</a> </li>
+          <li class ="nav_item"> <a href ="/user/edit_password">비밀번호 변경</a> </li>
+          <li class ="nav_item"> <a href ="/user/withdraw">회원탈퇴</a> </li>
         </div>
     </nav>
 
-    <div class="edit_user_info_contaner">
+    <div class="edit_password_wrap">
         <div class="edit_user_info_header">
-            <h1> 회원정보 수정</h1>
-            <a class="user_withdraw" href="/user/withdraw">회원탈퇴</a>
+            <h3> 회원정보 수정</h3>
         </div>
         <form id ="updUser" action="/user/edit" method="post">
             <table>

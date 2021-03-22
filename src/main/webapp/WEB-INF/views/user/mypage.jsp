@@ -5,9 +5,11 @@
 <meta charset="UTF-8">
    
     <nav class="nav_box">
-        <div class="nav_warp">
+         <div class="nav_warp">
           <li class ="nav_item"> <a href="/user/mypage">프로필</a></li>
           <li class ="nav_item"> <a href ="/user/edit">설정</a> </li>
+          <li class ="nav_item"> <a href ="/user/edit_password">비밀번호 변경</a> </li>
+          <li class ="nav_item"> <a href ="/user/withdraw">회원탈퇴</a> </li>
         </div>
     </nav>
 
