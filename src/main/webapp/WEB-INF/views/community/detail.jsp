@@ -75,16 +75,20 @@
         	<!-- 스텟끝 -->
         	
         	<!-- 댓글시작 -->
-        	<div style="margin-top: 20px;">				
+        	<h1>댓글&nbsp;<span>${data.cmtCnt}</span></h1>
+        	<form action="/community/insCmt" method="post">
+				<input type="hidden" name="iBoard" value="${param.iBoard}">
+				<input type="text" name="ctnt" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)">	
+						<input type="submit" value="등록">	
+			</form>
+			<c:forEach items="${cmtList}" var="data">			
 				<div>
-					<form id="cmtFrm">
-						<input type="hidden" name="iBoard" value="${param.iBoard}">
-						댓글: <input type="text" name="ctnt">	
-						<input type="button" name="btn" value="등록">	
-					</form>
-				</div>				
-				<div id="cmtList"></div>		
-			</div>
+					<div>${data.nm}</div>
+					<div>${data.ctnt}</div>
+					<div><img src="/resources/img/user/${data.iUser}/${data.profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진"></div>
+					<div> 좋아요</div>
+				</div>
+			</c:forEach>			
         	<!-- 댓글끝 -->
         </div>
     </main>
