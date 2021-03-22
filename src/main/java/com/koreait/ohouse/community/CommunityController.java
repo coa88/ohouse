@@ -87,6 +87,7 @@ public class CommunityController {
 	@GetMapping("/houseparty/detail") // 집들이 디테일페이지
 	public String housepartyDetail(CommunityDTO param, Model model) {
 		model.addAttribute("data", service.selCmBoard(param));
+		model.addAttribute("cmtList", service.selCmtList(param));
 		return "community/detail";
 	}
 	
@@ -128,18 +129,11 @@ public class CommunityController {
 
 	// ----------------------------CMT----------------------------//
 
-	@ResponseBody
 	@PostMapping("/insCmt")
-	public Map<String, Object> insCmt(@RequestBody BoardCmtEntity p, HttpSession hs) {
-
-		System.out.println("i_board : " + p.getiBoard());
-		System.out.println("ctnt : " + p.getCtnt());
-
+	public String insCmt(CommunityCmtEntity p, HttpSession hs) {
 		p.setiUser(SecurityUtils.getLoginUserPk(hs));
-
-		Map<String, Object> returnValue = new HashMap<>();
-		returnValue.put("result", service.insCmt(p));
-		return returnValue;
+		service.insCmt(p);
+		return "redirect:/community/houseparty/detail?iBoard=" + p.getiBoard();
 	}
 
 }

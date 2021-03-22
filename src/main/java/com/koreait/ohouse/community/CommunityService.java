@@ -99,6 +99,7 @@ public class CommunityService {
 		int i_user = SecurityUtils.getLoginUserPk(hs);
 		param.setiUser(i_user);
 		String path = "/resources/img/community/board/";
+		String tempPath = "/resources/img/community/temp/";
 		CommunityDTO dto = mapper.selCmBoard(param);
 	
 		if(i_user != dto.getiUser()) { //글쓴이 다름
@@ -127,12 +128,21 @@ public class CommunityService {
 		CommunityPhotoEntity cmPhotoEntity = new CommunityPhotoEntity();
 		cmPhotoEntity.setiBoard(param.getiBoard());;
 		
+		mapper.delCmPhoto(param);
+		
 		for(Element ele : imgs) {
 			String originSrc = ele.attr("src");
 			String moveSrc = originSrc.replace("/temp/" + i_user, "/board/" + param.getiBoard());
+			String[] arrSrc = originSrc.split("/");
+			String fileNm = arrSrc[arrSrc.length-1];
 			
-			myFileUtils.moveFile(originSrc, moveSrc);
-			ctnt = ctnt.replace(originSrc, moveSrc);
+			File file = new File(myFileUtils.getRealPath(tempPath + i_user),fileNm);
+
+			if(file.exists()) {
+				myFileUtils.moveFile(originSrc, moveSrc);
+				ctnt = ctnt.replace(originSrc, moveSrc);
+				param.setCtnt(ctnt);
+			}
 			
 			//img insert
 			String saveImg = moveSrc.substring(moveSrc.lastIndexOf("/") + 1);
@@ -160,7 +170,9 @@ public class CommunityService {
 	
 	// ----------------------------CMT----------------------------//
 	
-	public int insCmt(BoardCmtEntity p) {
+	public int insCmt(CommunityCmtEntity p) {
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		p.setiUser(i_user);
 		return mapper.insCmt(p);
 	}
 	

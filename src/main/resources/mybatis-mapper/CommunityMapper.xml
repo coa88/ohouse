@@ -86,10 +86,10 @@
 		WHERE typ = #{typ} AND sec_typ = #{secTyp}
 	</select>
 	
-	<select id="selCmPhoto" resultType="CommunityPhotoEntity">
+	<select id="selCmPhotoList" resultType="CommunityPhotoEntity">
 		SELECT community_img
 		FROM cm_photo
-		WHERE i_board = #{iBoard} AND community_img = #{communityImg}
+		WHERE i_board = #{iBoard}
 	</select>
 	
 	<update id="updCmBoard">
@@ -120,7 +120,15 @@
 		INSERT INTO cm_cmt
 		( cmt_group, i_board, i_user, ctnt )
 		VALUES
-		( IFNULL(MAX(#{cmtGroup}), 0) + 1, #{iBoard}, #{iUser}, #{ctnt} )
+		( (SELECT IFNULL(MAX(cmt_group), 0) + 1 FROM cm_cmt b), #{iBoard}, #{iUser}, #{ctnt} )
 	</insert>
+	
+	<select id="selCmtList" resultType="CommunityCmtDTO">
+		SELECT A.ctnt, B.i_user, B.nm, B.profile_img
+		FROM cm_cmt A
+		LEFT JOIN t_user B
+		ON A.i_user = B.i_user
+		WHERE A.i_board = #{iBoard};
+	</select>
 	
 </mapper>

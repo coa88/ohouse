@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.koreait.ohouse.model.CommunityCmtDTO;
 import com.koreait.ohouse.model.BoardCmtEntity;
 import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityPhotoEntity;
@@ -18,7 +19,7 @@ public interface CommunityMapper {
 
 	List<CommunityDTO> selCmBoardList(CommunityDTO param);
 	
-	CommunityPhotoEntity selCmPhoto(CommunityPhotoEntity param);
+	List<CommunityPhotoEntity> selCmPhotoList(CommunityPhotoEntity param);
 
 	int updCmBoard(CommunityDTO param);
 
@@ -29,4 +30,6 @@ public interface CommunityMapper {
 	// ----------------------------CMT----------------------------//
 
 	int insCmt(BoardCmtEntity p);
+	
+	List<CommunityCmtDTO> selCmtList(CommunityDTO p);
 }
