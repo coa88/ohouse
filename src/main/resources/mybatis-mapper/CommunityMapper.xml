@@ -86,6 +86,12 @@
 		WHERE typ = #{typ} AND sec_typ = #{secTyp}
 	</select>
 	
+	<select id="selCmPhoto" resultType="CommunityPhotoEntity">
+		SELECT community_img
+		FROM cm_photo
+		WHERE i_board = #{iBoard} AND community_img = #{communityImg}
+	</select>
+	
 	<update id="updCmBoard">
 		UPDATE cm_board
 		SET title = #{title}
@@ -102,6 +108,11 @@
 		WHERE i_board = #{iBoard}
 		AND i_user = #{iUser}
 	</delete>	
+	
+	<delete id="delCmPhoto">
+		DELETE FROM cm_photo
+		WHERE i_board = #{iBoard}
+	</delete>
 	
 	<!-- /////////////////////////// CMT /////////////////////////// -->
 	
