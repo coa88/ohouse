@@ -3,6 +3,7 @@ package com.koreait.ohouse.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.koreait.ohouse.common.SecurityUtils;
+import com.koreait.ohouse.model.UserDTO;
 import com.koreait.ohouse.model.UserEntity;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,8 @@ public class UserController {
 	final private UserService service;
 	
 	final private HttpSession hs;
+	
+	final private HttpServletRequest request;
 
 	@GetMapping("/login")
 	public void login() {
@@ -79,6 +83,30 @@ public class UserController {
 		param.setiUser(SecurityUtils.getLoginUserPk(hs));
 		service.updUser(param);
 
+	}
+	@GetMapping("/edit_password")
+	public void changeUserPw() {
+		
+	}
+	@PostMapping("/edit_password")
+	public String changeUserPw(UserDTO param){
+		int result = service.changePw(param);
+		
+		if(result == 1) { //비밀번호 변경 성공시
+			hs.invalidate();
+			return "redirect:/user/login";
+		}
+		return "redirect:/user/edit_password";
+	}
+	
+	@GetMapping("/withdraw")
+	public void userWithdraw(){
+		
+	}
+	@PostMapping("/withdraw")
+	public String userWithdraw(UserEntity param) {
+		service.delUser(param);
+		return "redirect:/";
 	}
 
 	// 회원가입 중복 체크

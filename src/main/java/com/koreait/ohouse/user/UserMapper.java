@@ -14,6 +14,8 @@ public interface UserMapper {
 	int updUser(UserEntity p);
 
 	int delUser(UserEntity p);
+	
+	int changePw(UserEntity p);
 
 	// 회원가입 중복 체크
 	UserEntity emailIdChk(UserEntity p);

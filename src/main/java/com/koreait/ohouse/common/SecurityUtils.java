@@ -15,8 +15,8 @@ public class SecurityUtils {
 		return BCrypt.hashpw(pw, BCrypt.gensalt());
 	}
 	
-	public static boolean chkPassword(String pw, String salt) {
-		return BCrypt.checkpw(pw, salt);
+	public static boolean chkPassword(String plainPw, String hashedPw) {
+		return BCrypt.checkpw(plainPw, hashedPw);
 	}
 	public static UserEntity getLoginUser(HttpSession hs) {
 		return (UserEntity)hs.getAttribute("loginUser");

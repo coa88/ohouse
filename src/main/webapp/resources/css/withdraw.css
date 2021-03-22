@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+
+.withdraw_content{
+    padding: 5% 10% 10% 10%;
+}
+
+.terms_title{
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+.withdraw_terms_field {
+    padding: 50px 0 20px;
+    overflow: hidden;
+}
+.withdraw_terms_box{
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 1px solid #dcdcdc;
+    font-size: 15px;
+    line-height: 21px;
+    word-break: keep-all;
+    overflow: hidden;
+}
+.withdraw_terms_text>li{
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.confirm_check{
+    position: relative;
+    display: flex;
+}
+.confrim_alert{
+    font-weight: bold;
+    color: #ff7777;
+}
+
+
+.grid_checkbox{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 20px 20px 20px;
+
+}
+.confrim_info{
+    font-weight: bold;
+    color: #bdbdbd;
+}
+.terms_sub_title{
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 21px;
+}
+
+.withdrawal_reason_detail{
+    margin: 20px 0 0;
+    padding: 10px 15px;
+    width: 100%;
+    height: 160px;
+    border: 3px solid #dcdcdc;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 25px;
+    resize: none;
+}
+
+.text_length{
+    float: right;
+    font-size: 12px;
+}
+.withdraw_button_box{
+    display: flex;
+}
+.withdraw_button_box>div{
+    margin-top: 30px;
+    margin-right: 10px;
+    
+}
+
+.withdraw_commit{
+    background-color: #bdbdbd;
+    width: 150px;
+    height: 30px;
+    margin-right: 10px;
+    float: left;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+    line-height: 30px;
+    text-align: center;
+}
+.withdraw_cancel{
+    background-color: #35c5f0;
+    width: 150px;
+    height: 30px;  
+    text-decoration: none;
+    float: left;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+    line-height: 30px;
+    text-align: center;
+}
