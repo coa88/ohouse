@@ -77,11 +77,24 @@ function MyCustomUploadAdapterPlugin( editor ) {
 function WriteUpload () {
 	let fileElem = document.querySelector('#file')
 	let writePostElem = document.querySelector('#writePost')
-	let iBoardVal = writePostElem.iBoard.value;
 	let typVal = writePostElem.typ.value;
 	let secTypVal = writePostElem.secTyp.value;
 	let titleVal = writePostElem.title.value;
 	let ctntVal = textAreaData.getData();
+
+	
+	var pathName
+	if(typVal === '1' && secTypVal === '2') {
+		pathName = 'photo'
+	} else if (typVal === '1' && secTypVal === '3') {
+		pathName = 'houseparty'
+	} else if (typVal === '1' && secTypVal === '4') {
+		pathName = 'tip'
+	} else {
+		pathName = 'none'
+	}
+	
+	
 	
 	if(fileElem.files.length === 0) {
 		alert('이미지를 선택해 주세요')
@@ -95,9 +108,8 @@ function WriteUpload () {
 		return false;
 	}
 
-	var formData = new FormData()
+	let formData = new FormData()
 	formData.append('file', fileElem.files[0])
-	formData.append('iBoard', iBoardVal)
 	formData.append('typ', typVal)
 	formData.append('secTyp', secTypVal)
 	formData.append('title', titleVal)
@@ -109,16 +121,13 @@ function WriteUpload () {
 		body: formData
 	}).then(function (res){
 		console.log(res)
-		return res.json()
+		return res.json()		
 	}).then(function (data) {
 		console.log(data)
 		if(data.result === 0 || data.result === undefined) {
-			alert('업로드 실패하였습니다.')
-			return false;
+			alert('업로드 실패하였습니다.')			
 		} else {
-			console.log('data.items : ' + data.body )
-			location.href='/community/detail?iBoard='+data.iBoard
-			return data;			
+			location.href='/community/'+ pathName +'/detail?iBoard='+data.iBoard						
 		} 
 	}).catch(error => console.error('Error:', error))
 }
@@ -135,3 +144,49 @@ function setThumbnail() {
         document.querySelector('#preview').src = reader.result
     }
 }
+
+// 게시물 수정
+
+function UpdatePost () {
+	let fileElem = document.querySelector('#file')
+	let writePostElem = document.querySelector('#writePost')
+	let iBoardVal = writePostElem.iBoard.value
+	let titleVal = writePostElem.title.value
+	let ctntVal = textAreaData.getData()
+	let previousUrl = document.referrer
+	console.log(fileElem)
+	if(titleVal == '') {
+		alert('제목을 입력해 주세요.');
+		return false;
+	} else if(ctntVal == '') {
+		alert('내용을 작성해 주세요.');
+		return false;
+	}
+
+	let formData = new FormData()
+	if(fileElem.files[0] !== undefined) {
+		formData.append('file', fileElem.files[0])		
+	}
+	formData.append('iBoard', iBoardVal)
+	formData.append('title', titleVal)
+	formData.append('ctnt', ctntVal)
+	
+	
+	fetch('/community/modify', {
+		method: 'POST',		
+		body: formData
+	}).then(function (res){
+		console.log(res)
+		return res.json()		
+	}).then(function (data) {
+		console.log(data.result)
+		if(data.result === 0 || data.result === undefined) {
+			alert('수정을 실패하였습니다.')			
+		} else {
+			location.href = previousUrl
+		} 
+	}).catch(error => console.error('Error:', error))
+}
+
+
+

@@ -5,16 +5,17 @@
 	<insert id="insBoard" useGeneratedKeys="true" keyProperty="iBoard">
 		INSERT INTO cm_board
 		(i_user, typ, sec_typ, seq, title, ctnt, board_img)
-		SELECT #{iUser}, #{typ}, #{secTyp}, IFNULL(MAX(seq), 0) + 1, #{title}, #{ctnt}, #{boardImg}
-		FROM cm_board
-		WHERE typ = #{typ} AND sec_typ = #{secTyp};
+		VALUES
+		(#{iUser}, #{typ}, #{secTyp}
+		, (SELECT IFNULL(MAX(seq), 0) + 1 FROM cm_board b WHERE typ = #{typ} AND sec_typ = #{secTyp})
+		, #{title}, #{ctnt}, #{boardImg})
 	</insert>
 	
 	<insert id="insBoardImg">
 		INSERT INTO cm_photo
 		(i_board, img_seq, community_img)
 		VALUES
-		(#{iBoard}, (SELECT IFNULL(MAX(img_seq) + 1, 1) FROM cm_photo b), #{communityImg}) 
+		(#{iBoard}, (SELECT IFNULL(MAX(img_seq), 0) + 1 FROM cm_photo b), #{communityImg}) 
 	</insert>
 	
 	<select id="selCmBoard" resultType="CommunityDTO">
@@ -85,18 +86,41 @@
 		WHERE typ = #{typ} AND sec_typ = #{secTyp}
 	</select>
 	
-	<update id="updBoard">
+	<select id="selCmPhoto" resultType="CommunityPhotoEntity">
+		SELECT community_img
+		FROM cm_photo
+		WHERE i_board = #{iBoard} AND community_img = #{communityImg}
+	</select>
+	
+	<update id="updCmBoard">
 		UPDATE cm_board
 		SET title = #{title}
 		, ctnt = #{ctnt}
-		, board_img = #{boardImg}
+		<if test="boardImg != null">
+			, board_img = #{boardImg}
+		</if>
 		WHERE i_board = #{iBoard}
 		AND i_user = #{iUser}
 	</update>
 	
-	<delete id="delBoard">
+	<delete id="delCmBoard">
 		DELETE FROM cm_board
 		WHERE i_board = #{iBoard}
 		AND i_user = #{iUser}
+	</delete>	
+	
+	<delete id="delCmPhoto">
+		DELETE FROM cm_photo
+		WHERE i_board = #{iBoard}
 	</delete>
+	
+	<!-- /////////////////////////// CMT /////////////////////////// -->
+	
+	<insert id="insCmt">
+		INSERT INTO cm_cmt
+		( cmt_group, i_board, i_user, ctnt )
+		VALUES
+		( IFNULL(MAX(#{cmtGroup}), 0) + 1, #{iBoard}, #{iUser}, #{ctnt} )
+	</insert>
+	
 </mapper>

@@ -171,6 +171,7 @@ main {
     width: 100%;
     height: 100%;
     z-index: 1;
+    cursor: pointer;
 }
 
 .tip_img_wrap {
@@ -200,6 +201,10 @@ main {
     left: 12px;
 }
 
+.tip_new>svg {
+	stroke: none;
+}
+
 .tip_new > svg rect {
     fill: #f77;
 }
@@ -225,6 +230,7 @@ main {
     width: 100%;
     height: 100%;
     padding: 13px 42px 10px 4px;
+    text-align: left;
 }
 
 .tip_con_title {
