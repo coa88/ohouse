@@ -32,5 +32,7 @@ public interface CommunityMapper {
 
 	int insCmt(CommunityCmtEntity p);
 
-	List<CommunityCmtDTO> selCmtList(CommunityDTO p);
+	List<CommunityCmtDTO> selCmtList(CommunityCmtDTO p);
+	
+	int delCmt(CommunityCmtEntity p);
 }

@@ -4,6 +4,7 @@ public class CommunityCmtDTO extends CommunityCmtEntity {
 	private String nm;
 	private String profileImg;
 	private int favoriteCnt;
+	private int isMycmt;
 
 	public String getNm() {
 		return nm;
@@ -27,6 +28,14 @@ public class CommunityCmtDTO extends CommunityCmtEntity {
 
 	public void setFavoriteCnt(int favoriteCnt) {
 		this.favoriteCnt = favoriteCnt;
+	}
+
+	public int getIsMycmt() {
+		return isMycmt;
+	}
+
+	public void setIsMycmt(int isMycmt) {
+		this.isMycmt = isMycmt;
 	}
 
 }

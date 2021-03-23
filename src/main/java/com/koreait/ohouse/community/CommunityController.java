@@ -1,6 +1,7 @@
 package com.koreait.ohouse.community;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.koreait.ohouse.common.SecurityUtils;
+import com.koreait.ohouse.model.CommunityCmtDTO;
 import com.koreait.ohouse.model.CommunityCmtEntity;
 import com.koreait.ohouse.model.CommunityDTO;
 
@@ -86,7 +88,6 @@ public class CommunityController {
 	@GetMapping("/houseparty/detail") // 집들이 디테일페이지
 	public String housepartyDetail(CommunityDTO param, Model model) {
 		model.addAttribute("data", service.selCmBoard(param));
-		model.addAttribute("cmtList", service.selCmtList(param));
 		return "community/detail";
 	}
 
@@ -112,17 +113,16 @@ public class CommunityController {
 	@ResponseBody // 수정 Post
 	@PostMapping("/modify")
 	public Map<String, Object> modCmBoard(CommunityDTO param) {
-		
-		for(String src : param.getSrc()) {
+
+		for (String src : param.getSrc()) {
 			System.out.println(src);
 		}
-		
+
 		Map<String, Object> resultValue = new HashMap();
 		resultValue.put("result", service.updCmBoard(param));
 		resultValue.put("iBoard", param.getiBoard());
 		return resultValue;
 	}
-	
 
 	@ResponseBody // 삭제 Post
 	@DeleteMapping("/delCmBoard/{iBoard}")
@@ -134,11 +134,35 @@ public class CommunityController {
 
 	// ----------------------------CMT----------------------------//
 
+	@ResponseBody
 	@PostMapping("/insCmt")
-	public String insCmt(CommunityCmtEntity p, HttpSession hs) {
+	public Map<String, Object> insCmt(@RequestBody CommunityCmtEntity p, HttpSession hs) {
+		System.out.println("i_board : " + p.getiBoard());
+		System.out.println("ctnt : " + p.getCtnt());
+
 		p.setiUser(SecurityUtils.getLoginUserPk(hs));
-		service.insCmt(p);
-		return "redirect:/community/houseparty/detail?iBoard=" + p.getiBoard();
+		Map<String, Object> returnValue = new HashMap<>();
+		returnValue.put("result", service.insCmt(p));
+		return returnValue;
+	}
+
+	@ResponseBody
+	@GetMapping("/cmtList")
+	public List<CommunityCmtDTO> selCmtList(CommunityCmtDTO p, HttpSession hs) {
+		System.out.println("i_board : " + p.getiBoard());
+		p.setiUser(SecurityUtils.getLoginUserPk(hs));
+		return service.selCmtList(p);
+	}
+
+	@ResponseBody
+	@DeleteMapping("/delCmt")
+	public Map<String, Object> delCmt(CommunityCmtEntity p, HttpSession hs) {
+		System.out.println("icmt : " + p.getiCmt());
+		p.setiUser(SecurityUtils.getLoginUserPk(hs));
+
+		Map<String, Object> returnValue = new HashMap<>();
+		returnValue.put("result", service.delCmt(p));
+		return returnValue;
 	}
 
 }

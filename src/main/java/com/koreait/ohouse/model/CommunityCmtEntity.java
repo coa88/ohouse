@@ -2,7 +2,7 @@ package com.koreait.ohouse.model;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("BoardCmtEntity")
+@Alias("CommunityCmtEntity")
 public class CommunityCmtEntity {
 	private int iCmt;
 	private int cmtGroup;
