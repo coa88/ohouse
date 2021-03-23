@@ -55,17 +55,7 @@
 		                        <a class="tip_link" onclick="moveLocation(${item.iBoard})"></a>
 		                        <div class="tip_img_wrap">
 		                            <img class="tip_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" alt="노하우사진">
-		                            <span class="tip_new">
-		                                <svg class="icon" width="36" height="20" viewBox="0 0 36 20"
-		                                    preserveAspectRatio="xMidYMid meet">
-		                                    <g fill="none" fill-rule="evenodd">
-		                                        <rect width="36" height="20" fill="#FDBD39" rx="4"></rect>
-		                                        <path fill="#FFF" fill-rule="nonzero"
-		                                            d="M6 14V6h1.668l3.446 5.644h.036V6h1.318v8h-1.475L7.354 7.97h-.036V14H6zm8.414 0V6h5.174v1.131h-3.687v2.193h2.865v1.12h-2.865v2.425h3.76V14h-5.247zm8.317 0l-2.067-8h1.511l1.414 5.924h.037L25.318 6h1.21l1.667 5.924h.037L29.658 6H31l-2.03 8h-1.476l-1.62-5.808h-.036L24.194 14H22.73z">
-		                                        </path>
-		                                    </g>
-		                                </svg>
-		                            </span>
+		                         
 		                            <button class="tip_scrap">
 		                                <svg class="scrap_icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 		                                    viewBox="0 0 24 24" class="icon">

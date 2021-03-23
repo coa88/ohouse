@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.koreait.ohouse.common.SecurityUtils;
 import com.koreait.ohouse.model.CommunityCmtEntity;
 import com.koreait.ohouse.model.CommunityDTO;
+import com.koreait.ohouse.model.CommunityEntity;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +31,11 @@ public class CommunityController {
 	final private HttpSession hs;
 
 	@GetMapping("/write")
-	public void write() {
+	public String write() {
+		if(SecurityUtils.getLoginUserPk(hs) <= 0) {
+			return "redirect:/user/login";			
+		}
+		return "community/write";
 	}
 
 	@ResponseBody

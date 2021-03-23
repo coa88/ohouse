@@ -119,11 +119,7 @@ function onImageRemoveEvent(event) { // 이미지삭제 이벤트
 	//서버 이미지 삭제처리
 	removedImagesSrc.forEach(src => {
 		console.log(`src : ${src}`)
-		srcArr.push(src)
-		
-		for(var i = 0; i < srcArr.length; i++) {
-			console.log(srcArr[i])
-		}		
+		srcArr.push(src)	
 	})
 } 
 

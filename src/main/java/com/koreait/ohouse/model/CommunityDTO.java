@@ -10,7 +10,16 @@ public class CommunityDTO extends CommunityEntity {
 	private int favoriteCnt;
 	private int scrapCnt;
 	private int cmtCnt;
+	private int boardCnt;
+	
 
+	public int getBoardCnt() {
+		return boardCnt;
+	}
+
+	public void setBoardCnt(int boardCnt) {
+		this.boardCnt = boardCnt;
+	}
 
 	public String[] getSrc() {
 		return src;

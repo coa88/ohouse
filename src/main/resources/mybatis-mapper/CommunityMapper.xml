@@ -55,6 +55,7 @@
 	<select id="selCmBoardList" resultType="CommunityDTO">
 		SELECT 
 		A.i_board, A.i_user, A.title, A.ctnt, A.r_dt, A.hits, A.board_Img, B.nm, B.profile_img
+		, (SELECT COUNT(CASE WHEN typ=#{typ} AND sec_typ=#{secTyp} THEN 1 END)FROM cm_board) AS board_cnt
 		, IFNULL(C.favorite_cnt, 0) AS favorite_cnt
 		, IFNULL(D.scrap_cnt, 0) AS scrap_cnt
 		, IFNULL(E.cmt_cnt, 0) AS cmt_cnt

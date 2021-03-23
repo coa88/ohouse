@@ -127,7 +127,7 @@ public class CommunityService {
 		Elements imgs = doc.getElementsByTag("img");
 		
 		CommunityPhotoEntity cmPhotoEntity = new CommunityPhotoEntity();
-		cmPhotoEntity.setiBoard(param.getiBoard());;
+		cmPhotoEntity.setiBoard(param.getiBoard());
 		
 		mapper.delCmPhoto(param);// DB에 저장된 값 삭제
 		

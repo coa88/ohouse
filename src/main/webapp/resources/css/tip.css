@@ -195,20 +195,6 @@ main {
     width: 105%;
 }
 
-.tip_new {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-}
-
-.tip_new>svg {
-	stroke: none;
-}
-
-.tip_new > svg rect {
-    fill: #f77;
-}
-
 .tip_scrap {
     position: absolute;
     bottom: 12px;

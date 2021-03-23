@@ -201,15 +201,6 @@ main {
     width: 105%;
 }
 
-.houseparty_new {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-}
-
-.houseparty_new > svg rect {
-    fill: #f77;
-}
 
 .houseparty_scrap {
     position: absolute;
