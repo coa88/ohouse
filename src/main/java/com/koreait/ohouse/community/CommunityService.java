@@ -185,12 +185,14 @@ public class CommunityService {
 	// ----------------------------CMT----------------------------//
 	
 	public int insCmt(CommunityCmtEntity p) {
-		int i_user = SecurityUtils.getLoginUserPk(hs);
-		p.setiUser(i_user);
 		return mapper.insCmt(p);
 	}
 	
-	public List<CommunityCmtDTO> selCmtList(CommunityDTO p) {
+	public List<CommunityCmtDTO> selCmtList(CommunityCmtDTO p) {
 		return mapper.selCmtList(p);
+	}
+	
+	public int delCmt(CommunityCmtEntity p) {
+		return mapper.delCmt(p);
 	}
 }

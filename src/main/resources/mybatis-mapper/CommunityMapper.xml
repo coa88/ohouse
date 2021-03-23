@@ -125,11 +125,18 @@
 	</insert>
 	
 	<select id="selCmtList" resultType="CommunityCmtDTO">
-		SELECT A.ctnt, B.i_user, B.nm, B.profile_img
+		SELECT A.i_cmt, A.cmt_group, A.i_board, A.ctnt, B.i_user, B.nm, B.profile_img,
+		CASE WHEN A.i_user = #{iUser} THEN 1 ELSE 0 END is_mycmt
 		FROM cm_cmt A
 		LEFT JOIN t_user B
 		ON A.i_user = B.i_user
-		WHERE A.i_board = #{iBoard};
+		WHERE A.i_board = #{iBoard}
+		ORDER BY cmt_group DESC, i_cmt
 	</select>
+	
+	<delete id="delCmt">
+		DELETE FROM cm_cmt
+		WHERE i_cmt = #{iCmt} AND i_user = #{iUser}
+	</delete>
 	
 </mapper>
