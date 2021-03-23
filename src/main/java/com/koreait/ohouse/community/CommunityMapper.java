@@ -20,8 +20,6 @@ public interface CommunityMapper {
 
 	List<CommunityDTO> selCmBoardList(CommunityDTO param);
 	
-	List<CommunityPhotoEntity> selCmPhotoList(CommunityPhotoEntity param);
-
 	CommunityPhotoEntity selCmPhoto(CommunityPhotoEntity param);
 
 	int updCmBoard(CommunityDTO param);

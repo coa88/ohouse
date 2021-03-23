@@ -1,6 +1,7 @@
 package com.koreait.ohouse.community;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -119,9 +120,8 @@ public class CommunityService {
 				return 3;
 			}
 		}
-		//글 내용에 img 들어간 부분을 뽑아내서 임시 폴더에 있는 이미지들을 모두 옮겨주고 내용에 있는 img src 주소값도 변경한다.
-		//mapper.delCmPhoto(param);
 		
+		//글 내용에 img 들어간 부분을 뽑아내서 임시 폴더에 있는 이미지들을 모두 옮겨주고 내용에 있는 img src 주소값도 변경한다.
 		String ctnt = param.getCtnt();  
 		Document doc = Jsoup.parseBodyFragment(ctnt);
 		Elements imgs = doc.getElementsByTag("img");
@@ -129,15 +129,15 @@ public class CommunityService {
 		CommunityPhotoEntity cmPhotoEntity = new CommunityPhotoEntity();
 		cmPhotoEntity.setiBoard(param.getiBoard());;
 		
-		mapper.delCmPhoto(param);
+		mapper.delCmPhoto(param);// DB에 저장된 값 삭제
 		
 		for(Element ele : imgs) {
 			String originSrc = ele.attr("src");
 			String moveSrc = originSrc.replace("/temp/" + i_user, "/board/" + param.getiBoard());
 			String[] arrSrc = originSrc.split("/");
-			String fileNm = arrSrc[arrSrc.length-1];
-			
-			File file = new File(myFileUtils.getRealPath(tempPath + i_user),fileNm);
+			String pathFileNm = arrSrc[arrSrc.length-1];
+			File file = new File(myFileUtils.getRealPath(tempPath + i_user),pathFileNm);
+			List<String> aa = new ArrayList<String>();
 
 			if(file.exists()) {
 				myFileUtils.moveFile(originSrc, moveSrc);
@@ -148,8 +148,21 @@ public class CommunityService {
 			//img insert
 			String saveImg = moveSrc.substring(moveSrc.lastIndexOf("/") + 1);
 			cmPhotoEntity.setCommunityImg(saveImg);
-			mapper.insBoardImg(cmPhotoEntity);
+			mapper.insBoardImg(cmPhotoEntity); // DB에 파일이름 등록
 		}
+		
+		for(int i=0;i < param.getSrc().length; i++) {
+			String[] arrSrc = param.getSrc()[i].split("/");
+			String pathFileNm = arrSrc[arrSrc.length-1];
+			cmPhotoEntity.setCommunityImg(pathFileNm);
+
+			
+			if(mapper.selCmPhoto(cmPhotoEntity) == null) {	// 검색결과가 null이면 삭제
+				System.out.println("result");
+				myFileUtils.delFile(param.getSrc()[i]);					
+			}
+		}
+		
 		return mapper.updCmBoard(param);
 	}
 	

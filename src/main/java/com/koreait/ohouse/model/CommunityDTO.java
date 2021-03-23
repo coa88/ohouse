@@ -3,12 +3,22 @@ package com.koreait.ohouse.model;
 import org.springframework.web.multipart.MultipartFile;
 
 public class CommunityDTO extends CommunityEntity {
+	private String[] src;
 	private MultipartFile file;
 	private String nm;
 	private String profileImg;
 	private int favoriteCnt;
 	private int scrapCnt;
 	private int cmtCnt;
+
+
+	public String[] getSrc() {
+		return src;
+	}
+
+	public void setSrc(String[] src) {
+		this.src = src;
+	}
 
 	public MultipartFile getFile() {
 		return file;

@@ -86,10 +86,10 @@
 		WHERE typ = #{typ} AND sec_typ = #{secTyp}
 	</select>
 	
-	<select id="selCmPhotoList" resultType="CommunityPhotoEntity">
+	<select id="selCmPhoto" resultType="CommunityPhotoEntity">
 		SELECT community_img
 		FROM cm_photo
-		WHERE i_board = #{iBoard}
+		WHERE i_board = #{iBoard} AND community_img = #{communityImg}
 	</select>
 	
 	<update id="updCmBoard">

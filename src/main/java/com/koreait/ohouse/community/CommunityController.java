@@ -112,11 +112,17 @@ public class CommunityController {
 	@ResponseBody // 수정 Post
 	@PostMapping("/modify")
 	public Map<String, Object> modCmBoard(CommunityDTO param) {
+		
+		for(String src : param.getSrc()) {
+			System.out.println(src);
+		}
+		
 		Map<String, Object> resultValue = new HashMap();
 		resultValue.put("result", service.updCmBoard(param));
 		resultValue.put("iBoard", param.getiBoard());
 		return resultValue;
 	}
+	
 
 	@ResponseBody // 삭제 Post
 	@DeleteMapping("/delCmBoard/{iBoard}")

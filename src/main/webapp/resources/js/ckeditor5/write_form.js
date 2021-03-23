@@ -23,13 +23,11 @@ ClassicEditor.create( document.querySelector( '.editor' ), {
 	.then( editor => {
 		window.editor = editor
 		textAreaData = editor
-} )
-.catch( error => {
-	console.error( 'Oops, something went wrong!' );
-	console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
-	console.warn( 'Build id: g4qhzp7szln0-71jm4jd3x1pp' );
-	console.error( error );
-})
+		editor.model.document.on('change:data', onImageRemoveEvent)
+	} )
+	.catch( error => {
+		console.error( error );
+	})
 
 //파일을 서버로 안전하게 보내고 서버의 응답 (예 : 저장된 파일의 URL)을 파일 로더로 다시 전달 또는 오류처리
 class MyUploadAdapter { 
@@ -69,6 +67,66 @@ function MyCustomUploadAdapterPlugin( editor ) {
         return new MyUploadAdapter( loader );
     }
 }
+
+var srcArr = [];
+function onImageRemoveEvent(event) { // 이미지삭제 이벤트
+	const differ = event.source.differ
+    // if no difference
+    if (differ.isEmpty) {
+        return;
+    }
+
+    const changes = differ.getChanges({
+        includeChangesInGraveyard: true
+    });
+
+    if (changes.length === 0) {
+        return;
+    }
+
+    let hasNoImageRemoved = true
+
+    // check any image remove or not
+    for (let i = 0; i < changes.length; i++){
+        const change = changes[i]
+        // if image remove exists
+        if (change && change.type === 'remove' && change.name === 'image') {
+            hasNoImageRemoved = false
+            break
+        }
+    }
+
+    // if not image remove stop execution
+    if (hasNoImageRemoved) {
+        return;
+    }
+
+    // get removed nodes
+    const removedNodes = changes.filter(change => (change.type === 'insert' && change.name === 'image'))
+
+    // removed images src
+    const removedImagesSrc = [];
+
+    // removed image nodes
+    const removedImageNodes = []
+
+    removedNodes.forEach(node => {
+        const removedNode = node.position.nodeAfter
+        removedImageNodes.push(removedNode)
+        removedImagesSrc.push(removedNode.getAttribute('src'))
+    })
+
+	//서버 이미지 삭제처리
+	removedImagesSrc.forEach(src => {
+		console.log(`src : ${src}`)
+		srcArr.push(src)
+		
+		for(var i = 0; i < srcArr.length; i++) {
+			console.log(srcArr[i])
+		}		
+	})
+} 
+
 
 //--------------- ckeditor 끝 -----------------//
 
@@ -170,6 +228,7 @@ function UpdatePost () {
 	formData.append('iBoard', iBoardVal)
 	formData.append('title', titleVal)
 	formData.append('ctnt', ctntVal)
+	formData.append('src', srcArr)
 	
 	
 	fetch('/community/modify', {

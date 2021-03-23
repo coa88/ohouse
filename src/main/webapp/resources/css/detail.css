@@ -211,6 +211,16 @@
     float: right;
 }
 
+.content-detail-item-btn>a {
+	color: #a4acb3;
+	margin-right: 15px;
+}
+
+.content-detail-item-btn>span {
+	color: #a4acb3;
+	cursor: pointer;
+}
+
 .detail-stats__item dd {
     color: #656e75;
 }
