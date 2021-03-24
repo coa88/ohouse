@@ -161,5 +161,7 @@ public class CommunityController {
 		returnValue.put("result", service.delCmt(p));
 		return returnValue;
 	}
-
+	
+	// ----------------------------RE_CMT----------------------------//
+	
 }
