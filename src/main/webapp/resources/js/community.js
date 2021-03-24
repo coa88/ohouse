@@ -62,14 +62,15 @@ var cmtObj = {
 		if (item.isMycmt === 1) {
 			etc = `<button onclick="delCmt(${item.iCmt})">삭제</button>`
 		}
-		var tr = document.createElement('tr')
-		tr.innerHTML =
+		var div = document.createElement('div')
+		div.innerHTML =
 			`
-			<td>${item.ctnt}</td>
-			<td>${item.nm}</td>
-			<td>${etc}</td>
+			<div>${item.ctnt}</div>
+			<div>${item.nm}</div>
+			<div>${etc}</div>
+			<input type="button" name="recmt_btn" value="등록">	
 			`
-		return tr
+		return div
 	},
 }
 
@@ -168,3 +169,5 @@ function delCmt(iCmt) {
 		}
 	})
 }
+
+//대댓글 달기
