@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.koreait.ohouse.common.SecurityUtils;
 import com.koreait.ohouse.model.CommunityEntity;
+import com.koreait.ohouse.model.StoreDTO;
 import com.koreait.ohouse.model.StoreEntity;
 import com.koreait.ohouse.model.UserEntity;
 
@@ -24,7 +25,7 @@ public class StoreController {
 	final private HttpSession hs;
 	
 	@GetMapping("/register")
-	public String register() {
+	public String register(StoreDTO param) {
 		UserEntity i_user = SecurityUtils.getLoginUser(hs);
 		if(SecurityUtils.getLoginUserPk(hs) <= 0) {
 			return "redirect:/user/login";			
@@ -45,8 +46,8 @@ public class StoreController {
 		return "";
 	}
 
-	@GetMapping("/store_detail")
-	public void store_detail() {
+	@GetMapping("/product_info")
+	public void product_info() {
 	}
 
 	@GetMapping("/best")

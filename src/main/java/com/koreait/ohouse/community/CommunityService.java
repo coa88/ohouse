@@ -30,17 +30,6 @@ public class CommunityService {
 	final CommunityMapper mapper; 
 	final MyFileUtils myFileUtils;
 	
-	public String saveBoardImg(MultipartFile img) {
-		int i_user = SecurityUtils.getLoginUserPk(hs);
-		String path = "/resources/img/community/temp/" + i_user;
-		try {
-			String fileNm = myFileUtils.transferTo(img, path);
-			return path + "/" + fileNm;
-		} catch(Exception e) {
-			return null;
-		}
-	}
-	
 	public int insBoard(CommunityDTO param) { //글쓰기
 		// 0:유저pk없음 1:성공 2:파일없음 
 		int i_user = SecurityUtils.getLoginUserPk(hs);
@@ -72,7 +61,7 @@ public class CommunityService {
 		
 		for(Element ele : imgs) {
 			String originSrc = ele.attr("src");
-			String moveSrc = originSrc.replace("/temp/" + i_user, "/board/" + param.getiBoard());
+			String moveSrc = originSrc.replace("/temp/" + i_user, "/community"+"/board/" + param.getiBoard());
 			myFileUtils.moveFile(originSrc, moveSrc);					
 			
 			ctnt = ctnt.replace(originSrc, moveSrc);
@@ -101,7 +90,7 @@ public class CommunityService {
 		int i_user = SecurityUtils.getLoginUserPk(hs);
 		param.setiUser(i_user);
 		String path = "/resources/img/community/board/";
-		String tempPath = "/resources/img/community/temp/";
+		String tempPath = "/resources/img/temp/";
 		CommunityDTO dto = mapper.selCmBoard(param);
 	
 		if(i_user != dto.getiUser()) { //글쓴이 다름
@@ -133,7 +122,7 @@ public class CommunityService {
 		
 		for(Element ele : imgs) {
 			String originSrc = ele.attr("src");
-			String moveSrc = originSrc.replace("/temp/" + i_user, "/board/" + param.getiBoard());
+			String moveSrc = originSrc.replace("/temp/" + i_user, "/community"+"/board/" + param.getiBoard());
 			String[] arrSrc = originSrc.split("/");
 			String pathFileNm = arrSrc[arrSrc.length-1];
 			File file = new File(myFileUtils.getRealPath(tempPath + i_user),pathFileNm);

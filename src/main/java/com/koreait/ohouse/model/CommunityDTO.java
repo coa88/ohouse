@@ -1,7 +1,9 @@
 package com.koreait.ohouse.model;
 
+import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
+@Alias("CommunityDTO")
 public class CommunityDTO extends CommunityEntity {
 	private String[] src;
 	private MultipartFile file;

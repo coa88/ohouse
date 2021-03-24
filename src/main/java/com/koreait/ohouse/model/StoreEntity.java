@@ -12,6 +12,7 @@ public class StoreEntity {
 	private String productTitle;
 	private String productCtnt;
 	private String productNm;
+	private String brand;
 	private int price;
 	private int sales;
 	private int finalPrice;
@@ -64,6 +65,13 @@ public class StoreEntity {
 	}
 	public void setProductNm(String productNm) {
 		this.productNm = productNm;
+	}
+	
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 	public int getPrice() {
 		return price;

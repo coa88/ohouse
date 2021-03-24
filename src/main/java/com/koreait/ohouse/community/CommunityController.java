@@ -50,14 +50,6 @@ public class CommunityController {
 		return resultValue;
 	}
 
-	@ResponseBody // 썸네일 이미지
-	@PostMapping("/uploadImg")
-	public Map<String, String> uploadImg(MultipartFile ctntImg) {
-		Map<String, String> result = new HashMap();
-		result.put("default", service.saveBoardImg(ctntImg));
-		return result;
-	}
-
 	@GetMapping("/modify") // 수정
 	public String Modify(CommunityDTO param, Model model) {
 		int i_user = SecurityUtils.getLoginUserPk(hs);

@@ -40,7 +40,7 @@ class MyUploadAdapter {
                		const data = new FormData()
             		data.append('ctntImg', ctntImg)
 
-					fetch('/community/uploadImg', {
+					fetch('/uploadImg', {
 						method: 'POST',
 						body: data
 					})
@@ -126,9 +126,22 @@ function onImageRemoveEvent(event) { // 이미지삭제 이벤트
 
 //--------------- ckeditor 끝 -----------------//
 
+// 썸네일보여주기
+var file = document.querySelector("#file");
+function setThumbnail() {
+    var fileList = file.files 
+    // 읽기
+    var reader = new FileReader()
+    reader.readAsDataURL(fileList [0])
+    //로드 한 후
+    reader.onload = function  () {
+        document.querySelector('#preview').src = reader.result
+    }
+}
 
-// 게시물 업로드
-function WriteUpload () {
+
+// 커뮤니티 게시물 업로드
+function writeUpload () {
 	let fileElem = document.querySelector('#file')
 	let writePostElem = document.querySelector('#writePost')
 	let typVal = writePostElem.typ.value;
@@ -186,22 +199,9 @@ function WriteUpload () {
 	}).catch(error => console.error('Error:', error))
 }
 
-// 썸네일보여주기
-var file = document.querySelector("#file");
-function setThumbnail() {
-    var fileList = file.files 
-    // 읽기
-    var reader = new FileReader()
-    reader.readAsDataURL(fileList [0])
-    //로드 한 후
-    reader.onload = function  () {
-        document.querySelector('#preview').src = reader.result
-    }
-}
+// 커뮤니티게시물 수정
 
-// 게시물 수정
-
-function UpdatePost () {
+function updatePost () {
 	let fileElem = document.querySelector('#file')
 	let writePostElem = document.querySelector('#writePost')
 	let iBoardVal = writePostElem.iBoard.value
@@ -242,6 +242,61 @@ function UpdatePost () {
 		} 
 	}).catch(error => console.error('Error:', error))
 }
+
+// 스토어 상품등록
+function productRegister () {
+	let fileElem = document.querySelector('#file')
+	let writePostElem = document.querySelector('#writePost')
+	let productTypVal = writePostElem.productTyp.value;
+	let productSectypVal = writePostElem.productSectyp.value;
+	let priceVal = writePostElem.price.value;
+	let salesVal = writePostElem.sales.value;
+	let productTitleVal = writePostElem.productTitle.value;
+	let productCtntVal = textAreaData.getData();
+
+	
+	if(fileElem.files.length === 0) {
+		alert('이미지를 선택해 주세요')
+		return false
+	}
+	if(productTitleVal == '') {
+		alert('제목을 입력해 주세요.');
+		return false;
+	} else if(productCtntVal == '') {
+		alert('내용을 작성해 주세요.');
+		return false;
+	}
+
+	let formData = new FormData()
+	for(var i=0; i<inputImgElem.files.length; i++) {
+		formData.append('file', fileElem.files[i])
+	}		
+	formData.append('productTyp', productTypVal)
+	formData.append('productSectyp', productSectypVal)
+	formData.append('price', priceVal)
+	formData.append('sales', salesVal)
+	formData.append('productTitle', productTitleVal)
+	formData.append('productCtnt', productCtntVal)
+	
+	
+	fetch('/store/register', {
+		method: 'POST',		
+		body: formData
+	}).then(function (res){
+		console.log(res)
+		return res.json()		
+	}).then(function (data) {
+		console.log(data)
+		if(data.result === 0 || data.result === undefined) {
+			alert('업로드 실패하였습니다.')			
+		} else {
+			location.href='/store/'+ pathName +'/store_detail?iProduct='+data.iProduct					
+		} 
+	}).catch(error => console.error('Error:', error))
+}
+
+
+
 
 
 
