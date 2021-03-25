@@ -50,4 +50,5 @@ function updUserDetail() {
 			alert('수정되었습니다.')					
 		} 
 	}).catch(error => console.error('Error:', error))
+	
 }
