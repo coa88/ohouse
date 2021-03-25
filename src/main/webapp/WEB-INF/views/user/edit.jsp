@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
@@ -16,12 +17,12 @@
         <div class="edit_user_info_header">
             <h3> 회원정보 수정</h3>
         </div>
-        <form id ="updUser" action="/user/edit" method="post">
+        <form id ="updUser">
             <table>
                 <tr class="edit_user_info_item">
                     <td>이메일</td>
                     <td> 
-                        <div class="edit_user_info_item_field">
+                        <div class="edit_user_info_item_field" onclick="test()">
                               <input class="form_control" name="email_id" value="${userDetail.emailId}">
                         </div>
                     </td>
@@ -36,7 +37,7 @@
                     <td>성별</td>
                     <td>
                         <ul class="radio_user_sex">
-                            <label><input type="radio" name="gender" value="0">여성</label>
+                            <label><input type="radio" name="gender" value="0" checked>여성</label>
                             <label><input type="radio" name="gender" value="1">남성</label>
                         </ul>
                     </td>
@@ -52,17 +53,35 @@
                 <tr class="edit_user_info_item">
                     <td>프로필 이미지</td>
                     <td>
-                        <button class="edit_user_profile_button" type="button">
-                            <img class="edit_user_profile" src=#>
-                        </button>
-                    </td>
+
+					<div class="edit_user_profile_box" >
+						<c:if test="${userDetail.profileImg == null}">
+							<div class="circular--landscape circular--size200">
+								<img id="profileImg" src="/resources/img/user/basic_profile.webp">
+							</div>
+						</c:if>
+						<c:if test="${userDetail.profileImg != null}">
+							<div class="circular--landscape circular--size200">
+								<img id="profileImg" src=#>
+							</div>
+						</c:if>
+					 <input type="file" id="file" accept="image/*" value="사진선택">
+						
+					</div>
+					
+				</td>
                 </tr>
             </table>
 
-            <button class="edit_user_info_submit" type="submit">회원정보 수정</button>
+            <button class="edit_user_info_submit" onclick="updUserDetail()">회원정보 수정</button>
         </form>
-
-    </div> 
+        
+        
+	
+	
+</div> 
 
 
 </html>
+
+<script defer src="/resources/js/edit.js?ver=4"></script>

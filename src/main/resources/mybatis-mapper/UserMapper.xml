@@ -9,7 +9,7 @@
 		(#{emailId}, #{userPw}, #{nm})
 	</insert>
 	
-	<select id="selUser" resultType="UserEntity">
+	<select id="selUser" resultType="UserDTO">
 		SELECT * FROM t_user 
 		<where>
 			<if test="iUser > 0">
@@ -25,10 +25,17 @@
 		set
 			nm = #{nm},
 			gender=#{gender},
-			ph = #{ph}
+			
+			<if test="ph != null">
+				ph = #{ph}
+			</if>
+			<if test="profile_img != null">
+				profile_img = #{profileImg}
+			</if>
 		
 		where i_user=#{iUser} 		
 	</update>
+	
 	
 	<update id="changePw">
 		update t_user

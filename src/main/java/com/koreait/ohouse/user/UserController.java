@@ -1,9 +1,12 @@
 package com.koreait.ohouse.user;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
@@ -14,12 +17,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.koreait.ohouse.common.SecurityUtils;
 import com.koreait.ohouse.model.UserDTO;
 import com.koreait.ohouse.model.UserEntity;
+import com.oreilly.servlet.MultipartRequest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -34,13 +41,15 @@ public class UserController {
 	final private HttpSession hs;
 	
 	final private HttpServletRequest request;
+	
+	final private HttpServletResponse response;
 
 	@GetMapping("/login")
 	public void login() {
 	}
 
 	@PostMapping("/login")
-	public String loginProc(UserEntity param) {
+	public String loginProc(UserDTO param) {
 		int result = service.login(param, hs);
 		if (result == 1) { // 로그인 성공
 			System.out.println("로그인 성공 ");
@@ -54,7 +63,7 @@ public class UserController {
 	}
 
 	@PostMapping("/join")
-	public String join(UserEntity p) {
+	public String join(UserDTO p) {
 		service.insUser(p);
 		return "redirect:/user/login";
 	}
@@ -72,18 +81,22 @@ public class UserController {
 	}
 
 	@GetMapping("/edit")
-	public void seluserdetail(UserEntity param, Model model) {
+	public void seluserdetail(UserDTO param, Model model) {
 		param.setiUser(SecurityUtils.getLoginUserPk(hs));
 		model.addAttribute("userDetail", service.selUser(param)); // 유저 정보 가져오기
-
 	}
 
 	@PostMapping("/edit")
-	public void edituserdetail(UserEntity param) {	
+	public Map<String, Object> edituserdetail(UserDTO param) {	
 		param.setiUser(SecurityUtils.getLoginUserPk(hs));
-		service.updUser(param);
+		Map<String, Object> resultValue = new HashMap<>();
+		resultValue.put("result", service.updUser(param));
+		return resultValue;
 
 	}
+	
+	
+    
 	@GetMapping("/edit_password")
 	public void changeUserPw() {
 		
@@ -104,10 +117,11 @@ public class UserController {
 		
 	}
 	@PostMapping("/withdraw")
-	public String userWithdraw(UserEntity param) {
+	public String userWithdraw(UserDTO param) {
 		service.delUser(param);
 		return "redirect:/";
 	}
+	
 
 	// 회원가입 중복 체크
 	@ResponseBody
