@@ -168,7 +168,7 @@ public class CommunityService {
 		return mapper.delCmBoard(param);
 	}
 	
-	// ----------------------------CMT----------------------------//
+	// ----------------------------커뮤니티 댓글----------------------------//
 	
 	public int insCmt(CommunityCmtEntity p) {
 		return mapper.insCmt(p);
@@ -180,5 +180,10 @@ public class CommunityService {
 	
 	public int delCmt(CommunityCmtEntity p) {
 		return mapper.delCmt(p);
+	}
+	
+	// ----------------------------커뮤니티 대댓글----------------------------//
+	public int insReCmt(CommunityCmtEntity p) {
+		return mapper.insCmt(p);
 	}
 }

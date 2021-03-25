@@ -28,11 +28,14 @@ public interface CommunityMapper {
 
 	int delCmPhoto(CommunityDTO param);
 
-	// ----------------------------CMT----------------------------//
+	// ----------------------------커뮤니티 댓글----------------------------//
 
 	int insCmt(CommunityCmtEntity p);
 
 	List<CommunityCmtDTO> selCmtList(CommunityCmtDTO p);
 	
 	int delCmt(CommunityCmtEntity p);
+	
+	// ----------------------------커뮤니티 대댓글----------------------------//
+	int insReCmt(CommunityCmtEntity p);
 }

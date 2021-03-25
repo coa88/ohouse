@@ -124,7 +124,7 @@
 		AND i_user = #{iUser}
 	</delete>	
 	
-	<!-- /////////////////////////// CMT /////////////////////////// -->
+	<!-- /////////////////////////// 커뮤니티 댓글 /////////////////////////// -->
 	
 	<insert id="insCmt">
 		INSERT INTO cm_cmt
@@ -147,6 +147,14 @@
 		DELETE FROM cm_cmt
 		WHERE i_cmt = #{iCmt} AND i_user = #{iUser}
 	</delete>
+	
+	<!-- /////////////////////////// 커뮤니티 대댓글 /////////////////////////// -->
+	<insert id="insReCmt">
+		INSERT INTO cm_cmt
+		( cmt_group, i_board, i_user, ctnt )
+		VALUES
+		( #{cmtGroup}, #{iBoard}, #{iUser}, #{ctnt} )
+	</insert>
 	
 	<!-- /////////////////////////// 사진 /////////////////////////// -->
 	

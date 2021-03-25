@@ -34,8 +34,8 @@ public class CommunityController {
 
 	@GetMapping("/write")
 	public String write() {
-		if(SecurityUtils.getLoginUserPk(hs) <= 0) {
-			return "redirect:/user/login";			
+		if (SecurityUtils.getLoginUserPk(hs) <= 0) {
+			return "redirect:/user/login";
 		}
 		return "community/write";
 	}
@@ -129,7 +129,7 @@ public class CommunityController {
 		return resultValue;
 	}
 
-	// ----------------------------CMT----------------------------//
+	// ----------------------------커뮤니티 댓글----------------------------//
 
 	@ResponseBody
 	@PostMapping("/insCmt")
@@ -161,7 +161,19 @@ public class CommunityController {
 		returnValue.put("result", service.delCmt(p));
 		return returnValue;
 	}
+
+	// ----------------------------커뮤니티 대댓글----------------------------//
 	
-	// ----------------------------RE_CMT----------------------------//
-	
+	@ResponseBody
+	@PostMapping("/insReCmt")
+	public Map<String, Object> insReCmt(@RequestBody CommunityCmtEntity p, HttpSession hs) {
+		System.out.println("cmt_group :" + p.getCmtGroup());
+		System.out.println("i_board : " + p.getiBoard());
+		System.out.println("ctnt : " + p.getCtnt());
+
+		p.setiUser(SecurityUtils.getLoginUserPk(hs));
+		Map<String, Object> returnValue = new HashMap<>();
+		returnValue.put("result", service.insReCmt(p));
+		return returnValue;
+	}
 }

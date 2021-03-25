@@ -77,18 +77,16 @@
         	<!-- 댓글시작 -->
         	<h1>댓글&nbsp;<span>${data.cmtCnt}</span></h1>
         	
-	        <div style="margin-top: 20px;">
-	        
-			<span id="iBoard" data-id="${data.iBoard}"></span>
-			<c:if test="${loginUser != null}">				
+	        <div style="margin-top: 20px;">	        
+				<span id="iBoard" data-id="${data.iBoard}"></span>
+				<c:if test="${loginUser != null}">				
 					<form id="cmtFrm">
 						<input type="text" name="ctnt" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)">				
-						<input type="button" name="btn" value="등록">				
+						<input type="button" name="btn" value="등록">
 					</form>					
-			</c:if>
+				</c:if>
 					
-			<div id="cmtList"></div>
-					
+				<div id="cmtList"></div>
 			</div>			
         	<!-- 댓글끝 -->
         </div>

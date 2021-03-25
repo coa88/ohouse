@@ -21,18 +21,6 @@ function DeletePost(iBoard) {
 // 댓글 obj
 var cmtObj = {
 	iBoard: 0,
-	createCmtTable: function() {
-		var tableElem = document.createElement('table')
-		tableElem.innerHTML =
-			`<tr>
-			<th>내용</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>비고</th>
-		</tr>`
-		return tableElem
-	},
-
 	getCmtList: function() {
 		if (this.iBoard === 0) {
 			return
@@ -50,12 +38,11 @@ var cmtObj = {
 		if (list.length == 0) {
 			return
 		}
-		var table = this.createCmtTable()
+
 		for (var i = 0; i < list.length; i++) {
 			var recode = this.createRecode(list[i])
-			table.append(recode)
+			cmtListElem.append(recode)
 		}
-		cmtListElem.append(table)
 	},
 	createRecode: function(item) {
 		var etc = ''
@@ -65,10 +52,14 @@ var cmtObj = {
 		var div = document.createElement('div')
 		div.innerHTML =
 			`
-			<div>${item.ctnt}</div>
-			<div>${item.nm}</div>
-			<div>${etc}</div>
-			<input type="button" name="recmt_btn" value="등록">	
+			<span>${item.nm}</span>
+			<span>${item.ctnt}</span>
+			<input id="recmtBtn" type="button" name="recmt_btn" value="답글 달기">
+			${etc}
+			<form id="recmtFrm">
+				<input type="text" name="ctnt">				
+				<input type="button" name="btn" value="등록">
+			</form>
 			`
 		return div
 	},
@@ -134,17 +125,6 @@ if (cmtFrmElem) {
 //댓글 리스트
 var cmtListElem = document.querySelector('#cmtList')
 if (cmtListElem) {
-	//모달창 닫기 버튼
-	var modalCloseElem = document.querySelector('.modal_close')
-	if (modalCloseElem) {
-		modalCloseElem.addEventListener('click', function() {
-			openCloseCmtModal('none')
-		})
-	}
-
-
-	var iBoard = document.querySelector('#iBoard').dataset.id
-	cmtObj.iBoard = iBoard
 	cmtObj.getCmtList()
 }
 
@@ -171,3 +151,5 @@ function delCmt(iCmt) {
 }
 
 //대댓글 달기
+
+
