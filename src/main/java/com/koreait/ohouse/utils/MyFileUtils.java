@@ -125,4 +125,20 @@ public class MyFileUtils {
 		
 		return fileNm;
 	}
+	
+	//배열파일저장 & 랜덤파일명 구하기
+	public String transferTo(MultipartFile[] mf, String target) throws IllegalStateException, IOException {
+		
+		String fileNm = null;
+		String basePath = getRealPath(target);
+		makeFolders(basePath);
+		
+		for(int i=0;i<mf.length;i++) {
+			fileNm = getRandomFileNm(mf[i].getOriginalFilename());
+			File file = new File(basePath, fileNm); //파일이 저장되어야 할 위치정보!!!
+			mf[i].transferTo(file);
+		}
+		
+		return fileNm;
+	}
 }

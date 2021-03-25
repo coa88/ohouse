@@ -30,15 +30,14 @@ public class CommunityService {
 	final CommunityMapper mapper; 
 	final MyFileUtils myFileUtils;
 	
-	public int insBoard(CommunityDTO param) { //글쓰기
+	public int insCmBoard(CommunityDTO param) { //글쓰기
 		// 0:유저pk없음 1:성공 2:파일없음 
 		int i_user = SecurityUtils.getLoginUserPk(hs);
 		param.setiUser(i_user);
 		if(i_user < 1) { // 유저없음
 			return 0;
 		}
-		mapper.insBoard(param); // pk값을 얻기위해 먼저 생성
-		
+		mapper.insCmBoard(param); // pk값을 얻기위해 먼저 생성
 	
 		//썸네일이미지 
 		MultipartFile img = param.getFile();
@@ -55,13 +54,12 @@ public class CommunityService {
 		Document doc = Jsoup.parseBodyFragment(ctnt);
 		Elements imgs = doc.getElementsByTag("img");
 		
-		
 		CommunityPhotoEntity cmPhotoEntity = new CommunityPhotoEntity();
 		cmPhotoEntity.setiBoard(param.getiBoard());;
 		
 		for(Element ele : imgs) {
 			String originSrc = ele.attr("src");
-			String moveSrc = originSrc.replace("/temp/" + i_user, "/community"+"/board/" + param.getiBoard());
+			String moveSrc = originSrc.replace("/temp/" + i_user, "/community/board/" + param.getiBoard());
 			myFileUtils.moveFile(originSrc, moveSrc);					
 			
 			ctnt = ctnt.replace(originSrc, moveSrc);
@@ -69,9 +67,8 @@ public class CommunityService {
 			//img insert
 			String saveImg = moveSrc.substring(moveSrc.lastIndexOf("/") + 1);
 			cmPhotoEntity.setCommunityImg(saveImg);
-			mapper.insBoardImg(cmPhotoEntity);
+			mapper.insCmBoardImg(cmPhotoEntity);
 		}
-		
 		
 		param.setCtnt(ctnt);
 		return mapper.updCmBoard(param);
@@ -86,7 +83,7 @@ public class CommunityService {
 		return mapper.selCmBoardList(param);
 	}
 	
-	public int updCmBoard(CommunityDTO param) { // 수정
+	public int updCmBoard(CommunityDTO param) { // 수정 
 		int i_user = SecurityUtils.getLoginUserPk(hs);
 		param.setiUser(i_user);
 		String path = "/resources/img/community/board/";
@@ -137,7 +134,7 @@ public class CommunityService {
 			//img insert
 			String saveImg = moveSrc.substring(moveSrc.lastIndexOf("/") + 1);
 			cmPhotoEntity.setCommunityImg(saveImg);
-			mapper.insBoardImg(cmPhotoEntity); // DB에 파일이름 등록
+			mapper.insCmBoardImg(cmPhotoEntity); // DB에 파일이름 등록
 		}
 		
 		for(int i=0;i < param.getSrc().length; i++) {

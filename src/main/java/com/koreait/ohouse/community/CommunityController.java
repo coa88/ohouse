@@ -45,7 +45,7 @@ public class CommunityController {
 	public Map<String, Object> write(CommunityDTO param) {
 		Map<String, Object> resultValue = new HashMap<>();
 		// service.insBoard(param);
-		resultValue.put("result", service.insBoard(param));
+		resultValue.put("result", service.insCmBoard(param));
 		resultValue.put("iBoard", param.getiBoard());
 		return resultValue;
 	}

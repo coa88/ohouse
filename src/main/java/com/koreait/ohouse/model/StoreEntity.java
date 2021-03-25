@@ -7,7 +7,7 @@ public class StoreEntity {
 	private int iProduct;
 	private int iUser;
 	private int productTyp;
-	private int productsecTyp;
+	private int productSectyp;
 	private int productSeq;
 	private String productTitle;
 	private String productCtnt;
@@ -36,11 +36,12 @@ public class StoreEntity {
 	public void setProductTyp(int productTyp) {
 		this.productTyp = productTyp;
 	}
-	public int getProductsecTyp() {
-		return productsecTyp;
+
+	public int getProductSectyp() {
+		return productSectyp;
 	}
-	public void setProductsecTyp(int productsecTyp) {
-		this.productsecTyp = productsecTyp;
+	public void setProductSectyp(int productSectyp) {
+		this.productSectyp = productSectyp;
 	}
 	public int getProductSeq() {
 		return productSeq;

@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <form id="writePost">
 	<input type="hidden" name="iProduct" value="${param.iProduct}">
-	<input type="hidden" name="productTyp" value="${param.productTyp}">
-	<input type="hidden" name="productSectyp" value="${param.productSectyp}">
+	<input type="hidden" name="productTyp" value="${param.productTyp eq null ? 2 : param.productTyp}">
+	<input type="hidden" name="productSectyp" value="${param.productSectyp eq null ? 3 : param.productSectyp}">
 
 	<div class="thumbImg-container">
 		<div class="thumbImg">
@@ -14,8 +14,9 @@
 	
 	<div>
 		<input type="text" name="brand" placeholder="브랜드" value="${data.brand}" required>
-		<input type="text" name="price" placeholder="가격" value="${data.price}" required>
-		<input type="text" name="sales" placeholder="할인율" value="${data.sales}" required>
+		<input type="text" name="productNm" placeholder="상품이름" value="${data.productNm}" required>
+		<input type="number" name="price" placeholder="가격" value="${data.price}" required>
+		<input type="number" name="sales" placeholder="할인율" value="${data.sales}" required>
 	</div>
 	
 	<div class="write-container">

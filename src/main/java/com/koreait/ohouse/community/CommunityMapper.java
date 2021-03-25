@@ -12,9 +12,9 @@ import com.koreait.ohouse.model.CommunityPhotoEntity;
 
 @Mapper
 public interface CommunityMapper {
-	int insBoard(CommunityDTO param);
+	int insCmBoard(CommunityDTO param);
 
-	int insBoardImg(CommunityPhotoEntity param);
+	int insCmBoardImg(CommunityPhotoEntity param);
 
 	CommunityDTO selCmBoard(CommunityDTO param);
 

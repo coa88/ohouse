@@ -249,6 +249,8 @@ function productRegister () {
 	let writePostElem = document.querySelector('#writePost')
 	let productTypVal = writePostElem.productTyp.value;
 	let productSectypVal = writePostElem.productSectyp.value;
+	let brandVal = writePostElem.brand.value;
+	let productNmVal = writePostElem.productNm.value;
 	let priceVal = writePostElem.price.value;
 	let salesVal = writePostElem.sales.value;
 	let productTitleVal = writePostElem.productTitle.value;
@@ -268,11 +270,13 @@ function productRegister () {
 	}
 
 	let formData = new FormData()
-	for(var i=0; i<inputImgElem.files.length; i++) {
+	for(var i=0; i<fileElem.files.length; i++) {
 		formData.append('file', fileElem.files[i])
-	}		
-	formData.append('productTyp', productTypVal)
+	}
+	formData.append('productTyp', productTypVal)		
 	formData.append('productSectyp', productSectypVal)
+	formData.append('brand', brandVal)
+	formData.append('productNm', productNmVal)
 	formData.append('price', priceVal)
 	formData.append('sales', salesVal)
 	formData.append('productTitle', productTitleVal)
@@ -290,7 +294,7 @@ function productRegister () {
 		if(data.result === 0 || data.result === undefined) {
 			alert('업로드 실패하였습니다.')			
 		} else {
-			location.href='/store/'+ pathName +'/register?iProduct='+data.iProduct					
+			location.href='/store/register?iProduct='+ data.iProduct			
 		} 
 	}).catch(error => console.error('Error:', error))
 }

@@ -1,5 +1,8 @@
 package com.koreait.ohouse.store;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -25,16 +28,23 @@ public class StoreController {
 	final private HttpSession hs;
 	
 	@GetMapping("/register")
-	public String register(StoreDTO param) {
+	public String register() {
 		UserEntity i_user = SecurityUtils.getLoginUser(hs);
-		if(SecurityUtils.getLoginUserPk(hs) <= 0) {
+		if(!(SecurityUtils.getLoginUserPk(hs) > 0) || i_user.getUserRank() == null) {
 			return "redirect:/user/login";			
 		}
-		if(i_user.getUserRank().equals(1)|| i_user.getUserRank() == null) {
-			System.out.println("i_user : " + i_user.getUserRank());
-			return "redirect:/";	
-		}
 		return "store/register";
+	}
+	
+	@PostMapping("/register")
+	public Map<String, Object> register(StoreDTO param) {
+		Map<String, Object> resultValue = new HashMap<>();
+		// service.insBoard(param);
+		System.out.println("PdTyp : " + param.getProductTyp());
+		System.out.println("PdSecTyp : " + param.getProductSectyp());
+		resultValue.put("result", service.insPdBoard(param));
+		resultValue.put("iBoard", param.getiProduct());
+		return resultValue;
 	}
 	
 	@GetMapping("/category")
@@ -51,7 +61,7 @@ public class StoreController {
 	}
 
 	@GetMapping("/best")
-	public void best(Model model, StoreEntity p) {
+	public void best(Model model, StoreDTO p) {
 		p.setiProduct(2);
 		model.addAttribute("data", service.selPdBoard(p));
 	}
