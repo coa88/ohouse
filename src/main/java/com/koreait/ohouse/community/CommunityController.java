@@ -44,7 +44,6 @@ public class CommunityController {
 	@PostMapping("/write") // 커뮤니티 게시판 글쓰기
 	public Map<String, Object> write(CommunityDTO param) {
 		Map<String, Object> resultValue = new HashMap<>();
-		// service.insBoard(param);
 		resultValue.put("result", service.insCmBoard(param));
 		resultValue.put("iBoard", param.getiBoard());
 		return resultValue;

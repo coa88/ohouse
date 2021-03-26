@@ -6,8 +6,7 @@ import org.apache.ibatis.type.Alias;
 public class StoreEntity {
 	private int iProduct;
 	private int iUser;
-	private int productTyp;
-	private int productSectyp;
+	private int category;
 	private int productSeq;
 	private String productTitle;
 	private String productCtnt;
@@ -30,18 +29,11 @@ public class StoreEntity {
 	public void setiUser(int iUser) {
 		this.iUser = iUser;
 	}
-	public int getProductTyp() {
-		return productTyp;
+	public int getCategory() {
+		return category;
 	}
-	public void setProductTyp(int productTyp) {
-		this.productTyp = productTyp;
-	}
-
-	public int getProductSectyp() {
-		return productSectyp;
-	}
-	public void setProductSectyp(int productSectyp) {
-		this.productSectyp = productSectyp;
+	public void setCategory(int category) {
+		this.category = category;
 	}
 	public int getProductSeq() {
 		return productSeq;
