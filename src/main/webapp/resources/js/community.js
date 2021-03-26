@@ -21,6 +21,7 @@ function DeletePost(iBoard) {
 // 댓글 obj
 var cmtObj = {
 	iBoard: 0,
+	cmtGroup: 0,
 	getCmtList: function() {
 		if (this.iBoard === 0) {
 			return
@@ -54,8 +55,9 @@ var cmtObj = {
 			`
 			<span>${item.nm}</span>
 			<span>${item.ctnt}</span>
-			<input id="recmtBtn" type="button" name="recmt_btn" value="답글 달기">
+			<button id="recmtBtn" ontoggle="reCmtFrm()">답글 달기</button>
 			${etc}
+			<span id="cmtGroup" data-id="${item.cmtGroup}"></span>
 			<form id="recmtFrm">
 				<input type="text" name="ctnt">				
 				<input type="button" name="btn" value="등록">
@@ -128,6 +130,10 @@ if (cmtListElem) {
 	cmtObj.getCmtList()
 }
 
+var recmtFrm = document.querySelector('#recmtFrm')
+
+
+
 //댓글 삭제
 function delCmt(iCmt) {
 	if (!confirm('댓글을 삭제하시겠습니까? 삭제한 댓글은 되돌릴 수 없습니다.')) {
@@ -150,6 +156,20 @@ function delCmt(iCmt) {
 	})
 }
 
-//대댓글 달기
 
+
+
+
+var recmtBtn = document.querySelector('#recmtBtn')
+function reCmtFrm() {
+		
+}
+
+//모달창 열기 닫기
+function openCloseCmtModal(state) {
+	var modalWrapElem = document.querySelector('.modal_wrap')
+	var blackBgElem = document.querySelector('.black_bg')	
+	modalWrapElem.style.display = state
+	blackBgElem.style.display = state
+}
 

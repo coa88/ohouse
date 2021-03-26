@@ -222,7 +222,6 @@
 	color: #656e75;
 }
 
-/* 댓글 */
-#recmtFrm {
-	display: block;
+.cmtHide {
+	display: none;
 }
