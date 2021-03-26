@@ -5,8 +5,7 @@
 	<insert id="insPdBoard" useGeneratedKeys="true" keyProperty="iProduct">
 		INSERT INTO pd_board
 		(	i_user
-			, product_typ
-			, product_sectyp
+			, category
 			, product_seq
 			, product_title
 			, product_ctnt
@@ -17,9 +16,8 @@
 			, final_price	)
 		VALUES
 		(	#{iUser}
-			, #{productTyp}
-			, #{productSectyp}
-			, (SELECT IFNULL(MAX(product_seq), 0) + 1 FROM pd_board b WHERE product_typ = #{productTyp} AND product_sectyp = #{productSectyp})
+			, #{category}
+			, (SELECT IFNULL(MAX(product_seq), 0) + 1 FROM pd_board b WHERE category = #{category})
 			, #{productTitle}
 			, #{productCtnt}
 			, #{productNm}
@@ -32,8 +30,7 @@
 	<select id="selPdBoard" resultType="StoreDTO">
 		SELECT 
 			A.i_product
-			, A.product_typ
-			, A.product_sectyp
+			, A.category
 			, A.product_seq
 			, A.product_title
 			, A.product_ctnt
@@ -54,8 +51,7 @@
 	<select id="selPdBoardList" resultType="StoreDTO">
 		SELECT 
 			A.i_product
-			, A.product_typ
-			, A.product_sectyp
+			, A.category
 			, A.product_seq
 			, A.product_title
 			, A.product_ctnt
@@ -72,7 +68,7 @@
 		LEFT JOIN t_user B
 		ON A.i_user = B.i_user
 				
-		WHERE A.product_typ = #{productTyp} AND A.product_sectyp = #{productSectyp}
+		WHERE A.category = #{category}
 		ORDER BY A.product_dt DESC
 	</select>
 	

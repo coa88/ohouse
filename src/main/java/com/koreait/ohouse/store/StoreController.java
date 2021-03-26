@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreait.ohouse.common.SecurityUtils;
 import com.koreait.ohouse.model.CommunityEntity;
@@ -36,19 +37,19 @@ public class StoreController {
 		return "store/register";
 	}
 	
+	@ResponseBody
 	@PostMapping("/register")
 	public Map<String, Object> register(StoreDTO param) {
 		Map<String, Object> resultValue = new HashMap<>();
-		// service.insBoard(param);
-		System.out.println("PdTyp : " + param.getProductTyp());
-		System.out.println("PdSecTyp : " + param.getProductSectyp());
+		System.out.println("category : "+param.getCategory());
 		resultValue.put("result", service.insPdBoard(param));
-		resultValue.put("iBoard", param.getiProduct());
+		resultValue.put("iProduct", param.getiProduct());
 		return resultValue;
 	}
 	
 	@GetMapping("/category")
-	public void category() {
+	public void category(StoreDTO param, Model model) {
+		model.addAttribute("list", service.selPdBoardList(param));
 	}
 
 	@PostMapping("/category")
@@ -59,11 +60,4 @@ public class StoreController {
 	@GetMapping("/product_info")
 	public void product_info() {
 	}
-
-	@GetMapping("/best")
-	public void best(Model model, StoreDTO p) {
-		p.setiProduct(2);
-		model.addAttribute("data", service.selPdBoard(p));
-	}
-
 }

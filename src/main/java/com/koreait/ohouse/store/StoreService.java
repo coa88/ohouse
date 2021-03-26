@@ -1,5 +1,7 @@
 package com.koreait.ohouse.store;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
@@ -27,7 +29,7 @@ public class StoreService {
 	final private HttpSession hs;
 	final MyFileUtils myFileUtils;
 	 
-	public int insPdBoard(StoreDTO param) { //글쓰기
+	public int insPdBoard(StoreDTO param) { //상품등록
 		// 0:유저pk없음 1:성공 2:파일없음 
 		int i_user = SecurityUtils.getLoginUserPk(hs);
 		param.setiUser(i_user);
@@ -76,7 +78,11 @@ public class StoreService {
 		return mapper.updPdBoard(param);
 	}
 	
-	public StoreEntity selPdBoard(StoreDTO p) {
-		return mapper.selPdBoard(p); 
+	public StoreEntity selPdBoard(StoreDTO param) { // 게시물 선택
+		return mapper.selPdBoard(param); 
+	}
+	
+	public List<StoreDTO> selPdBoardList(StoreDTO param) { // 게시물 선택
+		return mapper.selPdBoardList(param); 
 	}
 }
