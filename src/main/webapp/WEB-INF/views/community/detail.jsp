@@ -83,7 +83,7 @@
 					<form id="cmtFrm">
 						<input type="text" name="ctnt" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)">				
 						<input type="button" name="btn" value="등록">
-					</form>					
+					</form>
 				</c:if>
 					
 				<div id="cmtList"></div>

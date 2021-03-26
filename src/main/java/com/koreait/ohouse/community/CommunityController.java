@@ -44,7 +44,6 @@ public class CommunityController {
 	@PostMapping("/write") // 커뮤니티 게시판 글쓰기
 	public Map<String, Object> write(CommunityDTO param) {
 		Map<String, Object> resultValue = new HashMap<>();
-		// service.insBoard(param);
 		resultValue.put("result", service.insCmBoard(param));
 		resultValue.put("iBoard", param.getiBoard());
 		return resultValue;
@@ -134,9 +133,6 @@ public class CommunityController {
 	@ResponseBody
 	@PostMapping("/insCmt")
 	public Map<String, Object> insCmt(@RequestBody CommunityCmtEntity p, HttpSession hs) {
-		System.out.println("i_board : " + p.getiBoard());
-		System.out.println("ctnt : " + p.getCtnt());
-
 		p.setiUser(SecurityUtils.getLoginUserPk(hs));
 		Map<String, Object> returnValue = new HashMap<>();
 		returnValue.put("result", service.insCmt(p));
@@ -146,7 +142,6 @@ public class CommunityController {
 	@ResponseBody
 	@GetMapping("/cmtList")
 	public List<CommunityCmtDTO> selCmtList(CommunityCmtDTO p, HttpSession hs) {
-		System.out.println("i_board : " + p.getiBoard());
 		p.setiUser(SecurityUtils.getLoginUserPk(hs));
 		return service.selCmtList(p);
 	}
@@ -154,7 +149,6 @@ public class CommunityController {
 	@ResponseBody
 	@DeleteMapping("/delCmt")
 	public Map<String, Object> delCmt(CommunityCmtEntity p, HttpSession hs) {
-		System.out.println("icmt : " + p.getiCmt());
 		p.setiUser(SecurityUtils.getLoginUserPk(hs));
 
 		Map<String, Object> returnValue = new HashMap<>();
@@ -163,7 +157,7 @@ public class CommunityController {
 	}
 
 	// ----------------------------커뮤니티 대댓글----------------------------//
-	
+
 	@ResponseBody
 	@PostMapping("/insReCmt")
 	public Map<String, Object> insReCmt(@RequestBody CommunityCmtEntity p, HttpSession hs) {

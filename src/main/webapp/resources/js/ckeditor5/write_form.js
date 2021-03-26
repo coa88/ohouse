@@ -247,20 +247,26 @@ function updatePost () {
 function productRegister () {
 	let fileElem = document.querySelector('#file')
 	let writePostElem = document.querySelector('#writePost')
-	let productTypVal = writePostElem.productTyp.value;
-	let productSectypVal = writePostElem.productSectyp.value;
+	let categoryElem = document.getElementById("category")
+	let categoryVal = categoryElem.options[categoryElem.selectedIndex].value
 	let brandVal = writePostElem.brand.value;
 	let productNmVal = writePostElem.productNm.value;
 	let priceVal = writePostElem.price.value;
 	let salesVal = writePostElem.sales.value;
-	let productTitleVal = writePostElem.productTitle.value;
-	let productCtntVal = textAreaData.getData();
+	let productTitleVal = writePostElem.productTitle.value
+	let productCtntVal = textAreaData.getData()
 
 	
 	if(fileElem.files.length === 0) {
 		alert('이미지를 선택해 주세요')
 		return false
 	}
+	
+	if(categoryVal === 'none') {
+		alert('카테고리를 선택해 주세요')
+		return false
+	}
+	
 	if(productTitleVal == '') {
 		alert('제목을 입력해 주세요.');
 		return false;
@@ -273,8 +279,7 @@ function productRegister () {
 	for(var i=0; i<fileElem.files.length; i++) {
 		formData.append('file', fileElem.files[i])
 	}
-	formData.append('productTyp', productTypVal)		
-	formData.append('productSectyp', productSectypVal)
+	formData.append('category', categoryVal)		
 	formData.append('brand', brandVal)
 	formData.append('productNm', productNmVal)
 	formData.append('price', priceVal)
@@ -290,7 +295,7 @@ function productRegister () {
 		console.log(res)
 		return res.json()		
 	}).then(function (data) {
-		console.log(data)
+		console.log(data.result)
 		if(data.result === 0 || data.result === undefined) {
 			alert('업로드 실패하였습니다.')			
 		} else {
