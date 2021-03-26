@@ -20,10 +20,10 @@
 		
 		<c:choose>
 			<c:when test="${data == null}">
-				<input type="button" class="writeBtn" value="글등록" onclick="WriteUpload ()">			
+				<input type="button" class="writeBtn" value="글등록" onclick="writeUpload ()">			
 			</c:when>
 			<c:otherwise>
-				<input type="button" class="writeBtn" value="글수정" onclick="UpdatePost ()">			
+				<input type="button" class="writeBtn" value="글수정" onclick="updatePost ()">			
 			</c:otherwise>
 		</c:choose>
 	</div>

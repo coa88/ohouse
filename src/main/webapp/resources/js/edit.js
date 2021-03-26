@@ -32,7 +32,11 @@ function updUserDetail() {
 	formData.append('gender', genderVal)
 	formData.append('ph', phVal)
 	formData.append('profileImg', profileImgVal)
-	formData.append('file', fileElem.files[0])
+
+	if(fileElem.files.length !== 0) {
+		formData.append('file', fileElem.files[0])
+	}
+	
 	
 	
 	fetch('/user/edit', {
@@ -43,11 +47,12 @@ function updUserDetail() {
 		return res.json()		
 	}).then(function (data) {
 		console.log(data)
-		alert(data.result)
+		
 		if(data.result === 0 || data.result === undefined) {
 			alert('업로드 실패하였습니다.')			
 		} else {
-			alert('수정되었습니다.')					
+			alert('수정되었습니다.')	
+			location.href='/user/edit'				
 		} 
 	}).catch(error => console.error('Error:', error))
 	

@@ -65,7 +65,7 @@
         			<dt>조회수</dt>
         			<dd>${data.hits}</dd>
         		</div>
-        		<c:if test="${loginUser != null}">
+        		<c:if test="${loginUser.iUser eq data.iUser}">
         			<div class="content-detail-item-btn">
         				<a href="/community/modify?iBoard=${param.iBoard}">수정</a>
         				<span onclick="DeletePost(${param.iBoard})">삭제</span>
@@ -75,16 +75,19 @@
         	<!-- 스텟끝 -->
         	
         	<!-- 댓글시작 -->
-        	<div style="margin-top: 20px;">				
-				<div>
+        	<h1>댓글&nbsp;<span>${data.cmtCnt}</span></h1>
+        	
+	        <div style="margin-top: 20px;">	        
+				<span id="iBoard" data-id="${data.iBoard}"></span>
+				<c:if test="${loginUser != null}">				
 					<form id="cmtFrm">
-						<input type="hidden" name="iBoard" value="${param.iBoard}">
-						댓글: <input type="text" name="ctnt">	
-						<input type="button" name="btn" value="등록">	
-					</form>
-				</div>				
-				<div id="cmtList"></div>		
-			</div>
+						<input type="text" name="ctnt" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)">				
+						<input type="button" name="btn" value="등록">
+					</form>					
+				</c:if>
+					
+				<div id="cmtList"></div>
+			</div>			
         	<!-- 댓글끝 -->
         </div>
     </main>

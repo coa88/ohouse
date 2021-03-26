@@ -2,19 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.ohouse.store.StoreMapper">
 	
-	<insert id="insPdBoard" useGeneratedKeys="true" keyProperty="pd_board">
+	<insert id="insPdBoard" useGeneratedKeys="true" keyProperty="iProduct">
 		INSERT INTO pd_board
-		(i_user, product_typ, product_sectyp, product_seq, product_title, product_ctnt, product_nm, price, sales, final_price)
-		SELECT #{iUser}, #{productTyp}, #{productSectyp}, IFNULL(MAX(productSeq), 0) + 1
-		, #{productTitle}, #{productCtnt}, #{productNm}, #{price}, #{sales}, #{price}-(#{price} * (#{sales}/100))
-		FROM pd_board
-		WHERE product_typ = #{productTyp} AND product_sectyp = #{productSectyp}
+		(	i_user
+			, product_typ
+			, product_sectyp
+			, product_seq
+			, product_title
+			, product_ctnt
+			, product_nm
+			, brand
+			, price
+			, sales
+			, final_price	)
+		VALUES
+		(	#{iUser}
+			, #{productTyp}
+			, #{productSectyp}
+			, (SELECT IFNULL(MAX(product_seq), 0) + 1 FROM pd_board b WHERE product_typ = #{productTyp} AND product_sectyp = #{productSectyp})
+			, #{productTitle}
+			, #{productCtnt}
+			, #{productNm}
+			, #{brand}
+			, #{price}
+			, #{sales}
+			, #{price}-(#{price} * (#{sales}/100))	)
 	</insert>
 	
-	<select id="selPdBoard" resultType="StoreEntity">
-		SELECT A.i_product, A.product_typ, A.product_sectyp, A.product_seq, A.product_title, A.product_ctnt
-		,A.product_nm, A.price, A.sales, final_price, A.product_dt, B.i_user, B.nm
-		
+	<select id="selPdBoard" resultType="StoreDTO">
+		SELECT 
+			A.i_product
+			, A.product_typ
+			, A.product_sectyp
+			, A.product_seq
+			, A.product_title
+			, A.product_ctnt
+			, A.product_nm
+			, A.price
+			, A.sales
+			, final_price
+			, A.product_dt
+			, B.i_user
+			, B.nm
 		FROM pd_board A
 		LEFT JOIN t_user B
 		ON A.i_user = B.i_user
@@ -22,25 +51,42 @@
 		WHERE A.i_product = #{iProduct}
 	</select>
 	
-	<select id="selPdBoardList" resultType="StoreEntity">
-		SELECT A.i_product, A.product_typ, A.product_sectyp, A.product_seq, A.product_title, A.product_ctnt
-		,A.product_nm, A.price, FORMAT(A.sales/100,2) , final_price, A.product_dt, B.i_user, B.nm
-		
+	<select id="selPdBoardList" resultType="StoreDTO">
+		SELECT 
+			A.i_product
+			, A.product_typ
+			, A.product_sectyp
+			, A.product_seq
+			, A.product_title
+			, A.product_ctnt
+			, A.product_nm
+			, A.brand
+			, A.price
+			, FORMAT(A.sales/100,2) 
+			, final_price
+			, A.product_dt
+			, B.i_user
+			, B.nm
 		FROM pd_board A
+		
 		LEFT JOIN t_user B
 		ON A.i_user = B.i_user
 				
-		WHERE A.product_typ = #{productTyp} AND product_sectyp = #{productSectyp}
-		ORDER BY product_seq DESC
+		WHERE A.product_typ = #{productTyp} AND A.product_sectyp = #{productSectyp}
+		ORDER BY A.product_dt DESC
 	</select>
 	
 	
 	<update id="updPdBoard">
 		UPDATE pd_board
-		SET product_title = #{productTitle}, product_ctnt = #{productCtnt}, price = #{price}
-		, sales = #{sales}, final_price = #{price}-(#{price} * ((#{sales}/100))
-		WHERE i_product = #{iProduct}
-		AND i_user = #{iUser}
+		SET 
+			product_title = #{productTitle}
+			, product_ctnt = #{productCtnt}
+			, product_nm = #{productNm}
+			, price = #{price}
+			, sales = #{sales}
+			, final_price = #{price}-(#{price} * ((#{sales}/100)))
+		WHERE i_product = #{iProduct} AND i_user = #{iUser}
 	</update>
 	
 	<delete id="delPdBoard">
@@ -49,4 +95,27 @@
 		AND i_user = #{iUser}
 	</delete>
 	
+	
+	<!-- /////////////////////////// 사진 /////////////////////////// -->
+	<insert id="insPdPhoto"> <!-- 상품 대표이미지 -->
+		INSERT INTO pd_photo
+		(	i_product
+			, pdimg_seq
+			, pd_img	)
+		VALUES
+		(	#{iProduct}
+			, (SELECT IFNULL(MAX(pdimg_seq), 0) + 1 FROM pd_photo b WHERE i_product = #{iProduct})
+			, #{pdImg}	)
+	</insert>
+	
+	<insert id="insPdSubPhoto"> <!-- 본문에있는 이미지 -->
+		INSERT INTO pdsub_photo
+		(	i_product
+			, pdsub_seq
+			, pdsub_img	)
+		VALUES
+		(	#{iProduct}
+			, (SELECT IFNULL(MAX(pdsub_seq), 0) + 1 FROM pdsub_photo b WHERE i_product = #{iProduct})
+			, #{pdsubImg}	)
+	</insert>
 </mapper>

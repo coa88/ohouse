@@ -8,7 +8,7 @@ spring:
   #jdbc 설정
   datasource:
     url: jdbc:mysql://localhost:3306/ohouse?autoReconnect=true&useUnicode=true&characterEncoding=utf8
-    username: root
+    username: ohouse
     password: koreait2020
     driver-class-name: com.mysql.cj.jdbc.Driver
   

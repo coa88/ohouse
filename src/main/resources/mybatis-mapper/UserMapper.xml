@@ -23,15 +23,14 @@
 	<update id="updUser">
 		UPDATE t_user 
 		set
-			nm = #{nm},
-			gender=#{gender},
+			nm = #{nm}
+			,gender=#{gender}
 			
 			<if test="ph != null">
-				ph = #{ph}
+				,ph = #{ph}
 			</if>
-			<if test="profile_img != null">
-				profile_img = #{profileImg}
-			</if>
+			,profile_img = #{profileImg}
+			
 		
 		where i_user=#{iUser} 		
 	</update>

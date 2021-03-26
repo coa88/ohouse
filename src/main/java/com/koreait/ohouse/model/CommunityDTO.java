@@ -1,14 +1,35 @@
 package com.koreait.ohouse.model;
 
+import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
+@Alias("CommunityDTO")
 public class CommunityDTO extends CommunityEntity {
+	private String[] src;
 	private MultipartFile file;
 	private String nm;
 	private String profileImg;
 	private int favoriteCnt;
 	private int scrapCnt;
 	private int cmtCnt;
+	private int boardCnt;
+	
+
+	public int getBoardCnt() {
+		return boardCnt;
+	}
+
+	public void setBoardCnt(int boardCnt) {
+		this.boardCnt = boardCnt;
+	}
+
+	public String[] getSrc() {
+		return src;
+	}
+
+	public void setSrc(String[] src) {
+		this.src = src;
+	}
 
 	public MultipartFile getFile() {
 		return file;

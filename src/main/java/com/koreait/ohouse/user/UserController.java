@@ -83,12 +83,15 @@ public class UserController {
 	@GetMapping("/edit")
 	public void seluserdetail(UserDTO param, Model model) {
 		param.setiUser(SecurityUtils.getLoginUserPk(hs));
+
 		model.addAttribute("userDetail", service.selUser(param)); // 유저 정보 가져오기
 	}
-
+	
+	@ResponseBody
 	@PostMapping("/edit")
 	public Map<String, Object> edituserdetail(UserDTO param) {	
 		param.setiUser(SecurityUtils.getLoginUserPk(hs));
+		System.out.println("file : " + param.getFile());
 		Map<String, Object> resultValue = new HashMap<>();
 		resultValue.put("result", service.updUser(param));
 		return resultValue;

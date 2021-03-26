@@ -2,6 +2,7 @@ package com.koreait.ohouse.user;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -55,19 +56,38 @@ public class UserService {
 		String path = "/resources/img/user/";
 		UserDTO dto = mapper.selUser(param); 
 		
-		//썸네일이미지 
+		if(param.getFile() == null) {
+			param.setProfileImg(dto.getProfileImg());
+		}
 		if(param.getFile() != null) {
-			MultipartFile img = param.getFile();
-			try {
-				String folder = path + param.getiUser();		
-				String fileNm = myFileUtils.transferTo(img, folder);
-				myFileUtils.delFile(folder, dto.getProfileImg());
-				param.setProfileImg(fileNm);
-			} catch(Exception e) {
-				return 3;
+			//프로필 이미지 
+			if(dto.getProfileImg() == null) {//db 저장된 이미지가 없다면 
+				MultipartFile img = param.getFile();
+				try {
+					String folder = path + param.getiUser();		
+					String fileNm = myFileUtils.transferTo(img, folder);
+					System.out.println("filenm : " + fileNm);
+					param.setProfileImg(fileNm);
+				} catch(Exception e) {
+					return 2;
+				}
 			}
+			
+			if(dto.getProfileImg() != null) { //db  이미지가 있다
+				MultipartFile img = param.getFile();
+				try {
+					String folder = path + param.getiUser();		
+					String fileNm = myFileUtils.transferTo(img, folder);
+					System.out.println("filenm : " + fileNm);
+					myFileUtils.delFile(folder, dto.getProfileImg());
+					param.setProfileImg(fileNm);
+				} catch(Exception e) {
+					return 2;
+				}
+			}			
 		}
 		
+	
 		return mapper.updUser(param);
 	}
 	//유저 탈퇴

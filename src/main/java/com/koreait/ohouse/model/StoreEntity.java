@@ -7,11 +7,12 @@ public class StoreEntity {
 	private int iProduct;
 	private int iUser;
 	private int productTyp;
-	private int productsecTyp;
+	private int productSectyp;
 	private int productSeq;
 	private String productTitle;
 	private String productCtnt;
 	private String productNm;
+	private String brand;
 	private int price;
 	private int sales;
 	private int finalPrice;
@@ -35,11 +36,12 @@ public class StoreEntity {
 	public void setProductTyp(int productTyp) {
 		this.productTyp = productTyp;
 	}
-	public int getProductsecTyp() {
-		return productsecTyp;
+
+	public int getProductSectyp() {
+		return productSectyp;
 	}
-	public void setProductsecTyp(int productsecTyp) {
-		this.productsecTyp = productsecTyp;
+	public void setProductSectyp(int productSectyp) {
+		this.productSectyp = productSectyp;
 	}
 	public int getProductSeq() {
 		return productSeq;
@@ -64,6 +66,13 @@ public class StoreEntity {
 	}
 	public void setProductNm(String productNm) {
 		this.productNm = productNm;
+	}
+	
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 	public int getPrice() {
 		return price;

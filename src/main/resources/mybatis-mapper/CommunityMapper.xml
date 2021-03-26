@@ -2,28 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.ohouse.community.CommunityMapper">
 
-	<insert id="insBoard" useGeneratedKeys="true" keyProperty="iBoard">
+	<insert id="insCmBoard" useGeneratedKeys="true" keyProperty="iBoard">
 		INSERT INTO cm_board
-		(i_user, typ, sec_typ, seq, title, ctnt, board_img)
+		(	i_user
+			, typ
+			, sec_typ
+			, seq
+			, title
+			, ctnt
+			, board_img	)
 		VALUES
-		(#{iUser}, #{typ}, #{secTyp}
-		, (SELECT IFNULL(MAX(seq), 0) + 1 FROM cm_board b WHERE typ = #{typ} AND sec_typ = #{secTyp})
-		, #{title}, #{ctnt}, #{boardImg})
-	</insert>
-	
-	<insert id="insBoardImg">
-		INSERT INTO cm_photo
-		(i_board, img_seq, community_img)
-		VALUES
-		(#{iBoard}, (SELECT IFNULL(MAX(img_seq), 0) + 1 FROM cm_photo b), #{communityImg}) 
+		(	#{iUser}
+			, #{typ}
+			, #{secTyp}
+			, (SELECT IFNULL(MAX(seq), 0) + 1 FROM cm_board b WHERE typ = #{typ} AND sec_typ = #{secTyp})
+			, #{title}
+			, #{ctnt}
+			, #{boardImg}	)
 	</insert>
 	
 	<select id="selCmBoard" resultType="CommunityDTO">
 		SELECT 
-		A.i_board, A.i_user, A.title, A.ctnt, A.r_dt, A.hits, A.board_Img, B.nm, B.profile_img
-		, IFNULL(C.favorite_cnt, 0) AS favorite_cnt
-		, IFNULL(D.scrap_cnt, 0) AS scrap_cnt
-		, IFNULL(E.cmt_cnt, 0) AS cmt_cnt
+			A.i_board
+			, A.i_user
+			, A.title
+			, A.ctnt
+			, A.r_dt
+			, A.hits
+			, A.board_Img
+			, B.nm
+			, B.profile_img
+			, IFNULL(C.favorite_cnt, 0) AS favorite_cnt
+			, IFNULL(D.scrap_cnt, 0) AS scrap_cnt
+			, IFNULL(E.cmt_cnt, 0) AS cmt_cnt
 		FROM cm_board A
 		LEFT JOIN t_user B 
 		ON A.i_user = B.i_user
@@ -54,10 +65,19 @@
 	
 	<select id="selCmBoardList" resultType="CommunityDTO">
 		SELECT 
-		A.i_board, A.i_user, A.title, A.ctnt, A.r_dt, A.hits, A.board_Img, B.nm, B.profile_img
-		, IFNULL(C.favorite_cnt, 0) AS favorite_cnt
-		, IFNULL(D.scrap_cnt, 0) AS scrap_cnt
-		, IFNULL(E.cmt_cnt, 0) AS cmt_cnt
+			A.i_board
+			, A.i_user
+			, A.title
+			, A.ctnt
+			, A.r_dt
+			, A.hits
+			, A.board_Img
+			, B.nm
+			, B.profile_img
+			, (SELECT COUNT(CASE WHEN typ=#{typ} AND sec_typ=#{secTyp} THEN 1 END)FROM cm_board) AS board_cnt
+			, IFNULL(C.favorite_cnt, 0) AS favorite_cnt
+			, IFNULL(D.scrap_cnt, 0) AS scrap_cnt
+			, IFNULL(E.cmt_cnt, 0) AS cmt_cnt
 		FROM cm_board A
 		LEFT JOIN t_user B 
 		ON A.i_user = B.i_user
@@ -84,12 +104,7 @@
 		ON A.i_board = E.i_board
 		
 		WHERE typ = #{typ} AND sec_typ = #{secTyp}
-	</select>
-	
-	<select id="selCmPhoto" resultType="CommunityPhotoEntity">
-		SELECT community_img
-		FROM cm_photo
-		WHERE i_board = #{iBoard} AND community_img = #{communityImg}
+		ORDER BY r_dt DESC
 	</select>
 	
 	<update id="updCmBoard">
@@ -109,18 +124,59 @@
 		AND i_user = #{iUser}
 	</delete>	
 	
-	<delete id="delCmPhoto">
-		DELETE FROM cm_photo
-		WHERE i_board = #{iBoard}
-	</delete>
-	
-	<!-- /////////////////////////// CMT /////////////////////////// -->
+	<!-- /////////////////////////// 커뮤니티 댓글 /////////////////////////// -->
 	
 	<insert id="insCmt">
 		INSERT INTO cm_cmt
 		( cmt_group, i_board, i_user, ctnt )
 		VALUES
-		( IFNULL(MAX(#{cmtGroup}), 0) + 1, #{iBoard}, #{iUser}, #{ctnt} )
+		( (SELECT IFNULL(MAX(cmt_group), 0) + 1 FROM cm_cmt b), #{iBoard}, #{iUser}, #{ctnt} )
 	</insert>
 	
+	<select id="selCmtList" resultType="CommunityCmtDTO">
+		SELECT A.i_cmt, A.cmt_group, A.i_board, A.ctnt, B.i_user, B.nm, B.profile_img,
+		CASE WHEN A.i_user = #{iUser} THEN 1 ELSE 0 END is_mycmt
+		FROM cm_cmt A
+		LEFT JOIN t_user B
+		ON A.i_user = B.i_user
+		WHERE A.i_board = #{iBoard}
+		ORDER BY cmt_group DESC, i_cmt
+	</select>
+	
+	<delete id="delCmt">
+		DELETE FROM cm_cmt
+		WHERE i_cmt = #{iCmt} AND i_user = #{iUser}
+	</delete>
+	
+	<!-- /////////////////////////// 커뮤니티 대댓글 /////////////////////////// -->
+	<insert id="insReCmt">
+		INSERT INTO cm_cmt
+		( cmt_group, i_board, i_user, ctnt )
+		VALUES
+		( #{cmtGroup}, #{iBoard}, #{iUser}, #{ctnt} )
+	</insert>
+	
+	<!-- /////////////////////////// 사진 /////////////////////////// -->
+	
+	<insert id="insCmBoardImg">
+		INSERT INTO cm_photo
+		(	i_board
+			, img_seq
+			, community_img	)
+		VALUES
+		(	#{iBoard}
+			, (SELECT IFNULL(MAX(img_seq), 0) + 1 FROM cm_photo b WHERE i_board = #{iBoard})
+			, #{communityImg}	) 
+	</insert>
+	
+	<select id="selCmPhoto" resultType="CommunityPhotoEntity">
+		SELECT community_img
+		FROM cm_photo
+		WHERE i_board = #{iBoard} AND community_img = #{communityImg}
+	</select>
+	
+	<delete id="delCmPhoto">
+		DELETE FROM cm_photo
+		WHERE i_board = #{iBoard}
+	</delete>
 </mapper>

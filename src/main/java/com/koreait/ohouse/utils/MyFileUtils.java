@@ -50,6 +50,24 @@ public class MyFileUtils {
 	}
 
 	//파일 삭제
+		public void delFile(String path) {
+			String basePath = getRealPath(path);
+			File file = new File(basePath);
+			if (file.exists()) {
+				// 파일 삭제 성공시
+				if (file.delete()) {
+				  System.out.println("파일을 삭제 성공");
+				//파일 삭제 실패시
+				} else {
+				    System.out.println("파일 삭제 실패");
+				}
+		    // 지정한 경로에 파일이 존재안하는 경우 
+			} else {
+			  System.out.println("파일이 없습니다.");
+			}	
+		}
+	
+	//파일 삭제
 	public void delFile(String path, String fileNm) {
 		String basePath = getRealPath(path);
 		File file = new File(basePath, fileNm);
@@ -64,8 +82,7 @@ public class MyFileUtils {
 	    // 지정한 경로에 파일이 존재안하는 경우 
 		} else {
 		  System.out.println("파일이 없습니다.");
-		}
-		
+		}	
 	}
 	
 	public void moveFile(String beforePath, String afterPath) {
@@ -105,6 +122,22 @@ public class MyFileUtils {
 		fileNm = getRandomFileNm(mf.getOriginalFilename());
 		File file = new File(basePath, fileNm); //파일이 저장되어야 할 위치정보!!!
 		mf.transferTo(file);
+		
+		return fileNm;
+	}
+	
+	//배열파일저장 & 랜덤파일명 구하기
+	public String transferTo(MultipartFile[] mf, String target) throws IllegalStateException, IOException {
+		
+		String fileNm = null;
+		String basePath = getRealPath(target);
+		makeFolders(basePath);
+		
+		for(int i=0;i<mf.length;i++) {
+			fileNm = getRandomFileNm(mf[i].getOriginalFilename());
+			File file = new File(basePath, fileNm); //파일이 저장되어야 할 위치정보!!!
+			mf[i].transferTo(file);
+		}
 		
 		return fileNm;
 	}

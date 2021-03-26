@@ -55,16 +55,9 @@
                     <td>
 
 					<div class="edit_user_profile_box" >
-						<c:if test="${userDetail.profileImg == null}">
 							<div class="circular--landscape circular--size200">
-								<img id="profileImg" src="/resources/img/user/basic_profile.webp">
+								<img id="profileImg" src="/resources/img/user/${userDetail.iUser}/${userDetail.profileImg}" onerror="/resources/img/user/basic_profile.webp">		                                        
 							</div>
-						</c:if>
-						<c:if test="${userDetail.profileImg != null}">
-							<div class="circular--landscape circular--size200">
-								<img id="profileImg" src=#>
-							</div>
-						</c:if>
 					 <input type="file" id="file" accept="image/*" value="사진선택">
 						
 					</div>
@@ -73,7 +66,7 @@
                 </tr>
             </table>
 
-            <button class="edit_user_info_submit" onclick="updUserDetail()">회원정보 수정</button>
+            <input type="button" class="edit_user_info_submit" value="회원정보수정" onclick="updUserDetail()">
         </form>
         
         
