@@ -29,9 +29,8 @@
 			<if test="ph != null">
 				,ph = #{ph}
 			</if>
-			
 			,profile_img = #{profileImg}
-			
+		
 		
 		where i_user=#{iUser} 		
 	</update>
