@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.ohouse.store.StoreMapper">
-	
+
 	<insert id="insPdBoard" useGeneratedKeys="true" keyProperty="iProduct">
 		INSERT INTO pd_board
 		(	i_user
@@ -26,9 +26,9 @@
 			, #{sales}
 			, #{price}-(#{price} * (#{sales}/100))	)
 	</insert>
-	
+
 	<select id="selPdBoard" resultType="StoreDTO">
-		SELECT 
+		SELECT
 			A.i_product
 			, A.category
 			, A.product_seq
@@ -44,12 +44,12 @@
 		FROM pd_board A
 		LEFT JOIN t_user B
 		ON A.i_user = B.i_user
-		
+
 		WHERE A.i_product = #{iProduct}
 	</select>
-	
+
 	<select id="selPdBoardList" resultType="StoreDTO">
-		SELECT 
+		SELECT
 			A.i_product
 			, A.category
 			, A.product_seq
@@ -58,24 +58,36 @@
 			, A.product_nm
 			, A.brand
 			, A.price
-			, FORMAT(A.sales/100,2) 
+			, FORMAT(A.sales/100,2)
 			, final_price
 			, A.product_dt
 			, B.i_user
 			, B.nm
+			, IFNULL((SELECT COUNT(1) FROM pd_board WHERE category = A.category), 0) AS product_cnt
+			, IFNULL(C.review_cnt, 0) AS review_cnt
+			, C.star_rt
 		FROM pd_board A
-		
+
 		LEFT JOIN t_user B
 		ON A.i_user = B.i_user
-				
+
+		LEFT JOIN (
+			SELECT
+				i_product
+				, COUNT(i_product) AS review_cnt
+				, star_rt
+			FROM order_review
+			GROUP BY i_product
+		) C
+		ON A.i_product = C.i_product
+
 		WHERE A.category = #{category}
-		ORDER BY A.product_dt DESC
+		ORDER BY A.product_dt DESC;
 	</select>
-	
-	
+
 	<update id="updPdBoard">
 		UPDATE pd_board
-		SET 
+		SET
 			product_title = #{productTitle}
 			, product_ctnt = #{productCtnt}
 			, product_nm = #{productNm}
@@ -84,14 +96,14 @@
 			, final_price = #{price}-(#{price} * ((#{sales}/100)))
 		WHERE i_product = #{iProduct} AND i_user = #{iUser}
 	</update>
-	
+
 	<delete id="delPdBoard">
 		DELETE FROM pd_board
 		WHERE i_product = #{iProduct}
 		AND i_user = #{iUser}
 	</delete>
-	
-	
+
+
 	<!-- /////////////////////////// 사진 /////////////////////////// -->
 	<insert id="insPdPhoto"> <!-- 상품 대표이미지 -->
 		INSERT INTO pd_photo
@@ -103,7 +115,7 @@
 			, (SELECT IFNULL(MAX(pdimg_seq), 0) + 1 FROM pd_photo b WHERE i_product = #{iProduct})
 			, #{pdImg}	)
 	</insert>
-	
+
 	<insert id="insPdSubPhoto"> <!-- 본문에있는 이미지 -->
 		INSERT INTO pdsub_photo
 		(	i_product

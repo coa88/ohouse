@@ -1,6 +1,8 @@
 package com.koreait.ohouse.store;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -27,16 +29,16 @@ public class StoreController {
 
 	final StoreService service;
 	final private HttpSession hs;
-	
+
 	@GetMapping("/register")
 	public String register() {
 		UserEntity i_user = SecurityUtils.getLoginUser(hs);
 		if(!(SecurityUtils.getLoginUserPk(hs) > 0) || i_user.getUserRank() == null) {
-			return "redirect:/user/login";			
+			return "redirect:/user/login";
 		}
 		return "store/register";
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/register")
 	public Map<String, Object> register(StoreDTO param) {
@@ -46,10 +48,12 @@ public class StoreController {
 		resultValue.put("iProduct", param.getiProduct());
 		return resultValue;
 	}
-	
+
 	@GetMapping("/category")
-	public void category(StoreDTO param, Model model) {
+	public String category(StoreDTO param, Model model) {
+		System.out.println("카운트" + param.getProductCnt());
 		model.addAttribute("list", service.selPdBoardList(param));
+		return "store/category";
 	}
 
 	@PostMapping("/category")

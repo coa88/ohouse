@@ -36,57 +36,15 @@
             </div>
         </div>
         <!-- 카테고리 배너 끝 -->
-        
+
         <!-- 지금은 할인중 시작-->
         <div class="category-mdpick">
-            <h1 class="category-mdpick-title">${list.productTitle}</h1>
+            <h1 class="category-mdpick-title">#지금은 할인중</h1>
             <div class="category-mdpick-box">
-            	<c:choose>
-		            <c:when test="${fn:length(list) == 0}">
-						<div class="nonePost">글이 없습니다.</div>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${list}" var="item">
-			                <article class="store-small-item">
-			                    <a href="/store/store_detail">
-			                        <div class="store-imgbox">
-			                            <div class="store-item-s-img"><img src="/resources/img/1.jpg" class="store-item-s-img-pp"></div>
-			                            <button class="scrap-btn">
-			                                <span class="fas fa-bookmark fa-lg"></span>
-			                            </button>
-			                        </div>
-			                        <div class="store-item-info">
-			                            <h1 class="store-item-header">
-			                                <div class="store-item-brand">${item.brand}</div>
-			                                <div class="store-item-name">${item.productNm}</div>
-			                            </h1>
-			                            <div class="store-item-pricebox">
-			                                <span class="store-item-pricebox-sale">${item.sales}%</span>
-			                                <span class="store-item-pricebox-price">${item.finalPrice}</span>
-			                            </div>
-			                            <div>
-			                                <span class="store-item-avg"><i class="fas fa-star"></i>4.7</span>
-			                                <span class="store-item-rev"><strong>리뷰 3451</strong></span>
-			                            </div>
-			                        </div>
-			                    </a>
-			                </article>
-		                </c:forEach>
-					</c:otherwise>
-				</c:choose>
-            </div>
-            <!-- 지금은 할인중 끝-->
-
-
-            <!-- 전체상품-->
-            <nav class="store-header-title">전체 5123개</nav>
-            <!-- TODO 최신순, 인기순 -->
-            <div class="store-item-list">
-
-                <article class="store-big-item">
+            	 <article class="store-small-item">
                     <a href="/store/store_detail">
                         <div class="store-imgbox">
-                            <div class="store-item-b-img"><img src="../resources/img/1.jpg" class="store-item-b-img-pp"></div>
+                            <div class="store-item-s-img"><img src="/resources/img/1.jpg" class="store-item-s-img-pp"></div>
                             <button class="scrap-btn">
                                 <span class="fas fa-bookmark fa-lg"></span>
                             </button>
@@ -107,7 +65,48 @@
                         </div>
                     </a>
                 </article>
-                
+            </div>
+            <!-- 지금은 할인중 끝-->
+
+
+            <!-- 전체상품-->
+            <nav class="store-header-title">전체 ${list[0].productCnt}개</nav>
+            <!-- TODO 최신순, 인기순 -->
+            <div class="store-item-list">
+				<c:choose>
+		            <c:when test="${fn:length(list) == 0}">
+		            	<div class="nonePost">글이 없습니다.</div>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${list}" var="item">
+			            	<div>전체 ${item.productCnt}개</div>
+			                <article class="store-big-item">
+			                    <a href="/store/store_detail">
+			                        <div class="store-imgbox">
+			                            <div class="store-item-b-img"><img src="/resources/img/store/board/${item.iProduct}/${itme.pdImg}" class="store-item-b-img-pp"></div>
+			                            <button class="scrap-btn">
+			                                <span class="fas fa-bookmark fa-lg"></span>
+			                            </button>
+			                        </div>
+			                        <div class="store-item-info">
+			                            <h1 class="store-item-header">
+			                                <div class="store-item-brand">${item.brand}</div>
+			                                <div class="store-item-name">${item.productNm}</div>
+			                            </h1>
+			                            <div class="store-item-pricebox">
+			                                <span class="store-item-pricebox-sale">${item.sales}</span>
+			                                <span class="store-item-pricebox-price">${item.price}</span>
+			                            </div>
+			                            <div>
+			                                <span class="store-item-avg"><i class="fas fa-star"></i>${item.starRt}</span>
+			                                <span class="store-item-rev"><strong>리뷰 ${item.reviewCnt}</strong></span>
+			                            </div>
+			                        </div>
+			                    </a>
+			                </article>
+		                </c:forEach>
+	                </c:otherwise>
+                </c:choose>
             </div>
             <!-- 전체상품 끝-->
         </div>
