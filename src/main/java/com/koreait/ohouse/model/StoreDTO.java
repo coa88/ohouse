@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class StoreDTO extends StoreEntity {
 	private MultipartFile[] file;
+	private String pdImg;
 	private int productCnt;
 	private int reviewCnt;
 	private int starRt;
@@ -14,6 +15,14 @@ public class StoreDTO extends StoreEntity {
 
 	public void setFile(MultipartFile[] file) {
 		this.file = file;
+	}
+
+	public String getPdImg() {
+		return pdImg;
+	}
+
+	public void setPdImg(String pdImg) {
+		this.pdImg = pdImg;
 	}
 
 	public int getProductCnt() {

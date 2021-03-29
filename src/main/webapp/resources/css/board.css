@@ -62,7 +62,7 @@
     margin-bottom: 3px;
 }
 
-.product_nm {
+.product_title {
     display: block;
     font-size: 25px;
     font-weight: 500;
@@ -187,14 +187,13 @@
     font-size: 18px;
     font-weight: 700;
     color: #555;
-    margin: 30px 0 20px;
+    margin: 30px 0 19px;
     padding: 0 10px;
     border: 1px solid #D0D0D0;
     border-radius: 4px;
     outline: 0;
     box-sizing: border-box; 
 }
-
 
 .order_box {
     width: 100%;    
@@ -295,10 +294,17 @@
     color: #35c5f0;
     border-bottom: 4px solid #35c5f0;
 }
-  
+
+.item_info_box {
+	width: 900px;
+	margin: auto;
+}
+
 .item_info {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    margin-bottom: 30px;
 }
 
 .nav_item_text {
@@ -422,6 +428,7 @@ border: 2px solid #35c5f0;
 
 /*모달창 안쪽 콘텐츠*/
 .review_modal{
+display: none;
 position: relative;
 width: 680px;
 border-radius: 4px;

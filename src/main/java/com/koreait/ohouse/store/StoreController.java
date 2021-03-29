@@ -52,6 +52,7 @@ public class StoreController {
 	@GetMapping("/category")
 	public String category(StoreDTO param, Model model) {
 		System.out.println("카운트" + param.getProductCnt());
+		System.out.println("카운트" + param.getSales());
 		model.addAttribute("list", service.selPdBoardList(param));
 		return "store/category";
 	}
@@ -59,6 +60,14 @@ public class StoreController {
 	@PostMapping("/category")
 	public String category(CommunityEntity p) {
 		return "";
+	}
+	
+	@GetMapping("/category/productInfo")
+	public String productInfo(StoreDTO param, Model model) {
+		System.out.println(param.getFinalPrice());
+		model.addAttribute("photoList", service.selPdPhotoList(param));
+		model.addAttribute("data", service.selPdBoard(param));
+		return "store/product_info";
 	}
 
 	@GetMapping("/product_info")

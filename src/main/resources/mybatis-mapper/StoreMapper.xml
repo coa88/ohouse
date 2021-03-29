@@ -35,37 +35,15 @@
 			, A.product_title
 			, A.product_ctnt
 			, A.product_nm
-			, A.price
-			, A.sales
-			, final_price
-			, A.product_dt
-			, B.i_user
-			, B.nm
-		FROM pd_board A
-		LEFT JOIN t_user B
-		ON A.i_user = B.i_user
-
-		WHERE A.i_product = #{iProduct}
-	</select>
-
-	<select id="selPdBoardList" resultType="StoreDTO">
-		SELECT
-			A.i_product
-			, A.category
-			, A.product_seq
-			, A.product_title
-			, A.product_ctnt
-			, A.product_nm
 			, A.brand
 			, A.price
-			, FORMAT(A.sales/100,2)
-			, final_price
+			, A.sales
+			, A.final_price
 			, A.product_dt
 			, B.i_user
 			, B.nm
-			, IFNULL((SELECT COUNT(1) FROM pd_board WHERE category = A.category), 0) AS product_cnt
-			, IFNULL(C.review_cnt, 0) AS review_cnt
 			, C.star_rt
+			, IFNULL(C.review_cnt, 0) AS review_cnt
 		FROM pd_board A
 
 		LEFT JOIN t_user B
@@ -80,6 +58,50 @@
 			GROUP BY i_product
 		) C
 		ON A.i_product = C.i_product
+
+		WHERE A.i_product = #{iProduct} AND A.category = #{category}
+	</select>
+
+	<select id="selPdBoardList" resultType="StoreDTO">
+		SELECT
+			A.i_product
+			, A.category
+			, A.product_seq
+			, A.product_title
+			, A.product_ctnt
+			, A.product_nm
+			, A.brand
+			, A.price
+			, A.sales
+			, A.final_price
+			, A.product_dt
+			, B.i_user
+			, B.nm
+			, C.pd_img
+			, D.star_rt
+			, IFNULL((SELECT COUNT(1) FROM pd_board WHERE category = A.category), 0) AS product_cnt
+			, IFNULL(D.review_cnt, 0) AS review_cnt
+		FROM pd_board A
+
+		LEFT JOIN t_user B
+		ON A.i_user = B.i_user
+
+		LEFT JOIN (
+			SELECT *
+			FROM pd_photo
+			WHERE pdimg_seq = 1
+		) C
+		ON A.i_product = C.i_product
+
+		LEFT JOIN (
+			SELECT
+				i_product
+				, COUNT(i_product) AS review_cnt
+				, star_rt
+			FROM order_review
+			GROUP BY i_product
+		) D
+		ON A.i_product = D.i_product
 
 		WHERE A.category = #{category}
 		ORDER BY A.product_dt DESC;
@@ -126,4 +148,12 @@
 			, (SELECT IFNULL(MAX(pdsub_seq), 0) + 1 FROM pdsub_photo b WHERE i_product = #{iProduct})
 			, #{pdsubImg}	)
 	</insert>
+	
+	<select id="selPdPhotoList" resultType="StorePhotoEntity"> <!-- 상품사진리스트 불러오기 -->
+		SELECT 
+			i_product
+			,pd_img
+		FROM pd_photo
+		WHERE i_product = #{iProduct}
+	</select>
 </mapper>

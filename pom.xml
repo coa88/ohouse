@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ohouse</name>
 	<description>Demo project for Spring Boot</description>
-	<packaging>jar</packaging> <!-- 배포형식 정하기 -->
+	<packaging>war</packaging> <!-- 배포형식 정하기 -->
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

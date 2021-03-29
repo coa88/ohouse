@@ -1,5 +1,6 @@
 package com.koreait.ohouse.store;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -84,5 +85,11 @@ public class StoreService {
 	
 	public List<StoreDTO> selPdBoardList(StoreDTO param) { // 게시물 선택
 		return mapper.selPdBoardList(param); 
+	}
+	
+	public List<StorePhotoEntity> selPdPhotoList(StoreDTO param) { //상품대표사진
+		StorePhotoEntity photoList = new StorePhotoEntity();
+		photoList.setiProduct(param.getiProduct());
+		return mapper.selPdPhotoList(photoList);
 	}
 }

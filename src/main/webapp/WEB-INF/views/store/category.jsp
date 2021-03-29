@@ -70,7 +70,7 @@
 
 
             <!-- 전체상품-->
-            <nav class="store-header-title">전체 ${list[0].productCnt}개</nav>
+            <nav class="store-header-title">전체 ${list[0].productCnt}</nav>
             <!-- TODO 최신순, 인기순 -->
             <div class="store-item-list">
 				<c:choose>
@@ -79,11 +79,10 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${list}" var="item">
-			            	<div>전체 ${item.productCnt}개</div>
 			                <article class="store-big-item">
-			                    <a href="/store/store_detail">
+			                    <a href="/store/category/productInfo?category=${param.category}&iProduct=${item.iProduct}">
 			                        <div class="store-imgbox">
-			                            <div class="store-item-b-img"><img src="/resources/img/store/board/${item.iProduct}/${itme.pdImg}" class="store-item-b-img-pp"></div>
+			                            <div class="store-item-b-img"><img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" class="store-item-b-img-pp"></div>
 			                            <button class="scrap-btn">
 			                                <span class="fas fa-bookmark fa-lg"></span>
 			                            </button>
@@ -91,11 +90,11 @@
 			                        <div class="store-item-info">
 			                            <h1 class="store-item-header">
 			                                <div class="store-item-brand">${item.brand}</div>
-			                                <div class="store-item-name">${item.productNm}</div>
+			                                <div class="store-item-name">${item.productTitle}</div>
 			                            </h1>
 			                            <div class="store-item-pricebox">
-			                                <span class="store-item-pricebox-sale">${item.sales}</span>
-			                                <span class="store-item-pricebox-price">${item.price}</span>
+			                                <span class="store-item-pricebox-sale">${item.sales}%</span>
+			                                <span class="store-item-pricebox-price">${item.finalPrice}</span>
 			                            </div>
 			                            <div>
 			                                <span class="store-item-avg"><i class="fas fa-star"></i>${item.starRt}</span>

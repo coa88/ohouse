@@ -20,4 +20,5 @@ public interface StoreMapper {
 	// 사진관련
 	int insPdPhoto(StorePhotoEntity param);
 	int insPdSubPhoto(StoreSubPhotoEntity param);
+	List<StorePhotoEntity> selPdPhotoList(StorePhotoEntity param);
 }

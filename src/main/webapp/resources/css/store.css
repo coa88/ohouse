@@ -223,11 +223,12 @@
 
 /* 상품 큰박스 */
 .store-big-item { 
-      display: block;
-      width: 269px;
-      height: 431px;
-      color: #000;
-      padding: 0 0px;
+    display: table;
+    float: left;
+    width: 269px;
+    height: 431px;
+    color: #000;
+    padding: 0 0px;
 }
 
 .store-big-item a {
@@ -275,7 +276,7 @@
     float: left;
 }
 
-.store-item-list a:nth-child(3n+2) {
+.store-item-list .store-big-item:nth-child(3n+2) {
     padding: 0 20px;
   }
 
