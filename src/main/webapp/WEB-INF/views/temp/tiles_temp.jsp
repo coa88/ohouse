@@ -28,7 +28,7 @@
 <script defer src="/resources/js/store.js?ver=2"></script>
 <script defer src="/resources/js/join.js?ver=11"></script>
 <script defer src="/resources/js/store_detail.js?ver=2"></script>
-<script defer src="/resources/js/community.js?ver=2"></script>
+<script defer src="/resources/js/community.js?ver=4"></script>
 
 
 </head>
