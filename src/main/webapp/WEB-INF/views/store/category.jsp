@@ -2,18 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="category-container">
     <!-- 카테고리 사이드바 시작 -->
     <div class="category-side-bar">
         <section class="category-side-bar-item">
-            <h2 class="category-side-bar-title">가구</h2>
+            <h2 class="category-side-bar-title">${category.categoryNm}</h2>
             <ul class="category-side-bar-other">
-                <li><a href="/store/category?category=1">가구</a></li>
-                <li><a href="/store/category?category=2">패브릭</a></li>
-                <li><a href="/store/category?category=3">홈데코/조명</a></li>
-                <li><a href="/store/category?category=4">가전</a></li>
-                <li><a href="/store/category?category=5">수납/정리</a></li>
+           		<c:forEach items="${categoryList}" var="data">
+                	<li><a href="/store/category?category=${data.iCategory}">${data.categoryNm}</a></li>
+                </c:forEach>
             </ul>
         </section>
     </div>
@@ -22,7 +21,7 @@
     <div class="category-content">
         <!-- 카테고리 배너 -->
         <div class="category-header">
-            <nav class="store-header-title">가구</nav>
+            <nav class="store-header-title">${category.categoryNm}</nav>
             <div class="category-banners">
                 <div class="splide">
                     <div class="splide__track">
@@ -94,11 +93,11 @@
 			                            </h1>
 			                            <div class="store-item-pricebox">
 			                                <span class="store-item-pricebox-sale">${item.sales}%</span>
-			                                <span class="store-item-pricebox-price">${item.finalPrice}</span>
+			                                <span class="store-item-pricebox-price"><fmt:formatNumber value="${item.finalPrice}" pattern="#,###"/></span>
 			                            </div>
 			                            <div>
 			                                <span class="store-item-avg"><i class="fas fa-star"></i>${item.starRt}</span>
-			                                <span class="store-item-rev"><strong>리뷰 ${item.reviewCnt}</strong></span>
+			                                <span class="store-item-rev"><strong>리뷰 <fmt:formatNumber value="${item.reviewCnt}" pattern="#,###"/></strong></span>
 			                            </div>
 			                        </div>
 			                    </a>

@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="store-detail-container">
+	<div class="pdDelBtn" onclick="DeleteProduct(${param.iProduct})">삭제</div>
     <!-- 상품이미지 시작 -->
 	<div class="store-detail-photo">
 		<div class="product_img">

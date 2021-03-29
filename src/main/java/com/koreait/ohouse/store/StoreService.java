@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.koreait.ohouse.common.SecurityUtils;
 import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityPhotoEntity;
+import com.koreait.ohouse.model.StoreCategoryEntity;
 import com.koreait.ohouse.model.StoreDTO;
 import com.koreait.ohouse.model.StoreEntity;
 import com.koreait.ohouse.model.StorePhotoEntity;
@@ -79,11 +80,29 @@ public class StoreService {
 		return mapper.updPdBoard(param);
 	}
 	
-	public StoreEntity selPdBoard(StoreDTO param) { // 게시물 선택
+	public StoreCategoryEntity selPdCategory(StoreDTO param) {	// 카테고리 선택
+		StoreCategoryEntity entity = new StoreCategoryEntity();
+		if(param.getCategory() == 0) {
+			param.setCategory(1);
+		}
+		entity.setiCategory(param.getCategory());
+		return mapper.selPdCategory(entity);
+	}
+	
+	public List<StoreCategoryEntity> selPdCategoryList() { // 카테고리 리스트
+		return mapper.selPdCategoryList();
+	}
+	
+	public StoreDTO selPdBoard(StoreDTO param) { // 게시물 선택
 		return mapper.selPdBoard(param); 
 	}
 	
-	public List<StoreDTO> selPdBoardList(StoreDTO param) { // 게시물 선택
+	public List<StoreDTO> selPdBoardList(StoreDTO param) { // 게시물리스트
+		if(param.getCategory() == 0) {
+			param.setCategory(1);
+		}
+		if(param.getCurrentPageNo() == 0) {
+		}
 		return mapper.selPdBoardList(param); 
 	}
 	
@@ -91,5 +110,19 @@ public class StoreService {
 		StorePhotoEntity photoList = new StorePhotoEntity();
 		photoList.setiProduct(param.getiProduct());
 		return mapper.selPdPhotoList(photoList);
+	}
+	
+	
+	public int delPdBoard(StoreDTO param) { // 삭제
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		param.setiUser(i_user);
+		
+		String path = "/resources/img/store/board/" + param.getiProduct();
+		myFileUtils.delFolder(path);
+		
+		//TODO: 리뷰 지우기
+		mapper.delPdPhoto(param);
+		mapper.delPdSubPhoto(param);
+		return mapper.delPdBoard(param);
 	}
 }

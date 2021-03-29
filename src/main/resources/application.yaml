@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   #jsp
   mvc:
     view: 
@@ -24,7 +26,11 @@ mybatis:
   type-aliases-package: com.koreait.ohouse.model 
   configuration:
     map-underscore-to-camel-case: true
+logging:
+  config: classpath:logback-${spring.profiles.active}.xml
 
 # Tomcat port change
 server:
   port: 8090
+  
+# java -jar -Dspring.profiles.active=prod 커맨드창에 입력하면 prod.xml로 바꿔줌
