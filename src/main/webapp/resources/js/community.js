@@ -55,10 +55,10 @@ var cmtObj = {
 			`
 			<span>${item.nm}</span>
 			<span>${item.ctnt}</span>
-			<button id="recmtBtn" ontoggle="reCmtFrm()">답글 달기</button>
+			<button id="recmtBtn" onclick="recmtToggleFrm(${item.cmtGroup})">답글 달기</button>
 			${etc}
 			<span id="cmtGroup" data-id="${item.cmtGroup}"></span>
-			<form id="recmtFrm">
+			<form class="recmtFrm cmtHide">
 				<input type="text" name="ctnt">				
 				<input type="button" name="btn" value="등록">
 			</form>
@@ -97,7 +97,6 @@ if (cmtFrmElem) {
 			ctnt: ctntElem.value
 		}
 
-		console.log(param)
 		fetch('/community/insCmt', {
 			method: 'POST',
 			headers: {
@@ -130,10 +129,6 @@ if (cmtListElem) {
 	cmtObj.getCmtList()
 }
 
-var recmtFrm = document.querySelector('#recmtFrm')
-
-
-
 //댓글 삭제
 function delCmt(iCmt) {
 	if (!confirm('댓글을 삭제하시겠습니까? 삭제한 댓글은 되돌릴 수 없습니다.')) {
@@ -156,20 +151,69 @@ function delCmt(iCmt) {
 	})
 }
 
-
-
-
-
-var recmtBtn = document.querySelector('#recmtBtn')
-function reCmtFrm() {
-		
+//대댓글 입력창
+function recmtToggleFrm(cmtGroup) {
+	var i = cmtGroup - 1
+	var recmtFrmAll = document.querySelectorAll('.recmtFrm')
+	recmtFrmAll[i].classList.toggle('cmtHide')
 }
 
-//모달창 열기 닫기
-function openCloseCmtModal(state) {
-	var modalWrapElem = document.querySelector('.modal_wrap')
-	var blackBgElem = document.querySelector('.black_bg')	
-	modalWrapElem.style.display = state
-	blackBgElem.style.display = state
+//대댓글 달기
+var recmtFrmElem = document.querySelector('.recmtFrm')
+if (recmtFrmElem) {
+	recmtFrmElem.onsubmit = function(e) {
+		e.preventDefault()
+	}
+
+	var rectntElem = recmtFrmElem.ctnt
+	var rebtnElem = recmtFrmElem.btn
+	var iBoard = document.querySelector('#iBoard').dataset.id
+	var cmtGroup = document.querySelector('#cmtGroup').dataset.id
+	cmtObj.iBoard = iBoard
+	cmtObj.cmtGroup = cmtGroup
+
+	rectntElem.onkeyup = function(e) {
+		if (e.keyCode === 13) {
+			ajax()
+		}
+	}
+
+	function ajax() {
+		if (rectntElem.value === '') {
+			return
+		}
+
+		var param = {
+			cmtGroup: cmtGroup,
+			iBoard: iBoard,
+			ctnt: rectntElem.value
+		}
+
+		console.log(param)
+		fetch('/community/insReCmt', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(param)
+		}).then(function(res) {
+			return res.json()
+		}).then(function(data) {
+			proc(data)
+		})
+	}
+
+	function proc(data) {
+		switch (data.result) {
+			case 0:
+				alert('댓글 작성 실패하였습니다.')
+				return
+			case 1:
+				rectntElem.value = ''
+				cmtObj.getCmtList()
+				return
+		}
+	}
 }
+
 

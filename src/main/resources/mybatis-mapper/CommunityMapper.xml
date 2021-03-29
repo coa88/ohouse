@@ -140,7 +140,7 @@
 		LEFT JOIN t_user B
 		ON A.i_user = B.i_user
 		WHERE A.i_board = #{iBoard}
-		ORDER BY cmt_group DESC, i_cmt
+		ORDER BY cmt_group, i_cmt
 	</select>
 
 	<delete id="delCmt">
