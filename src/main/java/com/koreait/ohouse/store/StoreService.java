@@ -22,6 +22,7 @@ import com.koreait.ohouse.model.StoreEntity;
 import com.koreait.ohouse.model.StorePhotoEntity;
 import com.koreait.ohouse.model.StoreSubPhotoEntity;
 import com.koreait.ohouse.utils.MyFileUtils;
+import com.koreait.ohouse.utils.PagingUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,6 +32,7 @@ public class StoreService {
 	final StoreMapper mapper;
 	final private HttpSession hs;
 	final MyFileUtils myFileUtils;
+	final PagingUtils pagingUtils;
 	 
 	public int insPdBoard(StoreDTO param) { //상품등록
 		// 0:유저pk없음 1:성공 2:파일없음 
@@ -102,7 +104,7 @@ public class StoreService {
 		if(param.getCategory() == 0) { // 카테고리를 선택하지않으면 1을 선택
 			param.setCategory(1);
 		}
-		if(param.getRecordCntPerPage() == 0) { // 게시물을 12개씩 출력
+		if(param.getRecordCntPerPage() == 0) { // 게시물을 출력갯수 지정
 			param.setRecordCntPerPage(9);
 		}
 		if(param.getPage() == 0) { //선택된 페이지가 없으면 1을 선택
@@ -117,37 +119,9 @@ public class StoreService {
 		dto.setRecordCntPerPage(param.getRecordCntPerPage());
 		dto.setList(mapper.selPdBoardList(param));
 		dto.setMaxPageNum(mapper.selMaxPageNum(param));
+		dto.setPage(param.getPage());
 		
-		
-		final int SIDE_NUM = 4;
-		int pageLen = SIDE_NUM * 2;
-		int page = param.getPage();
-		int maxPage = dto.getMaxPageNum();
-		
-		int sPage = page - SIDE_NUM;
-		int ePage = page + SIDE_NUM;
-		
-		if(pageLen < maxPage) {	
-			if(sPage < 1) {
-				sPage = 1;
-			} else if(sPage >= maxPage - pageLen) {
-				sPage = maxPage - pageLen;
-			}
-			
-			if(ePage > maxPage) {
-				ePage = maxPage;
-			} else if(ePage <= pageLen) {
-				ePage = pageLen + 1;
-			}
-		} else {
-			sPage = 1;
-			ePage = maxPage;
-		}
-		
-		dto.setStartPage(sPage);
-		dto.setEndPage(ePage);		
-		
-		return dto; 
+		return pagingUtils.pageControll(dto);
 	}
 	
 	public List<StorePhotoEntity> selPdPhotoList(StoreDTO param) { //상품대표사진

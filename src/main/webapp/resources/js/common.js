@@ -12,6 +12,13 @@ function moveLocation(iBoard) {
 
 
 function getBoardList(page) { // 페이징 페이지선택
+	let params = new URLSearchParams(location.search);
+	let category = params.get('category')
+	
+	if(category === null) {
+		params.set('category', '1')
+		let url = params.toString();
+	}
 	
 	let formData = new FormData()
 	formData.append('page', page)
@@ -23,6 +30,6 @@ function getBoardList(page) { // 페이징 페이지선택
 		console.log(res)
 		return res.json()		
 	}).then(function (data) {
-		location.href=`/store/category?page=${page}`				
+		location.href='/store/category?category='+params.get('category')+`&page=${page}`				
 	}).catch(error => console.error('Error:', error))
 }

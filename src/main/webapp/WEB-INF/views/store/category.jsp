@@ -79,7 +79,7 @@
 					<c:otherwise>
 						<c:forEach items="${data.list}" var="item">
 			                <article class="store-big-item">
-			                    <a href="/store/category/productInfo?category=${param.category}&iProduct=${item.iProduct}">
+			                    <a href="/store/category/productInfo?category=${param.category eq null? 1 : param.category}&iProduct=${item.iProduct}">
 			                        <div class="store-imgbox">
 			                            <div class="store-item-b-img"><img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" class="store-item-b-img-pp"></div>
 			                            <button class="scrap-btn">
