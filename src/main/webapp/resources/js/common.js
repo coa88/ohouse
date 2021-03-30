@@ -9,3 +9,20 @@ function moveLocation(iBoard) {
 	let link = url + `/detail?iBoard=${iBoard}`
 	location.href = link; //주소값 이동
 }
+
+
+function getBoardList(page) { // 페이징 페이지선택
+	
+	let formData = new FormData()
+	formData.append('page', page)
+	
+	fetch('/store/category', {
+		method: 'POST',		
+		body: formData
+	}).then(function (res){
+		console.log(res)
+		return res.json()		
+	}).then(function (data) {
+		location.href=`/store/category?page=${page}`				
+	}).catch(error => console.error('Error:', error))
+}

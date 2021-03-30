@@ -27,7 +27,6 @@
 
 .category-content {  /* 컨텐츠 시작*/
     grid-area: category-content;
-    height: 2000px;
 }
 
 /* 스토어상단 시작 */
@@ -335,6 +334,27 @@
 }
 /* 상품 박스정보 끝 */
 
+/* 페이징 시작 */
+.pageContainer {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.pageContainer>.page {
+	border: 1px solid #fff;
+	cursor: pointer;
+}
+
+.pageContainer>.page.selected {
+	font-size: 25px;
+	color: #35c5f0;
+	font-weight: bold;
+}
+
+
+
+/* 페이징 끝 */
+
 /*-------------스토어 본문---------------*/
 .store-index-title {
     font-size: 20px;
@@ -369,11 +389,10 @@
 }
 
 .category-side-bar .category-side-bar-title{
-    margin: 0 0 27px;
     font-size: 20px;
     font-weight: 700;
     color: #000;
-    margin-bottom: 27px;
+    margin-bottom: 15px;
     padding: 0;
 
 }

@@ -69,15 +69,15 @@
 
 
             <!-- 전체상품-->
-            <nav class="store-header-title">전체 ${list[0].productCnt}</nav>
+            <nav class="store-header-title">전체 ${data.list[0].productCnt}</nav>
             <!-- TODO 최신순, 인기순 -->
             <div class="store-item-list">
 				<c:choose>
-		            <c:when test="${fn:length(list) == 0}">
+		            <c:when test="${fn:length(data.list) == 0}">
 		            	<div class="nonePost">글이 없습니다.</div>
 					</c:when>
 					<c:otherwise>
-						<c:forEach items="${list}" var="item">
+						<c:forEach items="${data.list}" var="item">
 			                <article class="store-big-item">
 			                    <a href="/store/category/productInfo?category=${param.category}&iProduct=${item.iProduct}">
 			                        <div class="store-imgbox">
@@ -106,6 +106,23 @@
 	                </c:otherwise>
                 </c:choose>
             </div>
+		    <!-- 페이징 -->
+		    <div class="pageContainer">
+		    	<c:if test="${data.startPage > 1}">
+					<span class="page" onclick="getBoardList(1)">[처음]</span>
+					<span>...</span>
+				</c:if>	
+		    
+				<c:forEach begin="${data.startPage}" end="${data.endPage}" var="i">			
+					<span class="page ${data.page == i ? 'selected' : ''}" onclick="getBoardList(${i})">${i}</span>
+				</c:forEach>
+				
+				<c:if test="${data.endPage < data.maxPageNum}">
+					<span>...</span>
+					<span class="page" onclick="getBoardList(${data.maxPageNum})">[끝]</span>
+				</c:if>
+			</div>
+			<!-- 페이징끝 -->
             <!-- 전체상품 끝-->
         </div>
     </div>

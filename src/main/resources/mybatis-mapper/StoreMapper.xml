@@ -36,6 +36,11 @@
 		WHERE i_category = #{iCategory}
 	</select>
 
+	<select id="selMaxPageNum" resultType="_int">
+		SELECT CEIL(COUNT(i_product) / #{recordCntPerPage}) FROM pd_board
+		WHERE category = #{category}
+	</select>
+
 	<select id="selPdBoard" resultType="StoreDTO">
 		SELECT
 			A.i_product
@@ -114,7 +119,7 @@
 
 		WHERE A.category = #{category}
 		ORDER BY A.product_dt DESC
-		LIMIT 12 OFFSET 0
+		LIMIT #{sIdx}, #{recordCntPerPage}
 	</select>
 
 	<update id="updPdBoard">

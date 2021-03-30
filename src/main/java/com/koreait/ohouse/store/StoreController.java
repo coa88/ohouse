@@ -52,10 +52,9 @@ public class StoreController {
 
 	@GetMapping("/category")
 	public String category(StoreDTO param, Model model) {
-		
 		model.addAttribute("category", service.selPdCategory(param));
 		model.addAttribute("categoryList", service.selPdCategoryList());
-		model.addAttribute("list", service.selPdBoardList(param));
+		model.addAttribute("data", service.selPdBoardList(param));
 		return "store/category";
 	}
 

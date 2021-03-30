@@ -13,10 +13,12 @@ public class StoreDTO extends StoreEntity {
 	private int reviewCnt;
 	private int starRt;
 	// 페이징
-	private int currentPageNo; // 현재 페이지 번호
-	private int recordsPerPage; // 출력할 데이터 개수
-	private int pageSize; // 하단에 출력할 페이지길이
+	private int recordCntPerPage; //게시물을 몇개씩 출력하는지 정함.
+	private int sIdx; // 현재 선택된페이지 
+	private int page; // 선택된 페이지
 
+	
+	
 	public MultipartFile[] getFile() {
 		return file;
 	}
@@ -57,30 +59,30 @@ public class StoreDTO extends StoreEntity {
 		this.starRt = starRt;
 	}
 
-
 	//페이징
-	public int getCurrentPageNo() {
-		return currentPageNo;
+	public int getRecordCntPerPage() {
+		return recordCntPerPage;
 	}
 	
-	public void setCurrentPageNo(int currentPageNo) {
-		this.currentPageNo = currentPageNo;
+	public void setRecordCntPerPage(int recordCntPerPage) {
+		this.recordCntPerPage = recordCntPerPage;
 	}
 	
-	public int getRecordsPerPage() {
-		return recordsPerPage;
+	public int getsIdx() {
+		return sIdx;
 	}
 	
-	public void setRecordsPerPage(int recordsPerPage) {
-		this.recordsPerPage = recordsPerPage;
+	public void setsIdx(int sIdx) {
+		this.sIdx = sIdx;
 	}
 	
-	public int getPageSize() {
-		return pageSize;
+	public int getPage() {
+		return page;
 	}
 	
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+	public void setPage(int page) {
+		this.page = page;
 	}
+
 	
 }

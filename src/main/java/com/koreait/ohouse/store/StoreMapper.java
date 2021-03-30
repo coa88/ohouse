@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.koreait.ohouse.model.StoreCategoryEntity;
 import com.koreait.ohouse.model.StoreDTO;
-import com.koreait.ohouse.model.StoreEntity;
 import com.koreait.ohouse.model.StorePhotoEntity;
 import com.koreait.ohouse.model.StoreSubPhotoEntity;
 
@@ -18,6 +17,7 @@ public interface StoreMapper {
 	List<StoreCategoryEntity> selPdCategoryList();
 	StoreDTO selPdBoard(StoreDTO param);
 	List<StoreDTO> selPdBoardList(StoreDTO param);
+	int selMaxPageNum(StoreDTO param);
 	
 	int updPdBoard(StoreDTO param);
 	
