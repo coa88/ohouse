@@ -31,7 +31,6 @@
 			</if>
 			,profile_img = #{profileImg}
 		
-		
 		where i_user=#{iUser} 		
 	</update>
 	
