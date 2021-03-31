@@ -19,7 +19,9 @@ import com.koreait.ohouse.model.CommunityCmtDTO;
 import com.koreait.ohouse.model.CommunityCmtEntity;
 import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityPhotoEntity;
+import com.koreait.ohouse.model.PagingDTO;
 import com.koreait.ohouse.utils.MyFileUtils;
+import com.koreait.ohouse.utils.PagingUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +31,7 @@ public class CommunityService {
 	final private HttpSession hs;
 	final CommunityMapper mapper; 
 	final MyFileUtils myFileUtils;
+	final PagingUtils pagingUtils;
 	
 	public int insCmBoard(CommunityDTO param) { //글쓰기
 		// 0:유저pk없음 1:성공 2:파일없음 
@@ -78,9 +81,23 @@ public class CommunityService {
 		return mapper.selCmBoard(param);
 	}
 	
-	public List<CommunityDTO> selCmBoardList(CommunityDTO param) { // 리스트 뿌리기
+	public PagingDTO selCmBoardList(CommunityDTO param) { // 리스트 뿌리기
+		if(param.getPage() == 0) { //선택된 페이지가 없으면 1을 선택
+			param.setPage(1);
+		}		
+		param.setRecordCntPerPage(12);	// 게시물을 출력갯수 지정
 		
-		return mapper.selCmBoardList(param);
+		// 선택된페이지가 몇번게시물인지 계산
+		int sIdx = (param.getPage() - 1) * param.getRecordCntPerPage(); 
+		param.setsIdx(sIdx);
+		
+		PagingDTO dto = new PagingDTO();
+		dto.setPage(param.getPage());
+		dto.setCmList(mapper.selCmBoardList(param));
+		dto.setMaxPageNum(mapper.selCmMaxPageNum(param));
+		dto.setPage(param.getPage());
+		
+		return pagingUtils.pageControll(dto);
 	}
 	
 	public int updCmBoard(CommunityDTO param) { // 수정 
@@ -166,6 +183,13 @@ public class CommunityService {
 		myFileUtils.delFolder(path);
 		mapper.delCmPhoto(param);
 		return mapper.delCmBoard(param);
+	}
+	
+	// ----------------------------좋아요----------------------------//
+	public int cmFavorite(CommunityDTO param) {
+		
+		
+		return mapper.insFavorite(param);
 	}
 	
 	// ----------------------------커뮤니티 댓글----------------------------//

@@ -63,7 +63,7 @@ public class CommunityController {
 	public String photo(CommunityDTO param, Model model) {
 		param.setTyp(1);
 		param.setSecTyp(2);
-		model.addAttribute("list", service.selCmBoardList(param));
+		model.addAttribute("data", service.selCmBoardList(param));
 		return "community/photo";
 	}
 
@@ -77,7 +77,7 @@ public class CommunityController {
 	public String houseparty(CommunityDTO param, Model model) {
 		param.setTyp(1);
 		param.setSecTyp(3);
-		model.addAttribute("list", service.selCmBoardList(param));
+		model.addAttribute("data", service.selCmBoardList(param));
 		return "community/houseparty";
 	}
 
@@ -91,7 +91,7 @@ public class CommunityController {
 	public String tip(CommunityDTO param, Model model) {
 		param.setTyp(1);
 		param.setSecTyp(4);
-		model.addAttribute("list", service.selCmBoardList(param));
+		model.addAttribute("data", service.selCmBoardList(param));
 		return "community/tip";
 	}
 
@@ -128,6 +128,16 @@ public class CommunityController {
 		return resultValue;
 	}
 
+	// ----------------------------커뮤니티 좋아요----------------------------//
+	@ResponseBody
+	@PostMapping("/favorite") // 커뮤니티 게시판 글쓰기
+	public Map<String, Object> favorite(CommunityDTO param) {
+		Map<String, Object> resultValue = new HashMap<>();
+		
+		return resultValue;
+	}
+	
+	
 	// ----------------------------커뮤니티 댓글----------------------------//
 
 	@ResponseBody

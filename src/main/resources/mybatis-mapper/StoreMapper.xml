@@ -36,7 +36,7 @@
 		WHERE i_category = #{iCategory}
 	</select>
 
-	<select id="selMaxPageNum" resultType="_int">
+	<select id="selPdMaxPageNum" resultType="_int">
 		SELECT CEIL(COUNT(i_product) / #{recordCntPerPage}) FROM pd_board
 		WHERE category = #{category}
 	</select>

@@ -46,11 +46,11 @@
             <!-- photo_리스트들 -->
             <div class="photo_box mlr-10">
            	<c:choose>
-	            <c:when test="${fn:length(list) == 0}">
+	            <c:when test="${fn:length(data.cmList) == 0}">
 					<div class="nonePost">글이 없습니다.</div>
 				</c:when>
 				<c:otherwise>
-	         		<c:forEach items="${list}" var="item">
+	         		<c:forEach items="${data.cmList}" var="item">
 		                <div class="photo_box_list plr10">
 		                    <div class="box_padding">
 		                    	<input type="hidden" name="iBoard" value="${item.iBoard}">
@@ -129,6 +129,23 @@
 	           	</c:otherwise>
            	</c:choose>
             </div>
+             <!-- 페이징 -->
+		    <div class="pageContainer">
+		    	<c:if test="${data.startPage > 1}">
+					<span class="page" onclick="getCmBoardList(1)">[처음]</span>
+					<span>...</span>
+				</c:if>	
+		    
+				<c:forEach begin="${data.startPage}" end="${data.endPage}" var="i">			
+					<span class="page ${data.page == i ? 'selected' : ''}" onclick="getCmBoardList(${i})">${i}</span>
+				</c:forEach>
+				
+				<c:if test="${data.endPage < data.maxPageNum}">
+					<span>...</span>
+					<span class="page" onclick="getCmBoardList(${data.maxPageNum})">[끝]</span>
+				</c:if>
+			</div>
+			<!-- 페이징끝 -->
         </div>
     </main>
 </div>

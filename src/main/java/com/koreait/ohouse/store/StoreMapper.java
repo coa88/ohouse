@@ -17,7 +17,7 @@ public interface StoreMapper {
 	List<StoreCategoryEntity> selPdCategoryList();
 	StoreDTO selPdBoard(StoreDTO param);
 	List<StoreDTO> selPdBoardList(StoreDTO param);
-	int selMaxPageNum(StoreDTO param);
+	int selPdMaxPageNum(StoreDTO param);
 	
 	int updPdBoard(StoreDTO param);
 	

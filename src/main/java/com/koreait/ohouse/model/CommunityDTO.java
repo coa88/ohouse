@@ -13,7 +13,11 @@ public class CommunityDTO extends CommunityEntity {
 	private int scrapCnt;
 	private int cmtCnt;
 	private int boardCnt;
-	
+	private int favState;
+	// 페이징
+	private int recordCntPerPage; //게시물을 몇개씩 출력하는지 정함.
+	private int sIdx; // 현재 선택된페이지 
+	private int page; // 선택된 페이지
 
 	public int getBoardCnt() {
 		return boardCnt;
@@ -78,7 +82,38 @@ public class CommunityDTO extends CommunityEntity {
 	public void setProfileImg(String profileImg) {
 		this.profileImg = profileImg;
 	}
-	
-	
+
+	public int getFavState() {
+		return favState;
+	}
+
+	public void setFavState(int favState) {
+		this.favState = favState;
+	}
+
+	//페이징
+	public int getRecordCntPerPage() {
+		return recordCntPerPage;
+	}
+
+	public void setRecordCntPerPage(int recordCntPerPage) {
+		this.recordCntPerPage = recordCntPerPage;
+	}
+
+	public int getsIdx() {
+		return sIdx;
+	}
+
+	public void setsIdx(int sIdx) {
+		this.sIdx = sIdx;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
 	
 }
