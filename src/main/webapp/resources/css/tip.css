@@ -249,10 +249,3 @@ main {
     color: rgb(117, 117, 117);
     margin: 0px 4px 0px 2px;
 }
-
-/* footer */
-footer {
-    position: relative;
-    height: 281px;
-    background-color: #fafafa;
-}

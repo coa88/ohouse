@@ -382,10 +382,3 @@ main {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
-
-/* footer */
-footer {
-    position: relative;
-    height: 281px;
-    background-color: #fafafa;
-}

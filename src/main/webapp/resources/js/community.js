@@ -59,8 +59,8 @@ var cmtObj = {
 			${etc}
 			<span id="cmtGroup" data-id="${item.cmtGroup}"></span>
 			<form class="recmtFrm cmtHide">
-				<input type="text" name="ctnt">				
-				<input type="button" name="btn" value="등록">
+				<input type="text" name="re_ctnt">				
+				<input type="button" name="re_btn" value="등록">
 			</form>
 			`
 		return div
@@ -159,14 +159,23 @@ function recmtToggleFrm(cmtGroup) {
 }
 
 //대댓글 달기
-var recmtFrmElem = document.querySelector('.recmtFrm')
+for (var i = 0; i < recmtFrmElem.length; i++) {
+	var recmtFrmElem = document.querySelectorAll('.recmtFrm')
+	recmtEvent(i)
+}
+
+function recmtEvent() {
+	
+
+}
+
 if (recmtFrmElem) {
 	recmtFrmElem.onsubmit = function(e) {
 		e.preventDefault()
 	}
 
-	var rectntElem = recmtFrmElem.ctnt
-	var rebtnElem = recmtFrmElem.btn
+	var rectntElem = recmtFrmElem.re_ctnt
+	var rebtnElem = recmtFrmElem.re_btn
 	var iBoard = document.querySelector('#iBoard').dataset.id
 	var cmtGroup = document.querySelector('#cmtGroup').dataset.id
 	cmtObj.iBoard = iBoard
@@ -177,6 +186,8 @@ if (recmtFrmElem) {
 			ajax()
 		}
 	}
+
+	rebtnElem.addEventListener('click', ajax)
 
 	function ajax() {
 		if (rectntElem.value === '') {
@@ -215,5 +226,6 @@ if (recmtFrmElem) {
 		}
 	}
 }
+
 
 
