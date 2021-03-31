@@ -18,6 +18,10 @@
 	width: 200px;
 	height: 200px;
 }
+.circular--size500 {
+    width: 500px;
+    height: 500px;
+}
 
 .circular--landscape img {
   width: auto;
