@@ -26,6 +26,11 @@ public interface CommunityMapper {
 	int delCmBoard(CommunityDTO param);
 	int delCmPhoto(CommunityDTO param);
 
+	// ----------------------------좋아요----------------------------//
+	
+	int insFavorite(CommunityDTO param);
+	int delFavorite(CommunityDTO param);
+	
 	// ----------------------------커뮤니티 댓글----------------------------//
 
 	int insCmt(CommunityCmtEntity p);

@@ -130,6 +130,18 @@
 		AND i_user = #{iUser}
 	</delete>
 
+	<!-- /////////////////////////// 좋아요 /////////////////////////// -->
+	<insert id="insFavorite">
+		INSERT INTO cm_favorite
+		(i_board, i_user)
+		VALUES
+		(#{iBoard}, #{iUser});
+	</insert>
+
+	<delete id="delFavorite">
+		DELETE FROM cm_favorite
+		WHERE i_board = #{iBoard} AND i_user = #{iUser};
+	</delete>
 	<!-- /////////////////////////// 커뮤니티 댓글 /////////////////////////// -->
 
 	<insert id="insCmt">

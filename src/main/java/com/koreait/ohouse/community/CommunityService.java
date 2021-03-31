@@ -185,6 +185,13 @@ public class CommunityService {
 		return mapper.delCmBoard(param);
 	}
 	
+	// ----------------------------좋아요----------------------------//
+	public int cmFavorite(CommunityDTO param) {
+		
+		
+		return mapper.insFavorite(param);
+	}
+	
 	// ----------------------------커뮤니티 댓글----------------------------//
 	
 	public int insCmt(CommunityCmtEntity p) {
