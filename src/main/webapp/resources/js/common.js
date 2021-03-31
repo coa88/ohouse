@@ -24,10 +24,19 @@ function getPdBoardList(page) { // 스토어 페이지선택
 	location.href= url + '?category=' + params.get('category') + `&page=${page}`				
 }
 
-function favorite(i_board) {
+function favorite(iBoard) {
 	let fc = document.querySelector('#favoriteContainer');
-	var state = fc.getAttribute('is_favorite'); //1: 좋아요, 0: 안좋아요	
-	var state = 1 - state;
-	
-	fetch('/community/')
+	let favState = fc.getAttribute('is_favorite'); //1: 좋아요, 0: 안좋아요	
+	favState = 1 - favState;
+	console.log('favState : ')
+	fetch('/community/favorite', {
+		body: {
+			'iBoard': iBoard,
+			'state': favState
+		}
+	}).then(function (res) {
+		return res.json
+	}).then(function (data) {
+		
+	}).catch(error => console.error('Error:', error))
 }

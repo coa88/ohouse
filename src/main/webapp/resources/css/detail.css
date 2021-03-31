@@ -162,20 +162,16 @@
 	transition: border-color .2s, color .2s, background-color .2s;
 }
 
+.detail_favorite {
+	outline: none;
+}
+
 .detail_favorite>.icon {
 	position: absolute;
 	top: 14px;
 	left: 14px;
 }
 
-.detail_favorite_icon_inactive {
-	opacity: 0;
-	transition: opacity .15s;
-}
-
-.detail_favorite_icon_inactive:hover {
-	opacity: 1;
-}
 
 /* 디테일 댓글,좋아요,조회수... */
 .detail_footer {

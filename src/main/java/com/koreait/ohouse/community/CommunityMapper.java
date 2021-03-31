@@ -29,6 +29,7 @@ public interface CommunityMapper {
 	// ----------------------------좋아요----------------------------//
 	
 	int insFavorite(CommunityDTO param);
+	int selFavorite(CommunityDTO param);
 	int delFavorite(CommunityDTO param);
 	
 	// ----------------------------커뮤니티 댓글----------------------------//
