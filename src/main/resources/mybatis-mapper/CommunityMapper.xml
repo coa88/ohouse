@@ -21,6 +21,11 @@
 			, #{boardImg}	)
 	</insert>
 
+	<select id="selCmMaxPageNum" resultType="_int">
+		SELECT CEIL(COUNT(i_board) / #{recordCntPerPage}) FROM cm_board
+		WHERE typ = #{typ} AND sec_typ = #{secTyp}
+	</select>
+
 	<select id="selCmBoard" resultType="CommunityDTO">
 		SELECT
 			A.i_board
@@ -105,6 +110,7 @@
 
 		WHERE typ = #{typ} AND sec_typ = #{secTyp}
 		ORDER BY r_dt DESC
+		LIMIT #{sIdx}, #{recordCntPerPage}
 	</select>
 
 	<update id="updCmBoard">

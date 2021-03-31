@@ -8,32 +8,32 @@ import com.koreait.ohouse.model.PagingDTO;
 public class PagingUtils {
 	public PagingDTO pageControll(PagingDTO dto) {
 		
-		int SIDE_NUM = 4;
-		int pageLen = SIDE_NUM * 2;
+		int SIDE_NUM = 4; //양쪽에 몇개씩 보일지
+		int pageLen = SIDE_NUM * 2; // 페이지길이
 		int maxPage = dto.getMaxPageNum();
 		
-		int sPage = dto.getPage() - SIDE_NUM;
-		int ePage = dto.getPage() + SIDE_NUM;
+		int startPage = dto.getPage() - SIDE_NUM; // 선택된페이지 - SIDE_NUM만큼표시
+		int endPage = dto.getPage() + SIDE_NUM;  // 선택된페이지 + SIDE_NUM만큼표시
 		
-		if(pageLen < maxPage) {	
-			if(sPage < 1) {
-				sPage = 1;
-			} else if(sPage >= maxPage - pageLen) {
-				sPage = maxPage - pageLen;
+		if(pageLen < maxPage) {	 // 페이지길이가 최대페이지보다 낮을때
+			if(startPage < 1) { // 시작페이지가 1보다 낮으면 1
+				startPage = 1;
+			} else if(startPage >= maxPage - pageLen) { // 시작페이지가 최대페이지-페이지길이와 같거나 클때
+				startPage = maxPage - pageLen;
 			}
 			
-			if(ePage > maxPage) {
-				ePage = maxPage;
-			} else if(ePage <= pageLen) {
-				ePage = pageLen + 1;
+			if(endPage > maxPage) { // 마지막페이지가 최대페이지보다 클때
+				endPage = maxPage;
+			} else if(endPage <= pageLen) { // 마지막페이지가 페이지길이보다 작거나 같을때
+				endPage = pageLen + 1;
 			}
 		} else {
-			sPage = 1;
-			ePage = maxPage;
+			startPage = 1;
+			endPage = maxPage;
 		}
 		
-		dto.setStartPage(sPage);
-		dto.setEndPage(ePage);		
+		dto.setStartPage(startPage);
+		dto.setEndPage(endPage);		
 		
 		return dto; 
 	}

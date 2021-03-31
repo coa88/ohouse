@@ -104,21 +104,19 @@ public class StoreService {
 		if(param.getCategory() == 0) { // 카테고리를 선택하지않으면 1을 선택
 			param.setCategory(1);
 		}
-		if(param.getRecordCntPerPage() == 0) { // 게시물을 출력갯수 지정
-			param.setRecordCntPerPage(9);
-		}
 		if(param.getPage() == 0) { //선택된 페이지가 없으면 1을 선택
 			param.setPage(1);
 		}		
+		param.setRecordCntPerPage(9);	// 게시물을 출력갯수 지정
+		
 		// 선택된페이지가 몇번게시물인지 계산
 		int sIdx = (param.getPage() - 1) * param.getRecordCntPerPage(); 
 		param.setsIdx(sIdx);
 		
 		PagingDTO dto = new PagingDTO();
-		dto.setPage(param.getPage());
-		dto.setRecordCntPerPage(param.getRecordCntPerPage());
-		dto.setList(mapper.selPdBoardList(param));
-		dto.setMaxPageNum(mapper.selMaxPageNum(param));
+		dto.setPage(param.getPage()); 
+		dto.setPdList(mapper.selPdBoardList(param));
+		dto.setMaxPageNum(mapper.selPdMaxPageNum(param));
 		dto.setPage(param.getPage());
 		
 		return pagingUtils.pageControll(dto);

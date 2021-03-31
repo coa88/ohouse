@@ -63,7 +63,7 @@ public class CommunityController {
 	public String photo(CommunityDTO param, Model model) {
 		param.setTyp(1);
 		param.setSecTyp(2);
-		model.addAttribute("list", service.selCmBoardList(param));
+		model.addAttribute("data", service.selCmBoardList(param));
 		return "community/photo";
 	}
 
@@ -77,7 +77,7 @@ public class CommunityController {
 	public String houseparty(CommunityDTO param, Model model) {
 		param.setTyp(1);
 		param.setSecTyp(3);
-		model.addAttribute("list", service.selCmBoardList(param));
+		model.addAttribute("data", service.selCmBoardList(param));
 		return "community/houseparty";
 	}
 
@@ -91,7 +91,7 @@ public class CommunityController {
 	public String tip(CommunityDTO param, Model model) {
 		param.setTyp(1);
 		param.setSecTyp(4);
-		model.addAttribute("list", service.selCmBoardList(param));
+		model.addAttribute("data", service.selCmBoardList(param));
 		return "community/tip";
 	}
 
