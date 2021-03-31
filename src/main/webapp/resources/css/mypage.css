@@ -25,9 +25,7 @@
 .user_mypage> .main_container{
     margin-bottom: 40px;
 }
-.main_wrap{
-    display: flex;
-}
+
 
 
 
@@ -36,7 +34,7 @@
 }
 
 .user_profile{
-    display: flex;
+    
     width: 240px;
     height: 500px;
     margin-top: 20px;
@@ -44,6 +42,24 @@
     border-radius: 4px;
     border: 1px solid #dadce0;
 }
+
+
+#user_profile_link{
+    display: flex;
+}
+
+#user_profile_link>div{
+    padding: 10px
+}
+
+#link_item>div{
+    text-align: center;
+}
+
+#user_profile_link{
+    border-top: 1px solid #eaebef;
+}
+
 
 /* 글쓴거 리스트들 */
 .contents{

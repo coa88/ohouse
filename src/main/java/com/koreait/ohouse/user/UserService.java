@@ -150,41 +150,8 @@ public class UserService {
 		return mapper.nmChk(p) == null ? 0 : 1;
 	}
 
-	//프로필 이미지 관리 
 	
-	//프로필이미지 업로드 
-//	
-//	public void updProfileImg(HttpServletRequest request, HttpServletResponse response, UserEntity param) throws ServletException, IOException {
-//		int i_user= SecurityUtils.getLoginUserPk(hs);
-//		String savePath = request.getServletContext().getRealPath("resourcess/img/user/"+i_user);
-//		System.out.println("savePath" + savePath);
-//		File folder = new File(savePath);
-//		
-//		if(folder.exists()) { //기존 이미지가 있었다면 삭제처리
-//			File[] folder_list = folder.listFiles(); 
-//			for(File file : folder_list) {
-//				if(file.isFile()) {
-//					file.delete();
-//				}
-//			}
-//			folder.delete();	
-//			}		
-//		folder.mkdirs();
-//		
-//		int sizeLimit = 104_857_600; //100mb제한	
-//		MultipartRequest multi = new MultipartRequest(request, savePath, sizeLimit,"utf-8", new DefaultFileRenamePolicy());
-//
-//		Enumeration files =  multi.getFileNames();
-//		if(files.hasMoreElements()) {
-//			String eleName = (String)files.nextElement();			
-//							
-//			String fileNm = multi.getFilesystemName(eleName);
-//			System.out.println("fileNm : " + fileNm);	
-//			param.setProfileImg(fileNm);
-//			mapper.updProfileImg(param);
-//		}
-//		
-//	}
+	
 	
 	
 }

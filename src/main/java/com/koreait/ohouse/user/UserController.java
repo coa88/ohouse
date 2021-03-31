@@ -76,15 +76,16 @@ public class UserController {
 	}
 
 	@GetMapping("/mypage")
-	public void openmypage() {
-
+	public void openmypage(UserDTO dto, Model model) {
+		dto.setiUser(SecurityUtils.getLoginUserPk(hs));
+		model.addAttribute("userDetail", service.selUser(dto)); // 유저 정보 가져오기
 	}
 
 	@GetMapping("/edit")
 	public void seluserdetail(UserDTO param, Model model) {
 		param.setiUser(SecurityUtils.getLoginUserPk(hs));
 
-		model.addAttribute("userDetail", service.selUser(param)); // 유저 정보 가져오기
+		model.addAttribute("data", service.selUser(param)); // 유저 정보 가져오기
 	}
 	
 	@ResponseBody
@@ -124,6 +125,8 @@ public class UserController {
 		service.delUser(param);
 		return "redirect:/";
 	}
+	
+	
 	
 
 	// 회원가입 중복 체크

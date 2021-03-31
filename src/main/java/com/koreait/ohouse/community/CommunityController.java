@@ -130,13 +130,10 @@ public class CommunityController {
 
 	// ----------------------------커뮤니티 좋아요----------------------------//
 	@ResponseBody
-	@PostMapping("/favorite") // 커뮤니티 게시판 글쓰기
-	public Map<String, Object> favorite(CommunityDTO param) {
-		Map<String, Object> resultValue = new HashMap<>();
-		
-		return resultValue;
+	@PostMapping("/favorite")
+	public int favorite(CommunityDTO param) {
+		return service.cmFavorite(param);
 	}
-	
 	
 	// ----------------------------커뮤니티 댓글----------------------------//
 

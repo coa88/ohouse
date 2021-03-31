@@ -14,13 +14,45 @@
     </nav>
 
 <div class = "user_mypage">
-    <div class ="main_container">
-        <div class ="main_wrap">  
+    <div class ="main_wrap">  
             <div class="user_profile">
-                유저프로필, 스크랩, 팔로워, 팔로잉 좋아요 수 확인
+                    <div class="user_profile_img_box" >
+                        <div class="circular--landscape circular--size500">
+                            <img id="profileImg" src="/resources/img/user/${data.iUser}/${data.profileImg}" onerror="unnamed.png">		                                        
+                        </div>
+                        <div id="user_nm">'${data.userNm}'</div> 
+
+                        <div id="user_profile_link">
+                            <div id="link_item">
+                                <span class="link_item_icon"> 
+                                    <i class="far fa-bookmark fa-2x"></i>
+                                </span>
+                                <div>스크랩</div>
+                                <div>0</div>
+                            </div>
+                            <div id="link_item">
+                                <span class="link_item_icon"> 
+                                    <i class="far fa-heart fa-2x"></i>
+                                </span>
+                                <div>스크랩</div>
+                                <div>0</div>
+                            </div>
+                            <div id="link_item">
+                                <span class = "link_item_icon">
+                                    <i class="fas fa-ticket-alt fa-2x"></i>
+                                </span>
+                                <div>스크랩</div>
+                                <div>0</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+ 
+                스크랩, 팔로워, 팔로잉 좋아요 수 확인
 
             </div>
-        </div> 
+        </div>  
         <div class = "contents">
             
             <section class="post_list">

@@ -28,21 +28,21 @@
                 <div class="edit_password_section_title">
                     새 비밀번호 
                 </div>
-                <div class="edit_password_section_subtitle">
-                    8자 이상 입력해 주세요.
-                </div>
+                <span id="pwc"></span>
                 <div class="form_section">
                     <div class="form_content">
-                        <input type="password" name ="userPw" class="form_control">
+                        <input type="password" name ="user_pw" id= "user_pw" class="form_control">
                     </div>
                 </div>
                 <div class="edit_password_section_title">
                     비밀번호 확인
                 </div>
+                <span id="chkpwc"></span>
                 <div class="form_section">
                     <div class="form_content">
-                        <input type="password" name ="userPwChk" class="form_control">
+                        <input type="password" name ="chk_user_pw" id="chk_user_pw" class="form_control">
                     </div>
+                    
                 </div>
             </div>
             <button class="edit_password_submit" type="submit"> 확인 </button>
@@ -51,5 +51,5 @@
 
     </div>
 
-
+	 <script defer src="/resources/js/edit_password.js?ver=4"></script>
 </html>

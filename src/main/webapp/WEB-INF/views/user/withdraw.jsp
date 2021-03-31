@@ -37,7 +37,7 @@
 
 
                 </div>
-                <div class="terms_title">회원 탈퇴 신청에 앞서 아래 내용을 반드시 확인해 주세요.</div>
+                <div class="terms_title" id ="move">회원 탈퇴 신청에 앞서 아래 내용을 반드시 확인해 주세요.</div>
                 <div class="confirm_check">
                     <input id="confirm" type="checkbox">
                     <label for="confirm"> 위 내용을 모두 확인했습니다.
@@ -81,18 +81,18 @@
 
             </div>
             <div class="withdraw_terms_field">
-                <div class="terms_title">오늘의집 회원에서 탈퇴하려는 이유가 무엇인가요? (복수선택 가능) 
+                <div class="terms_title">오늘의집에 떠나는 이유를 자세히 알려주시겠어요? 
                     <span class="confrim_info">선택</span>
                 </div>
                 <div class="terms_sub_title">
-                    오늘의집에 떠나는 이유를 자세히 알려주시겠어요? 여러분의 소중한 의견을 반영해 더 좋은 서비스로 꼭 찾아뵙겠습니다.
+                    여러분의 소중한 의견을 반영해 더 좋은 서비스로 꼭 찾아뵙겠습니다.
                 </div>
-                <textarea placeholder="※ 탈퇴 사유 작성 전 아래 내용을 참고해주세요.
+               <textarea id = "text-area" placeholder="※ 탈퇴 사유 작성 전 아래 내용을 참고해주세요.
 - 오늘의집 이용 빈도가 낮아졌다면 어떤 이유로 자주 사용하지 않게 되었는지 구체적인 사유를 남겨주세요
 - 인테리어 콘텐츠/제품정보/상품 등 찾으려고 했던 정보가 부족하거나 없었다면 어떤 정보가 필요하신지 자세하게 남겨주세요
 - 기타 사유를 포함하여 오늘의집 이용중 불편하셨던 점이나 앱 기능 등 전반적으로 개선되었으면 하는 부분을 자세하게 남겨주세요
 - 다시 돌아오셨을 때 지금 보다 더 발전된 오늘의집이 되어있을 수 있도록 다양하고 충분한 의견 부탁드립니다^^*" class="withdrawal_reason_detail" ></textarea>
-                <div class="text_length"><span>0</span>자/2000자</div>
+                <div class="text_length"><span id='count'>0</span>자/<span id="max-count"> 0</span>자</div>
             </div>
             <div class="withdraw_button_box">
                 <input type="submit" class="withdraw_commit" value="탈퇴하기"> 
@@ -104,3 +104,5 @@
 </div>
 
 </html>
+
+<script defer src="/resources/js/withdraw.js?ver=4"></script>
