@@ -195,9 +195,14 @@ public class CommunityService {
 	
 	public int chkFavorite(CommunityDTO param) {
 		int i_user = SecurityUtils.getLoginUserPk(hs);
+		if(i_user == 0) { // 로그인이 안되어있으면
+			return 2;
+		}
+		System.out.println("i_user : " + i_user);
+		System.out.println("iBoard : " + param.getiBoard());
 		param.setiUser(i_user);
 		int favState = mapper.selFavorite(param);
-		
+		System.out.println("favState : " + favState);
 		if (favState == 1) {
 			return mapper.delFavorite(param);
 		}

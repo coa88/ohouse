@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -132,8 +133,13 @@ public class CommunityController {
 	// ----------------------------커뮤니티 좋아요----------------------------//
 	@ResponseBody
 	@GetMapping("/favorite")
-	public int favorite(CommunityDTO param) {
-		return service.chkFavorite(param);
+	public Map<String, Object> favorite(@RequestParam int iBoard, @RequestParam int favState) {
+		Map<String, Object> resultValue = new HashMap();
+		CommunityDTO dto = new CommunityDTO();
+		dto.setiBoard(iBoard);
+		dto.setFavState(favState);
+		resultValue.put("result", service.chkFavorite(dto));
+		return resultValue;
 	}
 	
 	// ----------------------------커뮤니티 댓글----------------------------//
