@@ -24,15 +24,14 @@ function getPdBoardList(page) { // 스토어 페이지선택
 	location.href= url + '?category=' + params.get('category') + `&page=${page}`				
 }
 
-function favorite(iBoard) {
-	let fc = document.querySelector('#favoriteContainer');
-	let favState = fc.getAttribute('is_favorite'); //1: 좋아요, 0: 안좋아요	
-	favState = 1 - favState;
-	console.log('favState : ')
+function favorite(iBoard, favState) {
+	
+	console.log('iBoard : ' + iBoard)
+	console.log('favState : ' + favState)
 	fetch('/community/favorite', {
 		body: {
 			'iBoard': iBoard,
-			'state': favState
+			'favState': favState
 		}
 	}).then(function (res) {
 		return res.json

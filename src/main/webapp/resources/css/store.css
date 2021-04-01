@@ -1,11 +1,9 @@
 /* 컨테이너 */
 .store-container { /* 스토어 컨테이너 */
-    position: absolute;
+    position: relative;
     width: 1136px;
-    height: 100%;
-    left: 50%;
-    
-    margin: 50px 0 0 -568px;
+    min-height: 800px;
+    margin: auto;
 }
 
 
@@ -14,15 +12,11 @@
     grid-template-columns: 289px 847px;
     grid-template-areas: 'category-side-bar category-header'
                          'category-side-bar category-content';
-    position: absolute;
-    top: 175px;
+    position: relative;
+    margin: 70px 0 0 -568px;
     left: 50%;
-    margin-left: -568px;    
 }
 /* 컨테이너 끝 */
-
-
-
 
 .category-content {  /* 컨텐츠 시작*/
     grid-area: category-content;
@@ -32,7 +26,8 @@
 .store-header {
     display: block;
     width: 100%;
-    height: 421px;
+    margin-bottom: 50px;
+    overflow: hidden;
 }
 .store-header .store-banners {
     display: block;
@@ -158,9 +153,6 @@
 /* 스크랩버튼 끝 */
 
 /* 추천 상품 */
-.category-mdpick {
-    height: 351px;
-}
 
 .category-mdpick-title {    
     font-size: 16px;
@@ -177,6 +169,10 @@
 /* 추천 상품끝 */
 
 /* 상품 작은박스 */
+.store-item-container-section {
+	display: inline-block;
+}
+
 .store-imgbox {
     position:relative;
 }
@@ -224,7 +220,6 @@
     display: table;
     float: left;
     width: 269px;
-    height: 431px;
     color: #000;
     padding: 0 0px;
 }
@@ -267,6 +262,11 @@
 
 .store-big-item:hover .store-item-name {
     color: rgb(155, 155, 155);
+}
+
+.store-item-list {
+	display: block;
+	min-height: 500px;
 }
 
 .store-item-list a {

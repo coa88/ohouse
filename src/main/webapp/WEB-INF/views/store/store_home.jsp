@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <div class="store-header">
     <div class="store-banners">
         <div id="banner-img" class="splide">
@@ -43,7 +42,6 @@
             </ul>
         </div>
     </div>
-
 </div>
 
 <div class="store-container">
@@ -74,5 +72,4 @@
             </a>
         </article>
     </section>
-    
 </div>

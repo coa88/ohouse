@@ -78,14 +78,6 @@ public class CommunityService {
 	}
 	
 	public CommunityDTO selCmBoard(CommunityDTO param) { // 게시물 선택
-		int i_user = SecurityUtils.getLoginUserPk(hs);
-		param.setiUser(i_user);
-		param.setFavState(mapper.selFavorite(param));
-		
-		System.out.println("i_user : " + i_user);
-		System.out.println("i_board : " + param.getiBoard());
-		System.out.println("favstate : " + mapper.selFavorite(param));
-		
 		return mapper.selCmBoard(param);
 	}
 	
@@ -194,11 +186,17 @@ public class CommunityService {
 	}
 	
 	// ----------------------------좋아요----------------------------//
-	public int cmFavorite(CommunityDTO param) {
+	public int selFavorite(CommunityDTO param) {
 		int i_user = SecurityUtils.getLoginUserPk(hs);
-		int favState = param.getFavState();
 		param.setiUser(i_user);
-		System.out.println("좋아요 : " + favState);
+		int favState = mapper.selFavorite(param);
+		return favState;
+	}
+	
+	public int chkFavorite(CommunityDTO param) {
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		param.setiUser(i_user);
+		int favState = mapper.selFavorite(param);
 		
 		if (favState == 1) {
 			return mapper.delFavorite(param);

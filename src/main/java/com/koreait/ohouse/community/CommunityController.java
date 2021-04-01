@@ -69,6 +69,7 @@ public class CommunityController {
 
 	@GetMapping("/photo/detail") // 사진 디테일페이지
 	public String photoDetail(CommunityDTO param, Model model) {
+		model.addAttribute("favState", service.selFavorite(param));
 		model.addAttribute("data", service.selCmBoard(param));
 		return "community/detail";
 	}
@@ -130,9 +131,9 @@ public class CommunityController {
 
 	// ----------------------------커뮤니티 좋아요----------------------------//
 	@ResponseBody
-	@PostMapping("/favorite")
+	@GetMapping("/favorite")
 	public int favorite(CommunityDTO param) {
-		return service.cmFavorite(param);
+		return service.chkFavorite(param);
 	}
 	
 	// ----------------------------커뮤니티 댓글----------------------------//
