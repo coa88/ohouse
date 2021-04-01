@@ -1,5 +1,7 @@
 'use strict'
 
+
+
 //게시물 삭제
 function DeletePost(iBoard) {
 	if (confirm('삭제 하시겠습니까?')) {
@@ -44,6 +46,8 @@ var cmtObj = {
 			var recode = this.createRecode(list[i])
 			cmtListElem.append(recode)
 		}
+
+		dd()
 	},
 	createRecode: function(item) {
 		var etc = ''
@@ -59,7 +63,7 @@ var cmtObj = {
 			${etc}
 			<span id="cmtGroup" data-id="${item.cmtGroup}"></span>
 			<form class="recmtFrm cmtHide">
-				<input type="text" name="re_ctnt">				
+				<input class="ph_color" type="text" name="re_ctnt" value="">						
 				<input type="button" name="re_btn" value="등록">
 			</form>
 			`
@@ -153,79 +157,84 @@ function delCmt(iCmt) {
 
 //대댓글 입력창
 function recmtToggleFrm(cmtGroup) {
-	var i = cmtGroup - 1
-	var recmtFrmAll = document.querySelectorAll('.recmtFrm')
+	let i = cmtGroup - 1
+	let recmtFrmAll = document.querySelectorAll('.recmtFrm')
 	recmtFrmAll[i].classList.toggle('cmtHide')
 }
 
 //대댓글 달기
-for (var i = 0; i < recmtFrmElem.length; i++) {
-	var recmtFrmElem = document.querySelectorAll('.recmtFrm')
-	recmtEvent(i)
+function dd() {
+	let recmtFrmElem = document.querySelectorAll('.recmtFrm')
+	for (let i = 0; i < recmtFrmElem.length; i++) {
+		recmtFrmElem[i].addEventListener('click', function() {
+			recmtEvent(recmtFrmElem, i)
+		}, false)
+	}
 }
 
-function recmtEvent() {
-	
+function recmtEvent(recmtFrmElem, i) {
 
-}
-
-if (recmtFrmElem) {
-	recmtFrmElem.onsubmit = function(e) {
-		e.preventDefault()
-	}
-
-	var rectntElem = recmtFrmElem.re_ctnt
-	var rebtnElem = recmtFrmElem.re_btn
-	var iBoard = document.querySelector('#iBoard').dataset.id
-	var cmtGroup = document.querySelector('#cmtGroup').dataset.id
-	cmtObj.iBoard = iBoard
-	cmtObj.cmtGroup = cmtGroup
-
-	rectntElem.onkeyup = function(e) {
-		if (e.keyCode === 13) {
-			ajax()
-		}
-	}
-
-	rebtnElem.addEventListener('click', ajax)
-
-	function ajax() {
-		if (rectntElem.value === '') {
-			return
+	if (recmtFrmElem) {
+		recmtFrmElem.onsubmit = function(e) {
+			e.preventDefault()
 		}
 
-		var param = {
-			cmtGroup: cmtGroup,
-			iBoard: iBoard,
-			ctnt: rectntElem.value
+		let rectntElem = recmtFrmElem[i].re_ctnt
+		let rebtnElem = recmtFrmElem[i].re_btn
+		let iBoard = document.querySelector('#iBoard').dataset.id
+		let cmtGroup = document.querySelector('#cmtGroup').dataset.id
+		cmtObj.iBoard = iBoard
+		cmtObj.cmtGroup = cmtGroup
+
+		rectntElem.onkeyup = function(e) {
+			if (e.keyCode === 13) {
+				ajax()
+			}
 		}
 
-		console.log(param)
-		fetch('/community/insReCmt', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(param)
-		}).then(function(res) {
-			return res.json()
-		}).then(function(data) {
-			proc(data)
-		})
-	}
+		rebtnElem.addEventListener('click', ajax)
 
-	function proc(data) {
-		switch (data.result) {
-			case 0:
-				alert('댓글 작성 실패하였습니다.')
+		function ajax() {
+			if (rectntElem.value === '') {
 				return
-			case 1:
-				rectntElem.value = ''
-				cmtObj.getCmtList()
-				return
+			}
+
+			let param = {
+				cmtGroup: cmtGroup,
+				iBoard: iBoard,
+				ctnt: rectntElem.value
+			}
+
+			console.log(param)
+			fetch('/community/insReCmt', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(param)
+			}).then(function(res) {
+				return res.json()
+			}).then(function(data) {
+				proc(data)
+			})
+		}
+
+		function proc(data) {
+			switch (data.result) {
+				case 0:
+					alert('댓글 작성 실패하였습니다.')
+					return
+				case 1:
+					rectntElem.value = ''
+					cmtObj.getCmtList()
+					return
+			}
 		}
 	}
+
 }
+
+
 
 
 

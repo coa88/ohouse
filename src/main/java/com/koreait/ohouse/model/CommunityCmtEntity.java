@@ -19,11 +19,11 @@ public class CommunityCmtEntity {
 		this.iCmt = iCmt;
 	}
 
-	public int getCmtGroup() {
+	public int getcmtGroup() {
 		return cmtGroup;
 	}
 
-	public void setCmtGroup(int cmtGroup) {
+	public void setcmtGroup(int cmtGroup) {
 		this.cmtGroup = cmtGroup;
 	}
 
@@ -43,19 +43,19 @@ public class CommunityCmtEntity {
 		this.iUser = iUser;
 	}
 
-	public String getCtnt() {
+	public String getctnt() {
 		return ctnt;
 	}
 
-	public void setCtnt(String ctnt) {
+	public void setctnt(String ctnt) {
 		this.ctnt = ctnt;
 	}
 
-	public String getCmtDt() {
+	public String getcmtDt() {
 		return cmtDt;
 	}
 
-	public void setCmtDt(String cmtDt) {
+	public void setcmtDt(String cmtDt) {
 		this.cmtDt = cmtDt;
 	}
 

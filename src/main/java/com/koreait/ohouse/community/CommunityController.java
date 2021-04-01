@@ -169,9 +169,9 @@ public class CommunityController {
 	@ResponseBody
 	@PostMapping("/insReCmt")
 	public Map<String, Object> insReCmt(@RequestBody CommunityCmtEntity p, HttpSession hs) {
-		System.out.println("cmt_group :" + p.getCmtGroup());
+		System.out.println("cmt_group :" + p.getcmtGroup());
 		System.out.println("i_board : " + p.getiBoard());
-		System.out.println("ctnt : " + p.getCtnt());
+		System.out.println("ctnt : " + p.getctnt());
 
 		p.setiUser(SecurityUtils.getLoginUserPk(hs));
 		Map<String, Object> returnValue = new HashMap<>();
