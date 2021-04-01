@@ -60,21 +60,21 @@
                
                 <li class="story_box_list plr10">
                     <div class="story_menu_wrap">
-                        <a class="story_menu_link" href="#">
+                        <a class="story_menu_link" href="/community/houseparty">
                             <div class="description">예쁜 집 구경하기</div>
                             <div class="title">
                                 <span class="text">집들이</span>
                                 <div class="arrow"></div>
                             </div>
                         </a>
-                        <a class="story_menu_link" href="#">
+                        <a class="story_menu_link" href="/community/houseparty">
                             <div class="description">전문가 시공사례</div>
                             <div class="title">
                                 <span class="text">전문가 집들이</span>
                                 <div class="arrow"></div>
                             </div>
                         </a>
-                        <a class="story_menu_link" href="#">
+                        <a class="story_menu_link" href="/community/tip">
                             <div class="description">인테리어 꿀팁 총 집합</div>
                             <div class="title">
                                 <span class="text">노하우</span>

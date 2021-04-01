@@ -221,3 +221,7 @@
 .cmtHide {
 	display: none;
 }
+
+.ph_color::placeholder{
+	color:#35c5f0;
+}
