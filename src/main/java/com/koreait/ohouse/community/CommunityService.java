@@ -88,6 +88,11 @@ public class CommunityService {
 		}		
 		param.setRecordCntPerPage(12);	// 게시물을 출력갯수 지정
 		
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		if(i_user > 0) {
+			param.setiUser(i_user);
+		}
+		
 		// 선택된페이지가 몇번게시물인지 계산
 		int sIdx = (param.getPage() - 1) * param.getRecordCntPerPage(); 
 		param.setsIdx(sIdx);

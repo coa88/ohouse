@@ -68,6 +68,27 @@ function scrap(iBoard) {
 	}).catch(error => console.error('Error:', error))
 }
 
+function scrapList(iBoard) {
+	let scrapDiv = document.querySelector('#scrap_div')
+	let scrapState = scrapDiv.getAttribute('scrapState') //1: 스크랩, 0:안 스크랩	
+	scrapState = 1 - scrapState
+	
+	fetch(`/community/scrap?iBoard=${iBoard}&scrapState=${scrapState}`, {
+		method: 'GET',
+	}).then(function (res) {
+		return res.json()
+	}).then(function (data) {
+		let resData = data.result
+		if( resData === 2) {
+			location.href = '/user/login'
+		}
+		if(data.result == 1) {
+			let iconType = scrapState == 1 ? 'blue' : 'white'
+			scrapDiv.innerHTML = `<svg class="detail_util_icon_${iconType}" width="24" height="24" stroke-width="1" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>`
+			scrapDiv.setAttribute('scrapState', scrapState)
+		}
+	}).catch(error => console.error('Error:', error))
+}
 
 	
 

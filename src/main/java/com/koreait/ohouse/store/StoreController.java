@@ -1,12 +1,12 @@
 package com.koreait.ohouse.store;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.koreait.ohouse.common.SecurityUtils;
 import com.koreait.ohouse.model.CommunityEntity;
 import com.koreait.ohouse.model.StoreDTO;
-import com.koreait.ohouse.model.StoreEntity;
 import com.koreait.ohouse.model.UserEntity;
 
 import lombok.RequiredArgsConstructor;
@@ -30,9 +29,12 @@ public class StoreController {
 
 	final StoreService service;
 	final private HttpSession hs;
+	final Logger loger = LoggerFactory.getLogger(this.getClass());
 
 	@GetMapping("/register")
 	public String register() {
+		loger.info("[register] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+		
 		UserEntity i_user = SecurityUtils.getLoginUser(hs);
 		if(!(SecurityUtils.getLoginUserPk(hs) > 0) || i_user.getUserRank() == null) {
 			return "redirect:/user/login";

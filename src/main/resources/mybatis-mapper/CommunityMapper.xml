@@ -82,6 +82,7 @@
 			, IFNULL((SELECT COUNT(1) FROM cm_board WHERE typ = A.typ AND sec_typ = A.sec_typ), 0) AS board_cnt
 			, IFNULL(C.favorite_cnt, 0) AS favorite_cnt
 			, IFNULL(D.scrap_cnt, 0) AS scrap_cnt
+			, IFNULL((SELECT COUNT(1) FROM cm_scrap WHERE A.i_board AND D.i_user = #{iUser}), 0)  AS scrap_chk
 			, IFNULL(E.cmt_cnt, 0) AS cmt_cnt
 		FROM cm_board A
 		LEFT JOIN t_user B
@@ -95,7 +96,10 @@
 		ON A.i_board = C.i_board
 
 		LEFT JOIN (
-			SELECT i_board, COUNT(i_board)  AS scrap_cnt
+			SELECT 
+				i_board
+				, COUNT(i_board) AS scrap_cnt
+				,i_user
 			FROM cm_scrap
 			GROUP BY i_board
 		) D

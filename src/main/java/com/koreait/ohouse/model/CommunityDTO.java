@@ -15,6 +15,9 @@ public class CommunityDTO extends CommunityEntity {
 	private int boardCnt;
 	private int favState;
 	private int scrapState;
+	private int scrapChk;
+	
+	
 	// 페이징
 	private int recordCntPerPage; //게시물을 몇개씩 출력하는지 정함.
 	private int sIdx; // 현재 선택된페이지 
@@ -124,5 +127,13 @@ public class CommunityDTO extends CommunityEntity {
 	public void setPage(int page) {
 		this.page = page;
 	}
-	
+
+	public int getScrapChk() {
+		return scrapChk;
+	}
+
+	public void setScrapChk(int scrapChk) {
+		this.scrapChk = scrapChk;
+	}
+
 }
