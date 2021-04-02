@@ -71,6 +71,7 @@ public class CommunityController {
 	@GetMapping("/photo/detail") // 사진 디테일페이지
 	public String photoDetail(CommunityDTO param, Model model) {
 		model.addAttribute("favState", service.selFavorite(param));
+		model.addAttribute("scrapState", service.selScrap(param));
 		model.addAttribute("data", service.selCmBoard(param));
 		return "community/detail";
 	}
@@ -85,6 +86,8 @@ public class CommunityController {
 
 	@GetMapping("/houseparty/detail") // 집들이 디테일페이지
 	public String housepartyDetail(CommunityDTO param, Model model) {
+		model.addAttribute("favState", service.selFavorite(param));
+		model.addAttribute("scrapState", service.selScrap(param));
 		model.addAttribute("data", service.selCmBoard(param));
 		return "community/detail";
 	}
@@ -99,6 +102,8 @@ public class CommunityController {
 
 	@GetMapping("/tip/detail") // 노하우 디테일페이지
 	public String tipDetail(CommunityDTO param, Model model) {
+		model.addAttribute("favState", service.selFavorite(param));
+		model.addAttribute("scrapState", service.selScrap(param));
 		model.addAttribute("data", service.selCmBoard(param));
 		return "community/detail";
 	}
@@ -111,11 +116,6 @@ public class CommunityController {
 	@ResponseBody // 수정 Post
 	@PostMapping("/modify")
 	public Map<String, Object> modCmBoard(CommunityDTO param) {
-
-		for (String src : param.getSrc()) {
-			System.out.println(src);
-		}
-
 		Map<String, Object> resultValue = new HashMap();
 		resultValue.put("result", service.updCmBoard(param));
 		resultValue.put("iBoard", param.getiBoard());
@@ -138,7 +138,21 @@ public class CommunityController {
 		CommunityDTO dto = new CommunityDTO();
 		dto.setiBoard(iBoard);
 		dto.setFavState(favState);
+		
 		resultValue.put("result", service.chkFavorite(dto));
+		return resultValue;
+	}
+	
+	// ----------------------------커뮤니티 스크랩----------------------------//
+	@ResponseBody
+	@GetMapping("/scrap")
+	public Map<String, Object> scrap(@RequestParam int iBoard, @RequestParam int scrapState) {
+		Map<String, Object> resultValue = new HashMap();
+		CommunityDTO dto = new CommunityDTO();
+		dto.setiBoard(iBoard);
+		dto.setScrapState(scrapState);
+		
+		resultValue.put("result", service.chkScrap(dto));
 		return resultValue;
 	}
 	

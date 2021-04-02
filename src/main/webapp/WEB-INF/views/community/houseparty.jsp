@@ -82,7 +82,6 @@
 		    <div class="pageContainer">
 		    	<c:if test="${data.startPage > 1}">
 					<span class="page" onclick="getBoardList(1)">[처음]</span>
-					<span>...</span>
 				</c:if>	
 		    
 				<c:forEach begin="${data.startPage}" end="${data.endPage}" var="i">			
@@ -90,7 +89,6 @@
 				</c:forEach>
 				
 				<c:if test="${data.endPage < data.maxPageNum}">
-					<span>...</span>
 					<span class="page" onclick="getBoardList(${data.maxPageNum})">[끝]</span>
 				</c:if>
 			</div>

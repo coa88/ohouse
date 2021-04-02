@@ -5,8 +5,8 @@
     grid-template-columns: 654px 482px;
     grid-template-areas: 'store-detail-photo store-detail-info'
                          'store-detail-content store-detail-content';
-    position: absolute;
-    top: 175px;
+    position: relative;
+    margin: 60px 0 50px;
     left: 50%;
     margin-left: -568px;
 }

@@ -101,8 +101,8 @@
 		                            <h1 class="tip_con_title">${item.title}</h1>
 		                            <div class="tip_con_author">${item.nm}</div>
 		                            <div class="tip_con_status">
-		                                <span class="status_scrap_count">스크랩 ${item.scrapCnt }</span>
-		                                <span class="status_count">조회 ${item.cmtCnt}</span>
+		                                <span class="status_scrap_count">스크랩 ${item.scrapCnt}</span>
+		                                <span class="status_count">조회 ${item.hits}</span>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -115,7 +115,6 @@
 		    <div class="pageContainer">
 		    	<c:if test="${data.startPage > 1}">
 					<span class="page" onclick="getBoardList(1)">[처음]</span>
-					<span>...</span>
 				</c:if>	
 		    
 				<c:forEach begin="${data.startPage}" end="${data.endPage}" var="i">			
@@ -123,7 +122,6 @@
 				</c:forEach>
 				
 				<c:if test="${data.endPage < data.maxPageNum}">
-					<span>...</span>
 					<span class="page" onclick="getBoardList(${data.maxPageNum})">[끝]</span>
 				</c:if>
 			</div>

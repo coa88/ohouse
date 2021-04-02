@@ -307,11 +307,59 @@ main {
 }
 
 .icon {
-    fill: transparent;
+	fill: #fff;
     stroke: #424242;
     stroke-width: 1.1px;
     transition: fill 0.1s, stroke 0.1s;
     vertical-align: -7px;
+}
+.icon:hover {
+	opacity: 0.5;
+}
+
+.icon.blue {
+	fill: #35c5f0;
+}
+
+
+#favoriteContainer {
+    border: 1px solid #bcbec0;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0px 0 0 1px #dcdedf;
+    margin-bottom: 10px;
+}
+
+#favoriteContainer:hover {
+	cursor: pointer;
+}
+
+#scrapContainer {
+    border: 1px solid #bcbec0;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0px 0 0 1px #dcdedf;
+}
+
+#scrapContainer {
+	cursor: pointer;
+}
+
+.detail_util_icon_blue {
+	fill: #35c5f0;
+	stroke: #35c5f0;
+    margin: 12px 0 0 0;
+	
+}
+
+.detail_util_icon_white {
+    fill: white;
+    stroke: black;
+    margin: 12px 0 0 0;
 }
 
 .icon_va7 {

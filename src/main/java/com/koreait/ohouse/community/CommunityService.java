@@ -78,10 +78,11 @@ public class CommunityService {
 	}
 	
 	public CommunityDTO selCmBoard(CommunityDTO param) { // 게시물 선택
+		mapper.hitsCmBoard(param);
 		return mapper.selCmBoard(param);
 	}
 	
-	public PagingDTO selCmBoardList(CommunityDTO param) { // 리스트 뿌리기
+	public PagingDTO selCmBoardList(CommunityDTO param) { // 리스트 뿌리기		
 		if(param.getPage() == 0) { //선택된 페이지가 없으면 1을 선택
 			param.setPage(1);
 		}		
@@ -90,7 +91,6 @@ public class CommunityService {
 		// 선택된페이지가 몇번게시물인지 계산
 		int sIdx = (param.getPage() - 1) * param.getRecordCntPerPage(); 
 		param.setsIdx(sIdx);
-		
 		PagingDTO dto = new PagingDTO();
 		dto.setPage(param.getPage());
 		dto.setCmList(mapper.selCmBoardList(param));
@@ -181,16 +181,20 @@ public class CommunityService {
 
 		String path = "/resources/img/community/board/" + param.getiBoard();
 		myFileUtils.delFolder(path);
-		mapper.delCmPhoto(param);
+		
+		
+		mapper.delCmPhoto(param);// 사진삭제
+		mapper.delFavorite(param);// 좋아요삭제
+		mapper.delScrap(param); //스크랩삭제
 		return mapper.delCmBoard(param);
 	}
 	
 	// ----------------------------좋아요----------------------------//
 	public int selFavorite(CommunityDTO param) {
 		int i_user = SecurityUtils.getLoginUserPk(hs);
+		System.out.println("i_board : " + param.getiBoard());
 		param.setiUser(i_user);
-		int favState = mapper.selFavorite(param);
-		return favState;
+		return mapper.selFavorite(param);
 	}
 	
 	public int chkFavorite(CommunityDTO param) {
@@ -209,6 +213,31 @@ public class CommunityService {
 		
 		return mapper.insFavorite(param);
 	}
+	
+	// ----------------------------스크랩----------------------------//
+		public int selScrap(CommunityDTO param) {
+			int i_user = SecurityUtils.getLoginUserPk(hs);
+			System.out.println("i_board : " + param.getiBoard());
+			param.setiUser(i_user);
+			return mapper.selScrap(param);
+		}
+		
+		public int chkScrap(CommunityDTO param) {
+			int i_user = SecurityUtils.getLoginUserPk(hs);
+			if(i_user == 0) { // 로그인이 안되어있으면
+				return 2;
+			}
+			System.out.println("i_user : " + i_user);
+			System.out.println("iBoard : " + param.getiBoard());
+			param.setiUser(i_user);
+			int favState = mapper.selScrap(param);
+			System.out.println("favState : " + favState);
+			if (favState == 1) {
+				return mapper.delScrap(param);
+			}
+			
+			return mapper.insScrap(param);
+		}
 	
 	// ----------------------------커뮤니티 댓글----------------------------//
 	

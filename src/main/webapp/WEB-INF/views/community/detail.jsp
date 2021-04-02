@@ -36,15 +36,23 @@
             <div class="con_side">
                 <div class="con_side_sticky">
                     <div class="side_icon_wrap">
-                    <div id="favoriteContainer" favState="${data.favState}" onclick="favorite(${data.iBoard})">	
+                    <div id="favoriteContainer" favState="${favState}" onclick="favorite(${param.iBoard})">	
                          <c:choose>
-                        	<c:when test="${data.favState eq 1}">
-                   				<div class="detail_favorite">
-		                            <svg class="detail_favorite_icon_blue icon" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M23.22 7.95c.4 4.94-2.92 9.71-10.92 13.85a.47.47 0 0 1-.42 0C3.88 17.66.56 12.9.96 7.93 1.54 2.48 8.28.3 12.1 4.7c3.8-4.4 10.55-2.22 11.13 3.25z"></path></svg>
-                       			</div>
+                        	<c:when test="${favState eq 1}">
+	                            <svg class="detail_util_icon_blue" width="24" height="24" stroke-width="1" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M23.22 7.95c.4 4.94-2.92 9.71-10.92 13.85a.47.47 0 0 1-.42 0C3.88 17.66.56 12.9.96 7.93 1.54 2.48 8.28.3 12.1 4.7c3.8-4.4 10.55-2.22 11.13 3.25z"></path></svg>
 	                        </c:when>
 	                        <c:otherwise>
-	                        	없음
+	                            <svg class="detail_util_icon_white" width="24" height="24" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M23.22 7.95c.4 4.94-2.92 9.71-10.92 13.85a.47.47 0 0 1-.42 0C3.88 17.66.56 12.9.96 7.93 1.54 2.48 8.28.3 12.1 4.7c3.8-4.4 10.55-2.22 11.13 3.25z"></path></svg>
+	                        </c:otherwise>
+                        </c:choose> 
+                    </div>     
+                    <div id="scrapContainer" scrapState="${scrapState}" onclick="scrap(${param.iBoard})">	
+                         <c:choose>
+                        	<c:when test="${scrapState eq 1}">
+	                            <svg class="detail_util_icon_blue" width="24" height="24" stroke-width="1" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
+	                        </c:when>
+	                        <c:otherwise>
+	                            <svg class="detail_util_icon_white" width="24" height="24" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
 	                        </c:otherwise>
                         </c:choose> 
                     </div>                        

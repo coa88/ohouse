@@ -22,6 +22,7 @@ public interface CommunityMapper {
 	int selCmMaxPageNum(CommunityDTO param);
 	
 	int updCmBoard(CommunityDTO param);
+	int hitsCmBoard(CommunityDTO param);
 
 	int delCmBoard(CommunityDTO param);
 	int delCmPhoto(CommunityDTO param);
@@ -32,6 +33,12 @@ public interface CommunityMapper {
 	int selFavorite(CommunityDTO param);
 	int delFavorite(CommunityDTO param);
 	
+	// ----------------------------스크랩----------------------------//
+	
+	int insScrap(CommunityDTO param);
+	int selScrap(CommunityDTO param);
+	int delScrap(CommunityDTO param);
+
 	// ----------------------------커뮤니티 댓글----------------------------//
 
 	int insCmt(CommunityCmtEntity p);

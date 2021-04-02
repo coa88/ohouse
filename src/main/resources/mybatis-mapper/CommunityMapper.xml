@@ -53,7 +53,7 @@
 
 		LEFT JOIN (
 			SELECT i_board, COUNT(i_board)  AS scrap_cnt
-			FROM cm_favorite
+			FROM cm_scrap
 			GROUP BY i_board
 		) D
 		ON A.i_board = D.i_board
@@ -96,7 +96,7 @@
 
 		LEFT JOIN (
 			SELECT i_board, COUNT(i_board)  AS scrap_cnt
-			FROM cm_favorite
+			FROM cm_scrap
 			GROUP BY i_board
 		) D
 		ON A.i_board = D.i_board
@@ -123,6 +123,12 @@
 		WHERE i_board = #{iBoard}
 		AND i_user = #{iUser}
 	</update>
+	
+	<update id="hitsCmBoard">
+		UPDATE cm_board 
+		SET hits = hits + 1
+		WHERE i_board = #{iBoard}
+	</update>
 
 	<delete id="delCmBoard">
 		DELETE FROM cm_board
@@ -146,6 +152,24 @@
 
 	<delete id="delFavorite">
 		DELETE FROM cm_favorite
+		WHERE i_board = #{iBoard} AND i_user = #{iUser}
+	</delete>
+	<!-- /////////////////////////// 스크랩 /////////////////////////// -->
+	<insert id="insScrap">
+		INSERT INTO cm_scrap
+		(i_board, i_user)
+		VALUES
+		(#{iBoard}, #{iUser})
+	</insert>
+
+	<select id="selScrap" resultType="_int">
+		SELECT COUNT(i_board) 
+		FROM cm_scrap
+		WHERE i_board = #{iBoard} AND i_user = #{iUser}
+	</select>
+
+	<delete id="delScrap">
+		DELETE FROM cm_scrap
 		WHERE i_board = #{iBoard} AND i_user = #{iUser}
 	</delete>
 	<!-- /////////////////////////// 커뮤니티 댓글 /////////////////////////// -->
