@@ -201,6 +201,7 @@
 	</delete>
 
 	<!-- /////////////////////////// 커뮤니티 대댓글 /////////////////////////// -->
+	
 	<insert id="insReCmt">
 		INSERT INTO cm_cmt
 		( cmt_group, i_board, i_user, ctnt )

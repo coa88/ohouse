@@ -49,4 +49,5 @@ public interface CommunityMapper {
 	
 	// ----------------------------커뮤니티 대댓글----------------------------//
 	int insReCmt(CommunityCmtEntity p);
+	
 }

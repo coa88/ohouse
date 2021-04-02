@@ -198,4 +198,5 @@ public class CommunityController {
 		returnValue.put("result", service.insReCmt(p));
 		return returnValue;
 	}
+	
 }

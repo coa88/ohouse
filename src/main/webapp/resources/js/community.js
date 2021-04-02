@@ -1,7 +1,5 @@
 'use strict'
 
-
-
 //게시물 삭제
 function DeletePost(iBoard) {
 	if (confirm('삭제 하시겠습니까?')) {
@@ -19,6 +17,129 @@ function DeletePost(iBoard) {
 		})
 	}
 }
+
+
+// 커뮤니티 댓글
+const cmtFrmElem = document.querySelector('#cmtFrm')
+const ctntElem = cmtFrmElem.ctnt
+const btnElem = cmtFrmElem.btn
+const iBoardElem = cmtFrmElem.cmtiBoard
+const cmtListElem = document.querySelector('#cmtList')
+
+// 댓글달기
+if (cmtFrmElem) {
+
+	cmtFrmElem.onsubmit = function(e) {
+		e.preventDefault()
+	}
+
+	btnElem.addEventListener('click', ajax)
+
+	function ajax() {
+
+		if (ctntElem.value === '') {
+			return
+		}
+
+		let param = {
+			iBoard: iBoardElem.value,
+			ctnt: ctntElem.value
+		}
+
+		fetch('/community/insCmt', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(param)
+		}).then(function(res) {
+			return res.json()
+		}).then(function(data) {
+			proc(data)
+		})
+	}
+
+	function proc(data) {
+		switch (data.result) {
+			case 0:
+				alert('댓글 작성 실패하였습니다.')
+				return
+			case 1:
+				ctntElem.value = ''
+				getCmtList()
+				return
+		}
+	}
+
+}
+
+// 댓글리스트
+if (cmtListElem) {
+	getCmtList()
+}
+
+function getCmtList() {
+	if (iBoardElem.value === 0) {
+		return
+	}
+
+	fetch(`/community/cmtList?iBoard=${iBoardElem.value}`)
+		.then(function(res) {
+			return res.json()
+		})
+		.then((list) => {
+			cmtListElem.innerHTML = ''
+
+			if (list.length == 0) {
+				return
+			}
+
+			for (let i = 0; i < list.length; i++) {
+				let recode = createRecode(list[i])
+				cmtListElem.append(recode)
+			}
+
+			function createRecode(data) {
+				let delButton = ''
+				if (data.isMycmt === 1) {
+					delButton = `<button onclick="delCmt(${data.iCmt})">삭제</button>`
+				}
+				var div = document.createElement('div')
+				div.innerHTML =
+					`
+					<span>${data.nm}</span>
+					<span>${data.ctnt}</span>			
+					${delButton}
+					`
+				return div
+			}
+
+		})
+}
+
+//댓글 삭제
+function delCmt(iCmt) {
+	if (!confirm('댓글을 삭제하시겠습니까? 삭제한 댓글은 되돌릴 수 없습니다.')) {
+		return
+	}
+
+	fetch(`/community/delCmt?iCmt=${iCmt}`, {
+		method: 'delete'
+	}).then(function(res) {
+		return res.json()
+	}).then(function(myJson) {
+		switch (myJson.result) {
+			case 1:
+				getCmtList()
+				return
+			case 0:
+				alert('댓글 삭제 실패')
+				return
+		}
+	})
+}
+
+/*
 
 // 댓글 obj
 var cmtObj = {
@@ -47,7 +168,7 @@ var cmtObj = {
 			cmtListElem.append(recode)
 		}
 
-		dd()
+		recmtInsert()
 	},
 	createRecode: function(item) {
 		var etc = ''
@@ -63,7 +184,7 @@ var cmtObj = {
 			${etc}
 			<span id="cmtGroup" data-id="${item.cmtGroup}"></span>
 			<form class="recmtFrm cmtHide">
-				<input class="ph_color" type="text" name="re_ctnt" value="">						
+				<input class="ph_color" type="text" name="re_ctnt" value="">
 				<input type="button" name="re_btn" value="등록">
 			</form>
 			`
@@ -163,7 +284,7 @@ function recmtToggleFrm(cmtGroup) {
 }
 
 //대댓글 달기
-function dd() {
+function recmtInsert() {
 	let recmtFrmElem = document.querySelectorAll('.recmtFrm')
 	for (let i = 0; i < recmtFrmElem.length; i++) {
 		recmtFrmElem[i].addEventListener('click', function() {
@@ -236,5 +357,5 @@ function recmtEvent(recmtFrmElem, i) {
 
 
 
-
+*/
 
