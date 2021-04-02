@@ -257,4 +257,5 @@ public class CommunityService {
 	public int insReCmt(CommunityCmtEntity p) {
 		return mapper.insCmt(p);
 	}
+	
 }
