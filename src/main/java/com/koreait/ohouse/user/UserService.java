@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.koreait.ohouse.common.SecurityUtils;
 import com.koreait.ohouse.community.CommunityMapper;
+import com.koreait.ohouse.model.CommunityCmtDTO;
+import com.koreait.ohouse.model.CommunityDTO;
+import com.koreait.ohouse.model.PagingDTO;
 import com.koreait.ohouse.model.UserDTO;
 import com.koreait.ohouse.model.UserEntity;
 import com.koreait.ohouse.utils.MyFileUtils;
@@ -152,6 +156,18 @@ public class UserService {
 
 	
 	
+	////유저 작성한글 보기
 	
-	
+	public List<CommunityDTO> selUserBoardList(UserDTO dto) {
+		return mapper.selUserBoardList(dto);
+	}
+//	public List<CommunityDTO> selUserReviewList(UserDTO dto) { //리뷰 (아직 생성안)
+//		return mapper.selUserBoardList(dto);
+//	}
+	public List<CommunityCmtDTO> selUserCmtList(UserDTO dto){
+		return mapper.selUserCmtList(dto);
+	}
+	public UserDTO userStateChk(UserDTO dto) {
+		return mapper.userStateChk(dto);
+	}
 }

@@ -20,6 +20,29 @@
 
 	</select>
 	
+	<select id="selUserBoardList" resultType="CommunityDTO">
+	 select * from cm_board
+	 where i_user = #{iUser}
+	</select>
+	
+	<select id="selUserCmtList" resultType="CommunityCmtDTO">
+	 select * from cm_board
+	 where i_user = #{iUser}
+	</select>
+	
+	<select id="userStateChk" resultType="UserDTO">
+
+	SELECT
+	IFNULL((SELECT COUNT(1) FROM cm_favorite B WHERE B.i_user = #{iUser}), 0) AS favorite_chk
+	, IFNULL((SELECT COUNT(1) FROM cm_scrap C WHERE C.i_user = #{iUser}), 0) AS cm_scrap_chk
+	, IFNULL((SELECT COUNT(1) FROM pd_scrap D WHERE D.i_user = #{iUser}), 0) AS pd_scrap_chk
+	FROM t_user A
+
+	WHERE A.i_user = #{iUser}
+		
+	</select>
+	
+	
 	<update id="updUser">
 		UPDATE t_user 
 		set

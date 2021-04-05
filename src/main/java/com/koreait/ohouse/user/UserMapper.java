@@ -1,7 +1,11 @@
 package com.koreait.ohouse.user;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
+import com.koreait.ohouse.model.CommunityCmtDTO;
+import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.UserDTO;
 import com.koreait.ohouse.model.UserEntity;
 
@@ -24,5 +28,15 @@ public interface UserMapper {
 	UserEntity emailIdChk(UserEntity p);
 
 	UserEntity nmChk(UserEntity p);
+	
+	//유저 글쓴거 접근
+	List<CommunityDTO> selUserBoardList(UserDTO p);
+	
+	//유저 댓글리스트 접근
+	List<CommunityCmtDTO> selUserCmtList(UserDTO p);
+	
+	//유저 좋아요, 북마크 접
+	UserDTO userStateChk(UserDTO dto);
+	
 
 }

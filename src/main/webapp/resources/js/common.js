@@ -11,6 +11,11 @@ function moveLocation(iBoard) {
 	location.href = link; //주소값 이동
 }
 
+function mypageLocation(iBoard) {		
+	let link = '/community/photo/detail?iBoard=' + iBoard
+	location.href = link //주소값 이동
+}
+
 function getCmBoardList(page) { // 커뮤니티 페이지선택
 	location.href= url + `?page=${page}`				
 }

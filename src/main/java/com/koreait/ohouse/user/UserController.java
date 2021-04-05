@@ -78,14 +78,19 @@ public class UserController {
 	@GetMapping("/mypage")
 	public void openmypage(UserDTO dto, Model model) {
 		dto.setiUser(SecurityUtils.getLoginUserPk(hs));
-		model.addAttribute("userDetail", service.selUser(dto)); // 유저 정보 가져오기
+		model.addAttribute("data", service.selUser(dto)); //유저정보 가져오기 
+		
+		model.addAttribute("boardData", service.selUserBoardList(dto)); //유저 글쓴거 가져오기 
+		//model.addAttribute("reviewData", service.selUserReviewList(dto)); //유저 리뷰 가져오기? < 아직구현안됨
+		model.addAttribute("CmtData", service.selUserCmtList(dto));// 유저 댓글 가져오기 
+		model.addAttribute("userStateChk", service.userStateChk(dto)); //유저 좋아요,스크랩, 찜한것 들고오
 	}
 
 	@GetMapping("/edit")
 	public void seluserdetail(UserDTO param, Model model) {
 		param.setiUser(SecurityUtils.getLoginUserPk(hs));
 
-		model.addAttribute("data", service.selUser(param)); // 유저 정보 가져오기
+		model.addAttribute("userDetail", service.selUser(param)); // 유저 정보 가져오기
 	}
 	
 	@ResponseBody

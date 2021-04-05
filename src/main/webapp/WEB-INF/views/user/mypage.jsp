@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<meta charset="UTF-8">
-   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
     <nav class="nav_box">
          <div class="nav_warp">
           <li class ="nav_item"> <a href="/user/mypage">프로필</a></li>
@@ -17,39 +15,36 @@
     <div class ="main_wrap">  
             <div class="user_profile">
                     <div class="user_profile_img_box" >
-                        <div class="circular--landscape circular--size500">
-                            <img id="profileImg" src="/resources/img/user/${data.iUser}/${data.profileImg}" onerror="unnamed.png">		                                        
+                        <div class="circular--landscape circular--size200">
+                            <img class="profileImg" src="/resources/img/user/${data.iUser}/${data.profileImg}" onerror="/resources/img/user/basic_profile.webp">		                                        
                         </div>
-                        <div id="user_nm">'${data.userNm}'</div> 
+                        <div class="user_nm">${data.nm}</div> 
 
-                        <div id="user_profile_link">
-                            <div id="link_item">
+                        <div class="user_profile_link">
+                            <div class="link_item">
                                 <span class="link_item_icon"> 
                                     <i class="far fa-bookmark fa-2x"></i>
                                 </span>
-                                <div>스크랩</div>
-                                <div>0</div>
+                                <div class="link_item_title">스크랩</div>
+                                <div>${userStateChk.cmScrapChk}</div>
                             </div>
-                            <div id="link_item">
+                            <div class="link_item">
                                 <span class="link_item_icon"> 
                                     <i class="far fa-heart fa-2x"></i>
                                 </span>
-                                <div>스크랩</div>
-                                <div>0</div>
+                                <div class="link_item_title">좋아요</div>
+                                <div>${userStateChk.favoriteChk}</div>
                             </div>
-                            <div id="link_item">
+                            <div class="link_item">
                                 <span class = "link_item_icon">
                                     <i class="fas fa-ticket-alt fa-2x"></i>
                                 </span>
-                                <div>스크랩</div>
-                                <div>0</div>
+                                <div class="link_item_title">찜한상품</div>
+                                <div class="link_item_content">${userStateChk.pdScrapChk}</div>
                             </div>
                         </div>
                         
                     </div>
-
- 
-                스크랩, 팔로워, 팔로잉 좋아요 수 확인
 
             </div>
         </div>  
@@ -58,16 +53,55 @@
             <section class="post_list">
                 <h3 class="post_title">커뮤니티</h3>
                 <div class="post_item_box">
-                    -커뮤니티에서 글 쓴 것들 리스트         
+                
+					<table>
+						<thead class="post_table_head">
+							<tr class="post_table_tr">
+								<th>제목</th>
+								<th>수정일</th>
+								<th>조회수</th>
+								<th>좋아요</th>
+							</tr>
+						</thead>
+						<c:forEach items="${boardData}" var="item">
+						
+							<tbody class="post_table_body">
+								<tr class="post_table_tr" onclick="mypageLocation(${item.iBoard})">
+									<td>${item.title}</td>
+									<td>${item.rDt}</td>
+									<td>${item.hits}</td>
+									<td>${item.favoriteCnt}</td>
+								</tr>
+							</tbody>
+						
+						</c:forEach>
+					</table>
                 </div>
 
-                <h3 class="post_title">리뷰</h3>
-                    <div class="post_item_box">
-                        -리뷰들       
-                    </div>
                 <h3 class="post_title">댓글</h3>
                     <div class="post_item_box">
-                        -댓글들      
+                    
+                    <table>
+						<thead class="post_table_head">
+							<tr class="post_table_tr">
+								<th >댓글내용</th>
+								<th>수정일</th>
+							</tr>
+						</thead>
+                     <c:forEach items="${CmtData}" var="item">
+                     	<tbody class="post_table_body">
+							<tr class="post_table_tr">
+								<td>${item.ctnt}</td>
+								<td>${item.cmtDt}</td>
+							</tr>
+						</tbody>
+               		</c:forEach>
+                	</table> 
+                       
+                    </div>
+                <h3 class="post_title">스크랩 </h3>
+                    <div class="post_item_box">
+                          
                     </div>
             </section>
         </div>          

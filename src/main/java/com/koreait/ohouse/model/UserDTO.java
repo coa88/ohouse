@@ -8,6 +8,28 @@ public class UserDTO extends UserEntity {
 	
 	private String currentPw;
 	private MultipartFile file;
+	private int favoriteChk;
+	private int cmScrapChk;
+	public int getFavoriteChk() {
+		return favoriteChk;
+	}
+	public void setFavoriteChk(int favoriteChk) {
+		this.favoriteChk = favoriteChk;
+	}
+	public int getCmScrapChk() {
+		return cmScrapChk;
+	}
+	public void setCmScrapChk(int cmScrapChk) {
+		this.cmScrapChk = cmScrapChk;
+	}
+	public int getPdScrapChk() {
+		return pdScrapChk;
+	}
+	public void setPdScrapChk(int pdScrapChk) {
+		this.pdScrapChk = pdScrapChk;
+	}
+	private int pdScrapChk;
+	
 	
 	public MultipartFile getFile() {
 		return file;

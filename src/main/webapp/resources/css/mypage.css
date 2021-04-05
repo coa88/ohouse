@@ -22,6 +22,10 @@
     color: #35c5f0;
 }
 
+.user_mypage {
+	display: flex;
+}
+
 .user_mypage> .main_container{
     margin-bottom: 40px;
 }
@@ -44,20 +48,31 @@
 }
 
 
-#user_profile_link{
+.user_nm{
+	text-align: center;
+}
+.user_profile_link{
     display: flex;
 }
 
-#user_profile_link>div{
+.user_profile_link>div{
     padding: 10px
 }
 
-#link_item>div{
+.link_item>div{
     text-align: center;
 }
 
-#user_profile_link{
+.user_profile_link{
     border-top: 1px solid #eaebef;
+}
+
+.link_item_title{
+	display: inline-block;
+	padding-top: 10px
+}
+.link_item_content{
+	padding-top: 10px
 }
 
 
@@ -70,19 +85,33 @@
 .post_list{
     padding: 10 10 30 10;
     margin-bottom: 60px;
+    margin-left: 30px;
     position: relative;
+    
 }
 .post_title{
     color: #000;
     font-weight: 700;
     position: relative;
     margin-bottom: 20px;
+    padding-top:20px;
 }
 .post_item_box{
-    width: 100%;
+    width: 80%;
     padding: 80px 0;
     border: 1px dashed #dbdbdb;
     color: #757575;
     font-weight: 700;
     font-size: 13px;
+    display: inline-grid;
 }
+
+.post_table_tr > th{
+	padding:10px;
+}
+
+.post_table_tr > td{
+	text-align:center;
+	padding:10px;
+}
+
