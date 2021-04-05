@@ -187,6 +187,11 @@
 		DELETE FROM cm_favorite
 		WHERE i_board = #{iBoard} AND i_user = #{iUser}
 	</delete>
+	
+	<delete id="delFavoriteAll">
+		DELETE FROM cm_favorite
+		WHERE i_board = #{iBoard}
+	</delete>
 	<!-- /////////////////////////// 스크랩 /////////////////////////// -->
 	<insert id="insScrap">
 		INSERT INTO cm_scrap
@@ -204,6 +209,11 @@
 	<delete id="delScrap">
 		DELETE FROM cm_scrap
 		WHERE i_board = #{iBoard} AND i_user = #{iUser}
+	</delete>
+	
+	<delete id="delScrapAll">
+		DELETE FROM cm_scrap
+		WHERE i_board = #{iBoard}
 	</delete>
 	<!-- /////////////////////////// 커뮤니티 댓글 /////////////////////////// -->
 
@@ -229,6 +239,11 @@
 		WHERE i_cmt = #{iCmt} AND i_user = #{iUser}
 	</delete>
 
+	<delete id="delCmtAll">
+		DELETE FROM cm_cmt
+		WHERE i_board = #{iBoard}
+	</delete>
+	
 	<!-- /////////////////////////// 커뮤니티 대댓글 /////////////////////////// -->
 	
 	<insert id="insReCmt">

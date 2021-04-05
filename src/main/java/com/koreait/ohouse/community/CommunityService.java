@@ -200,8 +200,10 @@ public class CommunityService {
 		
 		
 		mapper.delCmPhoto(param);// 사진삭제
-		mapper.delFavorite(param);// 좋아요삭제
-		mapper.delScrap(param); //스크랩삭제
+		mapper.delCmtAll(param); //댓글삭제
+		mapper.delFavoriteAll(param);// 좋아요삭제
+		mapper.delScrapAll(param); //스크랩삭제
+		
 		return mapper.delCmBoard(param);
 	}
 	
