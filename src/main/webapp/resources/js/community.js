@@ -104,20 +104,122 @@ function getCmtList() {
 				if (data.isMycmt === 1) {
 					delButton = `<button onclick="delCmt(${data.iCmt})">삭제</button>`
 				}
-				var div = document.createElement('div')
+				const div = document.createElement('div')
+
+				let url = new URLSearchParams(location.search)
+				let urlParams = url.get('iBoard')
 				div.innerHTML =
 					`
 					<span>${data.nm}</span>
-					<span>${data.ctnt}</span>			
+					<span>${data.ctnt}</span>
+					<button class="reCmtBtn" type="button" data-iCmt="${data.iCmt}" onclick="reCmtBtnClk(${data.iCmt},${data.cmtGroup},${urlParams})">답글달기</button>
 					${delButton}
+					<div class="reCmtDiv"></div>
 					`
 				return div
 			}
+			
 
 		})
+
 }
 
-//댓글 삭제
+// 대댓글 창열기
+function reCmtBtnClk(icmt, cmtGroup, urliBoard) {
+	let reCmtBtn = document.getElementsByClassName('reCmtBtn')
+	for (let i = 0; i < reCmtBtn.length; i++) {
+		let dataiCmt = reCmtBtn[i].getAttribute('data-iCmt')
+		if (dataiCmt == icmt) {
+			let reCmtDiv = document.querySelectorAll('.reCmtDiv')
+			reCmtDiv[i].innerHTML =
+				`
+				<form id="recmtFrm">
+					<input type="hidden" name="cmtiBoard" value="${urliBoard}">
+					<input type="hidden" name="cmtGroup" value="${cmtGroup}">
+					<input type="text" name="ctnt">				
+					<input type="button" name="btn" value="등록">
+				</form>
+				`
+		}
+	}
+	recmtInsert()
+
+}
+
+// 대댓글 달기
+const reCmtFrmElem = document.querySelectorAll('#recmtFrm')
+const rectntElem = reCmtFrmElem.ctnt
+const rebtnElem = reCmtFrmElem.btn
+const reiBoardElem = reCmtFrmElem.cmtiBoard
+const recmtGroupElem = reCmtFrmElem.cmtGroup
+
+function recmtInsert() {
+	for (let i = 0; i < reCmtFrmElem.length; i++) {
+		reCmtFrmElem[i].addEventListener('click', function() {
+			recmtEvent(reCmtFrmElem, i)
+		}, false)
+	}
+}
+
+function recmtEvent(reCmtFrmElem, i) {
+	if (reCmtFrmElem) {
+		reCmtFrmElem.onsubmit = function(e) {
+			e.preventDefault()
+		}
+
+		let rectntElem = reCmtFrmElem[i]
+		let rebtnElem = reCmtFrmElem[i]
+		let iBoard = reiBoardElem[i]
+		let cmtGroup = recmtGroupElem[i]
+
+		rectntElem.onkeyup = function(e) {
+			if (e.keyCode === 13) {
+				ajax()
+			}
+		}
+
+		rebtnElem.addEventListener('click', ajax)
+
+		function ajax() {
+			if (rectntElem.value === '') {
+				return
+			}
+
+			let param = {
+				cmtGroup: cmtGroup.value,
+				iBoard: iBoard.value,
+				ctnt: rectntElem.value
+			}
+
+			console.log(param)
+			fetch('/community/insReCmt', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(param)
+			}).then(function(res) {
+				return res.json()
+			}).then(function(data) {
+				proc(data)
+			})
+		}
+
+		function proc(data) {
+			switch (data.result) {
+				case 0:
+					alert('댓글 작성 실패하였습니다.')
+					return
+				case 1:
+					rectntElem.value = ''
+					alert('댓글 성공')
+					return
+			}
+		}
+	}
+}
+
+// 댓글 삭제
 function delCmt(iCmt) {
 	if (!confirm('댓글을 삭제하시겠습니까? 삭제한 댓글은 되돌릴 수 없습니다.')) {
 		return

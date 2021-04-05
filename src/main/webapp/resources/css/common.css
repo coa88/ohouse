@@ -1446,10 +1446,6 @@ img {
 	color: #656e75;
 }
 
-.cmtHide {
-	display: none;
-}
-
 .ph_color::placeholder{
 	color:#35c5f0;
 }
@@ -1464,6 +1460,8 @@ img {
     left: 50%;
     margin-left: -568px;
 }
+
+
 
 /* 상품 이미지 시작 */
 .pdDelBtn {

@@ -108,7 +108,6 @@ function pdScrapList(iProduct, scrapChk) { // 리스트페이지에서 스크랩
 			for(let i=0; i<scrapDiv.length; i++) {
 				let dataIProduct = scrapDiv[i].getAttribute('data-iProduct')
 				if(dataIProduct == iProduct) {
-					console.log('ddd')
 					scrapIcon[i].classList.toggle('blue')					
 				}
 			}
