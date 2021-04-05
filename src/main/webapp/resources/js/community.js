@@ -140,7 +140,6 @@ function delCmt(iCmt) {
 }
 
 /*
-
 // 댓글 obj
 var cmtObj = {
 	iBoard: 0,
@@ -162,12 +161,10 @@ var cmtObj = {
 		if (list.length == 0) {
 			return
 		}
-
 		for (var i = 0; i < list.length; i++) {
 			var recode = this.createRecode(list[i])
 			cmtListElem.append(recode)
 		}
-
 		recmtInsert()
 	},
 	createRecode: function(item) {
@@ -191,37 +188,30 @@ var cmtObj = {
 		return div
 	},
 }
-
 //댓글 달기
 var cmtFrmElem = document.querySelector('#cmtFrm')
 if (cmtFrmElem) {
 	cmtFrmElem.onsubmit = function(e) {
 		e.preventDefault()
 	}
-
 	var ctntElem = cmtFrmElem.ctnt
 	var btnElem = cmtFrmElem.btn
 	var iBoard = document.querySelector('#iBoard').dataset.id
 	cmtObj.iBoard = iBoard
-
 	ctntElem.onkeyup = function(e) {
 		if (e.keyCode === 13) {
 			ajax()
 		}
 	}
-
 	btnElem.addEventListener('click', ajax)
-
 	function ajax() {
 		if (ctntElem.value === '') {
 			return
 		}
-
 		var param = {
 			iBoard: iBoard,
 			ctnt: ctntElem.value
 		}
-
 		fetch('/community/insCmt', {
 			method: 'POST',
 			headers: {
@@ -234,7 +224,6 @@ if (cmtFrmElem) {
 			proc(data)
 		})
 	}
-
 	function proc(data) {
 		switch (data.result) {
 			case 0:
@@ -247,19 +236,16 @@ if (cmtFrmElem) {
 		}
 	}
 }
-
 //댓글 리스트
 var cmtListElem = document.querySelector('#cmtList')
 if (cmtListElem) {
 	cmtObj.getCmtList()
 }
-
 //댓글 삭제
 function delCmt(iCmt) {
 	if (!confirm('댓글을 삭제하시겠습니까? 삭제한 댓글은 되돌릴 수 없습니다.')) {
 		return
 	}
-
 	fetch(`/community/delCmt?iCmt=${iCmt}`, {
 		method: 'delete'
 	}).then(function(res) {
@@ -275,14 +261,12 @@ function delCmt(iCmt) {
 		}
 	})
 }
-
 //대댓글 입력창
 function recmtToggleFrm(cmtGroup) {
 	let i = cmtGroup - 1
 	let recmtFrmAll = document.querySelectorAll('.recmtFrm')
 	recmtFrmAll[i].classList.toggle('cmtHide')
 }
-
 //대댓글 달기
 function recmtInsert() {
 	let recmtFrmElem = document.querySelectorAll('.recmtFrm')
@@ -292,40 +276,32 @@ function recmtInsert() {
 		}, false)
 	}
 }
-
 function recmtEvent(recmtFrmElem, i) {
-
 	if (recmtFrmElem) {
 		recmtFrmElem.onsubmit = function(e) {
 			e.preventDefault()
 		}
-
 		let rectntElem = recmtFrmElem[i].re_ctnt
 		let rebtnElem = recmtFrmElem[i].re_btn
 		let iBoard = document.querySelector('#iBoard').dataset.id
 		let cmtGroup = document.querySelector('#cmtGroup').dataset.id
 		cmtObj.iBoard = iBoard
 		cmtObj.cmtGroup = cmtGroup
-
 		rectntElem.onkeyup = function(e) {
 			if (e.keyCode === 13) {
 				ajax()
 			}
 		}
-
 		rebtnElem.addEventListener('click', ajax)
-
 		function ajax() {
 			if (rectntElem.value === '') {
 				return
 			}
-
 			let param = {
 				cmtGroup: cmtGroup,
 				iBoard: iBoard,
 				ctnt: rectntElem.value
 			}
-
 			console.log(param)
 			fetch('/community/insReCmt', {
 				method: 'POST',
@@ -339,7 +315,6 @@ function recmtEvent(recmtFrmElem, i) {
 				proc(data)
 			})
 		}
-
 		function proc(data) {
 			switch (data.result) {
 				case 0:
@@ -352,10 +327,5 @@ function recmtEvent(recmtFrmElem, i) {
 			}
 		}
 	}
-
 }
-
-
-
 */
-
