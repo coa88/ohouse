@@ -299,7 +299,7 @@ function productRegister () {
 		if(data.result === 0 || data.result === undefined) {
 			alert('업로드 실패하였습니다.')			
 		} else {
-			location.href='/store/register?iProduct='+ data.iProduct			
+			location.href='/store/category/productInfo?category='+ categoryVal + '&iProduct=' + data.iProduct			
 		} 
 	}).catch(error => console.error('Error:', error))
 }

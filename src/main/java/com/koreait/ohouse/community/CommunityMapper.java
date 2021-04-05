@@ -33,12 +33,14 @@ public interface CommunityMapper {
 	int insFavorite(CommunityDTO param);
 	int selFavorite(CommunityDTO param);
 	int delFavorite(CommunityDTO param);
+	int delFavoriteAll(CommunityDTO param);
 	
 	// ----------------------------스크랩----------------------------//
 	
 	int insScrap(CommunityDTO param);
 	int selScrap(CommunityDTO param);
 	int delScrap(CommunityDTO param);
+	int delScrapAll(CommunityDTO param);
 
 	// ----------------------------커뮤니티 댓글----------------------------//
 
@@ -47,6 +49,7 @@ public interface CommunityMapper {
 	List<CommunityCmtDTO> selCmtList(CommunityCmtDTO p);
 	
 	int delCmt(CommunityCmtEntity p);
+	int delCmtAll(CommunityDTO p);
 	
 	// ----------------------------커뮤니티 대댓글----------------------------//
 	int insReCmt(CommunityCmtEntity p);
