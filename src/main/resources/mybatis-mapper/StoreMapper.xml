@@ -95,6 +95,7 @@
 			, D.star_rt
 			, IFNULL((SELECT COUNT(1) FROM pd_board WHERE category = A.category), 0) AS product_cnt
 			, IFNULL(D.review_cnt, 0) AS review_cnt
+			, IFNULL((SELECT COUNT(1) FROM pd_scrap E WHERE E.i_product = A.i_product AND E.i_user = #{iUser}), 0)  AS scrap_chk
 		FROM pd_board A
 
 		LEFT JOIN t_user B
@@ -120,6 +121,51 @@
 		WHERE A.category = #{category}
 		ORDER BY A.product_dt DESC
 		LIMIT #{sIdx}, #{recordCntPerPage}
+	</select>
+	
+	<select id="selPdBoardSales" resultType="StoreDTO">
+	SELECT
+		A.i_product
+		, A.category
+		, A.product_title
+		, A.product_nm
+		, A.brand
+		, A.price
+		, A.sales
+		, A.final_price
+		, A.product_dt
+		, A.i_user
+		, B.nm
+		, C.star_rt
+		, IFNULL(C.review_cnt, 0) AS review_cnt
+		, D.pd_img
+		, IFNULL((SELECT COUNT(1) FROM pd_scrap E WHERE E.i_product = A.i_product AND E.i_user = #{iUser}), 0)  AS scrap_chk
+	FROM pd_board A
+	
+	LEFT JOIN t_user B
+	ON A.i_user = B.i_user
+	
+	LEFT JOIN (
+		SELECT
+			i_product
+			, COUNT(i_product) AS review_cnt
+			, star_rt
+		FROM order_review
+		GROUP BY i_product
+	) C
+	ON A.i_product = C.i_product
+	
+	LEFT JOIN (
+			SELECT *
+			FROM pd_photo
+			WHERE pdimg_seq = 1
+		) D
+	ON A.i_product = D.i_product
+	<if test="category > 0">
+		WHERE category = #{category}
+	</if>
+	ORDER BY sales DESC
+	LIMIT #{sIdx}, #{recordCntPerPage}
 	</select>
 
 	<update id="updPdBoard">
@@ -180,5 +226,24 @@
 	<delete id="delPdSubPhoto">	<!-- 본문내용사진 -->
 		DELETE FROM pdsub_photo
 		WHERE i_product = #{iProduct};
+	</delete>
+	
+	<!-- /////////////////////////// 스크랩 /////////////////////////// -->
+	<insert id="insPdScrap">
+		INSERT INTO pd_scrap
+		(i_product, i_user)
+		VALUES
+		(#{iProduct}, #{iUser})
+	</insert>
+
+	<select id="selPdScrap" resultType="_int">
+		SELECT COUNT(i_product) 
+		FROM pd_scrap
+		WHERE i_product = #{iProduct} AND i_user = #{iUser}
+	</select>
+
+	<delete id="delPdScrap">
+		DELETE FROM pd_scrap
+		WHERE i_product = #{iProduct} AND i_user = #{iUser}
 	</delete>
 </mapper>

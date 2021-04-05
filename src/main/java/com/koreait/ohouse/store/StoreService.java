@@ -101,6 +101,11 @@ public class StoreService {
 	}
 	
 	public PagingDTO selPdBoardList(StoreDTO param) { // 게시물리스트
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		if(i_user > 0) {
+			param.setiUser(i_user);
+		}
+		
 		if(param.getCategory() == 0) { // 카테고리를 선택하지않으면 1을 선택
 			param.setCategory(1);
 		}
@@ -112,7 +117,6 @@ public class StoreService {
 		// 선택된페이지가 몇번게시물인지 계산
 		int sIdx = (param.getPage() - 1) * param.getRecordCntPerPage(); 
 		param.setsIdx(sIdx);
-		
 		PagingDTO dto = new PagingDTO();
 		dto.setPage(param.getPage()); 
 		dto.setPdList(mapper.selPdBoardList(param));
@@ -128,6 +132,17 @@ public class StoreService {
 		return mapper.selPdPhotoList(photoList);
 	}
 	
+	public List<StoreDTO> selPdBoardSales(StoreDTO param, int category, int sIdx, int recordCntPerPage) { // 세일상품리스트
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		if(i_user > 0) {
+			param.setiUser(i_user);
+		}
+		
+		param.setCategory(category);
+		param.setsIdx(sIdx);
+		param.setRecordCntPerPage(recordCntPerPage);
+		return mapper.selPdBoardSales(param); 
+	}
 	
 	public int delPdBoard(StoreDTO param) { // 삭제
 		int i_user = SecurityUtils.getLoginUserPk(hs);
@@ -137,8 +152,26 @@ public class StoreService {
 		myFileUtils.delFolder(path);
 		
 		//TODO: 리뷰 지우기
+		mapper.delPdScrap(param);
 		mapper.delPdPhoto(param);
 		mapper.delPdSubPhoto(param);
 		return mapper.delPdBoard(param);
 	}
+	
+	// ----------------------------스크랩----------------------------//
+	
+		public int chkScrap(StoreDTO param) {
+			//1: 스크랩 2: 로그인안됨 
+			int i_user = SecurityUtils.getLoginUserPk(hs);
+			if(i_user == 0) { // 로그인이 안되어있으면
+				return 2;
+			}
+			param.setiUser(i_user);
+			int scrapChk = mapper.selPdScrap(param);
+			if (scrapChk == 1) { // 이미 스크랩한경우
+				return mapper.delPdScrap(param);
+			}
+			
+			return mapper.insPdScrap(param);
+		}
 }

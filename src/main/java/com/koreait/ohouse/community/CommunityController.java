@@ -70,8 +70,6 @@ public class CommunityController {
 
 	@GetMapping("/photo/detail") // 사진 디테일페이지
 	public String photoDetail(CommunityDTO param, Model model) {
-		model.addAttribute("favState", service.selFavorite(param));
-		model.addAttribute("scrapState", service.selScrap(param));
 		model.addAttribute("data", service.selCmBoard(param));
 		return "community/detail";
 	}
@@ -86,8 +84,6 @@ public class CommunityController {
 
 	@GetMapping("/houseparty/detail") // 집들이 디테일페이지
 	public String housepartyDetail(CommunityDTO param, Model model) {
-		model.addAttribute("favState", service.selFavorite(param));
-		model.addAttribute("scrapState", service.selScrap(param));
 		model.addAttribute("data", service.selCmBoard(param));
 		return "community/detail";
 	}
@@ -102,8 +98,6 @@ public class CommunityController {
 
 	@GetMapping("/tip/detail") // 노하우 디테일페이지
 	public String tipDetail(CommunityDTO param, Model model) {
-		model.addAttribute("favState", service.selFavorite(param));
-		model.addAttribute("scrapState", service.selScrap(param));
 		model.addAttribute("data", service.selCmBoard(param));
 		return "community/detail";
 	}
@@ -133,11 +127,11 @@ public class CommunityController {
 	// ----------------------------커뮤니티 좋아요----------------------------//
 	@ResponseBody
 	@GetMapping("/favorite")
-	public Map<String, Object> favorite(@RequestParam int iBoard, @RequestParam int favState) {
+	public Map<String, Object> favorite(@RequestParam int iBoard, @RequestParam int favoriteChk) {
 		Map<String, Object> resultValue = new HashMap();
 		CommunityDTO dto = new CommunityDTO();
 		dto.setiBoard(iBoard);
-		dto.setFavState(favState);
+		dto.setFavoriteChk(favoriteChk);
 		
 		resultValue.put("result", service.chkFavorite(dto));
 		return resultValue;
@@ -146,11 +140,11 @@ public class CommunityController {
 	// ----------------------------커뮤니티 스크랩----------------------------//
 	@ResponseBody
 	@GetMapping("/scrap")
-	public Map<String, Object> scrap(@RequestParam int iBoard, @RequestParam int scrapState) {
+	public Map<String, Object> scrap(@RequestParam int iBoard, @RequestParam int scrapChk) {
 		Map<String, Object> resultValue = new HashMap();
 		CommunityDTO dto = new CommunityDTO();
 		dto.setiBoard(iBoard);
-		dto.setScrapState(scrapState);
+		dto.setScrapChk(scrapChk);
 		
 		resultValue.put("result", service.chkScrap(dto));
 		return resultValue;

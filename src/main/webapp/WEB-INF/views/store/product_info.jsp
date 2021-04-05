@@ -5,7 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="store-detail-container">
-	<div class="pdDelBtn" onclick="DeleteProduct(${param.iProduct})">삭제</div>
+	<c:if test="${loginUser.iUser eq data.iUser}">
+		<div class="pdDelBtn" onclick="DeleteProduct(${param.iProduct})">삭제</div>
+	</c:if>
     <!-- 상품이미지 시작 -->
 	<div class="store-detail-photo">
 		<div class="product_img">
@@ -16,7 +18,7 @@
 			</div>
 
 			<div class="pro_big_img_box">
-				<img class='pro_big_img' src="/resources/img/store/detail1.jpg" alt="커다란 이미지.">
+				<img class='pro_big_img' src="/resources/img/store/board/${data.iProduct}/${photoList[0].pdImg}" alt="커다란 이미지.">
 			</div>
 		</div>
     </div>
@@ -133,7 +135,7 @@
 	        </ol>
 	    </div>
     </div>
-    
+<!-- 
     <div>리뷰쓰기 테스트 로그인 되어있으면 리뷰쓰기 버튼이 보이고 안되어있으면 로그인으로 </div>
     <c:choose>
     	<c:when test="${loginUser == null}">
@@ -154,6 +156,7 @@
 	         	</div>
 	        </div>
 	    </div>
+	     -->
 </div>
 <div class ="review_modal">
     <div class="review_modal_title"> 리뷰 쓰기

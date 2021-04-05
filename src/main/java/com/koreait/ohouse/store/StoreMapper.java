@@ -11,24 +11,31 @@ import com.koreait.ohouse.model.StoreSubPhotoEntity;
 
 @Mapper
 public interface StoreMapper {
-	int insPdBoard(StoreDTO param);
+	int insPdBoard(StoreDTO param); //제품등록
 	
 	StoreCategoryEntity selPdCategory(StoreCategoryEntity param);
-	List<StoreCategoryEntity> selPdCategoryList();
-	StoreDTO selPdBoard(StoreDTO param);
-	List<StoreDTO> selPdBoardList(StoreDTO param);
-	int selPdMaxPageNum(StoreDTO param);
+	List<StoreCategoryEntity> selPdCategoryList(); //카테고리 리스트
 	
-	int updPdBoard(StoreDTO param);
+	StoreDTO selPdBoard(StoreDTO param); //제품선택
+	List<StoreDTO> selPdBoardList(StoreDTO param); //제품리스트
+	List<StoreDTO> selPdBoardSales(StoreDTO param); //세일제품 리스트
+	int selPdMaxPageNum(StoreDTO param); // 최대페이지 구하는 쿼리문
 	
-	int delPdBoard(StoreDTO param);
+	int updPdBoard(StoreDTO param); //수정
+	
+	int delPdBoard(StoreDTO param); //제품 삭제
 	
 	// 사진관련
-	int insPdPhoto(StorePhotoEntity param);
-	int insPdSubPhoto(StoreSubPhotoEntity param);
+	int insPdPhoto(StorePhotoEntity param); // 제품사진 DB저장
+	int insPdSubPhoto(StoreSubPhotoEntity param); // 본문사진 DB저장
 	
-	List<StorePhotoEntity> selPdPhotoList(StorePhotoEntity param);
+	List<StorePhotoEntity> selPdPhotoList(StorePhotoEntity param); // 제품사진 리스트
 	
-	int delPdPhoto(StoreDTO param);
+	int delPdPhoto(StoreDTO param); // 사진삭제
 	int delPdSubPhoto(StoreDTO param);
+	
+	// ----------------------------스크랩----------------------------//
+	int insPdScrap(StoreDTO param);
+	int selPdScrap(StoreDTO param);
+	int delPdScrap(StoreDTO param);
 }

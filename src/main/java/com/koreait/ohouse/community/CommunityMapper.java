@@ -20,6 +20,7 @@ public interface CommunityMapper {
 	List<CommunityDTO> selCmBoardList(CommunityDTO param);
 	CommunityPhotoEntity selCmPhoto(CommunityPhotoEntity param);
 	int selCmMaxPageNum(CommunityDTO param);
+	List<CommunityDTO> selCmBoardBest(CommunityDTO param);
 	
 	int updCmBoard(CommunityDTO param);
 	int hitsCmBoard(CommunityDTO param);

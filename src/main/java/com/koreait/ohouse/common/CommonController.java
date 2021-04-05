@@ -4,10 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.koreait.ohouse.community.CommunityService;
+import com.koreait.ohouse.model.CommunityDTO;
+import com.koreait.ohouse.model.StoreDTO;
+import com.koreait.ohouse.store.StoreService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,14 +22,21 @@ import lombok.RequiredArgsConstructor;
 public class CommonController {
 	
 	final private CommonService service;
-
+	final private CommunityService cmService;
+	final private StoreService storeService;
+	
 	@GetMapping({"/","/community"})
-	public String community() {
+	public String community(CommunityDTO param, Model model) {
+		model.addAttribute("best", cmService.selCmBoardBest(param, 3, 0, 1));
+		model.addAttribute("photoBest", cmService.selCmBoardBest(param, 2, 0, 8));
+		model.addAttribute("housepartyBest", cmService.selCmBoardBest(param, 3, 1, 3));
 		return "community";
 	}
 	
 	@GetMapping("/store")
-	public String store() {
+	public String store(StoreDTO param, Model model) {
+		model.addAttribute("pdSales", storeService.selPdBoardSales(param, param.getCategory(), 0, 4));
+		
 		return "store";
 	}
 	

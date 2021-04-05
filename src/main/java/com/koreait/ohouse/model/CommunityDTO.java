@@ -13,8 +13,7 @@ public class CommunityDTO extends CommunityEntity {
 	private int scrapCnt;
 	private int cmtCnt;
 	private int boardCnt;
-	private int favState;
-	private int scrapState;
+	private int favoriteChk;
 	private int scrapChk;
 	
 	
@@ -87,22 +86,6 @@ public class CommunityDTO extends CommunityEntity {
 		this.profileImg = profileImg;
 	}
 
-	public int getFavState() {
-		return favState;
-	}
-
-	public void setFavState(int favState) {
-		this.favState = favState;
-	}
-	
-	public int getScrapState() {
-		return scrapState;
-	}
-
-	public void setScrapState(int scrapState) {
-		this.scrapState = scrapState;
-	}
-
 	//페이징
 	public int getRecordCntPerPage() {
 		return recordCntPerPage;
@@ -126,6 +109,14 @@ public class CommunityDTO extends CommunityEntity {
 
 	public void setPage(int page) {
 		this.page = page;
+	}
+	
+	public int getFavoriteChk() {
+		return favoriteChk;
+	}
+
+	public void setFavoriteChk(int favoriteChk) {
+		this.favoriteChk = favoriteChk;
 	}
 
 	public int getScrapChk() {

@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreait.ohouse.common.SecurityUtils;
+import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityEntity;
 import com.koreait.ohouse.model.StoreDTO;
 import com.koreait.ohouse.model.UserEntity;
@@ -29,12 +31,9 @@ public class StoreController {
 
 	final StoreService service;
 	final private HttpSession hs;
-	final Logger loger = LoggerFactory.getLogger(this.getClass());
 
 	@GetMapping("/register")
 	public String register() {
-		loger.info("[register] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
-		
 		UserEntity i_user = SecurityUtils.getLoginUser(hs);
 		if(!(SecurityUtils.getLoginUserPk(hs) > 0) || i_user.getUserRank() == null) {
 			return "redirect:/user/login";
@@ -54,6 +53,7 @@ public class StoreController {
 
 	@GetMapping("/category")
 	public String category(StoreDTO param, Model model) {
+		model.addAttribute("pdSales", service.selPdBoardSales(param, param.getCategory(), 0, 5));
 		model.addAttribute("category", service.selPdCategory(param));
 		model.addAttribute("categoryList", service.selPdCategoryList());
 		model.addAttribute("data", service.selPdBoardList(param));
@@ -83,6 +83,19 @@ public class StoreController {
 		System.out.println("iProduct : " + param.getiProduct());
 		Map<String, Object> resultValue = new HashMap();
 		resultValue.put("result", service.delPdBoard(param));
+		return resultValue;
+	}
+	
+	// ----------------------------스토어 스크랩----------------------------//
+	@ResponseBody
+	@GetMapping("/scrap")
+	public Map<String, Object> scrap(@RequestParam int iProduct, @RequestParam int scrapChk) {
+		Map<String, Object> resultValue = new HashMap();
+		StoreDTO dto = new StoreDTO();
+		dto.setiProduct(iProduct);
+		dto.setScrapChk(scrapChk);
+		
+		resultValue.put("result", service.chkScrap(dto));
 		return resultValue;
 	}
 }

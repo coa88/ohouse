@@ -78,6 +78,10 @@ public class CommunityService {
 	}
 	
 	public CommunityDTO selCmBoard(CommunityDTO param) { // 게시물 선택
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		if(i_user > 0) {
+			param.setiUser(i_user);
+		}
 		mapper.hitsCmBoard(param);
 		return mapper.selCmBoard(param);
 	}
@@ -103,6 +107,13 @@ public class CommunityService {
 		dto.setPage(param.getPage());
 		
 		return pagingUtils.pageControll(dto);
+	}
+	
+	public List<CommunityDTO> selCmBoardBest(CommunityDTO param, int secTyp, int sIdx, int RecordCntPerPage) { // 게시물 선택
+		param.setSecTyp(secTyp);
+		param.setsIdx(sIdx);
+		param.setRecordCntPerPage(RecordCntPerPage);
+		return mapper.selCmBoardBest(param);
 	}
 	
 	public int updCmBoard(CommunityDTO param) { // 수정 
@@ -195,24 +206,15 @@ public class CommunityService {
 	}
 	
 	// ----------------------------좋아요----------------------------//
-	public int selFavorite(CommunityDTO param) {
-		int i_user = SecurityUtils.getLoginUserPk(hs);
-		System.out.println("i_board : " + param.getiBoard());
-		param.setiUser(i_user);
-		return mapper.selFavorite(param);
-	}
 	
 	public int chkFavorite(CommunityDTO param) {
 		int i_user = SecurityUtils.getLoginUserPk(hs);
 		if(i_user == 0) { // 로그인이 안되어있으면
 			return 2;
 		}
-		System.out.println("i_user : " + i_user);
-		System.out.println("iBoard : " + param.getiBoard());
 		param.setiUser(i_user);
-		int favState = mapper.selFavorite(param);
-		System.out.println("favState : " + favState);
-		if (favState == 1) {
+		int favoriteChk = mapper.selFavorite(param);
+		if (favoriteChk == 1) {
 			return mapper.delFavorite(param);
 		}
 		
@@ -220,24 +222,16 @@ public class CommunityService {
 	}
 	
 	// ----------------------------스크랩----------------------------//
-		public int selScrap(CommunityDTO param) {
-			int i_user = SecurityUtils.getLoginUserPk(hs);
-			System.out.println("i_board : " + param.getiBoard());
-			param.setiUser(i_user);
-			return mapper.selScrap(param);
-		}
 		
 		public int chkScrap(CommunityDTO param) {
+			//1: 스크랩 2: 로그인안됨 
 			int i_user = SecurityUtils.getLoginUserPk(hs);
 			if(i_user == 0) { // 로그인이 안되어있으면
 				return 2;
 			}
-			System.out.println("i_user : " + i_user);
-			System.out.println("iBoard : " + param.getiBoard());
 			param.setiUser(i_user);
-			int favState = mapper.selScrap(param);
-			System.out.println("favState : " + favState);
-			if (favState == 1) {
+			int scrapChk = mapper.selScrap(param);
+			if (scrapChk == 1) { // 이미 스크랩한경우
 				return mapper.delScrap(param);
 			}
 			

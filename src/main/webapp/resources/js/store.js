@@ -45,6 +45,21 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
 // ------------------------------ splide 배너 설정 끝 ------------------------------
 
+
+//마우스 오버시 상품이미지 변경
+let bigImg = document.querySelector('.pro_big_img')
+let minImg = document.querySelectorAll('.pro_min_img')
+for(let i=0; i<minImg.length; i++) {
+	minImg[i].addEventListener("click", changepic)
+}
+
+function changepic() { // 상품이미지 바꾸기
+	let minImgAttribute = this.getAttribute("src")
+	bigImg.setAttribute("src", minImgAttribute)
+}
+
+
+
 //게시물 삭제
 function DeleteProduct(iProduct) {
 	if (confirm('삭제 하시겠습니까?')) {

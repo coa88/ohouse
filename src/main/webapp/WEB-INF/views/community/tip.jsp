@@ -56,89 +56,34 @@
 		                        <div class="tip_img_wrap">
 		                            <img class="tip_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" alt="노하우사진">
 		                         
-		                            <button class="tip_scrap">
-		                                <c:choose>
-		                            		<c:when test="${item.scrapChk > 0}">
-				                                <svg class="scrap_icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-				                                    viewBox="0 0 24 24" class="icon">
-				                                    <defs>
-				                                        <path id="scrap-icon-619-b"
-				                                            d="M12.472 6.93l7.056-3.811A1 1 0 0 1 21 4.002v15.496c0 .83-.672 1.502-1.5 1.502h-15c-.828 0-1.5-.673-1.5-1.502V4.002a1 1 0 0 1 1.472-.883l7.056 3.811a.999.999 0 0 0 .944 0z">
-				                                        </path>
-				                                        <filter id="scrap-icon-619-a" width="150%" height="150%" x="-25%" y="-25%"
-				                                            filterUnits="objectBoundingBox">
-				                                            <feOffset in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-				                                            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1"
-				                                                stdDeviation="1.5"></feGaussianBlur>
-				                                            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out"
-				                                                result="shadowBlurOuter1"></feComposite>
-				                                            <feColorMatrix in="shadowBlurOuter1"
-				                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.26 0"></feColorMatrix>
-				                                        </filter>
-				                                        <filter id="scrap-icon-619-c" width="150%" height="150%" x="-25%" y="-25%"
-				                                            filterUnits="objectBoundingBox">
-				                                            <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1"
-				                                                stdDeviation="1.5"></feGaussianBlur>
-				                                            <feOffset in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
-				                                            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1"
-				                                                operator="arithmetic" result="shadowInnerInner1"></feComposite>
-				                                            <feColorMatrix in="shadowInnerInner1"
-				                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix>
-				                                        </filter>
-				                                    </defs>
-				                                    <g fill="none" fill-rule="nonzero" transform="matrix(1 0 0 -1 0 24)">
-				                                        <use fill="#000" filter="url(#scrap-icon-619-a)" href="#scrap-icon-619-b">
-				                                        </use>
-				                                        <use fill="#35c5f0" fill-opacity=".4" href="#scrap-icon-619-b"></use>
-				                                        <use fill="#000" filter="url(#scrap-icon-619-c)" href="#scrap-icon-619-b">
-				                                        </use>
-				                                        <path stroke="#FFF"
-				                                            d="M12.71 7.37h-.002a1.5 1.5 0 0 1-1.417 0L4.236 3.56a.499.499 0 0 0-.736.442v15.496c0 .553.448 1.002 1 1.002h15c.552 0 1-.449 1-1.002V4.002a.499.499 0 0 0-.734-.443l-7.057 3.81zm-.475-.88h-.001z">
-				                                        </path>
-				                                    </g>
-				                                </svg>
-		                                	</c:when>
-		                                	<c:otherwise>
-		                                		<svg class="scrap_icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-				                                    viewBox="0 0 24 24" class="icon">
-				                                    <defs>
-				                                        <path id="scrap-icon-619-b"
-				                                            d="M12.472 6.93l7.056-3.811A1 1 0 0 1 21 4.002v15.496c0 .83-.672 1.502-1.5 1.502h-15c-.828 0-1.5-.673-1.5-1.502V4.002a1 1 0 0 1 1.472-.883l7.056 3.811a.999.999 0 0 0 .944 0z">
-				                                        </path>
-				                                        <filter id="scrap-icon-619-a" width="150%" height="150%" x="-25%" y="-25%"
-				                                            filterUnits="objectBoundingBox">
-				                                            <feOffset in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-				                                            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1"
-				                                                stdDeviation="1.5"></feGaussianBlur>
-				                                            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out"
-				                                                result="shadowBlurOuter1"></feComposite>
-				                                            <feColorMatrix in="shadowBlurOuter1"
-				                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.26 0"></feColorMatrix>
-				                                        </filter>
-				                                        <filter id="scrap-icon-619-c" width="150%" height="150%" x="-25%" y="-25%"
-				                                            filterUnits="objectBoundingBox">
-				                                            <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1"
-				                                                stdDeviation="1.5"></feGaussianBlur>
-				                                            <feOffset in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
-				                                            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1"
-				                                                operator="arithmetic" result="shadowInnerInner1"></feComposite>
-				                                            <feColorMatrix in="shadowInnerInner1"
-				                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix>
-				                                        </filter>
-				                                    </defs>
-				                                    <g fill="none" fill-rule="nonzero" transform="matrix(1 0 0 -1 0 24)">
-				                                        <use fill="#000" filter="url(#scrap-icon-619-a)" href="#scrap-icon-619-b">
-				                                        </use>
-				                                        <use fill="#FFF" fill-opacity=".4" href="#scrap-icon-619-b"></use>
-				                                        <use fill="#000" filter="url(#scrap-icon-619-c)" href="#scrap-icon-619-b">
-				                                        </use>
-				                                        <path stroke="#FFF"
-				                                            d="M12.71 7.37h-.002a1.5 1.5 0 0 1-1.417 0L4.236 3.56a.499.499 0 0 0-.736.442v15.496c0 .553.448 1.002 1 1.002h15c.552 0 1-.449 1-1.002V4.002a.499.499 0 0 0-.734-.443l-7.057 3.81zm-.475-.88h-.001z">
-				                                        </path>
-				                                    </g>
-				                                </svg>
-		                                	</c:otherwise>
-		                                </c:choose>
+		                            <button class="tip_scrap" onclick="scrapList(${item.iBoard}, ${item.scrapChk})">
+			                            <div class="scrap_div" data-iBoard = "${item.iBoard}">
+			                                <c:choose>
+			                            		<c:when test="${item.scrapChk > 0}">
+					                                <svg class="scrap_icon active_blue" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+					                                    viewBox="0 0 24 24" class="icon">
+					                                    <g fill="none" fill-rule="nonzero" transform="matrix(1 0 0 -1 0 24)">
+					                                        <use fill="#000" filter="url(#scrap-icon-619-a)" href="#scrap-icon-619-b"></use>
+					                                        <path stroke="#FFF"
+					                                            d="M12.71 7.37h-.002a1.5 1.5 0 0 1-1.417 0L4.236 3.56a.499.499 0 0 0-.736.442v15.496c0 .553.448 1.002 1 1.002h15c.552 0 1-.449 1-1.002V4.002a.499.499 0 0 0-.734-.443l-7.057 3.81zm-.475-.88h-.001z">
+					                                        </path>
+					                                    </g>
+					                                </svg>
+			                                	</c:when>
+			                                	<c:otherwise>
+			                                		<svg class="scrap_icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+					                                    viewBox="0 0 24 24" class="icon">
+					                               
+					                                    <g fill="none" fill-rule="nonzero" transform="matrix(1 0 0 -1 0 24)">
+					                                        <use fill="#000" filter="url(#scrap-icon-619-a)" href="#scrap-icon-619-b"></use>
+					                                        <path stroke="#FFF"
+					                                            d="M12.71 7.37h-.002a1.5 1.5 0 0 1-1.417 0L4.236 3.56a.499.499 0 0 0-.736.442v15.496c0 .553.448 1.002 1 1.002h15c.552 0 1-.449 1-1.002V4.002a.499.499 0 0 0-.734-.443l-7.057 3.81zm-.475-.88h-.001z">
+					                                        </path>
+					                                    </g>
+					                                </svg>
+			                                	</c:otherwise>
+			                                </c:choose>
+		                                </div>
 		                            </button>
 		                        </div>
 		                        <div class="tip_con">

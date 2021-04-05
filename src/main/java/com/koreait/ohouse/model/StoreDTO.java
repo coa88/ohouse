@@ -12,6 +12,8 @@ public class StoreDTO extends StoreEntity {
 	private int productCnt;
 	private int reviewCnt;
 	private int starRt;
+	private int scrapChk;
+	
 	// 페이징
 	private int recordCntPerPage; //게시물을 몇개씩 출력하는지 정함.
 	private int sIdx; // 현재 선택된페이지 
@@ -57,6 +59,14 @@ public class StoreDTO extends StoreEntity {
 
 	public void setStarRt(int starRt) {
 		this.starRt = starRt;
+	}
+
+	public int getScrapChk() {
+		return scrapChk;
+	}
+
+	public void setScrapChk(int scrapChk) {
+		this.scrapChk = scrapChk;
 	}
 
 	//페이징

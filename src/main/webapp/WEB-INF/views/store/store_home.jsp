@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <div class="store-header">
     <div class="store-banners">
         <div id="banner-img" class="splide">
@@ -47,29 +50,41 @@
 <div class="store-container">
     <h1 class="store-index-title">오늘의딜</h1>
     <section class="store-item-container-section">
-        <article class="store-big-item">
-            <a href="/store/detail">
-                <div class="store-imgbox">
-                    <div class="store-item-b-img"><img src="../resources/img/1.jpg" class="store-item-b-img-pp"></div>
-                    <button class="scrap-btn">
-                        <span class="fas fa-bookmark fa-lg"></span>
-                    </button>
-                </div>
-                <div class="store-item-info">
-                    <h1 class="store-item-header">
-                        <div class="store-item-brand">판매업체</div>
-                        <div class="store-item-name">상품이름</div>
-                    </h1>
-                    <div class="store-item-pricebox">
-                        <span class="store-item-pricebox-sale">40%</span>
-                        <span class="store-item-pricebox-price">170,000 외</span>
-                    </div>
-                    <div>
-                        <span class="store-item-avg"><i class="fas fa-star"></i>4.7</span>
-                        <span class="store-item-rev"><strong>리뷰 3451</strong></span>
-                    </div>
-                </div>
-            </a>
-        </article>
+    	<c:forEach items="${pdSales}" var="item">
+	        <article class="store-big-item">
+	            <a href="/store/category/productInfo?category=${item.category}&iProduct=${item.iProduct}"></a>
+	                <div class="store-imgbox">
+	                    <div class="store-item-b-img">
+	                    	<img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" class="store-item-b-img-pp">
+	                    </div>
+	                    <button class="scrap-btn" onclick="pdScrapList(${item.iProduct}, ${item.scrapChk})">
+	                    <div class="scrap_div" data-iProduct = "${item.iProduct}">
+                            <c:choose>
+                        		<c:when test="${item.scrapChk > 0}">
+	                        	    <span class="fas fa-bookmark fa-lg blue"></span>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        	    <span class="fas fa-bookmark fa-lg"></span>
+	                        	</c:otherwise>
+                            </c:choose>
+                        </div>
+	                    </button>
+	                </div>
+	                <div class="store-item-info">
+	                    <h1 class="store-item-header">
+	                        <div class="store-item-brand">${item.brand}</div>
+	                        <div class="store-item-name">${item.productTitle}</div>
+	                    </h1>
+	                    <div class="store-item-pricebox">
+	                        <span class="store-item-pricebox-sale">${item.sales}%</span>
+	                        <span class="store-item-pricebox-price"><fmt:formatNumber value="${item.finalPrice}" pattern="#,###"/></span>
+	                    </div>
+	                    <div>
+	                        <span class="store-item-avg"><i class="fas fa-star"></i>${item.starRt}</span>
+	                        <span class="store-item-rev"><strong>리뷰 <fmt:formatNumber value="${item.reviewCnt}" pattern="#,###"/></strong></span>
+	                    </div>
+	                </div>
+	        </article>
+        </c:forEach>
     </section>
 </div>

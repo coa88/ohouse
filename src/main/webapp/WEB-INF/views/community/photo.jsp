@@ -54,8 +54,7 @@
 		                <div class="photo_box_list plr10">
 		                    <div class="box_padding">
 		                    	<input type="hidden" name="iBoard" value="${item.iBoard}">
-		                    	<input type="hidden" name="typ" value="1">
-   								<input type="hidden" name="secTyp" value="2">
+		            
 		                        <div class="box_writer">
 		                            <div class="writer_content">
 		                                <div class="writer_header">
@@ -64,7 +63,6 @@
 		                                        <span class="writer_name">${item.nm}</span>
 		                                    </a>
 		                                </div>
-		                               <!-- <p class="writer_introduction">인스타 @dreaming_roomroom</p>  -->
 		                            </div>
 		                        </div>
 		                        <div class="box_content">
@@ -79,30 +77,40 @@
 		                                </div>
 		                            </div>
 		                            <div class="util">
-		                                <button class="util_icon">
-		                                    <svg class="icon" aria-label="좋아요" width="24" height="24" fill="currentColor"
-		                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-		                                        preserveAspectRatio="xMidYMid meet">
-		                                        <path
-		                                            d="M23.22 7.95c.4 4.94-2.92 9.71-10.92 13.85a.47.47 0 0 1-.42 0C3.88 17.66.56 12.9.96 7.93 1.54 2.48 8.28.3 12.1 4.7c3.8-4.4 10.55-2.22 11.13 3.25z">
-		                                        </path>
-		                                    </svg>
-		                                    <span class="count">${item.favoriteCnt }</span>
+		                                <button class="util_icon" onclick="utilIconChk(${item.iBoard},${item.favoriteChk},2)">
+		                                	<span class="utilFIcon_span" data-iBoard="${item.iBoard}" data-iconAttribute="favorite">
+			                                <c:choose>
+		                                		<c:when test="${item.favoriteChk > 0}">
+				                                    <svg class="fIcon blue" aria-label="좋아요" width="24" height="24" stroke-width="2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+				                                        <path
+				                                            d="M23.22 7.95c.4 4.94-2.92 9.71-10.92 13.85a.47.47 0 0 1-.42 0C3.88 17.66.56 12.9.96 7.93 1.54 2.48 8.28.3 12.1 4.7c3.8-4.4 10.55-2.22 11.13 3.25z">
+				                                        </path>
+				                                    </svg>
+				                                    <span class="count">${item.favoriteCnt }</span>
+			                                    </c:when>
+			                                    <c:otherwise>
+			                                    	<svg class="fIcon" aria-label="좋아요" width="24" height="24" stroke-width="2" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+				                                        <path
+				                                            d="M23.22 7.95c.4 4.94-2.92 9.71-10.92 13.85a.47.47 0 0 1-.42 0C3.88 17.66.56 12.9.96 7.93 1.54 2.48 8.28.3 12.1 4.7c3.8-4.4 10.55-2.22 11.13 3.25z">
+				                                        </path>
+				                                    </svg>
+				                                    <span class="count">${item.favoriteCnt}</span>
+			                                    </c:otherwise>
+		                                    </c:choose>
+		                              		</span>
 		                                </button>
-		                                <button class="util_icon">
+		                                <button class="util_icon" onclick="utilIconChk(${item.iBoard},2,${item.scrapChk})">
+		                                	<span class="utilSIcon_span" data-iBoard="${item.iBoard}" data-iconAttribute="scrap">
 		                                	<c:choose>
 		                                		<c:when test="${item.scrapChk > 0}">
-				                                    <svg class="icon" aria-label="스크랩" width="24" height="24" fill="currentColor"
-				                                        stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24"
-				                                        preserveAspectRatio="xMidYMid meet">
+				                                    <svg class="sIcon blue" aria-label="스크랩" width="24" height="24" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
 				                                        <path
 				                                            d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z">
 				                                        </path>
 				                                    </svg>
 		                                		</c:when>
 		                               			<c:otherwise>
-				                                    <svg class="icon" aria-label="스크랩" width="24" height="24" fill="#35c5f0"
-				                                        stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24"
+				                                    <svg class="sIcon" aria-label="스크랩" width="24" height="24" stroke-width="0.5" viewBox="0 0 24 24"
 				                                        preserveAspectRatio="xMidYMid meet">
 				                                        <path
 				                                            d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z">
@@ -110,6 +118,7 @@
 				                                    </svg>
 		                               			</c:otherwise>
 		                                	</c:choose>
+		                                	</span>
 		                                    <span class="count">${item.scrapCnt}</span>
 		                                </button>
 		                                <button class="util_icon">

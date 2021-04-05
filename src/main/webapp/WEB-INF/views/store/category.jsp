@@ -37,34 +37,34 @@
         <!-- 카테고리 배너 끝 -->
 
         <!-- 지금은 할인중 시작-->
+        <c:if test="${param.page <= 1 || param.page == null}">
         <div class="category-mdpick">
             <h1 class="category-mdpick-title">#지금은 할인중</h1>
             <div class="category-mdpick-box">
-            	 <article class="store-small-item">
-                    <a href="/store/store_detail">
-                        <div class="store-imgbox">
-                            <div class="store-item-s-img"><img src="/resources/img/1.jpg" class="store-item-s-img-pp"></div>
-                            <button class="scrap-btn">
-                                <span class="fas fa-bookmark fa-lg"></span>
-                            </button>
-                        </div>
-                        <div class="store-item-info">
-                            <h1 class="store-item-header">
-                                <div class="store-item-brand">판매업체</div>
-                                <div class="store-item-name">상품이름</div>
-                            </h1>
-                            <div class="store-item-pricebox">
-                                <span class="store-item-pricebox-sale">40%</span>
-                                <span class="store-item-pricebox-price">170,000 외</span>
-                            </div>
-                            <div>
-                                <span class="store-item-avg"><i class="fas fa-star"></i>4.7</span>
-                                <span class="store-item-rev"><strong>리뷰 3451</strong></span>
-                            </div>
-                        </div>
-                    </a>
-                </article>
+	            <c:forEach items="${pdSales}" var="item">
+	            	 <article class="store-small-item">
+	                    <a href="/store/category/productInfo?category=${item.category}&iProduct=${item.iProduct}"></a>
+	                        <div class="store-imgbox">
+	                            <div class="store-item-s-img"><img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" class="store-item-s-img-pp"></div>
+	                        </div>
+	                        <div class="store-item-info">
+	                            <h1 class="store-item-header">
+	                                <div class="store-item-brand">${item.brand}</div>
+	                                <div class="store-item-name">${item.productTitle}</div>
+	                            </h1>
+	                            <div class="store-item-pricebox">
+	                                <span class="store-item-pricebox-sale">${item.sales}%</span>
+	                                <span class="store-item-pricebox-price"><fmt:formatNumber value="${item.finalPrice}" pattern="#,###"/></span>
+	                            </div>
+	                            <div>
+	                                <span class="store-item-avg"><i class="fas fa-star"></i>${item.starRt}</span>
+	                                <span class="store-item-rev"><strong>리뷰 <fmt:formatNumber value="${item.reviewCnt}" pattern="#,###"/></strong></span>
+	                            </div>
+	                        </div>
+	                </article>
+                </c:forEach>
             </div>
+            </c:if>
             <!-- 지금은 할인중 끝-->
 
 
@@ -79,11 +79,20 @@
 					<c:otherwise>
 						<c:forEach items="${data.pdList}" var="item">
 			                <article class="store-big-item">
-			                    <a href="/store/category/productInfo?category=${param.category eq null? 1 : param.category}&iProduct=${item.iProduct}">
+			                    <a href="/store/category/productInfo?category=${param.category eq null? 1 : param.category}&iProduct=${item.iProduct}"></a>
 			                        <div class="store-imgbox">
 			                            <div class="store-item-b-img"><img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" class="store-item-b-img-pp"></div>
-			                            <button class="scrap-btn">
-			                                <span class="fas fa-bookmark fa-lg"></span>
+			                            <button class="scrap-btn" onclick="pdScrapList(${item.iProduct}, ${item.scrapChk})">
+			                            <div class="scrap_div" data-iProduct = "${item.iProduct}">
+			                                <c:choose>
+			                            		<c:when test="${item.scrapChk > 0}">
+			                               			<span class="fas fa-bookmark fa-lg blue"></span>
+		                               			</c:when>
+		                               			<c:otherwise>
+			                               			<span class="fas fa-bookmark fa-lg"></span>
+		                               			</c:otherwise>
+	                               			</c:choose>
+                               			</div>
 			                            </button>
 			                        </div>
 			                        <div class="store-item-info">
@@ -100,7 +109,6 @@
 			                                <span class="store-item-rev"><strong>리뷰 <fmt:formatNumber value="${item.reviewCnt}" pattern="#,###"/></strong></span>
 			                            </div>
 			                        </div>
-			                    </a>
 			                </article>
 		                </c:forEach>
 	                </c:otherwise>
