@@ -89,20 +89,18 @@
         	<!-- 스텟끝 -->
         	
         	<!-- 댓글시작 -->
-        	<h1>댓글&nbsp;<span>${data.cmtCnt}</span></h1>
+        	<h1 style="margin-top: 20px;">댓글&nbsp;<span>${data.cmtCnt}</span></h1>
         	
-	        <div style="margin-top: 20px;">
-				<c:if test="${loginUser != null}">
-					<form id="cmtFrm">
-						<input type="hidden" name="cmtiBoard" value="${param.iBoard}">
-						<input type="text" name="ctnt" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)">				
-						<input type="button" name="btn" value="등록">
-					</form>
-				</c:if>
-					
-				<div id="cmtList"></div>
-			</div>			
+	        <div style="margin-top: 20px;">				
+				<form id="cmtFrm">
+					<input type="hidden" name="cmtiBoard" value="${param.iBoard}">
+					<input type="text" name="ctnt" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)">				
+					<input type="button" name="btn" value="등록">
+				</form>				
+				<div id="cmtList"></div>				
+			</div>
         	<!-- 댓글끝 -->
+        	
         </div>
     </main>
 </div>

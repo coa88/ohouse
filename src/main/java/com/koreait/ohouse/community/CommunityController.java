@@ -172,7 +172,6 @@ public class CommunityController {
 	@DeleteMapping("/delCmt")
 	public Map<String, Object> delCmt(CommunityCmtEntity p, HttpSession hs) {
 		p.setiUser(SecurityUtils.getLoginUserPk(hs));
-
 		Map<String, Object> returnValue = new HashMap<>();
 		returnValue.put("result", service.delCmt(p));
 		return returnValue;
@@ -183,10 +182,6 @@ public class CommunityController {
 	@ResponseBody
 	@PostMapping("/insReCmt")
 	public Map<String, Object> insReCmt(@RequestBody CommunityCmtEntity p, HttpSession hs) {
-		System.out.println("cmt_group :" + p.getcmtGroup());
-		System.out.println("i_board : " + p.getiBoard());
-		System.out.println("ctnt : " + p.getctnt());
-
 		p.setiUser(SecurityUtils.getLoginUserPk(hs));
 		Map<String, Object> returnValue = new HashMap<>();
 		returnValue.put("result", service.insReCmt(p));

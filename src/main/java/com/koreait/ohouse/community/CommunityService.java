@@ -243,20 +243,28 @@ public class CommunityService {
 	// ----------------------------커뮤니티 댓글----------------------------//
 	
 	public int insCmt(CommunityCmtEntity p) {
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		if(i_user == 0) { // 로그인이 안되어있으면
+			return 2;
+		}
 		return mapper.insCmt(p);
 	}
-	
+
 	public List<CommunityCmtDTO> selCmtList(CommunityCmtDTO p) {
 		return mapper.selCmtList(p);
 	}
-	
+
 	public int delCmt(CommunityCmtEntity p) {
 		return mapper.delCmt(p);
 	}
-	
+
 	// ----------------------------커뮤니티 대댓글----------------------------//
 	public int insReCmt(CommunityCmtEntity p) {
-		return mapper.insCmt(p);
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		if(i_user == 0) { // 로그인이 안되어있으면
+			return 2;
+		}
+		return mapper.insReCmt(p);
 	}
-	
+
 }

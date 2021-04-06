@@ -19,11 +19,11 @@ public class CommunityCmtEntity {
 		this.iCmt = iCmt;
 	}
 
-	public int getcmtGroup() {
+	public int getCmtGroup() {
 		return cmtGroup;
 	}
 
-	public void setcmtGroup(int cmtGroup) {
+	public void setCmtGroup(int cmtGroup) {
 		this.cmtGroup = cmtGroup;
 	}
 
