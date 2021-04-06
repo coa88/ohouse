@@ -14,7 +14,7 @@
 	                 <c:forEach items="${best}" var="item">
 	                    <a class="visual_left_link" href="/community/houseparty/detail?iBoard=${item.iBoard }">
 	                        <div class="visual_left_img_wrap">
-	                            <img class="visual_left_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" alt="메인사진">
+	                            <img class="visual_left_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" onerror="this.src='/resources/img/errorThumb.png'" alt="메인사진">
 	                        </div>
 	                        <div class="visual_left_content_wrap">
 	                            <span class="visual_left_title">${item.title}</span>
@@ -48,7 +48,7 @@
                 <li class="story_box_list plr10">
                     <a class="story_box_link" href="/community/houseparty/detail?iBoard=${item.iBoard}">
                         <div class="story_box_img_wrap">
-                            <img class="story_box_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" alt="집들이사진">
+                            <img class="story_box_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" onerror="this.src='/resources/img/errorThumb.png'" alt="집들이사진">
                         </div>
                         <div class="story_box_content_wrap">
                             <div class="story_box_content_title">${item.title}</div>
@@ -99,7 +99,7 @@
 	                <li class="photo_box_list plr10">
 	                    <a class="photo_box_link" href="/community/photo/detail?iBoard=${item.iBoard}">
 	                        <div class="photo_box_img_wrap">
-	                            <img class="photo_box_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" alt="썸네일사진">
+	                            <img class="photo_box_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" onerror="this.src='/resources/img/errorThumb.png'" alt="썸네일사진">
 	                        </div>
 	                        <div class="photo_box_content_wrap">
 	                            <div class="photo_box_content_profile">

@@ -30,6 +30,26 @@ function getPdBoardList(page) { // 스토어 페이지선택
 	location.href = url + '?category=' + params.get('category') + `&page=${page}`				
 }
 
+// ----------------------- 검색 시작 -------------------------//
+
+
+function doSearch(e) { // 엔터눌렀을때 이벤트발생
+	if(e.keyCode === 13) {
+		getSearchList()
+	}
+}
+
+function getSearchList() {
+	let searchTextElem = document.querySelector('.form-control')
+	let searchTextVal = searchTextElem.value
+	console.log('searchTextVal : ' + searchTextVal)
+	
+	location.href="/search?searchText=" + searchTextVal
+}
+
+// ----------------------- 검색 끝 -------------------------//
+
+// ----------------------- 좋아요,스크랩시작 -------------------------//
 function favorite(iBoard) { // 디테일페이지에서 좋아요버튼 눌렀을때
 	let fc = document.querySelector('#favoriteContainer')
 	let favoriteChk = fc.getAttribute('data-favoriteChk') //1: 좋아요, 0:안 좋아요	
@@ -171,4 +191,6 @@ function utilIconChk(iBoard, favoriteChk, scrapChk) {
 		}
 	}).catch(error => console.error('Error:', error))
 }
+
+// ----------------------- 좋아요,스크랩끝 -------------------------//
 

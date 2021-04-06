@@ -54,7 +54,7 @@
 		                    <div class="box_padding">
 		                        <a class="tip_link" onclick="moveLocation(${item.iBoard})"></a>
 		                        <div class="tip_img_wrap">
-		                            <img class="tip_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" alt="노하우사진">
+		                            <img class="tip_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" onerror="this.src='/resources/img/errorThumb.png'" alt="노하우사진">
 		                         
 		                            <button class="tip_scrap" onclick="scrapList(${item.iBoard}, ${item.scrapChk})">
 			                            <div class="scrap_div" data-iBoard = "${item.iBoard}">

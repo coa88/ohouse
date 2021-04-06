@@ -56,7 +56,7 @@
 		                    <div class="box_padding">
 		                        <a class="houseparty_link" onclick="moveLocation(${item.iBoard})"></a>
 		                        <div class="houseparty_img_wrap">
-		                            <img class="houseparty_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" alt="집들이사진">
+		                            <img class="houseparty_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" onerror="this.src='/resources/img/errorThumb.png'" alt="집들이사진">
 		                            <button class="houseparty_scrap" onclick="scrapList(${item.iBoard}, ${item.scrapChk})">
 		                            	<div class="scrap_div" data-iBoard = "${item.iBoard}">
 			                            	<c:choose>

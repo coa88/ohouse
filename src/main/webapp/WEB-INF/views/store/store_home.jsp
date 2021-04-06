@@ -55,7 +55,7 @@
 	            <a href="/store/category/productInfo?category=${item.category}&iProduct=${item.iProduct}"></a>
 	                <div class="store-imgbox">
 	                    <div class="store-item-b-img">
-	                    	<img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" class="store-item-b-img-pp">
+	                    	<img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" onerror="this.src='/resources/img/errorThumb.png'" class="store-item-b-img-pp">
 	                    </div>
 	                    <button class="scrap-btn" onclick="pdScrapList(${item.iProduct}, ${item.scrapChk})">
 	                    <div class="scrap_div" data-iProduct = "${item.iProduct}">

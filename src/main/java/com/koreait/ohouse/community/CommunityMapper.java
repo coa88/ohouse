@@ -9,6 +9,7 @@ import com.koreait.ohouse.model.CommunityCmtDTO;
 import com.koreait.ohouse.model.CommunityCmtEntity;
 import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityPhotoEntity;
+import com.koreait.ohouse.model.PagingDTO;
 import com.koreait.ohouse.model.StoreDTO;
 
 @Mapper
@@ -21,6 +22,7 @@ public interface CommunityMapper {
 	CommunityPhotoEntity selCmPhoto(CommunityPhotoEntity param);
 	int selCmMaxPageNum(CommunityDTO param);
 	List<CommunityDTO> selCmBoardBest(CommunityDTO param);
+	List<CommunityDTO> selCmSearchList(PagingDTO param); // 검색리스트
 	
 	int updCmBoard(CommunityDTO param);
 	int hitsCmBoard(CommunityDTO param);

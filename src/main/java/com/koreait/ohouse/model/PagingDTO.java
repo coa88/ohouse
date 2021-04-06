@@ -11,8 +11,10 @@ public class PagingDTO {
 	private int maxPageNum; // 게시물 전체 페이지수
 	private int startPage; // 시작페이지
 	private int endPage;  // 범위내의 마지막 페이지
+	private String searchText;  // 범위내의 마지막 페이지
 	private List<CommunityDTO> cmList; // select한 게시물의 정보(커뮤니티)
 	private List<StoreDTO> pdList; // select한 게시물의 정보(스토어)
+	
 	
 	public int getSide_num() {
 		return side_num;
@@ -43,6 +45,12 @@ public class PagingDTO {
 	}
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
+	}
+	public String getSearchText() {
+		return searchText;
+	}
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
 	}
 	public List<CommunityDTO> getCmList() {
 		return cmList;

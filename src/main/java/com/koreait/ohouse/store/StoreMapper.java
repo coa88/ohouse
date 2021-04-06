@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.koreait.ohouse.model.PagingDTO;
 import com.koreait.ohouse.model.StoreCategoryEntity;
 import com.koreait.ohouse.model.StoreDTO;
 import com.koreait.ohouse.model.StorePhotoEntity;
@@ -20,6 +21,7 @@ public interface StoreMapper {
 	List<StoreDTO> selPdBoardList(StoreDTO param); //제품리스트
 	List<StoreDTO> selPdBoardSales(StoreDTO param); //세일제품 리스트
 	int selPdMaxPageNum(StoreDTO param); // 최대페이지 구하는 쿼리문
+	List<StoreDTO> selPdSearchList(PagingDTO param); //검색리스트
 	
 	int updPdBoard(StoreDTO param); //수정
 	
