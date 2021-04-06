@@ -12,8 +12,12 @@
         <put-attribute name="content" value="/WEB-INF/views/community/home.jsp" />
     </definition>
      
-     <definition name="store" extends="basic-template">
+    <definition name="store" extends="basic-template">
         <put-attribute name="content" value="/WEB-INF/views/store/store_home.jsp" />
+    </definition>
+    
+    <definition name="search" extends="basic-template">
+        <put-attribute name="content" value="/WEB-INF/views/common/search.jsp" />
     </definition>
      
     <definition name="*/*" extends="basic-template">

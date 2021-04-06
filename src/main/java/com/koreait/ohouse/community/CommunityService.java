@@ -207,6 +207,12 @@ public class CommunityService {
 		return mapper.delCmBoard(param);
 	}
 	
+	// ----------------------------검색----------------------------//
+
+	public List<CommunityDTO> selCmSearchList(PagingDTO param) {
+		return mapper.selCmSearchList(param);
+	}
+	
 	// ----------------------------좋아요----------------------------//
 	
 	public int chkFavorite(CommunityDTO param) {

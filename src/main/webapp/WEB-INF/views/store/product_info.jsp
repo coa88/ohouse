@@ -13,12 +13,12 @@
 		<div class="product_img">
 			<div class="pro_min_img_box">
 				<c:forEach items="${photoList}" var="list">
-					<img class="pro_min_img" src="/resources/img/store/board/${data.iProduct}/${list.pdImg}" alt="작은 이미지.">
+					<img class="pro_min_img" src="/resources/img/store/board/${data.iProduct}/${list.pdImg}" onerror="this.src='/resources/img/errorThumb.png'" alt="작은 이미지.">
 				</c:forEach>
 			</div>
 
 			<div class="pro_big_img_box">
-				<img class='pro_big_img' src="/resources/img/store/board/${data.iProduct}/${photoList[0].pdImg}" alt="커다란 이미지.">
+				<img class='pro_big_img' src="/resources/img/store/board/${data.iProduct}/${photoList[0].pdImg}" onerror="this.src='/resources/img/errorThumb.png'" alt="커다란 이미지.">
 			</div>
 		</div>
     </div>

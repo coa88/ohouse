@@ -40,7 +40,7 @@
                 <div class="nav-right">
                     <div class="has-search">
                         <span class="fa fa-search fa-lg form-control-feedback"></span>
-                        <input type="text" class="form-control" placeholder="스토어 검색">
+                        <input type="text" class="form-control" value="${param.searchText}" placeholder="통합검색" onkeyup="doSearch(event)">
                     </div>
                     <div class="cart-menu">
                         <a href="/" class="fas fa-shopping-cart fa-lg cart-icon"></a>

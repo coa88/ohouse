@@ -69,7 +69,7 @@
 		                            
 		                            <div class="box_link" onclick="moveLocation(${item.iBoard})">
 		                                <div class="photo_feed_img_wrap">
-		                                    <img class="photo_feed_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" alt="썸네일사진">
+		                                    <img class="photo_feed_img" src="/resources/img/community/board/${item.iBoard}/${item.boardImg}" onerror="this.src='/resources/img/errorThumb.png'" alt="썸네일사진">
 		                                    <span class="img_view_count">조회수 ${item.hits}</span>
 		                                </div>
 		                                <div class="user_text_wrap">
@@ -135,8 +135,7 @@
 		                            <div class="photo_feed_comment_wrap">
 		                                <div class="photo_feed_comment">
 		                                    <a class="comment_profile" href="#">
-		                                        <img class="comment_img" src="/"
-		                                            onerror="this.src='/resources/img/user/basic_profile.webp'" alt="댓글프로필사진">
+		                                        <img class="comment_img" src="/" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="댓글프로필사진">
 		                                        <span class="comment_name">댓글닉네임</span>
 		                                    </a>
 		                                    <a class="comment_link" href="#">

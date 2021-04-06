@@ -8,7 +8,7 @@
         <!-- 커버이미지 -->
         <div class="detail_cover_img_wrap">
             <div class="detail_cover_img_size">
-            	<img src="/resources/img/community/board/${data.iBoard}/${data.boardImg}"alt="대표이미지">
+            	<img src="/resources/img/community/board/${data.iBoard}/${data.boardImg}" onerror="this.src='/resources/img/errorThumb.png'" alt="대표이미지">
             </div>
         </div>
         <!-- 디테일 내용 -->

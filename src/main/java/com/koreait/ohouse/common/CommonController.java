@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.koreait.ohouse.community.CommunityService;
 import com.koreait.ohouse.model.CommunityDTO;
+import com.koreait.ohouse.model.PagingDTO;
 import com.koreait.ohouse.model.StoreDTO;
 import com.koreait.ohouse.store.StoreService;
 
@@ -40,16 +42,28 @@ public class CommonController {
 		return "store";
 	}
 	
-	@GetMapping("/error")
-	public String error() {
-		return "error";
-	}
-	
 	@ResponseBody // 썸네일 이미지
 	@PostMapping("/uploadImg")
 	public Map<String, String> uploadImg(MultipartFile ctntImg) {
 		Map<String, String> result = new HashMap();
 		result.put("default", service.saveBoardImg(ctntImg));
 		return result;
+	}
+	
+	@GetMapping("/search")
+	public String searchList(@RequestParam String searchText, Model model) {
+		System.out.println("searchText : " + searchText);
+		PagingDTO dto = new PagingDTO();
+		dto.setSearchText(searchText);
+		
+		model.addAttribute("cmList", cmService.selCmSearchList(dto));
+		model.addAttribute("pdList", storeService.selPdSearchList(dto));
+		
+		return "search";
+	}
+	
+	@GetMapping("/error")
+	public String error() {
+		return "error";
 	}
 }

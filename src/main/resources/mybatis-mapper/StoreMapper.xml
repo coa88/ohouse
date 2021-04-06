@@ -123,6 +123,51 @@
 		LIMIT #{sIdx}, #{recordCntPerPage}
 	</select>
 	
+	<select id="selPdSearchList" resultType="StoreDTO">
+		SELECT
+			A.i_product
+			, A.category
+			, A.product_seq
+			, A.product_title
+			, A.product_ctnt
+			, A.product_nm
+			, A.brand
+			, A.price
+			, A.sales
+			, A.final_price
+			, A.product_dt
+			, B.i_user
+			, B.nm
+			, C.pd_img
+			, D.star_rt
+			, IFNULL((SELECT COUNT(1) FROM pd_board WHERE category = A.category), 0) AS product_cnt
+			, IFNULL(D.review_cnt, 0) AS review_cnt
+		FROM pd_board A
+		
+		LEFT JOIN t_user B
+		ON A.i_user = B.i_user
+		
+		LEFT JOIN (
+			SELECT *
+			FROM pd_photo
+			WHERE pdimg_seq = 1
+		) C
+		ON A.i_product = C.i_product
+		
+		LEFT JOIN (
+			SELECT
+				i_product
+				, COUNT(i_product) AS review_cnt
+				, star_rt
+			FROM order_review
+			GROUP BY i_product
+		) D
+		ON A.i_product = D.i_product
+		
+		WHERE product_title LIKE CONCAT('%', #{searchText}, '%')
+		ORDER BY product_dt DESC
+	</select>
+	
 	<select id="selPdBoardSales" resultType="StoreDTO">
 	SELECT
 		A.i_product

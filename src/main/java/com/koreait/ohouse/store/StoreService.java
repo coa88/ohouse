@@ -158,6 +158,13 @@ public class StoreService {
 		return mapper.delPdBoard(param);
 	}
 	
+	// ----------------------------검색----------------------------//
+
+	public List<StoreDTO> selPdSearchList(PagingDTO param) {
+		return mapper.selPdSearchList(param);
+	}
+		
+	
 	// ----------------------------스크랩----------------------------//
 	
 		public int chkScrap(StoreDTO param) {

@@ -45,7 +45,9 @@
 	            	 <article class="store-small-item">
 	                    <a href="/store/category/productInfo?category=${item.category}&iProduct=${item.iProduct}"></a>
 	                        <div class="store-imgbox">
-	                            <div class="store-item-s-img"><img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" class="store-item-s-img-pp"></div>
+	                            <div class="store-item-s-img">
+	                            	<img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" onerror="this.src='/resources/img/errorThumb.png'" class="store-item-s-img-pp">
+	                            </div>
 	                        </div>
 	                        <div class="store-item-info">
 	                            <h1 class="store-item-header">
@@ -81,7 +83,9 @@
 			                <article class="store-big-item">
 			                    <a href="/store/category/productInfo?category=${param.category eq null? 1 : param.category}&iProduct=${item.iProduct}"></a>
 			                        <div class="store-imgbox">
-			                            <div class="store-item-b-img"><img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" class="store-item-b-img-pp"></div>
+			                            <div class="store-item-b-img">
+			                            	<img src="/resources/img/store/board/${item.iProduct}/${item.pdImg}" onerror="this.src='/resources/img/errorThumb.png'" class="store-item-b-img-pp">
+			                            </div>
 			                            <button class="scrap-btn" onclick="pdScrapList(${item.iProduct}, ${item.scrapChk})">
 			                            <div class="scrap_div" data-iProduct = "${item.iProduct}">
 			                                <c:choose>
