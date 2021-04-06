@@ -1490,6 +1490,28 @@ img {
     height: 620px;
 }
 
+.product_item_info {
+	margin: 40px auto;
+    width: 500px;
+    text-align: center;
+}
+
+.product_item_info>input {
+    margin: 5px 5px;
+    text-align: center;
+    height: 20px;
+    border: 2px solid #35c5f0;
+    border-radius: 4px;
+}
+
+.product_item_info>select {
+    width: 370px;
+    height: 30px;
+    border: 2px solid #35c5f0;
+    border-radius: 4px;
+    margin: 5px 5px;
+}
+
 .product_img {
     display : flex;
 }

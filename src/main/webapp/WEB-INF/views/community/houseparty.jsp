@@ -90,15 +90,15 @@
                <!-- 페이징 -->
 		    <div class="pageContainer">
 		    	<c:if test="${data.startPage > 1}">
-					<span class="page" onclick="getBoardList(1)">[처음]</span>
+					<span class="page" onclick="getCmBoardList(1)">[처음]</span>
 				</c:if>	
 		    
 				<c:forEach begin="${data.startPage}" end="${data.endPage}" var="i">			
-					<span class="page ${data.page == i ? 'selected' : ''}" onclick="getBoardList(${i})">${i}</span>
+					<span class="page ${data.page == i ? 'selected' : ''}" onclick="getCmBoardList(${i})">${i}</span>
 				</c:forEach>
 				
 				<c:if test="${data.endPage < data.maxPageNum}">
-					<span class="page" onclick="getBoardList(${data.maxPageNum})">[끝]</span>
+					<span class="page" onclick="getCmBoardList(${data.maxPageNum})">[끝]</span>
 				</c:if>
 			</div>
 			<!-- 페이징끝 -->

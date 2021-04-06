@@ -9,7 +9,7 @@
 		<input type="file" id="file" multiple accept="image/*" value="커버사진선택" onchange="setThumbnail(event)">
 	</div>	
 	
-	<div>
+	<div class="product_item_info">
 		<input type="text" name="brand" placeholder="브랜드" value="${data.brand}" required>
 		<input type="text" name="productNm" placeholder="상품이름" value="${data.productNm}" required>
 		<input type="number" name="price" placeholder="가격" value="${data.price}" required>

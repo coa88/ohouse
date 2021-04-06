@@ -94,7 +94,7 @@
                             </a>
                             <c:if test="${loginUser.userRank eq 1}">
 	                            <a href="/store/register" class="nav-write-item">
-	                                <div class="nav-write-item-icon"><img src="/resources/img/icon/review_icon.png" alt="상품 등록하기"></div>
+	                                <div class="nav-write-item-icon"><img src="/resources/img/icon/regiter_icon.png" alt="상품 등록하기"></div>
 	                                <div class="nav-write-item-text">
 	                                    <div class="nav-write-item-title">상품 등록하기</div>
 	                                    <div class="nav-write-item-subtitle">스토어에 상품을 등록해보세요.</div>
