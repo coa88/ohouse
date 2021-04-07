@@ -11,10 +11,16 @@ public class PagingDTO {
 	private int maxPageNum; // 게시물 전체 페이지수
 	private int startPage; // 시작페이지
 	private int endPage;  // 범위내의 마지막 페이지
-	private String searchText;  // 범위내의 마지막 페이지
+	
+	private String searchText;  // 검색어
+	
 	private List<CommunityDTO> cmList; // select한 게시물의 정보(커뮤니티)
 	private List<StoreDTO> pdList; // select한 게시물의 정보(스토어)
 	
+	private int secTyp; // 커뮤니티 서브메뉴 타입
+	
+	private int sIdx;
+	private int recordCntPerPage; //게시물을 몇개씩 출력하는지 정함.
 	
 	public int getSide_num() {
 		return side_num;
@@ -63,6 +69,25 @@ public class PagingDTO {
 	}
 	public void setPdList(List<StoreDTO> pdList) {
 		this.pdList = pdList;
+	}
+	public int getSecTyp() {
+		return secTyp;
+	}
+	public void setSecTyp(int secTyp) {
+		this.secTyp = secTyp;
+	}
+
+	public int getsIdx() {
+		return sIdx;
+	}
+	public void setsIdx(int sIdx) {
+		this.sIdx = sIdx;
+	}
+	public int getRecordCntPerPage() {
+		return recordCntPerPage;
+	}
+	public void setRecordCntPerPage(int recordCntPerPage) {
+		this.recordCntPerPage = recordCntPerPage;
 	}
 	
 }

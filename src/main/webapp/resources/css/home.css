@@ -20,7 +20,7 @@
 }
 
 .section_title {
-	margin-bottom: 20px;
+	margin: 20px 0;
 }
 
 .section_title>h2 {
@@ -230,6 +230,7 @@ main {
 
 .story_box {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .story_box_list {

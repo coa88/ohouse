@@ -41,10 +41,20 @@ function doSearch(e) { // 엔터눌렀을때 이벤트발생
 
 function getSearchList() {
 	let searchTextElem = document.querySelector('.form-control')
-	let searchTextVal = searchTextElem.value
+	let searchTextVal = searchTextElem.value.replace(/ /g, '') // 검색공백제거
+	
+	if(searchTextVal === "") { // 검색창에 빈칸일때
+		return false
+	}
+	
 	console.log('searchTextVal : ' + searchTextVal)
 	
-	location.href="/search?searchText=" + searchTextVal
+	location.href="/search?searchTyp=0&searchText=" + searchTextVal
+}
+
+function getMoreSearchList(searchText, searchTyp) {
+	console.log('param.searchText : ' + searchText)
+	location.href="/search?searchTyp=" + searchTyp + "&searchText=" + searchText 
 }
 
 // ----------------------- 검색 끝 -------------------------//

@@ -189,8 +189,11 @@
 		) E
 		ON A.i_board = E.i_board
 		
-		WHERE title LIKE CONCAT('%', #{searchText}, '%')
+		WHERE sec_typ=#{secTyp} AND title LIKE CONCAT('%', #{searchText}, '%')
 		ORDER BY r_dt DESC
+		<if test="recordCntPerPage > 0">
+			LIMIT #{sIdx}, #{recordCntPerPage}
+		</if>
 	</select>
 
 	<update id="updCmBoard">

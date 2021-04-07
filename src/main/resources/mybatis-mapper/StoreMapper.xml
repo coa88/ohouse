@@ -166,6 +166,9 @@
 		
 		WHERE product_title LIKE CONCAT('%', #{searchText}, '%')
 		ORDER BY product_dt DESC
+		<if test="recordCntPerPage > 0">
+			LIMIT #{sIdx}, #{recordCntPerPage}
+		</if>
 	</select>
 	
 	<select id="selPdBoardSales" resultType="StoreDTO">

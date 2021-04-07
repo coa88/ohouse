@@ -766,7 +766,6 @@ img {
 .store-container { /* 스토어 컨테이너 */
     position: relative;
     width: 1136px;
-    min-height: 800px;
     margin: auto;
 }
 
@@ -888,7 +887,11 @@ img {
  /* 카테고리상단 끝 */
 
 /* ------------상품 리스트 시작-------------*/
-
+.empty_post {
+    margin-top: 100px;
+    height: 500px;
+    text-align: center;
+}
 
 /* 스크랩버튼 */
 .scrap-btn {

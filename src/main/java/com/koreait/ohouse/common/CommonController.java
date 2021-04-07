@@ -51,15 +51,31 @@ public class CommonController {
 	}
 	
 	@GetMapping("/search")
-	public String searchList(@RequestParam String searchText, Model model) {
-		System.out.println("searchText : " + searchText);
+	public void searchList(@RequestParam String searchText, @RequestParam int searchTyp, Model model) {
 		PagingDTO dto = new PagingDTO();
 		dto.setSearchText(searchText);
+
+		if(searchTyp == 0) { // 더보기 안눌렀을때 리스트
+			for(int i=2; i < 5; i++) {
+				dto.setSecTyp(i);
+				dto.setsIdx(0);
+				dto.setRecordCntPerPage(4);
+				if(cmService.selCmSearchList(dto).size() != 0) {
+					model.addAttribute("cmList" + i, cmService.selCmSearchList(dto));					
+				}
+				if(storeService.selPdSearchList(dto).size() != 0) {
+					model.addAttribute("pdList", storeService.selPdSearchList(dto));					
+				}
+			}
+			return;
+		}
+		if(searchTyp == 5) { // 스토어 더보기 눌렀을때
+			model.addAttribute("pdList", storeService.selPdSearchList(dto));
+			return;
+		}
 		
-		model.addAttribute("cmList", cmService.selCmSearchList(dto));
-		model.addAttribute("pdList", storeService.selPdSearchList(dto));
-		
-		return "search";
+		dto.setSecTyp(searchTyp); // 커뮤니티 게시판 더보기 눌렀을때
+		model.addAttribute("cmList" + searchTyp, cmService.selCmSearchList(dto));
 	}
 	
 	@GetMapping("/error")
