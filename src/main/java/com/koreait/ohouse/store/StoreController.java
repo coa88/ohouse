@@ -98,4 +98,13 @@ public class StoreController {
 		resultValue.put("result", service.chkScrap(dto));
 		return resultValue;
 	}
+	
+	// ----------------------------카트----------------------------//
+	
+	@ResponseBody
+	@PostMapping("/cart")
+	public int cart(StoreDTO param) {
+		System.out.println("iP : " + param.getiProduct());
+		return service.addCart(param); 
+	}
 }

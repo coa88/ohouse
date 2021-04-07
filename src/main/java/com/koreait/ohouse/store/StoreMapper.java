@@ -40,4 +40,8 @@ public interface StoreMapper {
 	int insPdScrap(StoreDTO param);
 	int selPdScrap(StoreDTO param);
 	int delPdScrap(StoreDTO param);
+	
+	// ----------------------------카트----------------------------//
+	int insCart(StoreDTO param);
+	int updCart(StoreDTO param);
 }

@@ -167,18 +167,26 @@ public class StoreService {
 	
 	// ----------------------------스크랩----------------------------//
 	
-		public int chkScrap(StoreDTO param) {
-			//1: 스크랩 2: 로그인안됨 
-			int i_user = SecurityUtils.getLoginUserPk(hs);
-			if(i_user == 0) { // 로그인이 안되어있으면
-				return 2;
-			}
-			param.setiUser(i_user);
-			int scrapChk = mapper.selPdScrap(param);
-			if (scrapChk == 1) { // 이미 스크랩한경우
-				return mapper.delPdScrap(param);
-			}
-			
-			return mapper.insPdScrap(param);
+	public int chkScrap(StoreDTO param) {
+		//1: 스크랩 2: 로그인안됨 
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		if(i_user == 0) { // 로그인이 안되어있으면
+			return 2;
 		}
+		param.setiUser(i_user);
+		int scrapChk = mapper.selPdScrap(param);
+		if (scrapChk == 1) { // 이미 스크랩한경우
+			return mapper.delPdScrap(param);
+		}
+		
+		return mapper.insPdScrap(param);
+	}
+		
+	// ----------------------------카트----------------------------//
+		
+	public int addCart(StoreDTO param) {
+		param.setiUser(SecurityUtils.getLoginUserPk(hs));
+	 
+		return mapper.insCart(param);
+	}
 }
