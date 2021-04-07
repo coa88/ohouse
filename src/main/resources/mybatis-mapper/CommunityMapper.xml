@@ -87,6 +87,10 @@
 			, IFNULL(E.cmt_cnt, 0) AS cmt_cnt
 			, IFNULL((SELECT COUNT(1) FROM cm_favorite F WHERE F.i_board = A.i_board AND F.i_user = #{iUser}), 0)  AS favorite_chk
 			, IFNULL((SELECT COUNT(1) FROM cm_scrap G WHERE G.i_board = A.i_board AND G.i_user = #{iUser}), 0)  AS scrap_chk
+			, ( SELECT ctnt  
+				FROM cm_cmt H 
+				WHERE H.i_board = A.i_board 
+				GROUP BY i_board	) AS cmt_chk
 		FROM cm_board A
 		LEFT JOIN t_user B
 		ON A.i_user = B.i_user

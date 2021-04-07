@@ -139,7 +139,7 @@
 		                                        <span class="comment_name">댓글닉네임</span>
 		                                    </a>
 		                                    <a class="comment_link" href="#">
-		                                        <p class="comment_text">댓글내용</p>
+		                                        <p class="comment_text">${item.cmtChk}</p>
 		                                    </a>
 		                                </div>
 		                            </div>

@@ -15,6 +15,7 @@ public class CommunityDTO extends CommunityEntity {
 	private int boardCnt;
 	private int favoriteChk;
 	private int scrapChk;
+	private String cmtChk;
 	
 	
 	// 페이징
@@ -127,4 +128,14 @@ public class CommunityDTO extends CommunityEntity {
 		this.scrapChk = scrapChk;
 	}
 
+	public String getCmtChk() {
+		return cmtChk;
+	}
+
+	public void setCmtChk(String cmtChk) {
+		this.cmtChk = cmtChk;
+	}
+
+
+	
 }

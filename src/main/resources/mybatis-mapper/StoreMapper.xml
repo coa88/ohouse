@@ -294,4 +294,19 @@
 		DELETE FROM pd_scrap
 		WHERE i_product = #{iProduct} AND i_user = #{iUser}
 	</delete>
+	
+	<!-- /////////////////////////// 카트 /////////////////////////// -->
+	<insert id="insCart">
+		INSERT INTO cart 
+		(i_product, i_user)
+		VALUES
+		(#{iProduct}, #{iUser})
+	</insert>
+	
+	<update id="updCart">
+		UPDATE cart
+		SET cart_count = cart_count + 1
+		WHERE i_product = #{iProduct} AND i_user = #{iUser}
+	</update>
+	
 </mapper>

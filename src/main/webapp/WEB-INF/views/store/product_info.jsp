@@ -65,7 +65,7 @@
                 <span class="order_product_price"><fmt:formatNumber value="${data.finalPrice}" pattern="#,###"/>원</span>
             </div>
             <div class="order_or_basket">
-                <a href="#" class="basket_box">장바구니</a>
+                <div class="basket_box" onclick="addCart(${param.iProduct})">장바구니</div>
                 <a href="#" class="order_direct">바로주문</a>
             </div>
         </div>
