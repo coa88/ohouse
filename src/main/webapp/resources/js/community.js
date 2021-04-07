@@ -107,15 +107,16 @@ function getCmtList() {
 				if (data.isMycmt === 1) {
 					delButton = `<button onclick="delCmt(${data.iCmt})">삭제</button>`
 				}
-				const div = document.createElement('div')
 
+				const div = document.createElement('div')
 				let url = new URLSearchParams(location.search)
 				let urlParams = url.get('iBoard')
 				div.innerHTML =
 					`
+					<img class="cmt_profile_img" src="/resources/img/user/${data.iUser}/${data.profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진">
 					<span>${data.nm}</span>
 					<span>${data.ctnt}</span>
-					<button class="reCmtBtn" type="button" data-iCmt="${data.iCmt}" onclick="reCmtBtnClk(${data.iCmt},${data.cmtGroup},${urlParams})">답글달기</button>
+					<button class="reCmtBtn" type="button" data-iCmt="${data.iCmt}" data-nm=${data.nm} onclick="reCmtBtnClk(${data.iCmt},${data.cmtGroup},${urlParams})">답글달기</button>
 					${delButton}
 					<div class="reCmtDiv"></div>
 					`
@@ -130,16 +131,21 @@ function getCmtList() {
 // 대댓글 창열기
 function reCmtBtnClk(icmt, cmtGroup, urliBoard) {
 	let reCmtBtn = document.getElementsByClassName('reCmtBtn')
+	userInfo()
+	console.log(dd)
 	for (let i = 0; i < reCmtBtn.length; i++) {
 		let dataiCmt = reCmtBtn[i].getAttribute('data-iCmt')
+		let dataNm = reCmtBtn[i].getAttribute('data-nm')
 		if (dataiCmt == icmt) {
+			
 			let reCmtDiv = document.querySelectorAll('.reCmtDiv')
 			reCmtDiv[i].innerHTML =
 				`
 				<form id="recmtFrm">
 					<input type="hidden" name="cmtiBoard" value="${urliBoard}">
 					<input type="hidden" name="cmtGroup" value="${cmtGroup}">
-					<input type="text" name="ctnt">				
+					<img class="cmt_profile_img" src="/resources/img/user/${login.iUser}/${login.profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진">
+					<input type="text" name="ctnt" placeholder="@${dataNm}">
 					<input type="button" name="btn" value="등록">
 				</form>
 				`
@@ -150,13 +156,26 @@ function reCmtBtnClk(icmt, cmtGroup, urliBoard) {
 
 }
 
+function userInfo() {
+	fetch(`/community/userInfo`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+	}).then(function(res) {
+		return res.json()
+	}).then(function(login) {		
+		return login.result[0].iUser
+	})
+}
+
 // 대댓글 달기
 function recmtInsert() {
 	const reCmtFrmElem = document.querySelectorAll('#recmtFrm')
 	for (let i = 0; i < reCmtFrmElem.length; i++) {
 		reCmtFrmElem[i].addEventListener('click', function() {
 			recmtEvent(reCmtFrmElem[i])
-		}, {once:true})
+		}, { once: true })
 	}
 }
 

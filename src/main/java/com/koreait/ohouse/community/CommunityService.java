@@ -20,6 +20,7 @@ import com.koreait.ohouse.model.CommunityCmtEntity;
 import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityPhotoEntity;
 import com.koreait.ohouse.model.PagingDTO;
+import com.koreait.ohouse.model.UserEntity;
 import com.koreait.ohouse.utils.MyFileUtils;
 import com.koreait.ohouse.utils.PagingUtils;
 
@@ -271,6 +272,10 @@ public class CommunityService {
 			return 2;
 		}
 		return mapper.insReCmt(p);
+	}
+	
+	public List<UserEntity> userInfo(UserEntity p){
+		return mapper.userInfo(p);
 	}
 
 }

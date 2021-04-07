@@ -302,6 +302,11 @@
 		VALUES
 		( #{cmtGroup}, #{iBoard}, #{iUser}, #{ctnt} )
 	</insert>
+	
+	<select id="userInfo" resultType="UserEntity">
+		SELECT i_user,profile_img FROM t_user
+		WHERE i_user = #{iUser}
+	</select>
 
 	<!-- /////////////////////////// 사진 /////////////////////////// -->
 

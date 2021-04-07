@@ -11,6 +11,7 @@ import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityPhotoEntity;
 import com.koreait.ohouse.model.PagingDTO;
 import com.koreait.ohouse.model.StoreDTO;
+import com.koreait.ohouse.model.UserEntity;
 
 @Mapper
 public interface CommunityMapper {
@@ -55,5 +56,7 @@ public interface CommunityMapper {
 	
 	// ----------------------------커뮤니티 대댓글----------------------------//
 	int insReCmt(CommunityCmtEntity p);
+	
+	List<UserEntity> userInfo(UserEntity p);
 	
 }

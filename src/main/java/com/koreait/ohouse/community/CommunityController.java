@@ -22,6 +22,7 @@ import com.koreait.ohouse.model.CommunityCmtDTO;
 import com.koreait.ohouse.model.CommunityCmtEntity;
 import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.CommunityEntity;
+import com.koreait.ohouse.model.UserEntity;
 
 import lombok.RequiredArgsConstructor;
 
@@ -185,6 +186,15 @@ public class CommunityController {
 		p.setiUser(SecurityUtils.getLoginUserPk(hs));
 		Map<String, Object> returnValue = new HashMap<>();
 		returnValue.put("result", service.insReCmt(p));
+		return returnValue;
+	}
+	
+	@ResponseBody
+	@PostMapping("/userInfo")
+	public Map<String, Object> userInfo(UserEntity p, HttpSession hs) {
+		p.setiUser(SecurityUtils.getLoginUserPk(hs));
+		Map<String, Object> returnValue = new HashMap<>();
+		returnValue.put("result", service.userInfo(p));
 		return returnValue;
 	}
 	
