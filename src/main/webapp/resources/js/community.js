@@ -104,8 +104,13 @@ function getCmtList() {
 
 			function createRecode(data) {
 				let delButton = ''
+				let cmtAnsNm = ''
 				if (data.isMycmt === 1) {
 					delButton = `<button onclick="delCmt(${data.iCmt})">삭제</button>`
+				}
+				
+				if(data.cmtAnsNm !==null){
+					cmtAnsNm = `<span>@${data.cmtAnsNm}</span>`
 				}
 
 				const div = document.createElement('div')
@@ -115,6 +120,7 @@ function getCmtList() {
 					`
 					<img class="cmt_profile_img" src="/resources/img/user/${data.iUser}/${data.profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진">
 					<span>${data.nm}</span>
+					${cmtAnsNm}
 					<span>${data.ctnt}</span>
 					<button class="reCmtBtn" type="button" data-iCmt="${data.iCmt}" data-nm=${data.nm} onclick="reCmtBtnClk(${data.iCmt},${data.cmtGroup},${urlParams})">답글달기</button>
 					${delButton}
@@ -131,32 +137,7 @@ function getCmtList() {
 // 대댓글 창열기
 function reCmtBtnClk(icmt, cmtGroup, urliBoard) {
 	let reCmtBtn = document.getElementsByClassName('reCmtBtn')
-	userInfo()
-	console.log(dd)
-	for (let i = 0; i < reCmtBtn.length; i++) {
-		let dataiCmt = reCmtBtn[i].getAttribute('data-iCmt')
-		let dataNm = reCmtBtn[i].getAttribute('data-nm')
-		if (dataiCmt == icmt) {
-			
-			let reCmtDiv = document.querySelectorAll('.reCmtDiv')
-			reCmtDiv[i].innerHTML =
-				`
-				<form id="recmtFrm">
-					<input type="hidden" name="cmtiBoard" value="${urliBoard}">
-					<input type="hidden" name="cmtGroup" value="${cmtGroup}">
-					<img class="cmt_profile_img" src="/resources/img/user/${login.iUser}/${login.profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진">
-					<input type="text" name="ctnt" placeholder="@${dataNm}">
-					<input type="button" name="btn" value="등록">
-				</form>
-				`
-		}
-	}
 
-	recmtInsert()
-
-}
-
-function userInfo() {
 	fetch(`/community/userInfo`, {
 		method: 'POST',
 		headers: {
@@ -164,9 +145,31 @@ function userInfo() {
 		},
 	}).then(function(res) {
 		return res.json()
-	}).then(function(login) {		
-		return login.result[0].iUser
+	}).then(function(login) {
+		for (let i = 0; i < reCmtBtn.length; i++) {
+			let dataiCmt = reCmtBtn[i].getAttribute('data-iCmt')
+			let dataNm = reCmtBtn[i].getAttribute('data-nm')
+			if (dataiCmt == icmt) {
+				let iUser = login.result[0].iUser
+				let profileImg = login.result[0].profileImg
+				let reCmtDiv = document.querySelectorAll('.reCmtDiv')
+				reCmtDiv[i].innerHTML =
+					`
+				<form id="recmtFrm">
+					<input type="hidden" name="cmtiBoard" value="${urliBoard}">
+					<input type="hidden" name="cmtGroup" value="${cmtGroup}">
+					<input type="hidden" name="cmtAnsNm" value="${dataNm}">
+					<img class="cmt_profile_img" src="/resources/img/user/${iUser}/${profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진">
+					<input type="text" name="ctnt" placeholder="@${dataNm}">
+					<input type="button" name="btn" value="등록">
+				</form>
+				`
+			}
+		}
+		recmtInsert()
 	})
+
+
 }
 
 // 대댓글 달기
@@ -189,6 +192,7 @@ function recmtEvent(reCmtFrmElem) {
 		const rebtnElem = reCmtFrmElem.btn
 		const iBoard = reCmtFrmElem.cmtiBoard
 		const cmtGroup = reCmtFrmElem.cmtGroup
+		const cmtAnsNm = reCmtFrmElem.cmtAnsNm
 
 		rebtnElem.addEventListener('click', function(e) {
 			if (rectntElem.value === '') {
@@ -203,7 +207,8 @@ function recmtEvent(reCmtFrmElem) {
 			let param = {
 				cmtGroup: cmtGroup.value,
 				iBoard: iBoard.value,
-				ctnt: rectntElem.value
+				ctnt: rectntElem.value,
+				cmtAnsNm: cmtAnsNm.value
 			}
 
 			fetch('/community/insReCmt', {
