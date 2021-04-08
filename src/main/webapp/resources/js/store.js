@@ -80,7 +80,6 @@ function DeleteProduct(iProduct) {
 
 //장바구니 담기
 function addCart(iProduct) {
-	console.log('dddd : ' + iProduct)
 	
 	let formData = new FormData()
 	formData.append('iProduct', iProduct)
@@ -91,15 +90,18 @@ function addCart(iProduct) {
 	}).then(function (res) {
 		return res.json()
 	}).then(function (data) {
-		console.log(data)
-		if(data.result === 0) {
+		if(data == 0) {
 			alert('에러가 발생하였습니다.')
 		}
 		
-		if(data.result === 1) {
+		if(data == 1) { // 장바구니에 담았을때
 			if(confirm('장바구니에 상품을 담았습니다. 장바구니페이지로 이동하시겠습니까?')) {
-				location.href = '/'
+				location.href = '/user/mypage'
 			}
+		}
+		
+		if(data == 2) { // 로그인안됬을때
+			location.href = '/user/login'
 		}
 	})
 }

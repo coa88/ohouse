@@ -185,8 +185,16 @@ public class StoreService {
 	// ----------------------------카트----------------------------//
 		
 	public int addCart(StoreDTO param) {
-		param.setiUser(SecurityUtils.getLoginUserPk(hs));
-	 
-		return mapper.insCart(param);
+		int i_user = SecurityUtils.getLoginUserPk(hs);
+		
+		if(i_user == 0) {
+			return 2;
+		}
+		
+		param.setiUser(i_user);
+		if(mapper.selCart(param) == 0) { // 장바구니 목록에 없으면 추가
+			return mapper.insCart(param);
+		}
+		return mapper.updCart(param); // 장바구니 목록에 있으면 수량변경
 	}
 }

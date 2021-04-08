@@ -43,5 +43,6 @@ public interface StoreMapper {
 	
 	// ----------------------------카트----------------------------//
 	int insCart(StoreDTO param);
+	int selCart(StoreDTO param);
 	int updCart(StoreDTO param);
 }

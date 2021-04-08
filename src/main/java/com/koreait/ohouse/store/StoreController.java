@@ -104,7 +104,6 @@ public class StoreController {
 	@ResponseBody
 	@PostMapping("/cart")
 	public int cart(StoreDTO param) {
-		System.out.println("iP : " + param.getiProduct());
 		return service.addCart(param); 
 	}
 }
