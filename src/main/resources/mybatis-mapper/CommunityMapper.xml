@@ -87,10 +87,9 @@
 			, IFNULL(E.cmt_cnt, 0) AS cmt_cnt
 			, IFNULL((SELECT COUNT(1) FROM cm_favorite F WHERE F.i_board = A.i_board AND F.i_user = #{iUser}), 0)  AS favorite_chk
 			, IFNULL((SELECT COUNT(1) FROM cm_scrap G WHERE G.i_board = A.i_board AND G.i_user = #{iUser}), 0)  AS scrap_chk
-			, ( SELECT ctnt  
-				FROM cm_cmt H 
-				WHERE H.i_board = A.i_board 
-				GROUP BY i_board	) AS cmt_chk
+			, cmt_nm
+			, ( SELECT ctnt FROM cm_cmt I WHERE I.i_board = A.i_board GROUP BY i_board	) AS cmt_ctnt
+			
 		FROM cm_board A
 		LEFT JOIN t_user B
 		ON A.i_user = B.i_user
@@ -113,11 +112,18 @@
 		ON A.i_board = D.i_board
 
 		LEFT JOIN (
-			SELECT i_board, COUNT(i_board)  AS cmt_cnt
+			SELECT i_board, i_user, COUNT(i_board)  AS cmt_cnt
 			FROM cm_cmt
 			GROUP BY i_board
 		) E
 		ON A.i_board = E.i_board
+
+		LEFT JOIN (
+			SELECT i_user, nm AS cmt_nm
+			FROM t_user
+			GROUP BY i_user
+		) H
+		ON H.i_user = E.i_user
 
 		WHERE typ = #{typ} AND sec_typ = #{secTyp}
 		ORDER BY r_dt DESC
