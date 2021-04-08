@@ -1,6 +1,6 @@
+@charset "UTF-8";
 
-
-/* 유저프로필 */
+/* 유저프로필 edit*/
 
 .circular--landscape {
   display: inline-block;
@@ -82,4 +82,452 @@
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
+}
+
+
+/* 유저 패스워드 변경 edit_userpw*/
+
+.edit_password_wrap{
+    width: 400px;
+    padding: 40px;
+    color: #292929;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+    margin: 50px auto;
+}
+
+.edit_password_section_title{
+    font-weight: 700;
+    margin-bottom: 5px; 
+}
+
+.form_section{
+    padding: 20px 0;
+}
+
+.edit_password_submit{
+    width: 290px;
+    padding: 11px 10px;
+    font-size: 17px;
+    line-height: 26px;
+    background-color: #35c5f0;
+    border-color: #35c5f0;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/*유저 탈퇴 withdraw*/
+
+
+
+.withdraw_content{
+    padding: 5% 10% 10% 10%;
+}
+
+.terms_title{
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+.withdraw_terms_field {
+    padding: 50px 0 20px;
+    overflow: hidden;
+}
+.withdraw_terms_box{
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 1px solid #dcdcdc;
+    font-size: 15px;
+    line-height: 21px;
+    word-break: keep-all;
+    overflow: hidden;
+}
+.withdraw_terms_text>li{
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.confirm_check{
+    position: relative;
+    display: flex;
+}
+.confrim_alert{
+    font-weight: bold;
+    color: #ff7777;
+}
+
+
+.grid_checkbox{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 20px 20px 20px;
+
+}
+.confrim_info{
+    font-weight: bold;
+    color: #bdbdbd;
+}
+.terms_sub_title{
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 21px;
+}
+
+.withdrawal_reason_detail{
+    margin: 20px 0 0;
+    padding: 10px 15px;
+    width: 100%;
+    height: 160px;
+    border: 3px solid #dcdcdc;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 25px;
+    resize: none;
+}
+
+.text_length{
+    float: right;
+    font-size: 12px;
+}
+.withdraw_button_box{
+    display: flex;
+}
+.withdraw_button_box>div{
+    margin-top: 30px;
+    margin-right: 10px;
+    
+}
+
+.withdraw_commit{
+    background-color: #bdbdbd;
+    width: 150px;
+    height: 30px;
+    margin-right: 10px;
+    float: left;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+    line-height: 30px;
+    text-align: center;
+}
+.withdraw_cancel{
+    background-color: #35c5f0;
+    width: 150px;
+    height: 30px;  
+    text-decoration: none;
+    float: left;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+    line-height: 30px;
+    text-align: center;
+}
+
+
+/*마이페이지 mypage*/
+
+.nav_box{
+    border-bottom: 1px solid #ededed;
+    width: 100%;
+}
+.nav_warp{
+    display: block;
+    text-align: center;
+}
+
+
+.nav_item{
+    display: inline-block;
+    padding: 0 10px;
+    font-weight: 700;
+    position: relative;
+    height: 60px;
+    line-height: 60px;
+}
+.nav_item:hover{
+    color: #35c5f0;
+}
+
+.user_mypage {
+	display: flex;
+}
+
+.user_mypage> .main_container{
+    margin-bottom: 40px;
+}
+
+
+
+
+.main_container{
+    display: flex;
+}
+
+.user_profile{
+    
+    width: 240px;
+    height: 500px;
+    margin-top: 20px;
+    padding: 30px 25px 0;
+    border-radius: 4px;
+    border: 1px solid #dadce0;
+}
+
+
+.user_nm{
+	text-align: center;
+}
+.user_profile_link{
+    display: flex;
+}
+
+.user_profile_link>div{
+	padding: 10px 0 0 0 ;
+}
+
+.link_item>div{
+    
+}
+
+.user_profile_link{
+    border-top: 1px solid #eaebef;
+}
+
+.link_item_title{
+	display: inline-block;
+	padding-top: 10px
+}
+.link_item_content{
+	
+}
+
+
+/* 글쓴거 리스트들 */
+.contents{
+    width: 100%;
+   
+}
+
+.post_list{
+    padding: 10 10 30 10;
+    margin-bottom: 60px;
+    margin-left: 30px;
+    position: relative;
+    
+}
+.post_title{
+    color: #000;
+    font-weight: 700;
+    position: relative;
+    margin-bottom: 20px;
+    padding-top:20px;
+}
+.post_item_box{
+    width: 80%;
+    padding: 80px 0;
+    border: 1px dashed #dbdbdb;
+    color: #757575;
+    font-weight: 700;
+    font-size: 13px;
+    display: inline-grid;
+}
+
+.post_table_tr > th{
+	padding:10px;
+}
+
+.post_table_tr > td{
+	text-align:center;
+	padding:10px;
+}
+
+.scrap_table_ST {
+	display: inline-grid;
+}
+.scrap_table_CM{
+	display: inline-grid;
+}
+
+.scrap_table_title{
+	margin-left: 30px;
+	color: #35c5f0;
+	font-size: 1.2em;
+}
+
+
+
+/*cart */
+
+
+.commerce-cart-wrap{
+    background-color: #f5f5f5;
+}
+
+.cart_main_wrap{
+    width: 60%;
+    padding-right: 7.5px;
+    padding-left: 7.5px;
+}
+
+.cart_sidebar_wrap{
+    width: 40%;
+    
+    padding-right: 7.5px;
+    padding-left: 7.5px;
+}
+.cart_header{
+    display: flex;
+}
+
+
+.cart_item_header{
+    border: solid #ededed;
+    border-width: 1px 1px 0;
+    border-radius: 6px 6px 0 0;
+    
+    padding: 10px 0;
+   
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: center;
+    color: #424242;
+    background-color: #fff;;
+
+}
+
+.product_item_link{
+    display: flex;
+}
+.cart_content_group_item-detail{
+    display: flex;
+}
+.carted_product_delete{
+    top: 15px;
+}
+.cart_content_group_item{
+    
+}
+.cart_content_group_item-list{
+    border: 1px solid #ededed;
+    background-color: white;
+    border-width: 1px 1px 0;
+}
+.carted_product_delete{
+    position: relative;
+    display: inline-block;
+    top: 0;
+    left: 50%;
+    padding: 10px;
+    background: none;
+    border: none;
+    transition: opacity .1s;
+    color: #757575;
+}
+
+.product_small-img{
+    width: 70px;
+    height: 70px;
+}
+
+
+.item_price_number{
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #424242;
+    position: relative;
+    left: 80%;
+    bottom: 20px;
+}
+
+.cart_item_bottom{
+    background-color: white;
+    border: solid #ededed;
+    border-width: 1px 1px 0;
+    border-radius: 0 0 6px 6px;
+    text-align: center;
+    padding:5px;
+}
+
+
+.cart_summary_table{
+    margin-top: 20px;
+    width: 80%;
+    padding :  30px;   
+    background-color: #fff;
+    border: 1px solid #ededed;
+    border-radius: 6px;
+}
+
+.cart_summary_row{
+    
+    display: flex;
+    padding-top: 20px;
+}
+
+.cart_summary_column{
+    font-size: 15px;
+    font-weight: 400;
+    color: #424242;
+}
+
+.cart_summary_price{
+    margin-left: auto;
+}
+
+
+.row_total{
+    font-weight: 700;
+}
+.row_total_price{
+    font-weight: 700;
+    margin-left: auto;
+}
+.cart_submit{
+    margin-top: 10px;
+    width: 290px;
+    padding: 11px 10px;
+    font-size: 17px;
+    line-height: 26px;
+    background-color: #35c5f0;
+    border-color: #35c5f0;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.select_item_delete{
+    position: relative;
+    left: 90%;
+}
+
+.all_item_select{
+    display: flex;
+}
+
+.check_square{  
+    padding: 20px;
+}
+.cart_small-img{
+    width: 70px;
+    height: 70px;
+}
+
+.item_price_box{	
+	display: flex;
+}
+
+.won{
+    padding-left:10px;
+}
+.product_small_title{
+	  margin-left: 30px;
+	  margin-top: revert;
 }

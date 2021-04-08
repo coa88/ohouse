@@ -309,6 +309,8 @@
 		WHERE i_product = #{iProduct} AND i_user = #{iUser}
 	</select>
 	
+	
+	
 	<update id="updCart">
 		UPDATE cart
 		SET cart_count = cart_count + 1

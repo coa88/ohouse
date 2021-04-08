@@ -90,7 +90,7 @@
 						</thead>
                      <c:forEach items="${CmtData}" var="item">
                      	<tbody class="post_table_body">
-							<tr class="post_table_tr">
+							<tr class="post_table_tr" onclick="mypageLocation(${item.iBoard})">
 								<td>${item.ctnt}</td>
 								<td>${item.cmtDt}</td>
 							</tr>
@@ -99,11 +99,65 @@
                 	</table> 
                        
                     </div>
-                <h3 class="post_title">스크랩 </h3>
-                    <div class="post_item_box">
-                          
-                    </div>
-            </section>
+			<h3 class="post_title">스크랩</h3>
+			<div class="post_item_box">
+			
+			<div class="scrap_table_CM">
+				<div class ="scrap_table_title">커뮤니티 스크랩 </div>
+				<table>
+					<thead class="post_table_head">
+						<tr class="post_table_tr">
+							<th>제목</th>
+						</tr>
+					</thead>
+					<c:forEach items="${userScrapCMData}" var="item">
+						<tbody class="post_table_body">
+							<tr class="post_table_tr" onclick="mypageLocation(${item.iBoard})">
+								<td>${item.title}</td>
+							</tr>
+						</tbody>
+					</c:forEach>
+				</table>
+			</div>
+			
+			<div class="scrap_table_ST">
+				<div class ="scrap_table_title">스토어 스크랩 </div>
+				<table>
+					<thead class="post_table_head">
+						<tr class="post_table_tr">
+							<th>제목</th>
+						</tr>
+					</thead>
+					<c:forEach items="${userScrapSTData}" var="item">
+						<tbody class="post_table_body" >
+							<tr class="post_table_tr" onclick="moveLocation(${item.iBoard})">
+								<td>${item.title}</td>
+							</tr>
+						</tbody>
+					</c:forEach>
+				</table>
+			</div>
+			
+			</div>
+			<h3 class="post_title">좋아요</h3>
+			<div class="post_item_box">
+				<table>
+					<thead class="post_table_head">
+						<tr class="post_table_tr">
+							<th>제목</th>
+						</tr>
+					</thead>
+					<c:forEach items="${scrapData}" var="item">
+						<tbody class="post_table_body">
+							<tr class="post_table_tr">
+								<td>${item.title}</td>
+							</tr>
+						</tbody>
+					</c:forEach>
+				</table>
+
+			</div>
+		</section>
         </div>          
     </div>
       

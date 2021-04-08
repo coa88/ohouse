@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,8 +27,10 @@ import com.koreait.ohouse.community.CommunityMapper;
 import com.koreait.ohouse.model.CommunityCmtDTO;
 import com.koreait.ohouse.model.CommunityDTO;
 import com.koreait.ohouse.model.PagingDTO;
+import com.koreait.ohouse.model.StoreDTO;
 import com.koreait.ohouse.model.UserDTO;
 import com.koreait.ohouse.model.UserEntity;
+import com.koreait.ohouse.store.StoreMapper;
 import com.koreait.ohouse.utils.MyFileUtils;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -169,5 +172,21 @@ public class UserService {
 	}
 	public UserDTO userStateChk(UserDTO dto) {
 		return mapper.userStateChk(dto);
+	}
+
+	public List<CommunityDTO> userScrapCMList(UserDTO dto) { // 
+		return mapper.selUserScrapCMList(dto);
+	}
+	
+	public List<StoreDTO> userScrapSTList(UserDTO dto) { // 
+		return mapper.selUserScrapSTList(dto);
+	}
+	
+	
+	////유저 장바구니
+	public List<StoreDTO> selCartList(UserDTO dto){
+		dto.setiUser(SecurityUtils.getLoginUserPk(hs));
+		System.out.println("dddddddddd : " + mapper.selCartList(dto));
+		return mapper.selCartList(dto);
 	}
 }

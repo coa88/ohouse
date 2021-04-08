@@ -43,6 +43,34 @@
 	</select>
 	
 	
+	<select id="selUserScrapCMList" resultType="CommunityDTO">
+	 select 
+	 A.i_user
+	 , A.i_board
+	 , A.scrap_dt
+	 , B.title 
+	 from cm_scrap A
+	 left join cm_board B
+	 ON A.i_user = B.i_user
+	 where A.i_user = #{iUser}
+	 ORDER BY A.scrap_dt DESC
+	</select>
+	
+	
+	<select id="selUserScrapSTList" resultType="StoreDTO">
+	 select 
+	 A.i_user
+	 , A.i_product
+	 , A.scrap_dt
+	 , B.product_title 
+	 from pd_scrap A
+	 left join pd_board B
+	 ON A.i_user = B.i_user
+	 where A.i_user = #{iUser}
+	 ORDER BY A.scrap_dt DESC
+	</select>
+	
+	
 	<update id="updUser">
 		UPDATE t_user 
 		set
@@ -82,6 +110,39 @@
 		SELECT nm
 		FROM t_user
 		WHERE nm = #{nm}
+	</select>
+
+	<!--카트 -->
+	
+	<select id="selCartList" resultType="StoreDTO">
+				SELECT A.i_product, A.i_user, A.cart_count, B.product_nm, B.brand, B.price, B.sales, B.final_price, C.pd_img
+				FROM cart A
+				
+				LEFT JOIN (
+				   SELECT 
+				      i_product
+				      ,i_user
+				      ,product_nm
+				      ,brand
+				      ,price
+				      ,sales
+				      ,final_price
+				   FROM pd_board
+				   GROUP BY i_product
+				) B
+				ON A.i_product = B.i_product
+				
+				LEFT JOIN (
+				   SELECT 
+				      i_product
+				      ,MIN(pdimg_seq)
+				      ,pd_img
+				   FROM pd_photo
+				   GROUP BY i_product
+				) C
+				ON A.i_product = C.i_product
+				
+				WHERE A.i_user = #{iUser}
 	</select>
 
 </mapper>

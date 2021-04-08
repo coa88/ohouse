@@ -43,7 +43,7 @@
                         <input type="text" class="form-control" value="${param.searchText}" placeholder="통합검색" onkeyup="doSearch(event)">
                     </div>
                     <div class="cart-menu">
-                        <a href="/" class="fas fa-shopping-cart fa-lg cart-icon"></a>
+                        <a href="/user/cart" class="fas fa-shopping-cart fa-lg cart-icon"></a>
                     </div>
           
                     <c:choose>

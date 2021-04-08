@@ -83,7 +83,9 @@ public class UserController {
 		model.addAttribute("boardData", service.selUserBoardList(dto)); //유저 글쓴거 가져오기 
 		//model.addAttribute("reviewData", service.selUserReviewList(dto)); //유저 리뷰 가져오기? < 아직구현안됨
 		model.addAttribute("CmtData", service.selUserCmtList(dto));// 유저 댓글 가져오기 
-		model.addAttribute("userStateChk", service.userStateChk(dto)); //유저 좋아요,스크랩, 찜한것 들고오
+		model.addAttribute("userStateChk", service.userStateChk(dto)); //유저 좋아요,스크랩, 찜한것 갯수 들고오기
+		model.addAttribute("userScrapCMData", service.userScrapCMList(dto)); //유저커뮤니티 스크랩 들고오기
+		model.addAttribute("userScrapSTData", service.userScrapSTList(dto)); // 유저 스토어 스크랩 들고오
 	}
 
 	@GetMapping("/edit")
@@ -149,6 +151,12 @@ public class UserController {
 		Map<String, Object> nmVal = new HashMap<>();
 		nmVal.put("nm", service.nmChk(p));
 		return nmVal;
+	}
+	
+	//장바구니
+	@GetMapping("/cart")
+	public void getUserCartPage(UserDTO dto, Model model) {	
+		model.addAttribute("product_detail", service.selCartList(dto));
 	}
 
 }
