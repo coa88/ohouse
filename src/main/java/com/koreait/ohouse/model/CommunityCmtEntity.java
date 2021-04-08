@@ -10,6 +10,7 @@ public class CommunityCmtEntity {
 	private int iUser;
 	private String ctnt;
 	private String cmtDt;
+	private String cmtAnsNm;
 
 	public int getiCmt() {
 		return iCmt;
@@ -57,6 +58,14 @@ public class CommunityCmtEntity {
 
 	public void setcmtDt(String cmtDt) {
 		this.cmtDt = cmtDt;
+	}
+
+	public String getCmtAnsNm() {
+		return cmtAnsNm;
+	}
+
+	public void setCmtAnsNm(String cmtAnsNm) {
+		this.cmtAnsNm = cmtAnsNm;
 	}
 
 }

@@ -279,7 +279,7 @@
 	</insert>
 
 	<select id="selCmtList" resultType="CommunityCmtDTO">
-		SELECT A.i_cmt, A.cmt_group, A.i_board, A.ctnt, B.i_user, B.nm, B.profile_img,
+		SELECT A.i_cmt, A.cmt_group, A.i_board, A.ctnt, A.cmt_ans_nm, B.i_user, B.nm, B.profile_img,
 		CASE WHEN A.i_user = #{iUser} THEN 1 ELSE 0 END is_mycmt
 		FROM cm_cmt A
 		LEFT JOIN t_user B
@@ -302,9 +302,9 @@
 	
 	<insert id="insReCmt">
 		INSERT INTO cm_cmt
-		( cmt_group, i_board, i_user, ctnt )
+		( cmt_group, i_board, i_user, ctnt, cmt_ans_nm )
 		VALUES
-		( #{cmtGroup}, #{iBoard}, #{iUser}, #{ctnt} )
+		( #{cmtGroup}, #{iBoard}, #{iUser}, #{ctnt}, #{cmtAnsNm})
 	</insert>
 	
 	<select id="userInfo" resultType="UserEntity">
