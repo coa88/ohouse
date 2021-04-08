@@ -134,13 +134,15 @@
 		                            
 		                            <div class="photo_feed_comment_wrap">
 		                                <div class="photo_feed_comment">
+		                                <c:if test="${item.cmtNm != null}">
 		                                    <a class="comment_profile" href="#">
 		                                        <img class="comment_img" src="/" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="댓글프로필사진">
-		                                        <span class="comment_name">댓글닉네임</span>
+		                                        <span class="comment_name">${item.cmtNm}</span>
 		                                    </a>
 		                                    <a class="comment_link" href="#">
-		                                        <p class="comment_text">${item.cmtChk}</p>
+		                                        <p class="comment_text">${item.cmtCtnt}</p>
 		                                    </a>
+	                                    </c:if>
 		                                </div>
 		                            </div>
 		                        </div>
