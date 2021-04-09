@@ -1451,13 +1451,156 @@ img {
 	margin-left: -568px;
 }
 
-#cmtFrm{
+.cmtCnt {
+	font-size: 18px;
+	font-weight: 700;
+	margin-top: 20px;
+}
+
+.cmtCnt>span {
+	color: #35c5f0;
+}
+
+.cmt_wrap {
+	margin-top: 20px;
+}
+
+#cmtFrm {
+	position: relative;
+}
+
+#cmtFrm>input[type="text"] {
+	min-width: 84.9%;
+	min-height: 33px;
+	border: 1px solid #dbdbdb;
+	border-radius: 4px;
+	color: #424242;
+	margin-bottom: 30px;
+	padding-left: 16px;
+	padding-right: 51px;
+	outline: none;
+	font-size: 15px;
+}
+
+.reCmtInsText {
+	min-width: 56.8%;
+	min-height: 33px;
+	border: 1px solid #dbdbdb;
+	border-radius: 4px;
+	color: #424242;
+	padding-left: 187px;
+	padding-right: 51px;
+	outline: none;
+	font-size: 15px;
+}
+
+.dataNm {
+	position: absolute;
+	left: 50px;
+	top: 0;
+	line-height: 37px;
+	color: #35c5f0;
+	font-weight: 700;
+}
+
+#cmtList div {
+	margin-bottom: 30px;
+}
+
+.cmtAns_wrap{
+	padding: 15px 20px 1px 20px;
+    margin-left: 40px;
+    background-color: #f7f8fa;
+    border-radius:8px;
+}
+
+.cmtNm {
+	color: #424242;
+	font-weight: 700;
+}
+
+.cmtAnsNm {
+	color: #35c5f0;
+	font-weight: 700;
+}
+
+.cmtText {
+	color: #424242;
+	font-size: 15px;
+}
+
+.btn_wrap {
+	margin-left: 35px;
+}
+
+#recmtFrm {
+	position: relative;
+	margin-left: 10%;
+}
+
+.cmtBtn, .reCmtBtn, .reCmtInsBtn {
+	border: none;
+	background: none;
+	outline: none;
+	font-size: 15px;
+}
+
+.reCmtBtn {
+	font-size: 13px;
+	font-weight: 700;
+	color: #757575;
+	padding: 0 0 0 5px;
+}
+
+.cmtBtn {
+	position: absolute;
+	right: 7px;
+	top: 0;
+	color: #a3e4f8;
+	line-height: 37px;
+	font-weight: 700;
+	transition: color .2s;
+}
+
+.reCmtInsBtn {
+	position: absolute;
+	right: 7px;
+	top: 0;
+	color: #a3e4f8;
+	line-height: 37px;
+	font-weight: 700;
+	transition: color .2s;
+}
+
+.cmtBtn:hover, .reCmtInsBtn:hover {
+	color: #35c5f0;
+}
+
+.delBtn {
+	border: none;
+	background: none;
+	outline: none;
+	color: #bdbdbd;
+}
+
+.delBtn:before {
+	display: inline-block;
+	color: #bdbdbd;
+	content: "·";
+	margin-right: 10px;
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.reCmtBtn:hover, .delBtn:hover {
+	text-decoration: underline;
 }
 
 .cmt_profile_img {
 	width: 30px;
 	height: 30px;
 	border-radius: 100%;
+	margin-right: 4px;
 }
 
 /* 상품 이미지 시작 */

@@ -105,28 +105,58 @@ function getCmtList() {
 			function createRecode(data) {
 				let delButton = ''
 				let cmtAnsNm = ''
+				let profileImg = ''
+
 				if (data.isMycmt === 1) {
-					delButton = `<button onclick="delCmt(${data.iCmt})">삭제</button>`
+					delButton = `<button class="delBtn" onclick="delCmt(${data.iCmt})">삭제</button>`
 				}
-				
-				if(data.cmtAnsNm !==null){
-					cmtAnsNm = `<span>@${data.cmtAnsNm}</span>`
+
+				if (data.cmtAnsNm !== null) {
+					cmtAnsNm = `<span class="cmtAnsNm">@${data.cmtAnsNm}</span>`
+				}
+
+				if (data.profileImg !== null) {
+					profileImg = `<img class="cmt_profile_img" src="/resources/img/user/${data.iUser}/${data.profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진">`
+				} else {
+					profileImg = `<img class="cmt_profile_img" src="/resources/img/user/basic_profile.webp" alt="프로필사진">`
 				}
 
 				const div = document.createElement('div')
 				let url = new URLSearchParams(location.search)
 				let urlParams = url.get('iBoard')
-				div.innerHTML =
-					`
-					<img class="cmt_profile_img" src="/resources/img/user/${data.iUser}/${data.profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진">
-					<span>${data.nm}</span>
-					${cmtAnsNm}
-					<span>${data.ctnt}</span>
-					<button class="reCmtBtn" type="button" data-iCmt="${data.iCmt}" data-nm=${data.nm} onclick="reCmtBtnClk(${data.iCmt},${data.cmtGroup},${urlParams})">답글달기</button>
-					${delButton}
+				if (data.cmtAnsNm !== null) {
+					div.innerHTML =
+						`
+					<div class="cmtAns_wrap">
+						${profileImg}
+						<span class="cmtNm">${data.nm}</span>
+						${cmtAnsNm}
+						<span class="cmtText">${data.ctnt}</span>
+						<div class="btn_wrap">
+							<button class="reCmtBtn" type="button" data-iCmt="${data.iCmt}" data-nm=${data.nm} onclick="reCmtBtnClk(${data.iCmt},${data.cmtGroup},${urlParams})">답글달기</button>
+							${delButton}
+						</div>
+					</div>
 					<div class="reCmtDiv"></div>
+					
 					`
-				return div
+					return div
+				}else{
+					div.innerHTML =
+						`
+						${profileImg}
+						<span class="cmtNm">${data.nm}</span>
+						${cmtAnsNm}
+						<span class="cmtText">${data.ctnt}</span>
+						<div class="btn_wrap">
+							<button class="reCmtBtn" type="button" data-iCmt="${data.iCmt}" data-nm=${data.nm} onclick="reCmtBtnClk(${data.iCmt},${data.cmtGroup},${urlParams})">답글달기</button>
+							${delButton}
+						</div>
+						<div class="reCmtDiv"></div>
+					`
+					return div
+				}
+
 			}
 
 
@@ -136,6 +166,7 @@ function getCmtList() {
 
 // 대댓글 창열기
 function reCmtBtnClk(icmt, cmtGroup, urliBoard) {
+
 	let reCmtBtn = document.getElementsByClassName('reCmtBtn')
 
 	fetch(`/community/userInfo`, {
@@ -150,8 +181,20 @@ function reCmtBtnClk(icmt, cmtGroup, urliBoard) {
 			let dataiCmt = reCmtBtn[i].getAttribute('data-iCmt')
 			let dataNm = reCmtBtn[i].getAttribute('data-nm')
 			if (dataiCmt == icmt) {
+				let profileChk = ''
+
+				if (login.result.length === 0) {
+					return location.href = '/user/login'
+				}
+
 				let iUser = login.result[0].iUser
 				let profileImg = login.result[0].profileImg
+				if (profileImg !== null) {
+					profileChk = `<img class="cmt_profile_img" src="/resources/img/user/${iUser}/${profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진">`
+				} else {
+					profileChk = `<img class="cmt_profile_img" src="/resources/img/user/basic_profile.webp" alt="프로필사진">`
+				}
+
 				let reCmtDiv = document.querySelectorAll('.reCmtDiv')
 				reCmtDiv[i].innerHTML =
 					`
@@ -159,9 +202,10 @@ function reCmtBtnClk(icmt, cmtGroup, urliBoard) {
 					<input type="hidden" name="cmtiBoard" value="${urliBoard}">
 					<input type="hidden" name="cmtGroup" value="${cmtGroup}">
 					<input type="hidden" name="cmtAnsNm" value="${dataNm}">
-					<img class="cmt_profile_img" src="/resources/img/user/${iUser}/${profileImg}" onerror="this.src='/resources/img/user/basic_profile.webp'" alt="프로필사진">
-					<input type="text" name="ctnt" placeholder="@${dataNm}">
-					<input type="button" name="btn" value="등록">
+					${profileChk}
+					<span class="dataNm">@${dataNm}</span>
+					<input class="reCmtInsText" type="text" name="ctnt" placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다 :)">
+					<input class="reCmtInsBtn" type="button" name="btn" value="등록">
 				</form>
 				`
 			}
