@@ -183,7 +183,6 @@ public class CommunityController {
 	@ResponseBody
 	@PostMapping("/insReCmt")
 	public Map<String, Object> insReCmt(@RequestBody CommunityCmtEntity p, HttpSession hs) {
-		System.out.println("aaa : "+ p.getCmtAnsNm());
 		p.setiUser(SecurityUtils.getLoginUserPk(hs));
 		Map<String, Object> returnValue = new HashMap<>();
 		returnValue.put("result", service.insReCmt(p));

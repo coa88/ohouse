@@ -525,26 +525,11 @@ img {
 }
 
 /* 이메일 입력 끝 */
-.emailRequired, .emailChk, .emailIdOverlap, .pwRequired, .pwChk,
-	.pwChkChk, .pwChkRequired, .nmRequired, .nmLength, .nmOverlap {
-	display: none;
+.emailError, .pwError, .pw2Error, .nmError {
 	margin: 10px 0;
 	font-size: 13px;
 	line-height: 21px;
 	color: #f77;
-}
-
-.email_label.focus, .pw_label.focus, .pwChk_label.focus, .nm_label.focus
-	{
-	color: #f77;
-}
-
-.pw_margin, .pwChk_margin, .nm_margin {
-	margin: 0;
-}
-
-.pw_label, .pwChk_label, .nm_label, .terms_label {
-	margin-top: 30px;
 }
 
 .join-form-email-select {
@@ -1507,11 +1492,11 @@ img {
 	margin-bottom: 30px;
 }
 
-.cmtAns_wrap{
+.cmtAns_wrap {
 	padding: 15px 20px 1px 20px;
-    margin-left: 40px;
-    background-color: #f7f8fa;
-    border-radius:8px;
+	margin-left: 40px;
+	background-color: #f7f8fa;
+	border-radius: 8px;
 }
 
 .cmtNm {

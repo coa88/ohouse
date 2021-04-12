@@ -33,6 +33,12 @@ if (cmtFrmElem) {
 	}
 
 	btnElem.addEventListener('click', function(e) {
+
+		if (ctntElem.value.length > 200) {
+			alert('작성 가능한 글자 수를 초과하였습니다. 최대 글자수:200자')
+			return
+		}
+
 		if (ctntElem.value === '') {
 			e.preventDefault()
 		} else {
@@ -141,7 +147,7 @@ function getCmtList() {
 					
 					`
 					return div
-				}else{
+				} else {
 					div.innerHTML =
 						`
 						${profileImg}
@@ -239,6 +245,12 @@ function recmtEvent(reCmtFrmElem) {
 		const cmtAnsNm = reCmtFrmElem.cmtAnsNm
 
 		rebtnElem.addEventListener('click', function(e) {
+
+			if (rectntElem.value.length > 200) {
+				alert('작성 가능한 글자 수를 초과하였습니다. 최대 글자수:200자')
+				return
+			}
+
 			if (rectntElem.value === '') {
 				e.preventDefault()
 			} else {
@@ -247,7 +259,7 @@ function recmtEvent(reCmtFrmElem) {
 		})
 
 		function ajax() {
-
+			
 			let param = {
 				cmtGroup: cmtGroup.value,
 				iBoard: iBoard.value,

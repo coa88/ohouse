@@ -1,27 +1,23 @@
 'use strict'
 
 const form = document.querySelector('#joinForm')
+const emailErrorElem = document.querySelector('.emailError')
+const pwErrorElem = document.querySelector('.pwError')
+const pw2ErrorElem = document.querySelector('.pw2Error')
+const nmErrorElem = document.querySelector('.nmError')
 
 // 회원가입 체크
 function joinChk() {
-	if (!emailNullChk()) {
+	if (emailErrorElem.getAttribute('data-email') == 1) {
 		return false
-	} else if (!chkEmail()) {
+	} else if (nmErrorElem.getAttribute('data-nm') == 1) {
 		return false
-	} else if (!pwNullChk()) {
+	} else if (pwErrorElem.getAttribute('data-pw') == 1) {
 		return false
-	} else if (!chkPw()) {
-		return false
-	} else if (!pwChkNullChk()) {
-		return false
-	} else if (!chkPwChk()) {
-		return false
-	} else if (!nmNullChk()) {
-		return false
-	} else if (!chkNm()) {
+	} else if (!pw2Chk()) {
 		return false
 	}
-	
+	pw2ErrorElem.innerHTML = ''
 	return true
 }
 
@@ -33,7 +29,7 @@ form.emailId.addEventListener('change', function() {
 function emailIdAjax() {
 	const joinEmailIdVal = form.emailId.value
 
-	var param = {
+	const param = {
 		emailId: joinEmailIdVal
 	}
 
@@ -48,17 +44,61 @@ function emailIdAjax() {
 		.then(myJson => {
 			emailIdProc(myJson.emailId)
 		})
+
+	function emailIdProc(val) {
+		const emailJ = /^[_a-zA-Z0-9]+([-+.][_a-zA-Z0-9]+)*@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/i
+
+		if (!emailJ.test(form.emailId.value)) {
+			emailErrorElem.innerHTML = '이메일 형식이 올바르지 않습니다.'
+			form.emailId.focus()
+			emailErrorElem.setAttribute('data-email', '1')
+			return
+		} else if (val === 1) {
+			emailErrorElem.innerHTML = '이미 사용하고있는 이메일입니다.'
+			form.emailId.focus()
+			emailErrorElem.setAttribute('data-email', '1')
+			return
+		} else {
+			emailErrorElem.innerHTML = ''
+			emailErrorElem.setAttribute('data-email', '0')
+			return
+		}
+
+	}
 }
 
-function emailIdProc(val) {
-	if (val === 1) {
-		document.querySelector('.email_label').classList.add('focus')
-		document.querySelector('.emailIdOverlap').style.display = 'block'
-		return false
+// 비밀번호 조건 체크
+form.userPw.addEventListener('keydown', function(e) {
+	pwChk(e)
+})
+
+function pwChk(e) {
+	if (e.target.value.length < 8) {
+		pwErrorElem.innerHTML = '8자 이상 입력해주세요.'
+		form.userPw.focus()
+		pwErrorElem.setAttribute('data-pw', '1')
+		return
+	} else {
+		pwErrorElem.innerHTML = ''
+		pwErrorElem.setAttribute('data-pw', '0')
+		return
 	}
-	document.querySelector('.email_label').classList.remove('focus')
-	document.querySelector('.emailIdOverlap').style.display = 'none'
-	return true
+
+}
+
+function pw2Chk() {
+	const pwVal = form.userPw.value
+	const pw2Val = form.userPwChk.value
+	
+	if (pwVal !== pw2Val) {
+		pw2ErrorElem.innerHTML = '비밀번호가 일치하지 않습니다.'
+		form.userPwChk.focus()
+		return false
+	} else {
+		pw2ErrorElem.innerHTML = ''
+		return true
+	}
+	
 }
 
 // 별명 중복 체크
@@ -69,7 +109,7 @@ form.nm.addEventListener('change', function() {
 function nmAjax() {
 	const joinNmVal = form.nm.value
 
-	var param = {
+	const param = {
 		nm: joinNmVal
 	}
 
@@ -84,129 +124,27 @@ function nmAjax() {
 		.then(myJson => {
 			nmProc(myJson.nm)
 		})
-}
 
-function nmProc(val) {
-	if (val === 1) {
-		document.querySelector('.nm_label').classList.add('focus')
-		document.querySelector('.nmOverlap').style.display = 'block'
-		return false
+	function nmProc(val) {
+		const nmVal = form.nm.value
+
+		if (nmVal.length < 2 || nmVal.length > 10) {
+			nmErrorElem.innerHTML = '2자 이상 10자 이하로 입력해주세요.'
+			form.nm.focus()
+			nmErrorElem.setAttribute('data-email', '1')
+			return
+		} else if (val === 1) {
+			nmErrorElem.innerHTML = '사용 중인 별명입니다.'
+			form.nm.focus()
+			nmErrorElem.setAttribute('data-email', '1')
+			return
+		} else {
+			nmErrorElem.innerHTML = ''
+			nmErrorElem.setAttribute('data-email', '0')
+			return
+		}
+
 	}
-	document.querySelector('.nm_label').classList.remove('focus')
-	document.querySelector('.nmOverlap').style.display = 'none'
-	return true
-}
-
-
-
-
-
-
-
-
-// 회원가입 조건 체크
-function chkEmail() {
-
-	const emailJ = /^[_a-zA-Z0-9]+([-+.][_a-zA-Z0-9]+)*@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/i
-
-	if (!emailJ.test(form.emailId.value)) {
-		document.querySelector('.email_label').classList.add('focus')
-		document.querySelector('.emailChk').style.display = 'block'
-		form.emailId.focus()
-		return false
-	}
-	document.querySelector('.email_label').classList.remove('focus')
-	document.querySelector('.emailChk').style.display = 'none'
-	return true
-}
-
-function chkPw() {
-
-	if (form.userPw.value.length < 8) {
-		document.querySelector('.pw_label').classList.add('focus')
-		document.querySelector('.pwChk').style.display = 'block'
-		form.userPw.focus()
-		return false
-	}
-	document.querySelector('.pw_label').classList.remove('focus')
-	document.querySelector('.pwChk').style.display = 'none'
-	return true
-}
-
-function chkPwChk() {
-
-	if (form.userPw.value !== form.userPwChk.value) {
-		document.querySelector('.pwChk_label').classList.add('focus')
-		document.querySelector('.pwChkChk').style.display = 'block'
-		form.userPwChk.focus()
-		return false
-	}
-	document.querySelector('.pwChk_label').classList.remove('focus')
-	document.querySelector('.pwChkChk').style.display = 'none'
-	return true
-}
-
-function chkNm() {
-
-	if (form.nm.value.length < 2 || form.nm.value.length > 10) {
-		document.querySelector('.nm_label').classList.add('focus')
-		document.querySelector('.nmLength').style.display = 'block'
-		form.nm.focus()
-		return false
-	}
-	document.querySelector('.nm_label').classList.remove('focus')
-	document.querySelector('.nmLength').style.display = 'none'
-	return true
-}
-
-
-// 입력란 공백 체크
-function emailNullChk() {
-	if (form.emailId.value == '') {
-		document.querySelector('.email_label').classList.add('focus')
-		document.querySelector('.emailRequired').style.display = 'block'
-		form.emailId.focus()
-		return false
-	}
-	document.querySelector('.email_label').classList.remove('focus')
-	document.querySelector('.emailRequired').style.display = 'none'
-	return true
-}
-
-function pwNullChk() {
-	if (form.userPw.value == '') {
-		document.querySelector('.pw_label').classList.add('focus')
-		document.querySelector('.pwRequired').style.display = 'block'
-		form.userPw.focus()
-		return false
-	}
-	document.querySelector('.pw_label').classList.remove('focus')
-	document.querySelector('.pwRequired').style.display = 'none'
-	return true
-}
-
-function pwChkNullChk() {
-	if (form.userPwChk.value == '') {
-		document.querySelector('.pwChk_label').classList.add('focus')
-		document.querySelector('.pwChkRequired').style.display = 'block'
-		form.userPwChk.focus()
-		return false
-	}
-	document.querySelector('.pwChk_label').classList.remove('focus')
-	document.querySelector('.pwChkRequired').style.display = 'none'
-	return true
-}
-
-function nmNullChk() {
-	if (form.nm.value == '') {
-		document.querySelector('.nm_label').classList.add('focus')
-		document.querySelector('.nmRequired').style.display = 'block'
-		form.nm.focus()
-		return false
-	}
-	document.querySelector('.nm_label').classList.remove('focus')
-	document.querySelector('.nmRequired').style.display = 'none'
-	return true
 }
 
 // 약관동의
