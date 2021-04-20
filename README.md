@@ -1,5 +1,4 @@
 # ohouse
-ohouse 프로젝트
 
 참여인원 : 3명
 
